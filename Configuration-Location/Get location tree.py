@@ -1,7 +1,7 @@
 import requests
 
 url = "https://api.extremecloudiq.com/locations/tree?parentId=***&expandChildren=true"
-
+ 
 payload={}
 headers = {
   'accept': 'application/json',
