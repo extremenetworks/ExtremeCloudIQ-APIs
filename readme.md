@@ -10,11 +10,7 @@ Download the XIQ new API Framework Collection file onto your local machine.
 Open Postman, click on Import and select the downloaded json file.
 Once imported, a new API collection will be created.
 
-This Collection is using Postman Environment Variables, all you have to do is create an Environment at your Postman and use the following variables:
-
-Username<br>
-Password
-
-Enter your ExtremeCLoudIQ username and password into the value fields of the required variables and you will be able to use the whole Collection.
+This Collection is using Postman Environment Variables.
+Create a local environment, create two variable entries one for username and the other for password, and then enter your credentials for the initial and current value and you will be able to use the whole Collection.
 
 
