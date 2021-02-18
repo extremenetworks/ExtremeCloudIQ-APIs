@@ -12,7 +12,7 @@ Once imported, a new API collection will be created.
 
 This Collection is using Postman Environment Variables, all you have to do is create an Environment at your Postman and use the following variables:
 
-Username
+Username<br>
 Password
 
 Once you register the required variables for your store, you will be able to use the whole Collection.
