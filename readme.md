@@ -15,6 +15,6 @@ This Collection is using Postman Environment Variables, all you have to do is cr
 Username<br>
 Password
 
-Once you register the required variables for your store, you will be able to use the whole Collection.
+Once you enter your XIQ username and password into the required variables fields, you will be able to use the whole Collection.
 
 
