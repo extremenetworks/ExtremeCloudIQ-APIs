@@ -15,6 +15,6 @@ This Collection is using Postman Environment Variables, all you have to do is cr
 Username<br>
 Password
 
-Once you enter your ExtremeCLoudIQ username and password into value field of the required variables, you will be able to use the whole Collection.
+Enter your ExtremeCLoudIQ username and password into the value fields of the required variables and you will be able to use the whole Collection.
 
 
