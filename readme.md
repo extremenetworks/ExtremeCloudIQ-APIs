@@ -6,7 +6,7 @@ More information about the API can be found on [Extreme Networks API page](https
 
 ## Postman collection 
 
-Download the XIQ API Collection file onto your local machine. 
+Download the XIQ new API Framework Collection file onto your local machine. 
 Open Postman, click on Import and select the downloaded json files.
 Once imported, a new API collection will be created.
 
