@@ -1,0 +1,3231 @@
+{
+	"info": {
+		"_postman_id": "4d3cb811-8da2-4324-8618-b1437cffd193",
+		"name": "XIQ APIv2 Workflows",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login Basic authentication",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include access token\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"access_token\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function clearVariables() {",
+									"    // Get all the names of our env variables and put them in an array",
+									"    const environmentVariables = pm.environment.values.map(function(variable) {",
+									"        return variable.key;",
+									"    });",
+									"    // Filter through the above array but don't add variables that:",
+									"        // - Contain the string 'url' in the variable name",
+									"        // OR",
+									"        // - Are Named 'auth-token'",
+									"    const binTheseVariablesOff = environmentVariables.filter(function(variable) {",
+									"        return !variable.includes(\"username\") && !variable.match(\"password\");",
+									"    });",
+									"    // Now go through this new array and delete these env variables",
+									"    return binTheseVariablesOff.forEach(function(variableName) {",
+									"       pm.environment.unset(variableName);",
+									"    });",
+									"}",
+									"// Call the function",
+									"clearVariables();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"{{username}}\",\n  \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/login",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AT - Get Device Details",
+			"item": [
+				{
+					"name": "List Devices XIQ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"hostname\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									"",
+									"var value = pm.environment.get(\"var\");",
+									"pm.environment.set(\"var\", value+1);",
+									"",
+									"",
+									"DEVid = pm.environment.get(\"var\")",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.environment.set(\"id\", jsonData.data[DEVid][\"id\"]);",
+									"pm.environment.set(\"sn\", jsonData.data[DEVid][\"serial_number\"]);",
+									"",
+									"var testmessage=jsonData.data[DEVid].serial_number",
+									"pm.test(testmessage, function () {",
+									"   //testscript",
+									"",
+									"});",
+									"",
+									"",
+									" "
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var value = pm.environment.get(\"var\");",
+									"",
+									"if( !value) {",
+									"    pm.environment.set(\"var\", 1);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices?page=1&limit=50",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeviceDetails",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"hostname\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" });  ",
+									"pm.test(\"Device connected to XIQ \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"true\");",
+									"    console.log(pm.test)",
+									"});",
+									"var jsonData = pm.response.json();",
+									"var testmessage=jsonData.serial_number",
+									"pm.test(testmessage, function () {",
+									"   //testscript",
+									"",
+									"});",
+									"",
+									"function cleanup() {",
+									"    const clean = _.keys(pm.environment.toObject())",
+									"    _.each(clean, (arrItem) => {",
+									"        if (arrItem.startsWith(\"var\")) {",
+									"            pm.environment.unset(\"var\")",
+									"        }",
+									"    })",
+									"}",
+									"cleanup()",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AT - Change admin state",
+			"item": [
+				{
+					"name": "List Devices XIQ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"hostname\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									"",
+									"var value = pm.environment.get(\"var\");",
+									"pm.environment.set(\"var\", value+1);",
+									" ",
+									"",
+									"DEVid = pm.environment.get(\"var\")",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.environment.set(\"id\", jsonData.data[DEVid][\"id\"]);",
+									"",
+									"var testmessage=jsonData.data[DEVid].serial_number",
+									"pm.test(testmessage, function () {",
+									"   //testscript",
+									"",
+									"});",
+									"",
+									" "
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var value = pm.environment.get(\"var\");",
+									"",
+									"if( !value) {",
+									"    pm.environment.set(\"var\", 1);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices?page=1&limit=50",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeviceDetails",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"hostname\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									"var jsonData = pm.response.json();",
+									"var testmessage=jsonData.serial_number",
+									"pm.test(testmessage, function () {",
+									"   //testscript",
+									"",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unmanaged",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"ids\":[{{id}}]}"
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/:unmanage",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								":unmanage"
+							],
+							"variable": [
+								{
+									"key": "7a34a28b-9699-4aa9-901e-660e25763b05",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeviceDetails2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"hostname\");",
+									"    console.log(pm.test)",
+									"});",
+									"",
+									"",
+									"pm.test(\"Device status is unmanaged \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"UNMANAGED\");",
+									"    console.log(pm.test)",
+									"    });",
+									"",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									"",
+									"    var jsonData = pm.response.json();",
+									"var testmessage=jsonData.serial_number",
+									"pm.test(testmessage, function () {",
+									"   //testscript",
+									"",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Managed",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ids\": [\n    {{id}}\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/:manage",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								":manage"
+							],
+							"variable": [
+								{
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeviceDetails3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"hostname\");",
+									"    console.log(pm.test)",
+									"});",
+									"",
+									"",
+									"pm.test(\"Device status is managed \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"MANAGED\");",
+									"    console.log(pm.test)",
+									"    });",
+									"",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									"",
+									"        var jsonData = pm.response.json();",
+									"var testmessage=jsonData.serial_number",
+									"pm.test(testmessage, function () {",
+									"   //testscript",
+									"",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AT - GetSSID Details",
+			"item": [
+				{
+					"name": "List Network policies",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var value = pm.environment.get(\"var\");",
+									"",
+									"if( !value) {",
+									"    pm.environment.set(\"var\", 0);",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									"",
+									"var value = pm.environment.get(\"var\");",
+									"pm.environment.set(\"var\", value+1);",
+									"",
+									"DEVid = pm.environment.get(\"var\")",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.environment.set(\"npid\", jsonData.data[DEVid][\"id\"]);",
+									"",
+									"var testmessage=jsonData.data[DEVid].name",
+									"pm.test(testmessage, function () {",
+									"   //testscript",
+									"",
+									"});",
+									"",
+									" "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/network-policies?page=1&limit=10",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"network-policies"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List SSID list for the network policy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/network-policies/{{npid}}/ssids?page=1&limit=10",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"network-policies",
+								"{{npid}}",
+								"ssids"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AT- Change Network policy",
+			"item": [
+				{
+					"name": "List Devices XIQ",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"postman.setEnvironmentVariable('devices',data['id'])",
+									"postman.setEnvironmentVariable('networkpolicy',data['npid'])"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"hostname\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices?page=1&limit=50",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Network policies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/network-policies?page=1&limit=10",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"network-policies"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get network policy for one device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									"",
+									"var jsonData = pm.response.json();",
+									"    var testmessage=jsonData.id",
+									"pm.test(testmessage, function () {",
+									"   //testscript",
+									"",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/network-policy",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"network-policy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign network policy to one device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful PUT request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/network-policy?networkPolicyId={{npid}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"network-policy"
+							],
+							"query": [
+								{
+									"key": "networkPolicyId",
+									"value": "{{npid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List assigned devices for network policy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/network-policy/{{npid}}?page=1&limit=10",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"network-policy",
+								"{{npid}}"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AT - push CLI command",
+			"item": [
+				{
+					"name": "List Devices XIQ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"hostname\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									"",
+									"var value = pm.environment.get(\"var\");",
+									"pm.environment.set(\"var\", value+1);",
+									"",
+									"DEVid = pm.environment.get(\"var\")",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.environment.set(\"id\", jsonData.data[DEVid][\"id\"]);",
+									"",
+									"var testmessage=jsonData.data[DEVid].serial_number",
+									"pm.test(testmessage, function () {",
+									"   //testscript",
+									"",
+									"});",
+									"",
+									" "
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var value = pm.environment.get(\"var\");",
+									"",
+									"if( !value) {",
+									"    pm.environment.set(\"var\", 1);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices?page=1&limit=50",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeviceDetails",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"hostname\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									"",
+									"    var jsonData = pm.response.json();",
+									"var testmessage=jsonData.serial_number",
+									"pm.test(testmessage, function () {",
+									"   //testscript",
+									"",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send CLI to device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"CLI command successfully sent\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"CLI_RESPONSE_CODE_SUCCEED\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"devices\": {\n    \"ids\": [\n      {{id}}\n    ]\n  },\n  \"clis\": [\n    \"show version\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/:cli",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								":cli"
+							],
+							"variable": [
+								{
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AT - Onboard device and assign NP",
+			"item": [
+				{
+					"name": "Onboard Devices",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"postman.setEnvironmentVariable('extreme',data['extreme'])",
+									"postman.setEnvironmentVariable('npid',data['networkpolicy'])"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 202]);",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"extreme\": {\n    \"sns\": [\n      {{extreme}}\n    ]\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/:onboard",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								":onboard"
+							],
+							"variable": [
+								{
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Devices",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"hostname\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									"",
+									"// get the response body",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"for (count = 0; count < jsonData.data.length; count++)",
+									"{",
+									"    if (jsonData.data[count].serial_number === pm.environment.get(\"extreme\"))",
+									"    {",
+									"        var dev_id = jsonData.data[count].id;",
+									"        pm.environment.set(\"dev_id\", dev_id);",
+									"    }",
+									"",
+									"}",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices?page=1&limit=50",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Network policies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									"",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/network-policies?page=1&limit=10",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"network-policies"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign network policy to multiple devices",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"devices\":{\"ids\":[{{dev_id}}]},\"network_policy_id\":{{npid}}}"
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/network-policy/:assign",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"network-policy",
+								":assign"
+							],
+							"variable": [
+								{
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List assigned devices for network policy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/network-policy/{{npid}}?page=1&limit=10",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"network-policy",
+								"{{npid}}"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AT - PCG assign port for AP150W",
+			"item": [
+				{
+					"name": "List all Key Based PCG entries",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									"",
+									"var value = pm.environment.get(\"var\");",
+									"pm.environment.set(\"var\", value+1);",
+									"",
+									"PCGid = pm.environment.get(\"var\")",
+									"",
+									"let jsonData = pm.response.json();",
+									"pm.environment.set(\"pcgid\", jsonData[PCGid][\"policy_id\"]);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var value = pm.environment.get(\"var\");",
+									"",
+									"if( !value) {",
+									"    pm.environment.set(\"var\", 1);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/pcg/key-based",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"pcg",
+								"key-based"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Key Based PCG users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									"",
+									"    let jsonData = pm.response.json();",
+									"pm.environment.set(\"userid\", jsonData[0][\"id\"]);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/pcg/key-based/{{pcgid}}/users",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"pcg",
+								"key-based",
+								"{{pcgid}}",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get port assigment details of AP150W device Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"serial_number\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									"",
+									"    let jsonData = pm.response.json();",
+									"pm.environment.set(\"deviceid\", jsonData.pcg_port_assignment_entries[0].device[\"id\"]);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/pcg/key-based/ports/{{pcgid}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"pcg",
+								"key-based",
+								"ports",
+								"{{pcgid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign ports for AP150W",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"policy_id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"pcg_port_assignment\":[{\"device_id\":{{deviceid}},\"eth1_user_id\":{{userid}},\"eth2_user_id\":{{userid}},\"eth3_user_id\":{{userid}}}]}"
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/pcg/key-based/ports/{{pcgid}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"pcg",
+								"key-based",
+								"ports",
+								"{{pcgid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get port assigment details of AP150W device Copy 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"policy_id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/pcg/key-based/ports/{{pcgid}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"pcg",
+								"key-based",
+								"ports",
+								"{{pcgid}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AT - Onboard and configure switches + portconfigs",
+			"item": [
+				{
+					"name": "Onboard Devices",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"postman.setEnvironmentVariable('extreme',data['extreme'])",
+									"postman.setEnvironmentVariable('npid',data['networkpolicy'])",
+									"postman.setEnvironmentVariable('hostname',data['hostname'])"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 202]);",
+									"});",
+									" pm.test(\"Response time is less than 5000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(5000);",
+									"    });",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"extreme\": {\n    \"sns\": [\n      {{extreme}}\n    ]\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/:onboard",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								":onboard"
+							],
+							"variable": [
+								{
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Devices",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"hostname\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });",
+									"",
+									"// get the response body",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"for (count = 0; count < jsonData.data.length; count++)",
+									"{",
+									"    if (jsonData.data[count].serial_number === pm.environment.get(\"extreme\"))",
+									"    {",
+									"        var dev_id = jsonData.data[count].id;",
+									"        pm.environment.set(\"dev_id\", dev_id);",
+									"    }",
+									"",
+									"}",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices?page=1&limit=50",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign network policy to multiple devices",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"devices\":{\"ids\":[{{dev_id}}]},\"network_policy_id\":{{npid}}}"
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/network-policy/:assign",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"network-policy",
+								":assign"
+							],
+							"variable": [
+								{
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change hostname for one device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful PUT request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{dev_id}}/hostname?hostname={{hostname}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{dev_id}}",
+								"hostname"
+							],
+							"query": [
+								{
+									"key": "hostname",
+									"value": "{{hostname}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get device details for one device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"hostname\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 5000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(5000);",
+									"    });",
+									"",
+									"let jsonData = pm.response.json();",
+									"var testmessage=jsonData.serial_number",
+									"pm.test(testmessage, function () {",
+									"//testscript",
+									"}",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{dev_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{dev_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Port types",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 5000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(5000);",
+									"    });",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-AH-API-CLIENT-SECRET",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "X-AH-API-CLIENT-REDIRECT-URI",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "X-AH-API-CLIENT-ID",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://nl-gcp.extremecloudiq.com/xapi/v1/configuration/porttypes?ownerId={id}",
+							"protocol": "https",
+							"host": [
+								"nl-gcp",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"xapi",
+								"v1",
+								"configuration",
+								"porttypes"
+							],
+							"query": [
+								{
+									"key": "ownerId",
+									"value": "{id}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT switch port details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"portDetailEntries\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 5000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(5000);",
+									"    });",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-AH-API-CLIENT-SECRET",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "X-AH-API-CLIENT-REDIRECT-URI",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "X-AH-API-CLIENT-ID",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "     {    \"portDetailEntries\": [\n    {\n                    \"interfaceName\": \"eth1\",\n                    \"enabled\": true,\n                    \"description\": \"Default settings for the trunk port\",\n                    \"vlanId\": 1,\n                    \"allowedVlans\": \"all\",\n                    \"portTypeId\": 458882895953290,\n                    \"portType\": {\n                        \"id\": 458882895953290,\n                        \"name\": \"SR214P-trunk\",\n                        \"deviceSeries\": \"SWITCH\",\n                        \"portType\": \"TRUNK\",\n                        \"deviceFamily\": \"AH_SWITCH\",\n                        \"enabled\": true,\n                        \"defaultUserProfile\": {\n                            \"id\": 36000,\n                            \"enableFirewall\": false\n                        },\n                        \"vlan\": {\n                            \"id\": 40000,\n                            \"name\": \"1\",\n                            \"defVlanId\": 1\n                        },\n                        \"allowedVlans\": \"all\"\n       }}\n      ], \"enableStp\": true }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://nl-gcp.extremecloudiq.com/xapi/v1/configuration/switch/{{dev_id}}/settings?ownerId={id}",
+							"protocol": "https",
+							"host": [
+								"nl-gcp",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"xapi",
+								"v1",
+								"configuration",
+								"switch",
+								"{{dev_id}}",
+								"settings"
+							],
+							"query": [
+								{
+									"key": "ownerId",
+									"value": "{id}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET switch port details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"portDetailEntries\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 5000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(5000);",
+									"    });",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-AH-API-CLIENT-SECRET",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "X-AH-API-CLIENT-REDIRECT-URI",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "X-AH-API-CLIENT-ID",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://nl-gcp.extremecloudiq.com/xapi/v1/configuration/switch/{{dev_id}}/settings?ownerId={id}",
+							"protocol": "https",
+							"host": [
+								"nl-gcp",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"xapi",
+								"v1",
+								"configuration",
+								"switch",
+								"{{dev_id}}",
+								"settings"
+							],
+							"query": [
+								{
+									"key": "ownerId",
+									"value": "{id}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Push configuration and firmware to device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"request_id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"devices\":{\"ids\":[{{dev_id}}]},\"deploy_policy\":{\"enable_complete_configuration_update\":true,\"firmware_upgrade_policy\":{\"enable_enforce_upgrade\":true,\"enable_distributed_upgrade\":true},\"firmware_activate_option\":{\"enable_activate_at_next_reboot\":true,\"activation_delay_seconds\":0,\"activation_time\":0}}}"
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/config/:deploy",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"config",
+								":deploy"
+							],
+							"variable": [
+								{
+									"key": "deploy",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get configuration deployment status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"current_progress\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/config/deploy/status?deviceIds={{dev_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"config",
+								"deploy",
+								"status"
+							],
+							"query": [
+								{
+									"key": "deviceIds",
+									"value": "{{dev_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List assigned devices for network policy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 5000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(5000);",
+									"    });",
+									"",
+									"    "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/network-policy/{id}?page=1&limit=10",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"network-policy",
+								"{id}"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var authServiceUrl = pm.collectionVariables.get('authService');",
+					"var gatewayBaseUrl = pm.collectionVariables.get('gatewayBaseUrl');",
+					"var un = pm.environment.get('username');",
+					"var pw = pm.environment.get('password');",
+					"",
+					"var sdk = require('postman-collection');",
+					"",
+					"if (pm.info.requestName === \"Login\"){",
+					"    pm.environment.set(\"jwttoken\", \"123\");",
+					"    console.log('Token has been reset');",
+					"};",
+					"",
+					"var isValidTokenRequest = new sdk.Request({",
+					"    url: gatewayBaseUrl + \"/account/info\", // Use an endpoint that requires being authenticated",
+					"    method: 'GET',",
+					"    header: [",
+					"        new sdk.Header({",
+					"            key: 'content-type',",
+					"            value: 'application/json',",
+					"        }),",
+					"        new sdk.Header({",
+					"            key: 'acccept',",
+					"            value: 'application/json',",
+					"        }),",
+					"        new sdk.Header({",
+					"            key: 'Authorization',",
+					"            value: 'Bearer ' + pm.environment.get(\"jwttoken\"),",
+					"        }),",
+					"    ]",
+					"});",
+					"",
+					"pm.sendRequest(isValidTokenRequest, function (err, response) {",
+					"    if (response.code === 401) {",
+					"        console.log('Token is unauthorized');",
+					"        refreshToken();",
+					"    }",
+					"    else if (response.code === 200)",
+					"    {",
+					"        console.log('Valid Token');",
+					"    }",
+					"});",
+					"",
+					"function refreshToken() {",
+					"    var tokenRequest = new sdk.Request({",
+					"    url: authServiceUrl,",
+					"    method: 'POST',",
+					"    header: [",
+					"        new sdk.Header({",
+					"            key: 'content-type',",
+					"            value: 'application/json'",
+					"        }),",
+					"        new sdk.Header({",
+					"            key: 'acccept',",
+					"            value: '*/*'",
+					"        }),",
+					"    ],",
+					"    body: {",
+					"        mode: 'raw',",
+					"        raw: JSON.stringify({",
+					"            username: un,",
+					"            password: pw",
+					"        })",
+					"    } ",
+					"  });",
+					"",
+					"  pm.sendRequest(tokenRequest, function (err, response) {",
+					"      if (err) {",
+					"          throw err;",
+					"      }",
+					"      ",
+					"      if (response.code !== 200) {",
+					"          throw new Error('Could not log in.');",
+					"      }",
+					"      ",
+					"      pm.environment.set(\"jwttoken\", response.json().access_token);",
+					"      console.log(`New token has been set: ${response.json().access_token}`);",
+					"  });",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "authService",
+			"value": "https://api.extremecloudiq.com/login"
+		},
+		{
+			"key": "gatewayBaseUrl",
+			"value": "https://api.extremecloudiq.com"
+		},
+		{
+			"key": "jwttoken",
+			"value": ""
+		},
+		{
+			"key": "manage",
+			"value": ":manage"
+		},
+		{
+			"key": "check",
+			"value": ":check"
+		},
+		{
+			"key": "deploy",
+			"value": ":deploy"
+		},
+		{
+			"key": "cli",
+			"value": ":cli"
+		},
+		{
+			"key": "reboot",
+			"value": ":reboot"
+		},
+		{
+			"key": "unmanage",
+			"value": ":unmanage"
+		},
+		{
+			"key": "rename",
+			"value": ":rename"
+		},
+		{
+			"key": "pageNumber",
+			"value": ""
+		}
+	]
+}
