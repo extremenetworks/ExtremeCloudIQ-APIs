@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "ad00ed5a-3b5a-47a7-b428-bcb1649ca937",
-		"name": "XIQ API New Framework",
+		"_postman_id": "fd8c7886-322b-4708-b048-32742fff10b7",
+		"name": "XIQ APIv2 New Framework_MAY2021",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -3877,7 +3877,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/devices/network-policy/{{np_id}}?page=1&limit=10",
+							"raw": "https://api.extremecloudiq.com/devices/network-policy/{id}?page=1&limit=10",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -3887,7 +3887,7 @@
 							"path": [
 								"devices",
 								"network-policy",
-								"{{np_id}}"
+								"{id}"
 							],
 							"query": [
 								{
@@ -4174,7 +4174,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/locations/building",
+							"raw": "https://api.extremecloudiq.com/locations/",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -4183,7 +4183,7 @@
 							],
 							"path": [
 								"locations",
-								"building"
+								""
 							]
 						}
 					},
@@ -4766,7 +4766,7 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "",
+									"key": "file",
 									"type": "file",
 									"src": []
 								}
@@ -5035,7 +5035,7 @@
 									"    console.log(pm.test)",
 									"});",
 									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -6927,6 +6927,16 @@
 				{
 					"name": "List Webhook subscriptions",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -7020,6 +7030,16 @@
 				{
 					"name": "List Accounting Logs",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -7072,6 +7092,16 @@
 				{
 					"name": "List Audit Logs",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -7321,14 +7351,7 @@
 		}
 	],
 	"auth": {
-		"type": "bearer",
-		"bearer": [
-			{
-				"key": "token",
-				"value": "{{jwttoken}}",
-				"type": "string"
-			}
-		]
+		"type": "bearer"
 	},
 	"event": [
 		{
