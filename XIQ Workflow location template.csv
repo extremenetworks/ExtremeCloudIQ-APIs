@@ -1,0 +1,3 @@
+﻿loc_name,building_name,address,floor_name,environment,attenuation,measurement,height,map_width,map_height,map_name
+Loc_name1,building_name1,address1,floor123,RF_ENVIRONMENT_TYPE_OFFICE,15,MEASUREMENT_UNIT_METERS,3,50,50,FloorPlanUnitD2.jpg
+Loc_name2,building_name2,address2,floor234,RF_ENVIRONMENT_TYPE_OFFICE,15,MEASUREMENT_UNIT_METERS,3,25,25,FloorPlanUnitD2.jpg
