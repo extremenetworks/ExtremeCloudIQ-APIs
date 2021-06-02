@@ -4,4 +4,6 @@
 
 <b>XIQ-AD-PPSK-Sync.py </b>- sync your Active directory users with the Private Pre-shared-key solution from Extreme Networks and create automatically a Private Pre-shared key for every AD user. Disable a user in the AD server and the PPSK is automatically removed.
 
+<b>XIQ-PPSK-create-user.py </b> - list the availabe user groups and create a Private Pre-shared-key user.
+
 <b>XIQ-FW port test.py </b>- test if the ExtremeCloudIQ services are reachable from your location.
