@@ -1,4 +1,4 @@
-Demo scripts:
+<b>Demo scripts:</b>
 
 XIQ location csv.py  - use the csv template file to list your locations buildings and floors and add this file to the same folder. Run the XIQ location CSV python file, enter your XIQ login credentials and the name of the CSV file and the location,buildings and floors listed in the CSV file will be created in ExtremeCloudIQ.
 
