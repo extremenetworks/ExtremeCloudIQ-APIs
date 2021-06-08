@@ -10,4 +10,4 @@
 
 <b>XIQ-FW port test.py </b>- test if the ExtremeCloudIQ services are reachable from your location.
 
-<b>XIQ-Remove-exp-PPSK.py </b> remove the expired Private pre-shared-keys from ExtremeCloudIQ.
+<b>XIQ-Remove-exp-PPSK.py </b> -  remove the expired Private pre-shared-keys from ExtremeCloudIQ.
