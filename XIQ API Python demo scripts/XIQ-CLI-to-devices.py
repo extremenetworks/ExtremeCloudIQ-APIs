@@ -124,7 +124,6 @@ except:
     print("Unknown Error: Failed to generate token")
     raise SystemExit
 
-
 devices = Getdevices(10)
 
 deviceId = 0
