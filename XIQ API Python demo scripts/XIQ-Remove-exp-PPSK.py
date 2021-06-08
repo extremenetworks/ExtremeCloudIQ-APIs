@@ -6,7 +6,6 @@ from time import mktime
 import os
 import logging
 
-
 #-------------------------
 # logging
 PATH = os.path.dirname(os.path.abspath(__file__))
