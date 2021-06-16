@@ -91,7 +91,7 @@ def CreatePPSKuser(usergroupId,name1,user_name,password):
     payload = json.dumps({"user_group_id": usergroupId,"name": name1,"user_name": user_name,"password": password, "email_address": email_address, "email_password_delivery": email_address})
 
     print("Trying to create user using this URL and payload " + url)
-    print(payload, file=open(filename1 + "txt" , "a"))
+    print(payload, file=open(filename1 + ".txt" , "a"))
     response = requests.post(url, headers=headers, data=payload, verify=True)
     if response is None:
         print("Error adding PPSK user - no response!")
