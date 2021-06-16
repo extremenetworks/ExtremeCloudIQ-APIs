@@ -2,8 +2,9 @@ import requests
 import json
 import logging
 import getpass
-import secrets
+import random
 import string
+import datetime
 
 URL = "https://api.extremecloudiq.com"
 
@@ -84,12 +85,13 @@ def listusergroups(pageSize):
 # Create PPSK user
 
 def CreatePPSKuser(usergroupId,name1,user_name,password):
+    filename1 = "PPSK_" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     url = URL + "/ssids/users"
 
     payload = json.dumps({"user_group_id": usergroupId,"name": name1,"user_name": user_name,"password": password, "email_address": email_address, "email_password_delivery": email_address})
 
     print("Trying to create user using this URL and payload " + url)
-    print(payload)
+    print(payload, file=open(filename1 + "txt" , "a"))
     response = requests.post(url, headers=headers, data=payload, verify=True)
     if response is None:
         print("Error adding PPSK user - no response!")
@@ -143,6 +145,11 @@ def retrievePPSKusers(pageSize):
 
     return ppskusers
 
+def get_random_string(length):
+    letters = string.ascii_lowercase
+    password = ''.join(random.choice(letters) for i in range(length))
+    print("your password is:" + password)
+    return password
 
 login = GetaccessToken(username,password)
 usergroups = listusergroups(10)
@@ -163,13 +170,10 @@ name1 = input("Enter name: ")
 user_name = input("Enter username: ")
 email_address = input("Enter email-address: ")
 
-#password generator
-alphabet = string.ascii_letters + string.digits
-password_random = ''.join(secrets.choice(alphabet) for i in range(10))  # for a 20-character password
 
-password = alphabet
+password = get_random_string(10)
 
-adduser = CreatePPSKuser(usergroupId, name1, user_name, password)
+adduser = CreatePPSKuser(usergroupId, name1, user_name,password)
 if adduser == 0:
     print("\nFailed to create PPSK user - stopping\n")
     exit
