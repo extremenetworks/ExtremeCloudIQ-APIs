@@ -7,17 +7,26 @@ import sys
 import time
 import os
 import logging
+from ldap3 import Server, Connection, ALL, NTLM, SUBTREE
 
 
 # Global Variables - ADD CORRECT VALUES
 server_name = "enter your server name or IP"
 domain_name = "enter you domain name"
+fqdn = "enter your fqdn"
 user_name = "enter your username"
 password = "enter your password"
-ad_group = "enter active directory group"
 XIQ_username = "enter your ExtremeCloudIQ Username"
-XIQ_password = "enter your ExtremeCLoudIQ password
-usergroupID = " enter your user group ID"
+XIQ_password = "enter your ExtremeCLoudIQ password"
+###OR###
+#XIQ_token = "enter your ExtremeCloudIQ token with minimum 'ssid' permissions"
+
+group_roles = [
+    # AD GROUP Name, XIQ group ID
+    ("enter AD group name", "enter your user group ID"),
+    ("enter AD group name", "enter your user group ID")
+]
+
 
 #-------------------------
 # logging
@@ -33,9 +42,6 @@ ldap_disable_codes = ['514','66050']
 
 URL = "https://api.extremecloudiq.com"
 headers = {"Accept": "application/json", "Content-Type": "application/json"}
-
-from ldap3 import Server, Connection, ALL, NTLM, ALL_ATTRIBUTES, ALL_OPERATIONAL_ATTRIBUTES, AUTO_BIND_NO_TLS, SUBTREE
-
 
 
 def retrieveADUsers(ad_group):
@@ -90,7 +96,7 @@ def GetaccessToken(XIQ_username, XIQ_password):
         raise TypeError(log_msg)
 
 
-def CreatePPSKuser(name,mail):
+def CreatePPSKuser(name,mail, usergroupID):
     url = URL + "/ssids/users"
 
     payload = json.dumps({"user_group_id": usergroupID ,"name": name,"user_name": name,"password": "", "email_address": mail, "email_password_delivery": mail})
@@ -105,7 +111,7 @@ def CreatePPSKuser(name,mail):
     elif response.status_code != 200:
         log_msg = f"Error adding PPSK user {name} - HTTP Status Code: {str(response.status_code)}"
         logging.error(log_msg)
-        logging.warning(f"\t\t{response}")
+        logging.warning(f"\t\t{response.json()}")
         raise TypeError(log_msg)
 
     elif response.status_code ==200:
@@ -116,7 +122,7 @@ def CreatePPSKuser(name,mail):
 
 
 
-def retrievePPSKusers(pageSize):
+def retrievePPSKusers(pageSize, usergroupID):
     #print("Retrieve all PPSK users  from ExtremeCloudIQ")
     page = 1
 
@@ -175,73 +181,86 @@ def deleteuser(userId):
     #print(response)
 
 def main():
-    try:
-        login = GetaccessToken(XIQ_username, XIQ_password)
-    except TypeError as e:
-        print(e)
-        raise SystemExit
-    except:
-        log_msg = "Unknown Error: Failed to generate token"
-        logging.error(log_msg)
-        print(log_msg)
-        raise SystemExit
 
-    try:
-        ppsk_users = retrievePPSKusers(100)
-    except TypeError as e:
-        print(e)
-        print("script exiting....")
-        # not having ppsk will break later line - if not any(d['name'] == name for d in ppsk_users):
-        raise SystemExit
-    except:
-        log_msg = ("Unknown Error: Failed to retrieve users from XIQ")
-        logging.error(log_msg)
-        print(log_msg)
-        print("script exiting....")
-        # not having ppsk will break later line - if not any(d['name'] == name for d in ppsk_users):
-        raise SystemExit
+    if 'XIQ_token' not in globals():
+        try:
+            login = GetaccessToken(XIQ_username, XIQ_password)
+        except TypeError as e:
+            print(e)
+            raise SystemExit
+        except:
+            log_msg = "Unknown Error: Failed to generate token"
+            logging.error(log_msg)
+            print(log_msg)
+            raise SystemExit     
+    else:
+        headers["Authorization"] = "Bearer " + XIQ_token
+    ListofADgroups, ListofXIQUserGroups = zip(*group_roles)
+    ppsk_users = []
+    for usergroupID in ListofXIQUserGroups:
+        try:
+            ppsk_users += retrievePPSKusers(100,usergroupID)
+        except TypeError as e:
+            print(e)
+            print("script exiting....")
+            # not having ppsk will break later line - if not any(d['name'] == name for d in ppsk_users):
+            raise SystemExit
+        except:
+            log_msg = ("Unknown Error: Failed to retrieve users from XIQ")
+            logging.error(log_msg)
+            print(log_msg)
+            print("script exiting....")
+            # not having ppsk will break later line - if not any(d['name'] == name for d in ppsk_users):
+            raise SystemExit
+
 
     ldap_users = {}
     ldap_capture_success = True
-    ad_result = retrieveADUsers(ad_group)
-    #print("\nParsing all users from LDAP:\n")
+    for ad_group, xiq_user_role in group_roles:
+        ad_result = retrieveADUsers(ad_group)
+        #print("\nParsing all users from LDAP:\n")
 
-    for ldap_entry in ad_result:
-        if str(ldap_entry.name) not in ldap_users:
-            try:
-                ldap_users[str(ldap_entry.name)] = {
-                    "userAccountControl": str(ldap_entry.userAccountControl),
-                    "email": str(ldap_entry.mail)}
+        for ldap_entry in ad_result:
+            if str(ldap_entry.name) not in ldap_users:
+                try:
+                    ldap_users[str(ldap_entry.name)] = {
+                        "userAccountControl": str(ldap_entry.userAccountControl),
+                        "email": str(ldap_entry.mail),
+                        "username": str(ldap_entry.sAMAccountName),
+                        "xiq_role": xiq_user_role
+                    }
 
-            except:
-                log_msg = (f"Unexpected error: {sys.exc_info()[0]}")
-                logging.error(log_msg)
-                print(log_msg)
-                logging.warning("User info was not captured from Active Directory")
-                logging.warning(f"{ldap_entry}")
-                # not having ppsk will break later line - for name, details in ldap_users.items():
-                ldap_capture_success = False
-                continue
+                except:
+                    log_msg = (f"Unexpected error: {sys.exc_info()[0]}")
+                    logging.error(log_msg)
+                    print(log_msg)
+                    logging.warning("User info was not captured from Active Directory")
+                    logging.warning(f"{ldap_entry}")
+                    # not having ppsk will break later line - for name, details in ldap_users.items():
+                    ldap_capture_success = False
+                    continue
 
 
     log_msg = "Successfully parsed " + str(len(ldap_users)) + " LDAP users"
     logging.info(log_msg)
-    #print(f"\n{log_msg}\n")
+    print(f"\n{log_msg}\n")
 
     ldap_disabled = []
     for name, details in ldap_users.items():
         if details['email'] == '[]':
-            print(f"User {name} doesn't have a email set")
+            log_msg = (f"User {name} doesn't have a email set and will not be created in xiq")
+            logging.warning(log_msg)
+            print(log_msg)
             continue
         if not any(d['name'] == name for d in ppsk_users) and not any(d == details['userAccountControl'] for d in ldap_disable_codes):
             try:
-                CreatePPSKuser(name, details["email"])
+                CreatePPSKuser(name, details["email"], details['xiq_role'])
             except TypeError as e:
                 log_msg = f"failed to create {name}: {e}"
                 logging.error(log_msg)
                 print(log_msg)
             except:
-                log_msg = f"Unknown Error: Failed to create user {name}"
+                log_msg = f"Unknown Error: Failed to create user {name} - {details['email']}"
                 logging.error(log_msg)
                 print(log_msg)
         elif any(d == details['userAccountControl'] for d in ldap_disable_codes):
