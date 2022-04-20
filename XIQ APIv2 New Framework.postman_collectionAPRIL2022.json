@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2f524037-b7f1-4ed3-ae9c-decd0ff45ace",
+		"_postman_id": "721cf93c-46b6-4b75-a1b3-7d3d57a16fd7",
 		"name": "XIQ APIv2 New Framework_DEC2021",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -24,7 +24,7 @@
 									"    console.log(pm.test)",
 									"});",
 									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -69,37 +69,18 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Authorization",
-			"item": [
+				},
 				{
-					"name": "POST ​/auth​/apitoken Generate new API token",
+					"name": "Logout - Revoke token",
 					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"var myDate = new Date(\"July 2, 2021 02:30:00\"); // Your timezone!",
-									"pm.environment.set(\"myEpoch\", myDate.getTime()/1000.0);"
-								],
-								"type": "text/javascript"
-							}
-						},
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Successful POST request\", function () {",
+									"pm.test(\"Successful GET request\", function () {",
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									"pm.test(\"include access token\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"access_token\");",
-									"    console.log(pm.test)",
-									"});",
 									" pm.test(\"Response time is less than 500ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(500);",
 									"    });"
@@ -120,18 +101,15 @@
 							]
 						},
 						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"description\": \"Token for read account only\",\n  \"expire_time\": {{myEpoch}},\n  \"permissions\": [\n    \"account:r\"\n  ]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
 							}
-						},
+						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/auth/apitoken",
+							"raw": "https://api.extremecloudiq.com/logout",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -139,216 +117,7 @@
 								"com"
 							],
 							"path": [
-								"auth",
-								"apitoken"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "/auth/apitoken/info Get current API token details",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Successful GET request\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
-									"});",
-									"",
-									"pm.test(\"include role\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"role\");",
-									"    console.log(pm.test)",
-									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
-									"    });"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwttoken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://api.extremecloudiq.com/auth/apitoken/info",
-							"protocol": "https",
-							"host": [
-								"api",
-								"extremecloudiq",
-								"com"
-							],
-							"path": [
-								"auth",
-								"apitoken",
-								"info"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "/auth/permissions Get permissions for current login user",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Successful GET request\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
-									"});",
-									"",
-									"pm.test(\"include name\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"name\");",
-									"    console.log(pm.test)",
-									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
-									"    });"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwttoken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://api.extremecloudiq.com/auth/permissions",
-							"protocol": "https",
-							"host": [
-								"api",
-								"extremecloudiq",
-								"com"
-							],
-							"path": [
-								"auth",
-								"permissions"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "/auth/permissions/:check Check permissions",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Successful POST request\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
-									"});",
-									"",
-									"pm.test(\"include permissions\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"permissions\");",
-									"    console.log(pm.test)",
-									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
-									"    });"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwttoken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"uri\": \"https://api.extremecloudiq.com/auth/apitoken/info\",\n  \"method\": \"get\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://api.extremecloudiq.com/auth/permissions/{{check}}",
-							"protocol": "https",
-							"host": [
-								"api",
-								"extremecloudiq",
-								"com"
-							],
-							"path": [
-								"auth",
-								"permissions",
-								"{{check}}"
+								"logout"
 							]
 						}
 					},
@@ -371,11 +140,11 @@
 									"});",
 									"",
 									"pm.test(\"include account type\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"account_type\");",
+									"    pm.expect(pm.response.text()).to.include(\"access_token\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -700,6 +469,290 @@
 			]
 		},
 		{
+			"name": "Authorization",
+			"item": [
+				{
+					"name": "POST ​/auth​/apitoken Generate new API token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var myDate = new Date(\"July 2, 2022 02:30:00\"); // Your timezone!",
+									"pm.environment.set(\"myEpoch\", myDate.getTime()/1000.0);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include access token\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"access_token\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\": \"Token for read account only\",\n  \"expire_time\": {{myEpoch}},\n  \"permissions\": [\n    \"account:r\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/auth/apitoken",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"auth",
+								"apitoken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/auth/apitoken/info Get current API token details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include role\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"role\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/auth/apitoken/info",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"auth",
+								"apitoken",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/auth/permissions Get permissions for current login user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include name\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/auth/permissions",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"auth",
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/auth/permissions/:check Check permissions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include permissions\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"permissions\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"uri\": \"https://api.extremecloudiq.com/auth/apitoken/info\",\n  \"method\": \"get\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/auth/permissions/{{check}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"auth",
+								"permissions",
+								"{{check}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "User",
 			"item": [
 				{
@@ -803,8 +856,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"login_name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -1371,8 +1424,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -3046,12 +3099,12 @@
 								},
 								{
 									"key": "macAddresses",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
 									"key": "sns",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
@@ -5877,7 +5930,7 @@
 								},
 								{
 									"key": "userProfileNames",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
@@ -5992,7 +6045,7 @@
 								},
 								{
 									"key": "userProfileNames",
-									"value": null,
+									"value": "",
 									"disabled": true
 								},
 								{
@@ -7564,6 +7617,11 @@
 									"key": "user_group_ids",
 									"value": "{{group_id}}",
 									"disabled": true
+								},
+								{
+									"key": "usernames",
+									"value": "",
+									"disabled": true
 								}
 							]
 						}
@@ -7734,6 +7792,64 @@
 							"path": [
 								"endusers",
 								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Regenerate password for an end user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"password\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/endusers/{{user_id}}/:regenerate-password",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"endusers",
+								"{{user_id}}",
+								":regenerate-password"
+							],
+							"variable": [
+								{
+									"key": "regenerate-password",
+									"value": null
+								}
 							]
 						}
 					},
