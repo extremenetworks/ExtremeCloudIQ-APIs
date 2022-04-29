@@ -1,10 +1,16 @@
 import requests
+import json
+
+access_token = '***'
 
 url = "https://api.extremecloudiq.com/hiq/organizations"
 
-payload="{\n  \"name\": \"***\",\n  \"color\": \"***\"\n}"
+payload = json.dumps({
+  "name": "string",
+  "color": "string"
+})
 headers = {
-  'Authorization': '***',
+  'Authorization': 'Bearer ' + access_token,
   'Content-Type': 'application/json'
 }
 

@@ -63,7 +63,7 @@ def retrievePPSKusers(pageSize):
     ppskusers = []
 
     while page < 1000:
-        url = URL + "/ssids/users?page=" + str(page) + "&limit=" + str(pageSize)
+        url = URL + "/endusers?page=" + str(page) + "&limit=" + str(pageSize)
        # print("Retrieving next page of PPSK users from ExtremeCloudIQ starting at page " +
           #    str(page) + " url: " + url)
 
@@ -98,7 +98,7 @@ def retrievePPSKusers(pageSize):
 
 
 def removeuser(userID):
-    url = URL + "/ssids/users/" + str(userID)
+    url = URL + "/endusers/" + str(userID)
     print("\nTrying to delete user using this URL and payload\n " + url)
     response = requests.delete(url, headers=headers, verify=True)
     if response is None:

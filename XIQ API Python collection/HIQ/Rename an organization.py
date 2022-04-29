@@ -1,10 +1,14 @@
 import requests
+import json
 
-url = "https://api.extremecloudiq.com/hiq/organizations/***/"
+org_id = 0
+access_token = '***'
 
-payload="[***]"
+url = f"https://api.extremecloudiq.com/hiq/organizations/{org_id}/:rename"
+
+payload = json.dumps("new name")
 headers = {
-  'Authorization': '***',
+  'Authorization': 'Bearer ' + access_token,
   'Content-Type': 'application/json'
 }
 

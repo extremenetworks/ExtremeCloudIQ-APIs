@@ -1,10 +1,15 @@
 import requests
+import json
+
+access_token = '***'
 
 url = "https://api.extremecloudiq.com/hiq/context/reading"
 
-payload="[\n  ***\n]"
+payload = json.dumps([
+  0
+])
 headers = {
-  'Authorization': '***',
+  'Authorization': 'Bearer ' + access_token,
   'Content-Type': 'application/json'
 }
 

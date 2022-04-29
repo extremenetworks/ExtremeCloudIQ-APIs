@@ -86,7 +86,7 @@ def listusergroups(pageSize):
 
 def CreatePPSKuser(usergroupId,name1,user_name,password):
     filename1 = "PPSK_" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    url = URL + "/ssids/users"
+    url = URL + "/endusers"
 
     payload = json.dumps({"user_group_id": usergroupId,"name": name1,"user_name": user_name,"password": password, "email_address": email_address, "email_password_delivery": email_address})
 
@@ -114,7 +114,7 @@ def retrievePPSKusers(pageSize):
     ppskusers = []
 
     while page < 1000:
-        url = URL + "/ssids/users?page=" + str(page) + "&limit=" + str(pageSize)
+        url = URL + "/endusers?page=" + str(page) + "&limit=" + str(pageSize)
         print("Retrieving next page of PPSK users from ExtremeCloudIQ starting at page " +
               str(page) + " url: " + url)
 
@@ -156,9 +156,9 @@ usergroups = listusergroups(10)
 
 usergroupname = input("Enter the usergroup name: ")
 usergroupId = 0
-for usergroupId in usergroups:
-    if usergroupId['name'] == usergroupname:
-        usergroupId = usergroupId['id']
+for usergroup in usergroups:
+    if usergroup['name'] == usergroupname:
+        usergroupId = usergroup['id']
         print("Found usergroup ID: " + str(usergroupId))
         break
 if usergroupId == 0:

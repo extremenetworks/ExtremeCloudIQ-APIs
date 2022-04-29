@@ -1,10 +1,17 @@
 import requests
+import json
+
+access_token = '***'
 
 url = "https://api.extremecloudiq.com/devices/"
 
-payload="{\n  \"ids\": [\n    0\n  ]\n}"
+payload = json.dumps({
+  "ids": [
+    0
+  ]
+})
 headers = {
-  'Authorization': '***',
+  'Authorization': 'Bearer ' + access_token,
   'Content-Type': 'application/json'
 }
 
