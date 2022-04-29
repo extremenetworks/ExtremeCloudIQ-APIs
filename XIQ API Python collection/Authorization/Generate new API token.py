@@ -1,10 +1,19 @@
 import requests
+import json
+
+access_token = '***'
 
 url = "https://api.extremecloudiq.com/auth/apitoken"
 
-payload="{\n  \"description\": \"Token for read account only\",\n  \"expire_time\": 1625185800,\n  \"permissions\": [\n    \"account:r\"\n  ]\n}"
+payload = json.dumps({
+  "description": "access_token for read account only",
+  "expire_time": 1650999412,
+  "permissions": [
+    "account:r"
+  ]
+})
 headers = {
-  'Authorization': '***',
+  'Authorization': 'Bearer ' + access_token,
   'Content-Type': 'application/json'
 }
 

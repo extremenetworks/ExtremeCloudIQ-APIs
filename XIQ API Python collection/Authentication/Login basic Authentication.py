@@ -1,8 +1,16 @@
 import requests
+import json
+
+username = '***'
+password = '***'
 
 url = "https://api.extremecloudiq.com/login"
 
-payload="{\n  \"username\": \"***\",\n  \"password\": \"*** s\"\n}"
+
+payload = json.dumps({
+  'username': username,
+  'password': password
+})
 headers = {
   'Content-Type': 'application/json'
 }

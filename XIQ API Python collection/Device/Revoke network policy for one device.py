@@ -1,11 +1,14 @@
 import requests
 
-url = "https://api.extremecloudiq.com/devices/***/network-policy"
+device_id = 0 
+access_token = '***'
+
+url = f"https://api.extremecloudiq.com/devices/{device_id}/network-policy"
 
 payload={}
 headers = {
   'accept': '*/*',
-  'Authorization': '***'
+  'Authorization': 'Bearer ' + access_token
 }
 
 response = requests.request("DELETE", url, headers=headers, data=payload)

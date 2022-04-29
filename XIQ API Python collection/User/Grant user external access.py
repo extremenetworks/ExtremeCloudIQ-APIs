@@ -1,13 +1,16 @@
 import requests
 import json
 
-url = "https://api.extremecloudiq.com/users/externalaccess"
+access_token = '***'
+
+url = "https://api.extremecloudiq.com/users/external"
 
 payload = json.dumps({
   "login_name": "example1@company.com",
-  "user_role": "ADMINISTRATIVE_ROLE_ADMINISTRATOR"
+  "user_role": "ADMINISTRATOR"
 })
 headers = {
+  'Authorization': 'Bearer ' + access_token,
   'Content-Type': 'application/json'
 }
 

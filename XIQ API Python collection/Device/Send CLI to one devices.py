@@ -1,10 +1,16 @@
 import requests
+import json
 
-url = "https://api.extremecloudiq.com/devices***/"
+device_id = 0
+access_token = '***'
 
-payload="[\"show run\"]"
+url = f"https://api.extremecloudiq.com/devices/{device_id}/:cli"
+
+payload = json.dumps([
+  "string"
+])
 headers = {
-  'accept': '***'
+  'accept': 'Bearer ' + access_token
 }
 
 response = requests.request("POST", url, headers=headers, data=payload)

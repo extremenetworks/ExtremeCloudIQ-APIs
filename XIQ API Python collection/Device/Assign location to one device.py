@@ -1,12 +1,22 @@
 import requests
+import json
 
-url = "https://api.extremecloudiq.com/devices/***/location"
+device_id = 0
+access_token = '***'
 
-payload="{\n    \"location_id\":***,\n    \"x\":***,\n    \"y\":***,\n    \"latitude\":null,\n    \"longitude\":null\n    \n}"
+url = f"https://api.extremecloudiq.com/devices/{device_id}/location"
+
+payload = json.dumps({
+  "location_id": 0,
+  "x": 0,
+  "y": 0,
+  "latitude": 0,
+  "longitude": 0
+})
 headers = {
   'accept': '*/*',
   'Content-Type': 'application/json',
-  'Authorization': '***'
+  'Authorization': 'Bearer ' + access_token
 }
 
 response = requests.request("PUT", url, headers=headers, data=payload)

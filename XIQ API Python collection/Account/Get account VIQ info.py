@@ -1,10 +1,12 @@
 import requests
 
+access_token = '***'
+
 url = "https://api.extremecloudiq.com/account/viq"
 
 payload={}
 headers = {
-  'Authorization': '***'
+  'Authorization': 'Bearer ' + access_token
 }
 
 response = requests.request("GET", url, headers=headers, data=payload)

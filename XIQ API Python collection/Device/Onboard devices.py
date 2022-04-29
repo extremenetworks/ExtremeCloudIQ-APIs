@@ -1,10 +1,44 @@
 import requests
+import json
+
+access_token = '***'
 
 url = "https://api.extremecloudiq.com/devices/"
 
-payload="{\n  \"extreme\": {\n    \"sns\": [\n      \"string\"\n    ]\n  },\n  \"exos\": {\n    \"sns\": [\n      \"string\"\n    ]\n  },\n  \"voss\": {\n    \"sns\": [\n      \"string\"\n    ]\n  },\n  \"wing\": {\n    \"sn_to_mac\": {\n      \"additionalProp1\": \"string\",\n      \"additionalProp2\": \"string\",\n      \"additionalProp3\": \"string\"\n    }\n  },\n  \"dell\": {\n    \"sn_to_st\": {\n      \"additionalProp1\": \"string\",\n      \"additionalProp2\": \"string\",\n      \"additionalProp3\": \"string\"\n    }\n  }\n}"
+payload = json.dumps({
+  "extreme": {
+    "sns": [
+      "string"
+    ]
+  },
+  "exos": {
+    "sns": [
+      "string"
+    ]
+  },
+  "voss": {
+    "sns": [
+      "string"
+    ]
+  },
+  "wing": {
+    "sn_to_mac": {
+      "additionalProp1": "string",
+      "additionalProp2": "string",
+      "additionalProp3": "string"
+    }
+  },
+  "dell": {
+    "sn_to_st": {
+      "additionalProp1": "string",
+      "additionalProp2": "string",
+      "additionalProp3": "string"
+    }
+  }
+}
+)
 headers = {
-  'Authorization': '***',
+  'Authorization': 'Bearer ' + access_token,
   'Content-Type': 'application/json'
 }
 
