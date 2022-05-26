@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "721cf93c-46b6-4b75-a1b3-7d3d57a16fd7",
-		"name": "XIQ APIv2 New Framework_APRIL2022",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"_postman_id": "e2463ded-f28b-423e-8baa-cb4434f05614",
+		"name": "XIQ APIv2 New Framework_MAY2022",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4056946"
 	},
 	"item": [
 		{
@@ -126,6 +127,278 @@
 			]
 		},
 		{
+			"name": "Authorization",
+			"item": [
+				{
+					"name": "POST ​/auth​/apitoken Generate new API token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var myDate = new Date(\"July 2, 2022 02:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myEpoch\", myDate.getTime()/1000.0);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include access token\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"access_token\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\": \"Token for read account only\",\n  \"expire_time\": {{myEpoch}},\n  \"permissions\": [\n    \"account:r\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/auth/apitoken",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"auth",
+								"apitoken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/auth/apitoken/info Get current API token details",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include role\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"role\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/auth/apitoken/info",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"auth",
+								"apitoken",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/auth/permissions Get permissions for current login user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include name\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/auth/permissions",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"auth",
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/auth/permissions/:check Check permissions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include permissions\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"permissions\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"uri\": \"https://api.extremecloudiq.com/auth/apitoken/info\",\n  \"method\": \"get\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/auth/permissions/{{check}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"auth",
+								"permissions",
+								"{{check}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Account",
 			"item": [
 				{
@@ -173,10 +446,6 @@
 						},
 						"method": "POST",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/account/:switch?id={{viq_id}}",
 							"protocol": "https",
@@ -237,9 +506,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -253,10 +519,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/account/external",
 							"protocol": "https",
@@ -305,9 +567,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -321,10 +580,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/account/home",
 							"protocol": "https",
@@ -469,290 +724,6 @@
 			]
 		},
 		{
-			"name": "Authorization",
-			"item": [
-				{
-					"name": "POST ​/auth​/apitoken Generate new API token",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"var myDate = new Date(\"July 2, 2022 02:30:00\"); // Your timezone!",
-									"pm.environment.set(\"myEpoch\", myDate.getTime()/1000.0);"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Successful POST request\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
-									"});",
-									"",
-									"pm.test(\"include access token\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"access_token\");",
-									"    console.log(pm.test)",
-									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
-									"    });"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwttoken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"description\": \"Token for read account only\",\n  \"expire_time\": {{myEpoch}},\n  \"permissions\": [\n    \"account:r\"\n  ]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://api.extremecloudiq.com/auth/apitoken",
-							"protocol": "https",
-							"host": [
-								"api",
-								"extremecloudiq",
-								"com"
-							],
-							"path": [
-								"auth",
-								"apitoken"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "/auth/apitoken/info Get current API token details",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Successful GET request\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
-									"});",
-									"",
-									"pm.test(\"include role\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"role\");",
-									"    console.log(pm.test)",
-									"});",
-									" pm.test(\"Response time is less than 1000ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
-									"    });"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwttoken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://api.extremecloudiq.com/auth/apitoken/info",
-							"protocol": "https",
-							"host": [
-								"api",
-								"extremecloudiq",
-								"com"
-							],
-							"path": [
-								"auth",
-								"apitoken",
-								"info"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "/auth/permissions Get permissions for current login user",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Successful GET request\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
-									"});",
-									"",
-									"pm.test(\"include name\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"name\");",
-									"    console.log(pm.test)",
-									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
-									"    });"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwttoken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://api.extremecloudiq.com/auth/permissions",
-							"protocol": "https",
-							"host": [
-								"api",
-								"extremecloudiq",
-								"com"
-							],
-							"path": [
-								"auth",
-								"permissions"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "/auth/permissions/:check Check permissions",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Successful POST request\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
-									"});",
-									"",
-									"pm.test(\"include permissions\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"permissions\");",
-									"    console.log(pm.test)",
-									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
-									"    });"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwttoken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"uri\": \"https://api.extremecloudiq.com/auth/apitoken/info\",\n  \"method\": \"get\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://api.extremecloudiq.com/auth/permissions/{{check}}",
-							"protocol": "https",
-							"host": [
-								"api",
-								"extremecloudiq",
-								"com"
-							],
-							"path": [
-								"auth",
-								"permissions",
-								"{{check}}"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "User",
 			"item": [
 				{
@@ -787,9 +758,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -803,10 +771,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/users?page=1&limit=10",
 							"protocol": "https",
@@ -933,9 +897,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -949,15 +910,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/users/{{uid}}",
 							"protocol": "https",
@@ -1085,15 +1037,6 @@
 						},
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/users/{{uid}}",
 							"protocol": "https",
@@ -1142,9 +1085,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1158,15 +1098,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/users/external?page=1&limit=10",
 							"protocol": "https",
@@ -1295,9 +1226,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1311,15 +1239,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/users/external/{{uid}}",
 							"protocol": "https",
@@ -1445,15 +1364,6 @@
 						},
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/users/external/{{uid}}",
 							"protocol": "https",
@@ -1503,9 +1413,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1519,10 +1426,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/users/me",
 							"protocol": "https",
@@ -1576,9 +1479,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1592,10 +1492,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/hiq/context",
 							"protocol": "https",
@@ -1706,9 +1602,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1722,10 +1615,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/hiq/context/creating",
 							"protocol": "https",
@@ -1833,9 +1722,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1849,10 +1735,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/hiq/context/reading",
 							"protocol": "https",
@@ -1969,9 +1851,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1985,10 +1864,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/hiq/organizations",
 							"protocol": "https",
@@ -2116,15 +1991,6 @@
 						},
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/hiq/organizations/{{org_id}}",
 							"protocol": "https",
@@ -2248,9 +2114,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2264,10 +2127,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/hiq/status",
 							"protocol": "https",
@@ -2458,15 +2317,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/locations/{{loc_id}}",
 							"protocol": "https",
@@ -2653,15 +2503,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/locations/building/{{building_id}}",
 							"protocol": "https",
@@ -2849,15 +2690,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/locations/floor/{{floor_id}}",
 							"protocol": "https",
@@ -3952,9 +3784,9 @@
 							"script": {
 								"exec": [
 									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
-									"var endTime = new Date(\"Dec 20, 2021 12:30:00\"); // Your timezone!",
-									"pm.environment.set(\"myStartTime\", startTime.getTime()/1000.0);",
-									"pm.environment.set(\"myEndTime\", endTime.getTime()/1000.0);"
+									"var endTime = new Date(\"May 18, 2022 12:30:00\"); // Your timezone!",
+									"pm.environment.set(\"myStartTime\", startTime.getTime());",
+									"pm.environment.set(\"myEndTime\", endTime.getTime());"
 								],
 								"type": "text/javascript"
 							}
@@ -4039,10 +3871,10 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"var startTime = new Date(\"April 19, 2022 02:30:00\"); // Your timezone!",
+									"var startTime = new Date(\"April 20, 2022 10:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"APril 20, 2022 12:30:00\"); // Your timezone!",
-									"pm.environment.set(\"myStartTime\", startTime.getTime()/1000.0);",
-									"pm.environment.set(\"myEndTime\", endTime.getTime()/1000.0);"
+									"pm.environment.set(\"myStartTime\", startTime.getTime());",
+									"pm.environment.set(\"myEndTime\", endTime.getTime());"
 								],
 								"type": "text/javascript"
 							}
@@ -4067,7 +3899,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/devices/{{id}}/history/cpu-mem?startTime={{myStartTime}}&endTime={{myEndTime}}&interval=1",
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/history/cpu-mem?startTime={{myStartTime}}&endTime={{myEndTime}}&interval=100000",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -4091,7 +3923,7 @@
 								},
 								{
 									"key": "interval",
-									"value": "1"
+									"value": "100000"
 								}
 							]
 						}
@@ -5497,9 +5329,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -5513,10 +5342,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/network-policies?page=1&limit=10",
 							"protocol": "https",
@@ -5574,9 +5399,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -5590,10 +5412,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/network-policies/{{np_id}}/ssids?page=1&limit=10",
 							"protocol": "https",
@@ -5999,7 +5817,6 @@
 						}
 					],
 					"protocolProfileBehavior": {
-						"disableBodyPruning": true,
 						"disabledSystemHeaders": {}
 					},
 					"request": {
@@ -6022,10 +5839,6 @@
 								"disabled": true
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/clients/summary",
 							"protocol": "https",
@@ -6078,6 +5891,8 @@
 								"exec": [
 									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"Dec 20, 2021 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime());",
 									"pm.environment.set(\"myEndTime\", endTime.getTime());"
 								],
@@ -6105,7 +5920,6 @@
 						}
 					],
 					"protocolProfileBehavior": {
-						"disableBodyPruning": true,
 						"disabledSystemHeaders": {}
 					},
 					"request": {
@@ -6128,10 +5942,6 @@
 								"disabled": true
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/clients/usage?clientIds={{client_id}}&startTime={{myStartTime}}&endTime={{myEndTime}}",
 							"protocol": "https",
@@ -6199,9 +6009,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -6215,10 +6022,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/applications?page=1&limit=10&predefined=true",
 							"protocol": "https",
@@ -6280,6 +6083,8 @@
 									"//enter start and end times",
 									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"Dec 20, 2021 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime());",
 									"pm.environment.set(\"myEndTime\", endTime.getTime());",
 									"pm.environment.set(\"count\", count);"
@@ -6307,9 +6112,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -6323,10 +6125,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/applications/{{app_id}}/clients/top{{count}}?startTime={{myStartTime}}&endTime={{myEndTime}}",
 							"protocol": "https",
@@ -6367,6 +6165,8 @@
 									"//enter start and end times",
 									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"Dec 20, 2021 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime());",
 									"pm.environment.set(\"myEndTime\", endTime.getTime());",
 									"pm.environment.set(\"count\", count);"
@@ -6394,9 +6194,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -6410,10 +6207,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/applications/top{{count}}?startTime={{myStartTime}}&endTime={{myEndTime}}",
 							"protocol": "https",
@@ -6447,6 +6240,22 @@
 			"item": [
 				{
 					"name": "List Accounting Logs",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Dec 20, 2021 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime());",
+									"pm.environment.set(\"myEndTime\", endTime.getTime());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -6498,12 +6307,12 @@
 								},
 								{
 									"key": "startTime",
-									"value": "",
+									"value": "{{myStartTime}}",
 									"disabled": true
 								},
 								{
 									"key": "endTime",
-									"value": "",
+									"value": "{{myEndTime}}",
 									"disabled": true
 								}
 							]
@@ -6513,6 +6322,22 @@
 				},
 				{
 					"name": "List Audit Logs",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Dec 20, 2021 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime());",
+									"pm.environment.set(\"myEndTime\", endTime.getTime());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -6564,12 +6389,12 @@
 								},
 								{
 									"key": "startTime",
-									"value": "",
+									"value": "{{myStartTime}}",
 									"disabled": true
 								},
 								{
 									"key": "endTime",
-									"value": "",
+									"value": "{{myEndTime}}",
 									"disabled": true
 								}
 							]
@@ -6579,6 +6404,22 @@
 				},
 				{
 					"name": "List Auth Logs",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Dec 20, 2021 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime());",
+									"pm.environment.set(\"myEndTime\", endTime.getTime());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -6630,12 +6471,12 @@
 								},
 								{
 									"key": "startTime",
-									"value": "",
+									"value": "{{myStartTime}}",
 									"disabled": true
 								},
 								{
 									"key": "endTime",
-									"value": "",
+									"value": "{{myEndTime}}",
 									"disabled": true
 								}
 							]
@@ -6645,6 +6486,22 @@
 				},
 				{
 					"name": "List Credential Logs",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Dec 20, 2021 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime());",
+									"pm.environment.set(\"myEndTime\", endTime.getTime());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -6691,12 +6548,12 @@
 								},
 								{
 									"key": "startTime",
-									"value": "",
+									"value": "{{myStartTime}}",
 									"disabled": true
 								},
 								{
 									"key": "endTime",
-									"value": "",
+									"value": "{{myEndTime}}",
 									"disabled": true
 								}
 							]
@@ -6706,6 +6563,22 @@
 				},
 				{
 					"name": "List Email Logs",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Dec 20, 2021 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime());",
+									"pm.environment.set(\"myEndTime\", endTime.getTime());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -6752,12 +6625,12 @@
 								},
 								{
 									"key": "startTime",
-									"value": "",
+									"value": "{{myStartTime}}",
 									"disabled": true
 								},
 								{
 									"key": "endTime",
-									"value": "",
+									"value": "{{myEndTime}}",
 									"disabled": true
 								}
 							]
@@ -6767,6 +6640,22 @@
 				},
 				{
 					"name": "List SMS logs",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Dec 20, 2021 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime());",
+									"pm.environment.set(\"myEndTime\", endTime.getTime());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -6813,12 +6702,12 @@
 								},
 								{
 									"key": "startTime",
-									"value": "",
+									"value": "{{myStartTime}}",
 									"disabled": true
 								},
 								{
 									"key": "endTime",
-									"value": "",
+									"value": "{{myEndTime}}",
 									"disabled": true
 								}
 							]
@@ -7255,9 +7144,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -7271,10 +7157,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/vlan-profiles?page=1&limit=10",
 							"protocol": "https",
@@ -7401,9 +7283,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -7417,10 +7296,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/vlan-profiles/{{vlan_id}}",
 							"protocol": "https",
@@ -9218,9 +9093,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -9239,15 +9111,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/ccgs/{{ccg_id}}",
 							"protocol": "https",
@@ -9371,15 +9234,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/ccgs/{{ccg_id}}",
 							"protocol": "https",
@@ -9419,9 +9273,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -9440,15 +9291,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/classification-rules",
 							"protocol": "https",
