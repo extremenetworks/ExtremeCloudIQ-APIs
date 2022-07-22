@@ -36,6 +36,18 @@ This script can be used to migrate the location hierarchy, rf-domains, and floor
 - There is a document file included in the GitHub repo that covers setting up the script and running it.
 - Tested on MacOS only
 
+### XIQ_Replace_AP
+
+> Link to github Repo: [XIQ_Replace_AP](https://github.com/timjsmith24/XIQ_Examples/tree/master/v2_API_examples/Replace_AP)
+
+This script will collect a device's hostname, location info, and network policy, onboard a new device, apply those setting to the new devices and then remove the old device from XIQ.
+>**Note**: This script will **not** pull any device template overrides that could be on the existing device.
+
+###### information
+
+- There is a readme file included in the GitHub folder that covers running the script.
+- Testing on MacOS
+
 ## PPSK scripts
 
 ### XIQ_AD_PPSK_Sync
@@ -60,3 +72,4 @@ This script will collect the PPSK Users from a the main VIQ account and create t
 
 - There is a readme file included in the GitHub repo that covers setting up the script and running it.
 - Tested on MacOS
+

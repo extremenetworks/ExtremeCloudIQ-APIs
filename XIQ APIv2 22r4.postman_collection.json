@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "e2463ded-f28b-423e-8baa-cb4434f05614",
-		"name": "XIQ APIv2 New Framework_MAY2022",
+		"_postman_id": "644e4c77-da6f-4bf7-8519-84dd750d33e6",
+		"name": "XIQ APIv2 22r4",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4056946"
 	},
@@ -391,6 +391,193 @@
 								"auth",
 								"permissions",
 								"{{check}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Operation",
+			"item": [
+				{
+					"name": "Get the Long-Running Operation (LRO) status and result.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include name\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"status\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/operations/{{operation_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"operations",
+								"{{operation_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Long-Running Operation (LRO)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/operations/{{operation_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"operations",
+								"{{operation_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Long-Running Operation (LRO) Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/operations/{{operation_id}}/:cancel",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"operations",
+								"{{operation_id}}",
+								":cancel"
+							],
+							"variable": [
+								{
+									"key": "cancel",
+									"value": "cancel"
+								}
 							]
 						}
 					},
@@ -2292,7 +2479,7 @@
 									"});",
 									"",
 									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -2719,7 +2906,7 @@
 									"});",
 									"",
 									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"        pm.expect(pm.response.responseTime).to.be.below(2500);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -2750,7 +2937,7 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": []
+									"src": "/Users/timsmith/Documents/FloorPlans/TestMainFloor.png"
 								}
 							]
 						},
@@ -2850,7 +3037,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Successful GET request\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
 									"});",
 									"",
 									"pm.test(\"Body includes data \", function () {",
@@ -2962,6 +3149,11 @@
 									"key": "fields",
 									"value": "ID",
 									"disabled": true
+								},
+								{
+									"key": "async",
+									"value": "true",
+									"disabled": true
 								}
 							]
 						}
@@ -2976,7 +3168,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Successful POST request\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
 									"});",
 									"",
 									"pm.test(\"Body includes data\", function () {",
@@ -2984,7 +3176,7 @@
 									"    console.log(pm.test)",
 									"});",
 									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -3033,6 +3225,13 @@
 							"path": [
 								"devices",
 								":cli"
+							],
+							"query": [
+								{
+									"key": "async",
+									"value": "true",
+									"disabled": true
+								}
 							],
 							"variable": [
 								{
@@ -3194,7 +3393,7 @@
 									"});",
 									"",
 									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -3216,7 +3415,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"extreme\": {\n    \"sns\": [\n      \"string\"\n    ]\n  },\n  \"exos\": {\n    \"sns\": [\n      \"string\"\n    ]\n  },\n  \"voss\": {\n    \"sns\": [\n      \"string\"\n    ]\n  },\n  \"wing\": {\n    \"sn_to_mac\": {\n      \"additionalProp1\": \"string\",\n      \"additionalProp2\": \"string\",\n      \"additionalProp3\": \"string\"\n    }\n  },\n  \"dell\": {\n    \"sn_to_st\": {\n      \"additionalProp1\": \"string\",\n      \"additionalProp2\": \"string\",\n      \"additionalProp3\": \"string\"\n    }\n  }\n}",
+							"raw": "{\n  \"extreme\": {\n    \"sns\": [\n      \"01301505040168\"\n    ]\n  }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3464,7 +3663,7 @@
 									"});",
 									"",
 									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -3846,6 +4045,76 @@
 					"response": []
 				},
 				{
+					"name": "Change description for a device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"May 18, 2022 12:30:00\"); // Your timezone!",
+									"pm.environment.set(\"myStartTime\", startTime.getTime());",
+									"pm.environment.set(\"myEndTime\", endTime.getTime());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "string"
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/description",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"description"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get device CPU/memory usage history",
 					"event": [
 						{
@@ -4006,7 +4275,7 @@
 									"    console.log(pm.test)",
 									"});",
 									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -4060,7 +4329,7 @@
 									"});",
 									"",
 									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -4091,7 +4360,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"location_id\":769490635828943,\n    \"x\":16.235294117647058,\n    \"y\":35.470588235294116,\n    \"latitude\":null,\n    \"longitude\":null\n    \n}",
+							"raw": "{\n    \"location_id\":{{floor_id}},\n    \"x\":10,\n    \"y\":10,\n    \"latitude\":null,\n    \"longitude\":null\n    \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4239,7 +4508,7 @@
 									"});",
 									"",
 									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -5305,7 +5574,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"Successful GET request\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
 									"});",
 									"",
 									"pm.test(\"Body includes data \", function () {",
@@ -5362,6 +5631,275 @@
 									"key": "limit",
 									"value": "10"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Network Policy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"type\": \"NETWORK_ACCESS_AND_SWITCHING\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/network-policies",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"network-policies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get the network policy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"type\": \"NETWORK_ACCESS_AND_SWITCHING\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/network-policies/{{np_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"network-policies",
+								"{{np_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update the Network Policy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"type\": \"NETWORK_ACCESS_AND_SWITCHING\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/network-policies/{{np_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"network-policies",
+								"{{np_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete the Network Policy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/network-policies/{{np_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"network-policies",
+								"{{np_id}}"
 							]
 						}
 					},
@@ -5778,6 +6316,11 @@
 								{
 									"key": "views",
 									"value": "FULL"
+								},
+								{
+									"key": "fields",
+									"value": "id",
+									"disabled": true
 								}
 							]
 						}
@@ -5889,8 +6432,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
-									"var endTime = new Date(\"Dec 20, 2021 12:30:00\"); // Your timezone!",
+									"var startTime = new Date(\"May 19, 2022 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"May 19, 2022 04:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime());",
@@ -5912,7 +6455,7 @@
 									"    console.log(pm.test)",
 									"});",
 									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"        pm.expect(pm.response.responseTime).to.be.below(2000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -6043,10 +6586,6 @@
 									"value": "10"
 								},
 								{
-									"key": "predefined",
-									"value": "true"
-								},
-								{
 									"key": "name",
 									"value": "ACROBAT.COM",
 									"disabled": true
@@ -6055,6 +6594,15 @@
 									"key": "detectionProtocol",
 									"value": "HTTPS",
 									"disabled": true
+								},
+								{
+									"key": "detectionType",
+									"value": "HOST_NAME",
+									"disabled": true
+								},
+								{
+									"key": "predefined",
+									"value": "true"
 								},
 								{
 									"key": "sortField",
@@ -6081,8 +6629,8 @@
 									"//enter the number of Top clients to return",
 									"var count = 5;",
 									"//enter start and end times",
-									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
-									"var endTime = new Date(\"Dec 20, 2021 12:30:00\"); // Your timezone!",
+									"var startTime = new Date(\"May 19, 2022 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime());",
@@ -6163,8 +6711,8 @@
 									"//enter the number of Top clients to return",
 									"var count = 5;",
 									"//enter start and end times",
-									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
-									"var endTime = new Date(\"Dec 20, 2021 12:30:00\"); // Your timezone!",
+									"var startTime = new Date(\"May 19, 2022 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime());",
@@ -6245,8 +6793,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
-									"var endTime = new Date(\"Dec 20, 2021 12:30:00\"); // Your timezone!",
+									"var startTime = new Date(\"May 19, 2022 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime());",
@@ -6327,8 +6875,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
-									"var endTime = new Date(\"Dec 20, 2021 12:30:00\"); // Your timezone!",
+									"var startTime = new Date(\"May 19, 2022 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime());",
@@ -6409,8 +6957,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
-									"var endTime = new Date(\"Dec 20, 2021 12:30:00\"); // Your timezone!",
+									"var startTime = new Date(\"May 19, 2022 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime());",
@@ -6439,7 +6987,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/logs/auth?page=1&limit=10",
+							"raw": "https://api.extremecloudiq.com/logs/auth?page=1&limit=10&startTime={{myStartTime}}&endTime={{myEndTime}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -6471,13 +7019,11 @@
 								},
 								{
 									"key": "startTime",
-									"value": "{{myStartTime}}",
-									"disabled": true
+									"value": "{{myStartTime}}"
 								},
 								{
 									"key": "endTime",
-									"value": "{{myEndTime}}",
-									"disabled": true
+									"value": "{{myEndTime}}"
 								}
 							]
 						}
@@ -6491,8 +7037,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
-									"var endTime = new Date(\"Dec 20, 2021 12:30:00\"); // Your timezone!",
+									"var startTime = new Date(\"May 19, 2022 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime());",
@@ -6568,8 +7114,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
-									"var endTime = new Date(\"Dec 20, 2021 12:30:00\"); // Your timezone!",
+									"var startTime = new Date(\"May 19, 2022 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime());",
@@ -6645,8 +7191,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
-									"var endTime = new Date(\"Dec 20, 2021 12:30:00\"); // Your timezone!",
+									"var startTime = new Date(\"May 19, 2022 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime());",
@@ -7313,6 +7859,63 @@
 					"response": []
 				},
 				{
+					"name": "Delete a VLAN profile",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/vlan-profiles/{{vlan_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"vlan-profiles",
+								"{{vlan_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Update a VLAN profile",
 					"event": [
 						{
@@ -7366,67 +7969,6 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "https://api.extremecloudiq.com/vlan-profiles/{{vlan_id}}",
-							"protocol": "https",
-							"host": [
-								"api",
-								"extremecloudiq",
-								"com"
-							],
-							"path": [
-								"vlan-profiles",
-								"{{vlan_id}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete a VLAN profile",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Successful GET request\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
-									"});",
-									"",
-									"pm.test(\"include login info\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"name\");",
-									"    console.log(pm.test)",
-									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
-									"    });"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwttoken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
 						"url": {
 							"raw": "https://api.extremecloudiq.com/vlan-profiles/{{vlan_id}}",
 							"protocol": "https",
@@ -7781,7 +8323,7 @@
 									"    console.log(pm.test)",
 									"});",
 									" pm.test(\"Response time is less than 1000ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -8684,7 +9226,7 @@
 									"    console.log(pm.test)",
 									"});",
 									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -8764,7 +9306,7 @@
 									"    console.log(pm.test)",
 									"});",
 									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -9589,7 +10131,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/l3-address-profiles",
+							"raw": "https://api.extremecloudiq.com/l3-address-profiles?addressType=L3_ADDRESS_TYPE_IP_ADDRESS",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9598,6 +10140,12 @@
 							],
 							"path": [
 								"l3-address-profiles"
+							],
+							"query": [
+								{
+									"key": "addressType",
+									"value": "L3_ADDRESS_TYPE_IP_ADDRESS"
+								}
 							]
 						}
 					},
@@ -9619,7 +10167,7 @@
 									"    console.log(pm.test)",
 									"});",
 									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -10496,7 +11044,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/user-profiles",
+							"raw": "https://api.extremecloudiq.com/user-profiles?page=1&limit=10",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -10505,6 +11053,16 @@
 							],
 							"path": [
 								"user-profiles"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
 							]
 						}
 					},
