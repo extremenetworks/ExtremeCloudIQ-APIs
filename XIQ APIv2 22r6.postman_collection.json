@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "644e4c77-da6f-4bf7-8519-84dd750d33e6",
-		"name": "XIQ APIv2 22r4",
+		"_postman_id": "723d6be2-a968-4c9b-9da8-f99979d06c47",
+		"name": "XIQ APIv2 22r6",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4056946"
 	},
@@ -24,7 +24,7 @@
 									"    pm.expect(pm.response.text()).to.include(\"access_token\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
@@ -82,8 +82,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -139,7 +139,7 @@
 									"var myDate = new Date(\"July 2, 2022 02:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
-									"pm.environment.set(\"myEpoch\", myDate.getTime()/1000.0);"
+									"pm.environment.set(\"myEpoch\", myDate.getTime()/1000.0); //myEpoch is used in the body of this call. This is Epoch time in seconds."
 								],
 								"type": "text/javascript"
 							}
@@ -156,8 +156,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"access_token\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -279,8 +279,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -340,8 +340,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"permissions\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -380,7 +380,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/auth/permissions/{{check}}",
+							"raw": "https://api.extremecloudiq.com/auth/permissions/:check",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -390,7 +390,13 @@
 							"path": [
 								"auth",
 								"permissions",
-								"{{check}}"
+								":check"
+							],
+							"variable": [
+								{
+									"key": "check",
+									"value": null
+								}
 							]
 						}
 					},
@@ -416,8 +422,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"status\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -473,8 +479,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -530,8 +536,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -648,7 +654,8 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "{{viq_id}}"
+									"value": "{{viq_id}}",
+									"description": "The account ID to switch, switch back to home ExtremeCloud IQ account if not provide"
 								}
 							],
 							"variable": [
@@ -676,8 +683,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -723,7 +730,7 @@
 					"response": []
 				},
 				{
-					"name": "Account Home - Get home XIQ account info Copy",
+					"name": "Account Home - Get home XIQ account info",
 					"event": [
 						{
 							"listen": "test",
@@ -737,8 +744,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"account_type\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -798,8 +805,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"entitlement_key\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -855,8 +862,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -907,6 +914,136 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get the default device password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include account type\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"password\");",
+									"    console.log(pm.test)",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/account/viq/default-device-password",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"account",
+								"viq",
+								"default-device-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update the default device password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "password",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/account/viq/default-device-password",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"account",
+								"viq",
+								"default-device-password"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -937,8 +1074,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"login_name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -972,11 +1109,13 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								}
 							]
 						}
@@ -1076,8 +1215,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"login_name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -1096,6 +1235,63 @@
 							]
 						},
 						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/users/{{uid}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"users",
+								"{{uid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
 						"header": [],
 						"url": {
 							"raw": "https://api.extremecloudiq.com/users/{{uid}}",
@@ -1137,8 +1333,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"login_name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -1184,63 +1380,6 @@
 					"response": []
 				},
 				{
-					"name": "Delete a user",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Successful GET request\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
-									"});",
-									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
-									"    });"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwttoken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "https://api.extremecloudiq.com/users/{{uid}}",
-							"protocol": "https",
-							"host": [
-								"api",
-								"extremecloudiq",
-								"com"
-							],
-							"path": [
-								"users",
-								"{{uid}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "List all external users",
 					"event": [
 						{
@@ -1264,8 +1403,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"login_name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -1300,11 +1439,13 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								}
 							]
 						}
@@ -1335,8 +1476,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"login_name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -1405,8 +1546,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"login_name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -1426,73 +1567,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "https://api.extremecloudiq.com/users/external/{{uid}}",
-							"protocol": "https",
-							"host": [
-								"api",
-								"extremecloudiq",
-								"com"
-							],
-							"path": [
-								"users",
-								"external",
-								"{{uid}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update external user information",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Successful GET request\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
-									"});",
-									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
-									"    });"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwttoken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"user_role\": \"OPERATOR\",\n  \"enable_api_access\": true\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/users/external/{{uid}}",
 							"protocol": "https",
@@ -1569,6 +1643,73 @@
 					"response": []
 				},
 				{
+					"name": "Update external user information",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_role\": \"OPERATOR\",\n  \"enable_api_access\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/users/external/{{uid}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"users",
+								"external",
+								"{{uid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Current User Info",
 					"event": [
 						{
@@ -1592,8 +1733,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"login_name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -1658,8 +1799,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"reading_org_ids\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -1706,8 +1847,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -1781,8 +1922,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -1839,8 +1980,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -1901,8 +2042,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -1959,8 +2100,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -2030,8 +2171,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -2091,8 +2232,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -2157,8 +2298,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -2215,8 +2356,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -2293,8 +2434,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"enabled\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -2350,8 +2491,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"parent_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -2416,8 +2557,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"parent_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -2478,7 +2619,7 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
@@ -2535,8 +2676,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"parent_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -2601,8 +2742,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"parent_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -2664,8 +2805,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -2722,8 +2863,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"parent_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -2788,8 +2929,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"parent_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -2851,8 +2992,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -2905,7 +3046,7 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 2500ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(2500);",
 									"    });"
 								],
@@ -2972,8 +3113,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"parent_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -2999,7 +3140,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/locations/tree?parentId={{loc_id}}&expandChildren=true",
+							"raw": "https://api.extremecloudiq.com/locations/tree?expandChildren=true",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -3013,11 +3154,14 @@
 							"query": [
 								{
 									"key": "parentId",
-									"value": "{{loc_id}}"
+									"value": "{{loc_id}}",
+									"description": "The parent location ID, return root locations if parent is null",
+									"disabled": true
 								},
 								{
 									"key": "expandChildren",
-									"value": "true"
+									"value": "true",
+									"description": "Whether to return the child locations recursively, default is true. Set it to false to improve performance when there are a lot of child locations.\nDefault value : true"
 								}
 							]
 						}
@@ -3030,7 +3174,7 @@
 			"name": "Device",
 			"item": [
 				{
-					"name": "List Devices",
+					"name": "List Devices [LRO]",
 					"event": [
 						{
 							"listen": "test",
@@ -3044,8 +3188,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"hostname\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -3095,64 +3239,83 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "50"
+									"value": "50",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								},
 								{
 									"key": "locationId",
 									"value": "{{floor_id}}",
+									"description": "Location id",
 									"disabled": true
 								},
 								{
 									"key": "connected",
 									"value": "true",
+									"description": "The device connect status",
 									"disabled": true
 								},
 								{
 									"key": "adminStates",
 									"value": "MANAGED",
+									"description": "The device admin states\n\nAvailable values : NEW, BOOTSTRAP, STAGED, MANAGED, UNMANAGED",
 									"disabled": true
 								},
 								{
 									"key": "macAddresses",
 									"value": "",
+									"description": "The device mac addresses",
 									"disabled": true
 								},
 								{
 									"key": "sns",
 									"value": "",
+									"description": "The device serial numbers",
 									"disabled": true
 								},
 								{
 									"key": "hostnames",
 									"value": "",
+									"description": "The device host names",
 									"disabled": true
 								},
 								{
 									"key": "sortField",
 									"value": "SN",
+									"description": "The sort field\n\nAvailable values : MAC, SN",
 									"disabled": true
 								},
 								{
 									"key": "order",
 									"value": "ASC",
+									"description": "The sort order (ascending by default)\n\nAvailable values : ASC, DESC",
 									"disabled": true
 								},
 								{
 									"key": "views",
-									"value": "FULL"
+									"value": "FULL",
+									"description": "The views to return device fields (Check fields for each view at XiqDeviceView schema)\n\nAvailable values : BASIC, FULL, STATUS, LOCATION, CLIENT, DETAIL"
 								},
 								{
 									"key": "fields",
 									"value": "ID",
+									"description": "The device fields to return\n\nAvailable values : ID, CREATE_TIME, UPDATE_TIME, ORG_ID, SERIAL_NUMBER, SERVICE_TAG, MAC_ADDRESS, DEVICE_FUNCTION, PRODUCT_TYPE, HOSTNAME, IP_ADDRESS, SOFTWARE_VERSION, DEVICE_ADMIN_STATE, CONNECTED, LAST_CONNECT_TIME, NETWORK_POLICY_NAME, NETWORK_POLICY_ID, NTP_SERVER_ADDRESS, DNS_SERVER_ADDRESS, SUBNET_MASK, DEFAULT_GATEWAY, IPV6_ADDRESS, IPV6_NETMASK, SIMULATED, DISPLAY_VERSION, ACTIVE_CLIENTS, LOCATION_ID, LOCATIONS, DESCRIPTION, COUNTRY_CODE",
+									"disabled": true
+								},
+								{
+									"key": "deviceTypes",
+									"value": "REAL",
+									"description": "The device types to return\n\nAvailable values : REAL, DIGITAL_TWIN, SIMULATED\n\nDefault value : List [ \"REAL\" ]",
 									"disabled": true
 								},
 								{
 									"key": "async",
 									"value": "true",
+									"description": "Whether to enable async mode\n\nDefault value : false",
 									"disabled": true
 								}
 							]
@@ -3161,7 +3324,7 @@
 					"response": []
 				},
 				{
-					"name": "Send CLI to device",
+					"name": "Send CLI to device [LRO]",
 					"event": [
 						{
 							"listen": "test",
@@ -3175,7 +3338,7 @@
 									"    pm.expect(pm.response.text()).to.include(\"CLI_RESPONSE_CODE_SUCCEED\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
@@ -3230,6 +3393,7 @@
 								{
 									"key": "async",
 									"value": "true",
+									"description": "Whether to enable async mode\n\nDefault value : false",
 									"disabled": true
 								}
 							],
@@ -3251,6 +3415,21 @@
 							"script": {
 								"exec": [
 									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
 								],
 								"type": "text/javascript"
 							}
@@ -3320,7 +3499,7 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
@@ -3392,7 +3571,7 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([202]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
@@ -3464,8 +3643,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -3527,7 +3706,7 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
@@ -3598,8 +3777,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"hostname\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -3639,11 +3818,13 @@
 							"query": [
 								{
 									"key": "views",
-									"value": "FULL"
+									"value": "FULL",
+									"description": "The views to return device fields (Check fields for each view at XiqDeviceView schema)\n\nAvailable values : BASIC, FULL, STATUS, LOCATION, CLIENT, DETAIL"
 								},
 								{
 									"key": "fields",
 									"value": "ID",
+									"description": "The device fields to return\n\nAvailable values : ID, CREATE_TIME, UPDATE_TIME, ORG_ID, SERIAL_NUMBER, SERVICE_TAG, MAC_ADDRESS, DEVICE_FUNCTION, PRODUCT_TYPE, HOSTNAME, IP_ADDRESS, SOFTWARE_VERSION, DEVICE_ADMIN_STATE, CONNECTED, LAST_CONNECT_TIME, NETWORK_POLICY_NAME, NETWORK_POLICY_ID, NTP_SERVER_ADDRESS, DNS_SERVER_ADDRESS, SUBNET_MASK, DEFAULT_GATEWAY, IPV6_ADDRESS, IPV6_NETMASK, SIMULATED, DISPLAY_VERSION, ACTIVE_CLIENTS, LOCATION_ID, LOCATIONS, DESCRIPTION, COUNTRY_CODE",
 									"disabled": true
 								}
 							]
@@ -3662,7 +3843,7 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
@@ -3719,8 +3900,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"CLI_RESPONSE_CODE_SUCCEED\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -3787,7 +3968,7 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
@@ -3847,8 +4028,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -3897,6 +4078,74 @@
 					"response": []
 				},
 				{
+					"name": "Reset one device [LRO]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/:reboot",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								":reboot"
+							],
+							"query": [
+								{
+									"key": "async",
+									"value": "true",
+									"description": "Whether to enable async mode\n\nDefault value : false",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "reboot",
+									"value": ":reboot"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Change status to Unmanaged for one device",
 					"event": [
 						{
@@ -3907,7 +4156,7 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
@@ -3971,8 +4220,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"page\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -3984,8 +4233,8 @@
 								"exec": [
 									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"May 18, 2022 12:30:00\"); // Your timezone!",
-									"pm.environment.set(\"myStartTime\", startTime.getTime());",
-									"pm.environment.set(\"myEndTime\", endTime.getTime());"
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
 								"type": "text/javascript"
 							}
@@ -4010,7 +4259,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/devices/{{id}}/alarms?startTime={{myStartTime}}&endTime={{myEndTime}}&page=1&limit=10",
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/alarms?page=1&limit=10&startTime={{myStartTime}}&endTime={{myEndTime}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -4024,20 +4273,24 @@
 							],
 							"query": [
 								{
-									"key": "startTime",
-									"value": "{{myStartTime}}"
-								},
-								{
-									"key": "endTime",
-									"value": "{{myEndTime}}"
-								},
-								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time for query alarm"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time for query alarm"
 								}
 							]
 						}
@@ -4055,8 +4308,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 100ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -4066,10 +4319,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"var startTime = new Date(\"Dec 19, 2021 02:30:00\"); // Your timezone!",
-									"var endTime = new Date(\"May 18, 2022 12:30:00\"); // Your timezone!",
-									"pm.environment.set(\"myStartTime\", startTime.getTime());",
-									"pm.environment.set(\"myEndTime\", endTime.getTime());"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -4129,8 +4379,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"average_cpu\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -4142,8 +4392,8 @@
 								"exec": [
 									"var startTime = new Date(\"April 20, 2022 10:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"APril 20, 2022 12:30:00\"); // Your timezone!",
-									"pm.environment.set(\"myStartTime\", startTime.getTime());",
-									"pm.environment.set(\"myEndTime\", endTime.getTime());"
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
 								"type": "text/javascript"
 							}
@@ -4184,15 +4434,18 @@
 							"query": [
 								{
 									"key": "startTime",
-									"value": "{{myStartTime}}"
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
 								},
 								{
 									"key": "endTime",
-									"value": "{{myEndTime}}"
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
 								},
 								{
 									"key": "interval",
-									"value": "100000"
+									"value": "100000",
+									"description": "The aggregate interval in milliseconds"
 								}
 							]
 						}
@@ -4210,8 +4463,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -4252,7 +4505,8 @@
 							"query": [
 								{
 									"key": "hostname",
-									"value": "string"
+									"value": "string",
+									"description": "The new hostname"
 								}
 							]
 						}
@@ -4274,7 +4528,7 @@
 									"    pm.expect(pm.response.text()).to.include(\"location_name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
@@ -4328,7 +4582,7 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
@@ -4395,8 +4649,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -4453,8 +4707,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -4507,7 +4761,7 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
@@ -4549,7 +4803,8 @@
 							"query": [
 								{
 									"key": "networkPolicyId",
-									"value": "{{np_id}}"
+									"value": "{{np_id}}",
+									"description": "The network policy ID to assign"
 								}
 							]
 						}
@@ -4567,8 +4822,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -4621,8 +4876,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -4686,8 +4941,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -4741,7 +4996,7 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
@@ -4802,6 +5057,77 @@
 					"response": []
 				},
 				{
+					"name": "Assign a country code to devices",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful DEL request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"devices\": {\n    \"ids\": [\n      {{id}}\n    ]\n  },\n  \"country_code\": \"AFGHANISTAN_4\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/ssid/status/:change",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"ssid",
+								"status",
+								":change"
+							],
+							"variable": [
+								{
+									"key": "change",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Assign location to multiple devices",
 					"event": [
 						{
@@ -4812,8 +5138,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -4884,8 +5210,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"location_name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -4952,8 +5278,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -5020,8 +5346,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -5092,8 +5418,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -5160,8 +5486,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -5232,8 +5558,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -5274,11 +5600,13 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								}
 							]
 						}
@@ -5296,8 +5624,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -5364,8 +5692,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -5410,11 +5738,13 @@
 							"query": [
 								{
 									"key": "ids",
-									"value": "{{id}}"
+									"value": "{{id}}",
+									"description": "The device IDs"
 								},
 								{
 									"key": "radiusProxyId",
-									"value": "438086664193"
+									"value": "438086664193",
+									"description": "The RADIUS proxy ID to assign"
 								}
 							],
 							"variable": [
@@ -5438,8 +5768,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -5484,7 +5814,8 @@
 							"query": [
 								{
 									"key": "ids",
-									"value": "{{id}}"
+									"value": "{{id}}",
+									"description": "The device IDs"
 								}
 							],
 							"variable": [
@@ -5512,8 +5843,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -5554,6 +5885,7 @@
 								{
 									"key": "locationID",
 									"value": "{{floor_id}}",
+									"description": "The Location ID",
 									"disabled": true
 								}
 							]
@@ -5581,8 +5913,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -5625,11 +5957,13 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								}
 							]
 						}
@@ -5651,7 +5985,7 @@
 									"    pm.expect(pm.response.text()).to.include(\"id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
@@ -5720,7 +6054,7 @@
 									"    pm.expect(pm.response.text()).to.include(\"id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
@@ -5793,7 +6127,7 @@
 									"    pm.expect(pm.response.text()).to.include(\"id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
@@ -5859,7 +6193,7 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
@@ -5920,8 +6254,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -5966,11 +6300,13 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								}
 							]
 						}
@@ -5988,8 +6324,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -6062,8 +6398,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -6154,8 +6490,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -6200,11 +6536,13 @@
 							"query": [
 								{
 									"key": "views",
-									"value": "FULL"
+									"value": "FULL",
+									"description": "The views to return client fields (Check fields for each view at XiqClientView schema)\n\nAvailable values : BASIC, FULL, STATUS, DETAIL, LOCATION, METRICS, IOT"
 								},
 								{
 									"key": "fields",
 									"value": "ID",
+									"description": "The client fields to return\n\nAvailable values : ID, CREATE_TIME, UPDATE_TIME, ORG_ID, ORG_NAME, LOCATION_ID, LOCATIONS, HOSTNAME, MAC_ADDRESS, IP_ADDRESS, IPV6_ADDRESS, OS_TYPE, DEVICE_ID, DEVICE_FUNCTION, DEVICE_NAME, USERNAME, USER_PROFILE_NAME, CONNECTED, ONLINE_TIME, OFFLINE_TIME, VLAN, CONNECTION_TYPE, SSID, PORT, BSSID, PORT_TYPE_NAME, INTERFACE_NAME, AUTH, ENCRYPTION_METHOD, CHANNEL, CLIENT_HEALTH, APPLICATION_HEALTH, NETWORK_HEALTH, RADIO_HEALTH, HEALTH_UPDATE_TIME, RSSI, RSSI_UPDATE_TIME, SNR, SNR_UPDATE_TIME, RADIO_TYPE, WING_AP, VENDOR, MOBILITY, CATEGORY, DESCRIPTION, DEVICE_MAC_ADDRESS",
 									"disabled": true
 								}
 							]
@@ -6236,8 +6574,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -6283,43 +6621,52 @@
 								{
 									"key": "locationIds",
 									"value": "{{floor_id}}",
+									"description": "The Location IDs",
 									"disabled": true
 								},
 								{
 									"key": "deviceIds",
 									"value": "{{id}}",
+									"description": "the Device IDs",
 									"disabled": true
 								},
 								{
 									"key": "vlans",
 									"value": "200",
+									"description": "The associate vlan IDs",
 									"disabled": true
 								},
 								{
 									"key": "userProfileNames",
 									"value": "",
+									"description": "The user profile names",
 									"disabled": true
 								},
 								{
 									"key": "ssids",
 									"value": "SSID Name",
+									"description": "The SSIDs",
 									"disabled": true
 								},
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								},
 								{
 									"key": "views",
-									"value": "FULL"
+									"value": "FULL",
+									"description": "The views to return client fields (Check fields for each view at XiqClientView schema)\n\nAvailable values : BASIC, FULL, STATUS, DETAIL, LOCATION, METRICS, IOT"
 								},
 								{
 									"key": "fields",
 									"value": "id",
+									"description": "The client fields to return\n\nAvailable values : ID, CREATE_TIME, UPDATE_TIME, ORG_ID, ORG_NAME, LOCATION_ID, LOCATIONS, HOSTNAME, MAC_ADDRESS, IP_ADDRESS, IPV6_ADDRESS, OS_TYPE, DEVICE_ID, DEVICE_FUNCTION, DEVICE_NAME, USERNAME, USER_PROFILE_NAME, CONNECTED, ONLINE_TIME, OFFLINE_TIME, VLAN, CONNECTION_TYPE, SSID, PORT, BSSID, PORT_TYPE_NAME, INTERFACE_NAME, AUTH, ENCRYPTION_METHOD, CHANNEL, CLIENT_HEALTH, APPLICATION_HEALTH, NETWORK_HEALTH, RADIO_HEALTH, HEALTH_UPDATE_TIME, RSSI, RSSI_UPDATE_TIME, SNR, SNR_UPDATE_TIME, RADIO_TYPE, WING_AP, VENDOR, MOBILITY, CATEGORY, DESCRIPTION, DEVICE_MAC_ADDRESS",
 									"disabled": true
 								}
 							]
@@ -6351,8 +6698,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"connected_wireless_client_count\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -6398,26 +6745,31 @@
 								{
 									"key": "locationIds",
 									"value": "{{floor_id}}",
+									"description": "The Location IDs",
 									"disabled": true
 								},
 								{
 									"key": "deviceIds",
 									"value": "{{id}}",
+									"description": "The Device IDs",
 									"disabled": true
 								},
 								{
 									"key": "vlans",
 									"value": "92",
+									"description": "The associate vlan IDs",
 									"disabled": true
 								},
 								{
 									"key": "userProfileNames",
 									"value": "",
+									"description": "The user profile names",
 									"disabled": true
 								},
 								{
 									"key": "ssids",
 									"value": "SSID Name",
+									"description": "The SSIDs",
 									"disabled": true
 								}
 							]
@@ -6436,8 +6788,8 @@
 									"var endTime = new Date(\"May 19, 2022 04:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
-									"pm.environment.set(\"myStartTime\", startTime.getTime());",
-									"pm.environment.set(\"myEndTime\", endTime.getTime());"
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
 								"type": "text/javascript"
 							}
@@ -6454,7 +6806,7 @@
 									"    pm.expect(pm.response.text()).to.include(\"client_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 2000ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(2000);",
 									"    });"
 								],
@@ -6500,15 +6852,18 @@
 							"query": [
 								{
 									"key": "clientIds",
-									"value": "{{client_id}}"
+									"value": "{{client_id}}",
+									"description": "The Client IDs"
 								},
 								{
 									"key": "startTime",
-									"value": "{{myStartTime}}"
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
 								},
 								{
 									"key": "endTime",
-									"value": "{{myEndTime}}"
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
 								}
 							]
 						}
@@ -6544,8 +6899,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -6579,39 +6934,47 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								},
 								{
 									"key": "name",
 									"value": "ACROBAT.COM",
+									"description": "Application Name",
 									"disabled": true
 								},
 								{
 									"key": "detectionProtocol",
 									"value": "HTTPS",
+									"description": "Application Detection Protocol, only for custom Application\n\nAvailable values : HTTP, HTTPS",
 									"disabled": true
 								},
 								{
 									"key": "detectionType",
 									"value": "HOST_NAME",
+									"description": "Application Detection Type, only for custom Application\n\nAvailable values : HOST_NAME, SERVER_IP_ADDRESS, PORT_NUMBER",
 									"disabled": true
 								},
 								{
 									"key": "predefined",
-									"value": "true"
+									"value": "true",
+									"description": "Flag to filter predefined or custom Application\n\nExample : true"
 								},
 								{
 									"key": "sortField",
 									"value": "NAME",
+									"description": "The sort field\n\nAvailable values : NAME, CATEGORY",
 									"disabled": true
 								},
 								{
 									"key": "order",
 									"value": "DESC",
+									"description": "The sort order (ascending by default)\n\nAvailable values : ASC, DESC",
 									"disabled": true
 								}
 							]
@@ -6627,14 +6990,14 @@
 							"script": {
 								"exec": [
 									"//enter the number of Top clients to return",
-									"var count = 5;",
+									"var count = 5; //The count number to be added to URL",
 									"//enter start and end times",
 									"var startTime = new Date(\"May 19, 2022 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
-									"pm.environment.set(\"myStartTime\", startTime.getTime());",
-									"pm.environment.set(\"myEndTime\", endTime.getTime());",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
 									"pm.environment.set(\"count\", count);"
 								],
 								"type": "text/javascript"
@@ -6652,7 +7015,7 @@
 									"    pm.expect(pm.response.text()).to.include(\"client_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
@@ -6690,11 +7053,13 @@
 							"query": [
 								{
 									"key": "startTime",
-									"value": "{{myStartTime}}"
+									"value": "{{myStartTime}}",
+									"description": "The start time for querying top client usage of application"
 								},
 								{
 									"key": "endTime",
-									"value": "{{myEndTime}}"
+									"value": "{{myEndTime}}",
+									"description": "The end time for querying top application usage of application"
 								}
 							]
 						}
@@ -6709,14 +7074,14 @@
 							"script": {
 								"exec": [
 									"//enter the number of Top clients to return",
-									"var count = 5;",
+									"var count = 5; //count to be used in url TopN number",
 									"//enter start and end times",
-									"var startTime = new Date(\"May 19, 2022 02:30:00\"); // Your timezone!",
-									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
+									"var startTime = new Date(\"Sept 19, 2022 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Sept 20, 2022 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
-									"pm.environment.set(\"myStartTime\", startTime.getTime());",
-									"pm.environment.set(\"myEndTime\", endTime.getTime());",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
 									"pm.environment.set(\"count\", count);"
 								],
 								"type": "text/javascript"
@@ -6731,11 +7096,11 @@
 									"});",
 									"",
 									"pm.test(\"include login info\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"client_id\");",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									" pm.test(\"Response time is less than 155000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(15000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -6770,11 +7135,13 @@
 							"query": [
 								{
 									"key": "startTime",
-									"value": "{{myStartTime}}"
+									"value": "{{myStartTime}}",
+									"description": "The start time for querying top application usage"
 								},
 								{
 									"key": "endTime",
-									"value": "{{myEndTime}}"
+									"value": "{{myEndTime}}",
+									"description": "The end time for querying top application usage"
 								}
 							]
 						}
@@ -6797,8 +7164,27 @@
 									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
-									"pm.environment.set(\"myStartTime\", startTime.getTime());",
-									"pm.environment.set(\"myEndTime\", endTime.getTime());"
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"username\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
 								],
 								"type": "text/javascript"
 							}
@@ -6837,30 +7223,36 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								},
 								{
 									"key": "username",
 									"value": "",
+									"description": "The user login name",
 									"disabled": true
 								},
 								{
 									"key": "callingStationId",
 									"value": "",
+									"description": "The calling station ID",
 									"disabled": true
 								},
 								{
 									"key": "startTime",
 									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970, default is 0 if not specified or is negative",
 									"disabled": true
 								},
 								{
 									"key": "endTime",
 									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970, default is now if not specified or is negative",
 									"disabled": true
 								}
 							]
@@ -6879,8 +7271,27 @@
 									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
-									"pm.environment.set(\"myStartTime\", startTime.getTime());",
-									"pm.environment.set(\"myEndTime\", endTime.getTime());"
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
 								],
 								"type": "text/javascript"
 							}
@@ -6919,30 +7330,36 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								},
 								{
 									"key": "category",
 									"value": "",
+									"description": "Audit category\n\nAvailable values : ADMIN, SYSTEM, DEPLOYMENT, CONFIG, MONITOR, ALARM",
 									"disabled": true
 								},
 								{
 									"key": "username",
 									"value": "",
+									"description": "The user login name",
 									"disabled": true
 								},
 								{
 									"key": "startTime",
 									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970, default is 0 if not specified or is negative",
 									"disabled": true
 								},
 								{
 									"key": "endTime",
 									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970, default is now if not specified or is negative",
 									"disabled": true
 								}
 							]
@@ -6961,8 +7378,27 @@
 									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
-									"pm.environment.set(\"myStartTime\", startTime.getTime());",
-									"pm.environment.set(\"myEndTime\", endTime.getTime());"
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
 								],
 								"type": "text/javascript"
 							}
@@ -7001,29 +7437,35 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								},
 								{
 									"key": "username",
 									"value": "",
+									"description": "The user login name",
 									"disabled": true
 								},
 								{
 									"key": "callingStationId",
 									"value": "",
+									"description": "The calling station ID",
 									"disabled": true
 								},
 								{
 									"key": "startTime",
-									"value": "{{myStartTime}}"
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970, default is 0 if not specified or is negative"
 								},
 								{
 									"key": "endTime",
-									"value": "{{myEndTime}}"
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970, default is now if not specified or is negative"
 								}
 							]
 						}
@@ -7041,8 +7483,27 @@
 									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
-									"pm.environment.set(\"myStartTime\", startTime.getTime());",
-									"pm.environment.set(\"myEndTime\", endTime.getTime());"
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndtime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
 								],
 								"type": "text/javascript"
 							}
@@ -7081,25 +7542,30 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								},
 								{
 									"key": "username",
 									"value": "",
+									"description": "The user login name",
 									"disabled": true
 								},
 								{
 									"key": "startTime",
 									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970, default is 0 if not specified or is negative",
 									"disabled": true
 								},
 								{
 									"key": "endTime",
 									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970, default is now if not specified or is negative",
 									"disabled": true
 								}
 							]
@@ -7118,8 +7584,27 @@
 									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
-									"pm.environment.set(\"myStartTime\", startTime.getTime());",
-									"pm.environment.set(\"myEndTime\", endTime.getTime());"
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
 								],
 								"type": "text/javascript"
 							}
@@ -7158,25 +7643,30 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								},
 								{
 									"key": "username",
 									"value": "",
+									"description": "The user login name",
 									"disabled": true
 								},
 								{
 									"key": "startTime",
 									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970, default is 0 if not specified or is negative",
 									"disabled": true
 								},
 								{
 									"key": "endTime",
 									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970, default is now if not specified or is negative",
 									"disabled": true
 								}
 							]
@@ -7195,8 +7685,27 @@
 									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
-									"pm.environment.set(\"myStartTime\", startTime.getTime());",
-									"pm.environment.set(\"myEndTime\", endTime.getTime());"
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
 								],
 								"type": "text/javascript"
 							}
@@ -7235,25 +7744,30 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								},
 								{
 									"key": "phoneNumber",
 									"value": "",
+									"description": "The phone number",
 									"disabled": true
 								},
 								{
 									"key": "startTime",
 									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970, default is 0 if not specified or is negative",
 									"disabled": true
 								},
 								{
 									"key": "endTime",
 									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970, default is now if not specified or is negative",
 									"disabled": true
 								}
 							]
@@ -7281,8 +7795,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"message_type\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -7334,8 +7848,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([202]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -7396,8 +7910,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([202]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -7459,8 +7973,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"request_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -7524,8 +8038,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"request_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -7593,8 +8107,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"request_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -7646,7 +8160,8 @@
 							"query": [
 								{
 									"key": "deviceIds",
-									"value": "{{id}}"
+									"value": "{{id}}",
+									"description": "The target device IDs"
 								}
 							]
 						}
@@ -7682,7 +8197,7 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
@@ -7717,11 +8232,13 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								}
 							]
 						}
@@ -7752,7 +8269,7 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
@@ -7821,7 +8338,7 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
@@ -7878,7 +8395,7 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
@@ -7939,7 +8456,7 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
@@ -8025,8 +8542,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -8061,6 +8578,7 @@
 								{
 									"key": "passwordType",
 									"value": "RADIUS",
+									"description": "The password type\n\nAvailable values : PPSK, RADIUS",
 									"disabled": true
 								}
 							]
@@ -8083,8 +8601,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -8118,20 +8636,24 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								},
 								{
 									"key": "user_group_ids",
 									"value": "{{group_id}}",
+									"description": "The user group IDs",
 									"disabled": true
 								},
 								{
 									"key": "usernames",
 									"value": "",
+									"description": "The list of username",
 									"disabled": true
 								}
 							]
@@ -8154,8 +8676,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -8214,8 +8736,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -8271,8 +8793,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -8322,7 +8844,7 @@
 									"    pm.expect(pm.response.text()).to.include(\"password\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 1000ms\", function () {",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
@@ -8381,8 +8903,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -8434,8 +8956,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 202]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -8495,8 +9017,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 202]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -8526,7 +9048,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{policy_id}}?ids={{pcgk_id}}",
+							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{np_id}}?ids={{pcgk_id}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -8536,7 +9058,7 @@
 							"path": [
 								"pcgs",
 								"key-based",
-								"network-policy-{{policy_id}}"
+								"network-policy-{{np_id}}"
 							],
 							"query": [
 								{
@@ -8559,8 +9081,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 202]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -8594,7 +9116,7 @@
 							"raw": "{\n  \"ssid_name\": \"string\",\n  \"enabled\": true,\n  \"user_ids\": [\n    0\n  ]\n}"
 						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{policy_id}}/:onboard",
+							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{np_id}}/:onboard",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -8604,7 +9126,7 @@
 							"path": [
 								"pcgs",
 								"key-based",
-								"network-policy-{{policy_id}}",
+								"network-policy-{{np_id}}",
 								":onboard"
 							],
 							"variable": [
@@ -8628,8 +9150,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 202]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -8659,7 +9181,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{policy_id}}/keys/:email?userIds={{user_id}}",
+							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{np_id}}/keys/:email?userIds={{user_id}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -8669,14 +9191,15 @@
 							"path": [
 								"pcgs",
 								"key-based",
-								"network-policy-{{policy_id}}",
+								"network-policy-{{np_id}}",
 								"keys",
 								":email"
 							],
 							"query": [
 								{
 									"key": "userIds",
-									"value": "{{user_id}}"
+									"value": "{{user_id}}",
+									"description": "The user IDs"
 								}
 							],
 							"variable": [
@@ -8700,8 +9223,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 202]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -8731,7 +9254,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{policy_id}}/keys/:generate?userIds={{user_id}}",
+							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{np_id}}/keys/:generate?userIds={{user_id}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -8741,14 +9264,15 @@
 							"path": [
 								"pcgs",
 								"key-based",
-								"network-policy-{{policy_id}}",
+								"network-policy-{{np_id}}",
 								"keys",
 								":generate"
 							],
 							"query": [
 								{
 									"key": "userIds",
-									"value": "{{user_id}}"
+									"value": "{{user_id}}",
+									"description": "The user IDs"
 								}
 							],
 							"variable": [
@@ -8776,8 +9300,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"policy_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -8807,7 +9331,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{policy_id}}/port-assignments",
+							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{np_id}}/port-assignments",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -8817,7 +9341,7 @@
 							"path": [
 								"pcgs",
 								"key-based",
-								"network-policy-{{policy_id}}",
+								"network-policy-{{np_id}}",
 								"port-assignments"
 							]
 						}
@@ -8839,8 +9363,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"policy_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -8874,7 +9398,7 @@
 							"raw": "{\n  \"port_assignments\": [\n    {\n      \"device_id\": 0,\n      \"eth1_user_id\": 0,\n      \"eth2_user_id\": 0,\n      \"eth3_user_id\": 0\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{policy_id}}/port-assignments",
+							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{np_id}}/port-assignments",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -8884,7 +9408,7 @@
 							"path": [
 								"pcgs",
 								"key-based",
-								"network-policy-{{policy_id}}",
+								"network-policy-{{np_id}}",
 								"port-assignments"
 							]
 						}
@@ -8906,8 +9430,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -8937,7 +9461,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{policy_id}}/users",
+							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{np_id}}/users",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -8947,7 +9471,7 @@
 							"path": [
 								"pcgs",
 								"key-based",
-								"network-policy-{{policy_id}}",
+								"network-policy-{{np_id}}",
 								"users"
 							]
 						}
@@ -8965,8 +9489,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([202]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -9000,7 +9524,7 @@
 							"raw": "{\n  \"users\": [\n    {\n      \"name\": \"string\",\n      \"email\": \"string\",\n      \"user_group_name\": \"string\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{policy_id}}/users",
+							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{np_id}}/users",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9010,7 +9534,7 @@
 							"path": [
 								"pcgs",
 								"key-based",
-								"network-policy-{{policy_id}}",
+								"network-policy-{{np_id}}",
 								"users"
 							]
 						}
@@ -9028,8 +9552,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([202]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -9063,7 +9587,7 @@
 							"raw": "{\n  \"users\": [\n    {\n      \"name\": \"string\",\n      \"email\": \"string\",\n      \"user_group_name\": \"string\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{policy_id}}/users",
+							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{np_id}}/users",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9073,7 +9597,7 @@
 							"path": [
 								"pcgs",
 								"key-based",
-								"network-policy-{{policy_id}}",
+								"network-policy-{{np_id}}",
 								"users"
 							]
 						}
@@ -9091,8 +9615,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([202]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -9126,7 +9650,7 @@
 							"raw": "{\n  \"user_ids\": [\n    {{pcgu_id}}\n  ]\n}"
 						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{policy_id}}/users",
+							"raw": "https://api.extremecloudiq.com/pcgs/key-based/network-policy-{{np_id}}/users",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9136,7 +9660,7 @@
 							"path": [
 								"pcgs",
 								"key-based",
-								"network-policy-{{policy_id}}",
+								"network-policy-{{np_id}}",
 								"users"
 							]
 						}
@@ -9158,8 +9682,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -9203,6 +9727,7 @@
 								{
 									"key": "passwordType",
 									"value": "PPSK",
+									"description": "The password type\n\nAvailable values : PPSK, RADIUS",
 									"disabled": true
 								}
 							]
@@ -9225,7 +9750,7 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
@@ -9269,20 +9794,24 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								},
 								{
 									"key": "password_db_location",
 									"value": "CLOUD",
+									"description": "The password DB location\n\nAvailable values : CLOUD, LOCAL",
 									"disabled": true
 								},
 								{
 									"key": "passwordType",
 									"value": "PPSK",
+									"description": "The password type\n\nAvailable values : PPSK, RADIUS",
 									"disabled": true
 								}
 							]
@@ -9305,7 +9834,7 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
@@ -9369,8 +9898,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -9430,8 +9959,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -9496,8 +10025,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -9536,11 +10065,13 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								}
 							]
 						}
@@ -9562,8 +10093,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -9627,8 +10158,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -9684,8 +10215,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -9750,8 +10281,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -9807,8 +10338,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -9834,7 +10365,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/classification-rules",
+							"raw": "https://api.extremecloudiq.com/classification-rules?page=1&limit=10",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9843,6 +10374,18 @@
 							],
 							"path": [
 								"classification-rules"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
+								}
 							]
 						}
 					},
@@ -9863,8 +10406,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -9928,8 +10471,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -9985,8 +10528,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -10047,8 +10590,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -10104,8 +10647,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -10144,8 +10687,1391 @@
 							"query": [
 								{
 									"key": "addressType",
-									"value": "L3_ADDRESS_TYPE_IP_ADDRESS"
+									"value": "L3_ADDRESS_TYPE_IP_ADDRESS",
+									"description": "The address type\n\nAvailable values : L3_ADDRESS_TYPE_UNSPECIFIED, L3_ADDRESS_TYPE_IP_ADDRESS, L3_ADDRESS_TYPE_IP_SUBNET, L3_ADDRESS_TYPE_IP_RANGE, UNRECOGNIZED"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List radio profiles",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles?page=1&limit=10",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new radio profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"transmission_power\": 20,\n  \"max_transmit_power\": 20,\n  \"transmission_power_floor\": 20,\n  \"transmission_power_max_drop\": 18,\n  \"max_clients\": 255,\n  \"enable_client_transmission_power\": true,\n  \"client_transmission_power\": 20,\n  \"radio_mode\": \"B_G\",\n  \"enable_ofdma\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get radio profile by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/{{radio_profile_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"{{radio_profile_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update radio profile by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"transmission_power\": 20,\n  \"max_transmit_power\": 20,\n  \"transmission_power_floor\": 20,\n  \"transmission_power_max_drop\": 18,\n  \"max_clients\": 255,\n  \"enable_client_transmission_power\": true,\n  \"client_transmission_power\": 20,\n  \"radio_mode\": \"B_G\",\n  \"enable_ofdma\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/{{radio_profile_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"{{radio_profile_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete radio profile by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"transmission_power\": 20,\n  \"max_transmit_power\": 20,\n  \"transmission_power_floor\": 20,\n  \"transmission_power_max_drop\": 18,\n  \"max_clients\": 255,\n  \"enable_client_transmission_power\": true,\n  \"client_transmission_power\": 20,\n  \"radio_mode\": \"B_G\",\n  \"enable_ofdma\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/{{radio_profile_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"{{radio_profile_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get channel selection settings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"channel\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/channel-selection/{{channel_selection_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"channel-selection",
+								"{{channel_selection_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update channel selection settingss",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"channel\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"enable_dynamic_channel_switching\": true,\n  \"channel_width\": \"string\",\n  \"enable_dynamic_frequency_selection\": true,\n  \"enable_static_channel\": true,\n  \"enable_zero_wait_dfs\": true,\n  \"enable_use_last_selection\": true,\n  \"exclude_channels\": \"string\",\n  \"exclude_channels_width\": \"string\",\n  \"channel\": 165,\n  \"enable_limit_channel_selection\": true,\n  \"channel_region\": \"string\",\n  \"channel_model\": 4,\n  \"channels\": \"string\",\n  \"enable_channel_auto_selection\": true,\n  \"channel_selection_start_time\": \"string\",\n  \"channel_selection_end_time\": \"string\",\n  \"enable_avoid_switch_channel_if_clients_connected\": true,\n  \"channel_selection_max_clients\": 100,\n  \"enable_switch_channel_if_exceed_threshold\": true,\n  \"rf_interference_threshold\": 80,\n  \"crc_error_threshold\": 80\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/channel-selection/{{channel_selection_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"channel-selection",
+								"{{channel_selection_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List MAC OUI profiles",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/mac-ouis?page=1&limit=10",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"mac-ouis"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a  MAC OUI profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"string\",\n  \"value\": \"string\",\n  \"description\": \"string\",\n  \"mac_type\": \"string\",\n  \"defender_defined\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/mac-ouis",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"mac-ouis"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get MAC OUI profile by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/mac-ouis/{{mac_oui_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"mac-ouis",
+								"{{mac_oui_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update MAC OUI profile by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"string\",\n  \"value\": \"string\",\n  \"description\": \"string\",\n  \"mac_type\": \"string\",\n  \"defender_defined\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/mac-ouis/{{mac_oui_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"mac-ouis",
+								"{{mac_oui_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete MAC OUI profile by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/mac-ouis/{{mac_oui_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"mac-ouis",
+								"{{mac_oui_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get radio miscellaneous settings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/miscellaneous/{{radio_misc_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"miscellaneous",
+								"{{radio_misc_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update radio miscellaneous settings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"sla_throughput_level\": \"string\",\n  \"radio_range\": 10000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/miscellaneous/{{radio_misc_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"miscellaneous",
+								"{{radio_misc_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get neighborhood analysis settings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/neighborhood-analysis/{{neigh_analysis_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"neighborhood-analysis",
+								"{{neigh_analysis_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update neighborhood analysis settings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"enable_background_scan\": true,\n  \"background_scan_interval\": 1440,\n  \"enable_skip_scan_when_clients_connected\": true,\n  \"enable_skip_scan_when_clients_in_power_save_mode\": true,\n  \"enable_skip_scan_when_process_voice_traffic\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/neighborhood-analysis/{{neigh_analysis_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"neighborhood-analysis",
+								"{{neigh_analysis_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get radio usage optimization settings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/radio-usage-opt/{{radio_usage_opt_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"radio-usage-opt",
+								"{{radio_usage_opt_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update radio usage optimization settings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"preamble\": \"string\",\n  \"beacon_period\": 3500,\n  \"enable_frame_burst\": true,\n  \"enable_smart_antenna\": true,\n  \"enable_backhaul_failover\": true,\n  \"wireless_backhaul_switch_trigger_time\": 5,\n  \"wired_backhaul_revert_hold_time\": 300,\n  \"enable_band_steering\": true,\n  \"band_steering_mode\": \"string\",\n  \"ratio_for5g_clients\": 100,\n  \"ignore_initial_client_connection_number\": 100,\n  \"enable_client_load_balancing\": true,\n  \"load_balancing_mode\": \"string\",\n  \"crc_error_rate_per_device\": 99,\n  \"rf_interference_per_device\": 99,\n  \"average_airtime_per_client\": 5,\n  \"anchor_period\": 600,\n  \"neighbor_query_interval\": 600,\n  \"enable_weak_signal_probe_request_suppression\": true,\n  \"weak_snr_threshold\": 100,\n  \"enable_safety_net\": true,\n  \"safety_net_period\": 300,\n  \"enable_high_density\": true,\n  \"management_frame_basic_data_rate\": \"string\",\n  \"enable_suppress_successive_probe_request\": true,\n  \"probe_response_reduction_option\": \"string\",\n  \"suppression_limit\": 10,\n  \"enable_radio_balance\": true,\n  \"mac_oui_ids\": [\n    0\n  ],\n  \"enable_ampdu\": true,\n  \"enable_mu_mimo\": true,\n  \"enable_ofdma_down_link\": true,\n  \"enable_ofdma_up_link\": true,\n  \"bss_coloring\": 63,\n  \"enable_target_weak_time\": true\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/radio-usage-opt/{{radio_usage_opt_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"radio-usage-opt",
+								"{{radio_usage_opt_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get sensor scan settings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/sensor-scan/{{sensor_scan_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"sensor-scan",
+								"{{sensor_scan_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update sensor scan settings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"enable_scan_all_channels\": true,\n  \"dwell_time\": \"string\",\n  \"scan_channels\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/sensor-scan/{{sensor_scan_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"sensor-scan",
+								"{{sensor_scan_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get WMM QoS settings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/wmm-qos/{{radio_qos_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"wmm-qos",
+								"{{radio_qos_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update WMM QoS settings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"arbitration_interframe_space\": 15,\n  \"min_contention_window\": 15,\n  \"max_contention_window\": 15,\n  \"transmission_opportunity_limit\": 8192,\n  \"enable_no_ack\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles/wmm-qos/{{radio_qos_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles",
+								"wmm-qos",
+								"{{radio_qos_id}}"
 							]
 						}
 					},
@@ -10166,7 +12092,7 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
@@ -10206,11 +12132,13 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								}
 							]
 						}
@@ -10498,8 +12426,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -11017,8 +12945,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -11057,11 +12985,13 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								}
 							]
 						}
@@ -11083,8 +13013,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -11148,8 +13078,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -11205,8 +13135,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -11267,8 +13197,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -11329,8 +13259,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -11369,11 +13299,13 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								}
 							]
 						}
@@ -11395,8 +13327,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -11435,11 +13367,13 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								}
 							]
 						}
@@ -11461,8 +13395,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -11501,11 +13435,13 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								}
 							]
 						}
@@ -11527,8 +13463,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -11555,7 +13491,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"test-ldap-server\",\n  \"description\": \"test ldap server\",\n  \"enable_tls\": true,\n  \"bind_dn\": \"extreme.com\",\n  \"bind_dn_password\": \"123456\",\n  \"base_dn\": \"extreme.com\",\n  \"l3_address_profile_id\": 10,\n  \"protocol_type\": \"LDAP\",\n  \"enable_strip_realm_name\": false,\n  \"destination_port\": 10,\n  \"verification_mode\": \"TRY\",\n  \"ca_certificate_id\": 1000,\n  \"client_certificate_id\": 2000,\n  \"client_key_id\": 30000,\n  \"client_key_password\": \"\"\n}",
+							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"enable_tls\": true,\n  \"bind_dn\": \"string\",\n  \"bind_dn_password\": \"string\",\n  \"base_dn\": \"string\",\n  \"l3_address_profile_id\": 0,\n  \"protocol_type\": \"LDAP\",\n  \"enable_strip_realm_name\": false,\n  \"destination_port\": 10,\n  \"verification_mode\": \"TRY\",\n  \"ca_certificate_id\": 0,\n  \"client_certificate_id\": 0,\n  \"client_key_id\": 0,\n  \"client_key_password\": \"string\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -11592,8 +13528,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -11649,8 +13585,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"name\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -11677,7 +13613,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"test-ldap-server-1\",\n  \"description\": \"test ldap server 1\",\n  \"enable_tls\": true,\n  \"bind_dn\": \"extremenetworks.com\",\n  \"bind_dn_password\": \"888888\",\n  \"base_dn\": \"extremenetworks.com\",\n  \"l3_address_profile_id\": 1,\n  \"protocol_type\": \"LDAPS\",\n  \"enable_strip_realm_name\": false,\n  \"destination_port\": 20,\n  \"verification_mode\": \"DEMAND\",\n  \"ca_certificate_id\": 100,\n  \"client_certificate_id\": 200,\n  \"client_key_id\": 300,\n  \"client_key_password\": \"123456\"\n}",
+							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"enable_tls\": true,\n  \"bind_dn\": \"string\",\n  \"bind_dn_password\": \"string\",\n  \"base_dn\": \"string\",\n  \"l3_address_profile_id\": 0,\n  \"protocol_type\": \"LDAP\",\n  \"enable_strip_realm_name\": true,\n  \"destination_port\": 1,\n  \"verification_mode\": \"TRY\",\n  \"ca_certificate_id\": 0,\n  \"client_certificate_id\": 0,\n  \"client_key_id\": 0\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -11711,8 +13647,8 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -11808,11 +13744,13 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								}
 							]
 						}
@@ -11862,7 +13800,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"enable_inject_operator_name_attribute\": true,\n  \"enable_message_authenticator_attribute\": true,\n  \"enable_permit_dynamic_authorization_message_change\": true,\n  \"retry_interval\": 0,\n  \"accounting_interim_update_interval\": 0,\n  \"entries\": [\n    {\n      \"server_role\": \"PRIMARY\",\n      \"server_type\": \"EXTERNAL_RADIUS_SERVER\",\n      \"radius_server_id\": 0\n    }\n  ]\n}",
+							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"enable_inject_operator_name_attribute\": true,\n  \"enable_message_authenticator_attribute\": true,\n  \"enable_permit_dynamic_authorization_message_change\": true,\n  \"retry_interval\": 100000000,\n  \"accounting_interim_update_interval\": 100000000,\n  \"entries\": [\n    {\n      \"server_role\": \"PRIMARY\",\n      \"server_type\": \"EXTERNAL_RADIUS_SERVER\",\n      \"radius_server_id\": 0\n    }\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -11984,7 +13922,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"enable_inject_operator_name_attribute\": true,\n  \"enable_message_authenticator_attribute\": true,\n  \"enable_permit_dynamic_authorization_message_change\": true,\n  \"retry_interval\": 0,\n  \"accounting_interim_update_interval\": 0\n}",
+							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"enable_inject_operator_name_attribute\": true,\n  \"enable_message_authenticator_attribute\": true,\n  \"enable_permit_dynamic_authorization_message_change\": true,\n  \"retry_interval\": 100000000,\n  \"accounting_interim_update_interval\": 100000000\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -12115,11 +14053,13 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								}
 							]
 						}
@@ -12423,11 +14363,13 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								}
 							]
 						}
@@ -12490,11 +14432,13 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								}
 							]
 						}
@@ -12544,7 +14488,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"string\",\n  \"shared_secret\": \"string\",\n  \"authentication_port\": 0,\n  \"accounting_port\": 0,\n  \"server_type\": \"BOTH\",\n  \"ip_addr\": \"string\",\n  \"enable_a3\": true\n}",
+							"raw": "{\n  \"name\": \"string\",\n  \"shared_secret\": \"string\",\n  \"authentication_port\": 1812,\n  \"accounting_port\": 1813,\n  \"server_type\": \"BOTH\",\n  \"ip_addr\": \"string\",\n  \"enable_a3\": true\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -12664,7 +14608,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"string\",\n  \"shared_secret\": \"string\",\n  \"authentication_port\": 0,\n  \"accounting_port\": 0,\n  \"server_type\": \"BOTH\",\n  \"ip_addr\": \"string\"\n}",
+							"raw": "{\n  \"name\": \"string\",\n  \"shared_secret\": \"string\",\n  \"authentication_port\": 1812,\n  \"accounting_port\": 1813,\n  \"server_type\": \"BOTH\",\n  \"ip_addr\": \"string\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -12798,11 +14742,13 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								}
 							]
 						}
@@ -12852,7 +14798,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"authentication_method_group\": \"TLS_PEAP_TTLS_LEAP_MD5\",\n  \"default_authentication_method\": \"TLS\",\n  \"enable_verify_server_cert\": true,\n  \"server_key_password\": \"string\",\n  \"enable_check_cert_common_name\": true,\n  \"enable_check_user_for_tls_auth\": true,\n  \"enable_check_user_for_peap_auth\": true,\n  \"enable_check_user_for_ttls_auth\": true,\n  \"enable_authentication_server\": true,\n  \"enable_radius_accounting_settings\": true,\n  \"authentication_server_port\": 0,\n  \"active_session_limit\": 0,\n  \"active_session_age_timeout\": 0,\n  \"external_user_directory\": {\n    \"ldap_retry_interval\": 0,\n    \"local_check_interval\": 0,\n    \"remote_check_interval\": 0,\n    \"enable_radius_server_credential_caching\": true,\n    \"cache_lifetime\": 0,\n    \"user_group_attribute\": \"memberOf\",\n    \"external_user_directory_type\": \"OPEN_LDAP\",\n    \"entries\": [\n      {\n        \"default_server_id\": 0,\n        \"server_role\": \"PRIMARY\"\n      }\n    ]\n  },\n  \"ca_certificate_id\": 0,\n  \"server_certificate_id\": 0,\n  \"server_key_id\": 0,\n  \"device_ids\": [\n    0\n  ],\n  \"clients\": [\n    {\n      \"id\": 0,\n      \"shared_secret\": \"string\",\n      \"description\": \"string\",\n      \"l3_address_profile_id\": 0\n    }\n  ]\n}\n",
+							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"authentication_method_group\": \"TLS_PEAP_TTLS_LEAP_MD5\",\n  \"default_authentication_method\": \"TLS\",\n  \"enable_verify_server_cert\": true,\n  \"server_key_password\": \"string\",\n  \"enable_check_cert_common_name\": true,\n  \"enable_check_user_for_tls_auth\": true,\n  \"enable_check_user_for_peap_auth\": true,\n  \"enable_check_user_for_ttls_auth\": true,\n  \"enable_authentication_server\": true,\n  \"enable_radius_accounting_settings\": true,\n  \"authentication_server_port\": 1812,\n  \"active_session_limit\": 0,\n  \"active_session_age_timeout\": 1800,\n  \"external_user_directory\": {\n    \"ldap_retry_interval\": 600,\n    \"local_check_interval\": 300,\n    \"remote_check_interval\": 30,\n    \"enable_radius_server_credential_caching\": true,\n    \"cache_lifetime\": 86400,\n    \"user_group_attribute\": \"memberOf\",\n    \"external_user_directory_type\": \"OPEN_LDAP\",\n    \"entries\": [\n      {\n        \"default_server_id\": 0,\n        \"server_role\": \"PRIMARY\"\n      }\n    ]\n  },\n  \"ca_certificate_id\": 0,\n  \"server_certificate_id\": 0,\n  \"server_key_id\": 0,\n  \"device_ids\": [\n    0\n  ],\n  \"clients\": [\n    {\n      \"id\": 0,\n      \"shared_secret\": \"string\",\n      \"description\": \"string\",\n      \"l3_address_profile_id\": 0\n    }\n  ]\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -12976,7 +14922,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"authentication_method_group\": \"TLS_PEAP_TTLS_LEAP_MD5\",\n  \"default_authentication_method\": \"TLS\",\n  \"enable_verify_server_cert\": true,\n  \"server_key_password\": \"string\",\n  \"enable_check_cert_common_name\": true,\n  \"enable_check_user_for_tls_auth\": true,\n  \"enable_check_user_for_peap_auth\": true,\n  \"enable_check_user_for_ttls_auth\": true,\n  \"enable_authentication_server\": true,\n  \"enable_radius_accounting_settings\": true,\n  \"authentication_server_port\": 0,\n  \"active_session_limit\": 0,\n  \"active_session_age_timeout\": 0,\n  \"ca_certificate_id\": 0,\n  \"server_certificate_id\": 0,\n  \"server_key_id\": 0,\n  \"clients\": [\n    {\n      \"id\": 0,\n      \"shared_secret\": \"string\",\n      \"description\": \"string\",\n      \"l3_address_profile_id\": 0\n    }\n  ]\n}\n",
+							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"authentication_method_group\": \"TLS_PEAP_TTLS_LEAP_MD5\",\n  \"default_authentication_method\": \"TLS\",\n  \"enable_verify_server_cert\": true,\n  \"server_key_password\": \"string\",\n  \"enable_check_cert_common_name\": true,\n  \"enable_check_user_for_tls_auth\": true,\n  \"enable_check_user_for_peap_auth\": true,\n  \"enable_check_user_for_ttls_auth\": true,\n  \"enable_authentication_server\": true,\n  \"enable_radius_accounting_settings\": true,\n  \"authentication_server_port\": 1812,\n  \"active_session_limit\": 0,\n  \"active_session_age_timeout\": 30,\n  \"ca_certificate_id\": 0,\n  \"server_certificate_id\": 0,\n  \"server_key_id\": 0,\n  \"clients\": [\n    {\n      \"id\": 0,\n      \"shared_secret\": \"string\",\n      \"description\": \"string\",\n      \"l3_address_profile_id\": 0\n    }\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -13111,11 +15057,13 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								}
 							]
 						}
@@ -13142,8 +15090,8 @@
 									"    pm.expect(pm.response.text()).to.include(\"cert_type\");",
 									"    console.log(pm.test)",
 									"});",
-									" pm.test(\"Response time is less than 500ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(500);",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
 								"type": "text/javascript"
@@ -13177,11 +15125,13 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "1"
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								},
 								{
 									"key": "certType",
