@@ -51,7 +51,7 @@ def listusergroups(pageSize):
     allgroups = []
 
     while page < 1000:
-        url = URL + "/ssids/usergroups?page=" + str(page) + "&limit=" + str(pageSize)
+        url = URL + "/usergroups?page=" + str(page) + "&limit=" + str(pageSize)
         print("Retrieving next page of user groups from XIQ starting at page " +
               str(page) + " url: " + url)
 
@@ -84,11 +84,11 @@ def listusergroups(pageSize):
 
 # Create PPSK user
 
-def CreatePPSKuser(usergroupId,name1,user_name,password):
+def CreatePPSKuser(usergroupId,name1,user_name):
     filename1 = "PPSK_" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     url = URL + "/endusers"
 
-    payload = json.dumps({"user_group_id": usergroupId,"name": name1,"user_name": user_name,"password": password, "email_address": email_address, "email_password_delivery": email_address})
+    payload = json.dumps({"user_group_id": usergroupId,"name": name1,"user_name": user_name,"password": "", "email_address": email_address, "email_password_delivery": email_address})
 
     print("Trying to create user using this URL and payload " + url)
     print(payload, file=open(filename1 + ".txt" , "a"))
@@ -100,6 +100,7 @@ def CreatePPSKuser(usergroupId,name1,user_name,password):
     if response.status_code != 200:
         print("Error adding PPSK user - HTTP Status Code: " +
               str(response.status_code))
+        print(response.text)
         print(response)
         return
 
@@ -171,9 +172,7 @@ user_name = input("Enter username: ")
 email_address = input("Enter email-address: ")
 
 
-password = get_random_string(10)
-
-adduser = CreatePPSKuser(usergroupId, name1, user_name,password)
+adduser = CreatePPSKuser(usergroupId, name1, user_name)
 if adduser == 0:
     print("\nFailed to create PPSK user - stopping\n")
     exit
