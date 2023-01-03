@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "723d6be2-a968-4c9b-9da8-f99979d06c47",
-		"name": "XIQ APIv2 22r6",
+		"_postman_id": "5173722c-e951-4dd3-ac25-77f7db0e6ddf",
+		"name": "XIQ APIv2 22r7",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4056946"
 	},
@@ -197,6 +197,78 @@
 							"path": [
 								"auth",
 								"apitoken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST ​/auth​/apitoken/:validate Validate JWT format API token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/plain",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{jwttoken}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/auth/apitoken/:validate",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"auth",
+								"apitoken",
+								":validate"
+							],
+							"variable": [
+								{
+									"key": "validate",
+									"value": null
+								}
 							]
 						}
 					},
@@ -1499,7 +1571,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"login_name\": \"example1@company.com\",\n  \"user_role\": \"ADMINISTRATOR\"\n}",
+							"raw": "{\n  \"login_name\": \"example1@company.com\",\n  \"user_role\": \"ADMINISTRATOR\",\n  \"org_id\":0\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2543,6 +2615,78 @@
 					"response": []
 				},
 				{
+					"name": "Initialize orgination location",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"parent_id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"organization\": \"string\",\n  \"country\": \"AFGHANISTAN_4\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/locations/:init",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"locations",
+								":init"
+							],
+							"variable": [
+								{
+									"key": "init",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Update location by ID",
 					"event": [
 						{
@@ -2656,6 +2800,14 @@
 							"path": [
 								"locations",
 								"{{loc_id}}"
+							],
+							"query": [
+								{
+									"key": "force_delete",
+									"value": "false",
+									"description": "Force deletion of this location and its descendants recursively",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -2843,6 +2995,14 @@
 								"locations",
 								"building",
 								"{{building_id}}"
+							],
+							"query": [
+								{
+									"key": "force_delete",
+									"value": "false",
+									"description": "Force deletion of this building and its descendants recursively",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -2957,7 +3117,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"parent_id\": \"{{building_id}}\",\n  \"name\": \"NewFloorName\",\n  \"environment\": \"OFFICE\",\n  \"db_attenuation\": \"15\",\n  \"measurement_unit\": \"FEET\",\n  \"installation_height\": \"12\",\n  \"map_size_width\": \"12\",\n  \"map_size_height\": \"12\",\n  \"map_name\": \"\"\n}",
+							"raw": "{\n  \"parent_id\": \"{{building_id}}\",\n  \"name\": \"string\",\n  \"environment\": \"AUTO_ESTIMATE\",\n  \"db_attenuation\": \"15\",\n  \"measurement_unit\": \"FEET\",\n  \"installation_height\": \"12\",\n  \"map_size_width\": \"12\",\n  \"map_size_height\": \"12\",\n  \"map_name\": \"string\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3110,7 +3270,7 @@
 									"});",
 									"",
 									"pm.test(\"Body includes data \", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"parent_id\");",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
 									"    console.log(pm.test)",
 									"});",
 									" pm.test(\"Response time is less than 1000ms\", function () {",
@@ -3205,9 +3365,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -3221,10 +3378,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/devices?page=1&limit=50&views=FULL",
 							"protocol": "https",
@@ -4115,7 +4268,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/devices/{{id}}/:reboot",
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/:reset",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -4125,7 +4278,7 @@
 							"path": [
 								"devices",
 								"{{id}}",
-								":reboot"
+								":reset"
 							],
 							"query": [
 								{
@@ -4137,8 +4290,8 @@
 							],
 							"variable": [
 								{
-									"key": "reboot",
-									"value": ":reboot"
+									"key": "reset",
+									"value": null
 								}
 							]
 						}
@@ -4508,6 +4661,64 @@
 									"value": "string",
 									"description": "The new hostname"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get the device iBeacon setting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"enable_monitoring\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/ibeacon",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"ibeacon"
 							]
 						}
 					},
@@ -5103,7 +5314,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/devices/{{id}}/ssid/status/:change",
+							"raw": "https://api.extremecloudiq.com/devices/country-code/:assign",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -5112,16 +5323,76 @@
 							],
 							"path": [
 								"devices",
-								"{{id}}",
-								"ssid",
-								"status",
-								":change"
+								"country-code",
+								":assign"
 							],
 							"variable": [
 								{
-									"key": "change",
+									"key": "assign",
 									"value": null
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change iBeacon settings for devices",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful DEL request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"device_ids\": [\n    0\n  ],\n  \"enabled\": true,\n  \"major\": 65535,\n  \"minor\": 65535,\n  \"power\": 127,\n  \"enable_monitoring\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/ibeacon",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"ibeacon"
 							]
 						}
 					},
@@ -7151,6 +7422,202 @@
 			]
 		},
 		{
+			"name": "Alert",
+			"item": [
+				{
+					"name": "List the alerts",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter the number of Top clients to return",
+									"var count = 5; //The count number to be added to URL",
+									"//enter start and end times",
+									"var startTime = new Date(\"May 19, 2022 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"count\", count);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"data\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alerts?page=1&limit=10&startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alerts"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time for querying top client usage of application"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time for querying top application usage of application"
+								},
+								{
+									"key": "severity",
+									"value": "",
+									"description": "The alert severity to filter\n\nAvailable values : CRITICAL, WARNING, INFO",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "",
+									"description": "The alert category to filter\n\nAvailable values : DEVICE, XIQ, SECURITY, PERFORMANCE, CLIENT, ANOMALY",
+									"disabled": true
+								},
+								{
+									"key": "alertType",
+									"value": null,
+									"description": "The alert type to filter",
+									"disabled": true
+								},
+								{
+									"key": "keyword",
+									"value": null,
+									"description": "The keyword to filter, such as device SN or MAC address",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Count the alerts by different grouping",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter the Group to collect the count from",
+									"var alert_group = \"SEVERITY\"; //Available values : SEVERITY, CATEGORY, ALERT_TYPE",
+									"//enter start and end times",
+									"var startTime = new Date(\"May 19, 2022 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"alert_group\", alert_group);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alerts/count-by -{{alert_group}}?startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alerts",
+								"count-by -{{alert_group}}"
+							],
+							"query": [
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Log",
 			"item": [
 				{
@@ -8309,6 +8776,90 @@
 							],
 							"path": [
 								"vlan-profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[LRO] Delete Vlan profiles",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ids\": [\n    0\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/vlan-profiles/:delete",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"vlan-profiles",
+								":delete"
+							],
+							"query": [
+								{
+									"key": "async",
+									"value": "false",
+									"description": "Whether to enable async mode\n\nDefault value : false",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "delete",
+									"value": null
+								}
 							]
 						}
 					},
@@ -9866,7 +10417,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"password_db_location\": \"CLOUD\",\n  \"ppsk_use_only\": true,\n  \"password_type\": \"PPSK\",\n  \"enable_max_clients_per_ppsk\": true,\n  \"max_clients_per_ppsk\": 0,\n  \"pcg_use_only\": true,\n  \"pcg_type\": \"AP_BASED\",\n  \"enable_cwp_reg\": true,\n  \"password_settings\": {\n    \"enable_letters\": true,\n    \"enable_numbers\": true,\n    \"enable_special_characters\": true,\n    \"password_concat_string\": \"string\",\n    \"psk_generation_method\": \"PASSWORD_ONLY\",\n    \"password_character_types\": \"INCLUDE_ALL_CHARACTER_TYPE_ENABLED\",\n    \"password_length\": 8\n  },\n  \"expiration_settings\": {\n    \"expiration_type\": \"NEVER_EXPIRE\",\n    \"valid_during_dates\": {\n      \"start_date_time\": {\n        \"day_of_month\": 0,\n        \"month\": 0,\n        \"year\": 0,\n        \"hour_of_day\": 0,\n        \"minute_of_hour\": 0\n      },\n      \"end_date_time\": {\n        \"day_of_month\": 0,\n        \"month\": 0,\n        \"year\": 0,\n        \"hour_of_day\": 0,\n        \"minute_of_hour\": 0\n      },\n      \"time_zone\": \"string\"\n    },\n    \"valid_for_time_period\": {\n      \"valid_time_period_after\": \"ID_CREATION\",\n      \"after_id_creation_settings\": {\n        \"valid_time_period\": 0,\n        \"valid_time_period_unit\": \"MINUTE\"\n      },\n      \"after_first_login_settings\": {\n        \"valid_time_period\": 0,\n        \"valid_time_period_unit\": \"MINUTE\",\n        \"first_login_within\": 0,\n        \"first_login_within_unit\": \"MINUTE\"\n      }\n    },\n    \"valid_daily\": {\n      \"daily_start_hour\": 0,\n      \"daily_start_minute\": 0,\n      \"daily_end_hour\": 0,\n      \"daily_end_minute\": 0\n    },\n    \"expiration_action\": \"SHOW_MESSAGE\",\n    \"post_expiration_action\": {\n      \"enable_credentials_renewal\": true,\n      \"enable_delete_immediately\": true,\n      \"delete_after_value\": 0,\n      \"delete_after_unit\": \"MINUTE\"\n    }\n  },\n  \"delivery_settings\": {\n    \"email_template_id\": 0,\n    \"sms_template_id\": 0\n  }\n}"
+							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"password_db_location\": \"CLOUD\",\n  \"ppsk_use_only\": true,\n  \"password_type\": \"PPSK\",\n  \"enable_max_clients_per_ppsk\": true,\n  \"max_clients_per_ppsk\": 0,\n  \"pcg_use_only\": true,\n  \"pcg_type\": \"AP_BASED\",\n  \"enable_cwp_reg\": true,\n  \"password_settings\": {\n    \"enable_letters\": true,\n    \"enable_numbers\": true,\n    \"enable_special_characters\": true,\n    \"password_concat_string\": \"string\",\n    \"psk_generation_method\": \"PASSWORD_ONLY\",\n    \"password_character_types\": \"INCLUDE_ALL_CHARACTER_TYPE_ENABLED\",\n    \"password_length\": 0\n  },\n  \"expiration_settings\": {\n    \"expiration_type\": \"NEVER_EXPIRE\",\n    \"valid_during_dates\": {\n      \"start_date_time\": {\n        \"day_of_month\": 0,\n        \"month\": 0,\n        \"year\": 0,\n        \"hour_of_day\": 0,\n        \"minute_of_hour\": 0\n      },\n      \"end_date_time\": {\n        \"day_of_month\": 0,\n        \"month\": 0,\n        \"year\": 0,\n        \"hour_of_day\": 0,\n        \"minute_of_hour\": 0\n      },\n      \"time_zone\": \"string\"\n    },\n    \"valid_for_time_period\": {\n      \"valid_time_period_after\": \"ID_CREATION\",\n      \"after_id_creation_settings\": {\n        \"valid_time_period\": 0,\n        \"valid_time_period_unit\": \"MINUTE\"\n      },\n      \"after_first_login_settings\": {\n        \"valid_time_period\": 0,\n        \"valid_time_period_unit\": \"MINUTE\",\n        \"first_login_within\": 0,\n        \"first_login_within_unit\": \"MINUTE\"\n      }\n    },\n    \"valid_daily\": {\n      \"daily_start_hour\": 0,\n      \"daily_start_minute\": 0,\n      \"daily_end_hour\": 0,\n      \"daily_end_minute\": 0\n    },\n    \"expiration_action\": \"SHOW_MESSAGE\",\n    \"post_expiration_action\": {\n      \"enable_credentials_renewal\": true,\n      \"enable_delete_immediately\": true,\n      \"delete_after_value\": 0,\n      \"delete_after_unit\": \"MINUTE\"\n    }\n  },\n  \"delivery_settings\": {\n    \"email_template_id\": 0,\n    \"sms_template_id\": 0\n  }\n}"
 						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/usergroups",
@@ -9930,7 +10481,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string test\",\n  \"password_db_location\": \"CLOUD\",\n  \"ppsk_use_only\": true,\n  \"password_type\": \"PPSK\",\n  \"enable_max_clients_per_ppsk\": true,\n  \"max_clients_per_ppsk\": 0,\n  \"pcg_use_only\": true,\n  \"pcg_type\": \"AP_BASED\",\n  \"enable_cwp_reg\": true,\n  \"password_settings\": {\n    \"enable_letters\": true,\n    \"enable_numbers\": true,\n    \"enable_special_characters\": true,\n    \"password_concat_string\": \"string\",\n    \"psk_generation_method\": \"PASSWORD_ONLY\",\n    \"password_character_types\": \"INCLUDE_ALL_CHARACTER_TYPE_ENABLED\",\n    \"password_length\": 8\n  },\n  \"expiration_settings\": {\n    \"expiration_type\": \"NEVER_EXPIRE\",\n    \"valid_during_dates\": {\n      \"start_date_time\": {\n        \"day_of_month\": 0,\n        \"month\": 0,\n        \"year\": 0,\n        \"hour_of_day\": 0,\n        \"minute_of_hour\": 0\n      },\n      \"end_date_time\": {\n        \"day_of_month\": 0,\n        \"month\": 0,\n        \"year\": 0,\n        \"hour_of_day\": 0,\n        \"minute_of_hour\": 0\n      },\n      \"time_zone\": \"string\"\n    },\n    \"valid_for_time_period\": {\n      \"valid_time_period_after\": \"ID_CREATION\",\n      \"after_id_creation_settings\": {\n        \"valid_time_period\": 0,\n        \"valid_time_period_unit\": \"MINUTE\"\n      },\n      \"after_first_login_settings\": {\n        \"valid_time_period\": 0,\n        \"valid_time_period_unit\": \"MINUTE\",\n        \"first_login_within\": 0,\n        \"first_login_within_unit\": \"MINUTE\"\n      }\n    },\n    \"valid_daily\": {\n      \"daily_start_hour\": 0,\n      \"daily_start_minute\": 0,\n      \"daily_end_hour\": 0,\n      \"daily_end_minute\": 0\n    },\n    \"expiration_action\": \"SHOW_MESSAGE\",\n    \"post_expiration_action\": {\n      \"enable_credentials_renewal\": true,\n      \"enable_delete_immediately\": true,\n      \"delete_after_value\": 0,\n      \"delete_after_unit\": \"MINUTE\"\n    }\n  },\n  \"delivery_settings\": {\n    \"email_template_id\": 0,\n    \"sms_template_id\": 0\n  }\n}"
+							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string test\",\n  \"password_db_location\": \"CLOUD\",\n  \"ppsk_use_only\": true,\n  \"password_type\": \"PPSK\",\n  \"enable_max_clients_per_ppsk\": true,\n  \"max_clients_per_ppsk\": 0,\n  \"pcg_use_only\": true,\n  \"pcg_type\": \"AP_BASED\",\n  \"enable_cwp_reg\": true,\n  \"password_settings\": {\n    \"enable_letters\": true,\n    \"enable_numbers\": true,\n    \"enable_special_characters\": true,\n    \"password_concat_string\": \"string\",\n    \"psk_generation_method\": \"PASSWORD_ONLY\",\n    \"password_character_types\": \"INCLUDE_ALL_CHARACTER_TYPE_ENABLED\",\n    \"password_length\": 0\n  },\n  \"expiration_settings\": {\n    \"expiration_type\": \"NEVER_EXPIRE\",\n    \"valid_during_dates\": {\n      \"start_date_time\": {\n        \"day_of_month\": 0,\n        \"month\": 0,\n        \"year\": 0,\n        \"hour_of_day\": 0,\n        \"minute_of_hour\": 0\n      },\n      \"end_date_time\": {\n        \"day_of_month\": 0,\n        \"month\": 0,\n        \"year\": 0,\n        \"hour_of_day\": 0,\n        \"minute_of_hour\": 0\n      },\n      \"time_zone\": \"string\"\n    },\n    \"valid_for_time_period\": {\n      \"valid_time_period_after\": \"ID_CREATION\",\n      \"after_id_creation_settings\": {\n        \"valid_time_period\": 0,\n        \"valid_time_period_unit\": \"MINUTE\"\n      },\n      \"after_first_login_settings\": {\n        \"valid_time_period\": 0,\n        \"valid_time_period_unit\": \"MINUTE\",\n        \"first_login_within\": 0,\n        \"first_login_within_unit\": \"MINUTE\"\n      }\n    },\n    \"valid_daily\": {\n      \"daily_start_hour\": 0,\n      \"daily_start_minute\": 0,\n      \"daily_end_hour\": 0,\n      \"daily_end_minute\": 0\n    },\n    \"expiration_action\": \"SHOW_MESSAGE\",\n    \"post_expiration_action\": {\n      \"enable_credentials_renewal\": true,\n      \"enable_delete_immediately\": true,\n      \"delete_after_value\": 0,\n      \"delete_after_unit\": \"MINUTE\"\n    }\n  },\n  \"delivery_settings\": {\n    \"email_template_id\": 0,\n    \"sms_template_id\": 0\n  }\n}"
 						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/usergroups/{{group_id}}",
@@ -10277,10 +10828,6 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									"pm.test(\"Body includes data \", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
-									"    console.log(pm.test)",
-									"});",
 									" pm.test(\"Response time is less than 1000ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
@@ -14806,7 +15353,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/radius-servers/external",
+							"raw": "https://api.extremecloudiq.com/radius-servers/internal",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -14815,7 +15362,86 @@
 							],
 							"path": [
 								"radius-servers",
-								"external"
+								"internal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[LRO] Delete internal RADIUS server configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"authentication_method_group\": \"TLS_PEAP_TTLS_LEAP_MD5\",\n  \"default_authentication_method\": \"TLS\",\n  \"enable_verify_server_cert\": true,\n  \"server_key_password\": \"string\",\n  \"enable_check_cert_common_name\": true,\n  \"enable_check_user_for_tls_auth\": true,\n  \"enable_check_user_for_peap_auth\": true,\n  \"enable_check_user_for_ttls_auth\": true,\n  \"enable_authentication_server\": true,\n  \"enable_radius_accounting_settings\": true,\n  \"authentication_server_port\": 1812,\n  \"active_session_limit\": 0,\n  \"active_session_age_timeout\": 1800,\n  \"external_user_directory\": {\n    \"ldap_retry_interval\": 600,\n    \"local_check_interval\": 300,\n    \"remote_check_interval\": 30,\n    \"enable_radius_server_credential_caching\": true,\n    \"cache_lifetime\": 86400,\n    \"user_group_attribute\": \"memberOf\",\n    \"external_user_directory_type\": \"OPEN_LDAP\",\n    \"entries\": [\n      {\n        \"default_server_id\": 0,\n        \"server_role\": \"PRIMARY\"\n      }\n    ]\n  },\n  \"ca_certificate_id\": 0,\n  \"server_certificate_id\": 0,\n  \"server_key_id\": 0,\n  \"device_ids\": [\n    0\n  ],\n  \"clients\": [\n    {\n      \"id\": 0,\n      \"shared_secret\": \"string\",\n      \"description\": \"string\",\n      \"l3_address_profile_id\": 0\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radius-servers/internal?ids={{radius_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radius-servers",
+								"internal"
+							],
+							"query": [
+								{
+									"key": "ids",
+									"value": "{{radius_id}}",
+									"description": "The internal RADIUS server IDs to be delete, min = 1 ID, max = 100 IDs"
+								},
+								{
+									"key": "async",
+									"value": "false",
+									"description": "Whether to enable async mode",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -14863,7 +15489,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/radius-servers/external/{{int_radius_id}}",
+							"raw": "https://api.extremecloudiq.com/radius-servers/internal/{{int_radius_id}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -14872,7 +15498,7 @@
 							],
 							"path": [
 								"radius-servers",
-								"external",
+								"internal",
 								"{{int_radius_id}}"
 							]
 						}
