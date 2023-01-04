@@ -1757,7 +1757,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"user_role\": \"OPERATOR\",\n  \"enable_api_access\": true\n}",
+							"raw": "{\n  \"user_role\": \"OPERATOR\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
