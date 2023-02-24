@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "5173722c-e951-4dd3-ac25-77f7db0e6ddf",
-		"name": "XIQ APIv2 22r7",
+		"_postman_id": "b9b8e0ef-cdea-4b54-886e-b027df953a51",
+		"name": "XIQ APIv2 23r1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4056946"
 	},
@@ -2327,7 +2327,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"string2\",\n  \"color\": \"string2\"\n}",
+							"raw": "{\n  \"name\": \"string\",\n  \"color\": \"string\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3747,7 +3747,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"extreme\": {\n    \"sns\": [\n      \"01301505040168\"\n    ]\n  }\n}",
+							"raw": "{\n  \"extreme\": {\n    \"sns\": [\n      \"string\"\n    ]\n  },\n  \"exos\": {\n    \"sns\": [\n      \"string\"\n    ]\n  },\n  \"voss\": {\n    \"sns\": [\n      \"string\"\n    ]\n  },\n  \"wing\": {\n    \"sn_to_mac\": {\n      \"additionalProp1\": \"string\",\n      \"additionalProp2\": \"string\",\n      \"additionalProp3\": \"string\"\n    }\n  },\n  \"dell\": {\n    \"sn_to_st\": {\n      \"additionalProp1\": \"string\",\n      \"additionalProp2\": \"string\",\n      \"additionalProp3\": \"string\"\n    }\n  }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -5441,7 +5441,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"devices\":{\"ids\":[0]},\"device_location\":{\"location_id\":0,\"x\":0,\"y\":0,\"latitude\":0,\"longitude\":0}}"
+							"raw": "{\n  \"devices\": {\n    \"ids\": [\n      0\n    ]\n  },\n  \"device_location\": {\n    \"location_id\": 0,\n    \"x\": 0,\n    \"y\": 0,\n    \"latitude\": 0,\n    \"longitude\": 0\n  }\n}"
 						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/devices/location/:assign",
@@ -5994,7 +5994,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/devices/radius=proxy/:assign?ids={{id}}&radiusProxyId=438086664193",
+							"raw": "https://api.extremecloudiq.com/devices/radius=proxy/:assign?ids={{id}}&radiusProxyId={{radius_proxy_id}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -6014,7 +6014,7 @@
 								},
 								{
 									"key": "radiusProxyId",
-									"value": "438086664193",
+									"value": "{{radius_proxy_id}}",
 									"description": "The RADIUS proxy ID to assign"
 								}
 							],
@@ -6235,6 +6235,30 @@
 									"key": "limit",
 									"value": "10",
 									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
+								},
+								{
+									"key": "policyNames",
+									"value": "Policy Name",
+									"description": "The list of full network policy names to filter the query",
+									"disabled": true
+								},
+								{
+									"key": "keyword",
+									"value": "string",
+									"description": "The keyword to partial search by network policy name",
+									"disabled": true
+								},
+								{
+									"key": "fields",
+									"value": "ID",
+									"description": "The network policy fields to return\n\nAvailable values : ID, CREATE_TIME, UPDATE_TIME, ORG_ID, NAME, DESCRIPTION, TYPE, PREDEFINED",
+									"disabled": true
+								},
+								{
+									"key": "view",
+									"value": "FULL",
+									"description": "The views to return network policy fields (Check fields for each view at XiqNetworkPolicyView schema)\n\nAvailable values : BASIC, FULL",
+									"disabled": true
 								}
 							]
 						}
@@ -6342,9 +6366,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -6358,15 +6379,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"type\": \"NETWORK_ACCESS_AND_SWITCHING\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/network-policies/{{np_id}}",
 							"protocol": "https",
@@ -6909,7 +6921,7 @@
 								},
 								{
 									"key": "userProfileNames",
-									"value": "",
+									"value": "Profile Name",
 									"description": "The user profile names",
 									"disabled": true
 								},
@@ -7033,7 +7045,7 @@
 								},
 								{
 									"key": "userProfileNames",
-									"value": "",
+									"value": "Profile Name",
 									"description": "The user profile names",
 									"disabled": true
 								},
@@ -7807,13 +7819,13 @@
 								},
 								{
 									"key": "category",
-									"value": "",
+									"value": "ADMIN",
 									"description": "Audit category\n\nAvailable values : ADMIN, SYSTEM, DEPLOYMENT, CONFIG, MONITOR, ALARM",
 									"disabled": true
 								},
 								{
 									"key": "username",
-									"value": "",
+									"value": "User Name",
 									"description": "The user login name",
 									"disabled": true
 								},
@@ -7914,7 +7926,7 @@
 								},
 								{
 									"key": "username",
-									"value": "",
+									"value": "User Name",
 									"description": "The user login name",
 									"disabled": true
 								},
@@ -8019,7 +8031,7 @@
 								},
 								{
 									"key": "username",
-									"value": "",
+									"value": "User Name",
 									"description": "The user login name",
 									"disabled": true
 								},
@@ -8120,7 +8132,7 @@
 								},
 								{
 									"key": "username",
-									"value": "",
+									"value": "User Name",
 									"description": "The user login name",
 									"disabled": true
 								},
@@ -8221,7 +8233,7 @@
 								},
 								{
 									"key": "phoneNumber",
-									"value": "",
+									"value": "Phone Number",
 									"description": "The phone number",
 									"disabled": true
 								},
@@ -8513,9 +8525,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -8534,15 +8543,6 @@
 								"value": "*/*"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"devices\": {\n    \"ids\": [\n      {{id}}\n    ]\n  },\n  \"policy\": {\n    \"enable_complete_configuration_update\": true,\n    \"firmware_upgrade_policy\": {\n      \"enable_enforce_upgrade\": true,\n      \"enable_distributed_upgrade\": true\n    },\n    \"firmware_activate_option\": {\n      \"enable_activate_at_next_reboot\": true,\n      \"activation_delay_seconds\": 0,\n      \"activation_time\": 0\n    }\n  }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/deployments/overview",
 							"protocol": "https",
@@ -8582,9 +8582,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -8603,15 +8600,6 @@
 								"value": "*/*"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"devices\": {\n    \"ids\": [\n      {{id}}\n    ]\n  },\n  \"policy\": {\n    \"enable_complete_configuration_update\": true,\n    \"firmware_upgrade_policy\": {\n      \"enable_enforce_upgrade\": true,\n      \"enable_distributed_upgrade\": true\n    },\n    \"firmware_activate_option\": {\n      \"enable_activate_at_next_reboot\": true,\n      \"activation_delay_seconds\": 0,\n      \"activation_time\": 0\n    }\n  }\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/deployments/status?deviceIds={{id}}",
 							"protocol": "https",
@@ -9115,7 +9103,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/email-templates",
+							"raw": "https://api.extremecloudiq.com/email-templates?passwordType=PPSK",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9128,9 +9116,8 @@
 							"query": [
 								{
 									"key": "passwordType",
-									"value": "RADIUS",
-									"description": "The password type\n\nAvailable values : PPSK, RADIUS",
-									"disabled": true
+									"value": "PPSK",
+									"description": "The password type\n\nAvailable values : PPSK, RADIUS"
 								}
 							]
 						}
@@ -9539,7 +9526,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"policy_name\":\"0\",\"ssid_name\":\"0\",\"users\":[{\"name\":\"0\",\"email\":\"0\",\"user_group_name\":\"0\"}]}"
+							"raw": "{\n  \"policy_name\": \"string\",\n  \"ssid_name\": \"string\",\n  \"users\": [\n    {\n      \"name\": \"string\",\n      \"email\": \"string\",\n      \"user_group_name\": \"string\"\n    }\n  ]\n}"
 						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/pcgs/key-based",
@@ -11535,15 +11522,6 @@
 								"value": "application/json"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"transmission_power\": 20,\n  \"max_transmit_power\": 20,\n  \"transmission_power_floor\": 20,\n  \"transmission_power_max_drop\": 18,\n  \"max_clients\": 255,\n  \"enable_client_transmission_power\": true,\n  \"client_transmission_power\": 20,\n  \"radio_mode\": \"B_G\",\n  \"enable_ofdma\": true\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "https://api.extremecloudiq.com/radio-profiles/{{radio_profile_id}}",
 							"protocol": "https",
@@ -12731,7 +12709,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "string",
+							"raw": "\"string\"",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -12800,7 +12778,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "CWP ID",
+							"raw": "0",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -12931,7 +12909,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "New CWP ID",
+							"raw": "0",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -13120,7 +13098,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"key_management\": \"WPA_PSK\",\n  \"encryption_method\": \"CCMP\",\n  \"user_group_ids\": [\n    0\n  ],\n  \"enable_max_clients_per_ppsk\": true,\n  \"max_clients_per_ppsk\": 0,\n  \"enable_mac_bind\": true,\n  \"max_macs_per_ppsk\": 0,\n  \"ppsk_server_id\": 0\n}",
+							"raw": "{\n  \"key_management\": \"WPA_PSK\",\n  \"encryption_method\": \"CCMP\",\n  \"user_group_ids\": [\n    0\n  ],\n  \"enable_max_clients_per_ppsk\": true,\n  \"max_clients_per_ppsk\": 15,\n  \"enable_mac_bind\": true,\n  \"max_macs_per_ppsk\": 5,\n  \"ppsk_server_id\": 0\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -13312,7 +13290,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "string",
+							"raw": "\"string\"",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -14656,7 +14634,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"radius-proxy-1\",\n  \"description\": \"Radius Proxy 1\",\n  \"format_type\": \"NAI\",\n  \"retry_count\": 3,\n  \"retry_delay\": 5,\n  \"dead_time\": 300,\n  \"enable_inject_operator_name_attribute\": false,\n  \"device_ids\": [\n    1\n  ],\n  \"clients\": [\n    {\n      \"shared_secret\": \"123456\",\n      \"description\": \"\",\n      \"l3_address_profile_id\": 1000\n    }\n  ],\n  \"realms\": [\n    {\n      \"name\": \"NULL\",\n      \"enable_strip_realm_name\": false,\n      \"radius_client_object_id\": 2000\n    },\n    {\n      \"name\": \"DEFAULT\",\n      \"enable_strip_realm_name\": false,\n      \"radius_client_object_id\": 3000\n    }\n  ]\n}",
+							"raw": "{\n  \"name\": \"radius-proxy-1\",\n  \"description\": \"Radius Proxy 1\",\n  \"format_type\": \"NAI\",\n  \"retry_count\": 3,\n  \"retry_delay\": 5,\n  \"dead_time\": 300,\n  \"enable_inject_operator_name_attribute\": false,\n  \"device_ids\": [\n{{id}}\n  ],\n  \"clients\": [\n    {\n      \"shared_secret\": \"123456\",\n      \"description\": \"\",\n      \"l3_address_profile_id\": 1000\n    }\n  ],\n  \"realms\": [\n    {\n      \"name\": \"NULL\",\n      \"enable_strip_realm_name\": false,\n      \"radius_client_object_id\": 2000\n    },\n    {\n      \"name\": \"DEFAULT\",\n      \"enable_strip_realm_name\": false,\n      \"radius_client_object_id\": 3000\n    }\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -14778,7 +14756,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"radius-proxy-1\",\n  \"description\": \"Radius Proxy 1\",\n  \"format_type\": \"NAI\",\n  \"retry_count\": 3,\n  \"retry_delay\": 5,\n  \"dead_time\": 300,\n  \"enable_inject_operator_name_attribute\": false,\n  \"clients\": [\n    {\n      \"id\": 1\n    },\n    {\n      \"shared_secret\": \"123456\",\n      \"description\": \"\",\n      \"l3_address_profile_id\": 1000\n    }\n  ],\n  \"realms\": [\n    {\n      \"id\": 1\n    },\n    {\n      \"id\": 2\n    },\n    {\n      \"name\": \"test-realm\",\n      \"enable_strip_realm_name\": false,\n      \"radius_client_object_id\": 3000\n    }\n  ]\n}",
+							"raw": "{\n  \"name\": \"radius-proxy-1\",\n  \"description\": \"Radius Proxy 1\",\n  \"format_type\": \"NAI\",\n  \"retry_count\": 3,\n  \"retry_delay\": 5,\n  \"dead_time\": 300,\n  \"enable_inject_operator_name_attribute\": false,\n  \"clients\": [\n    {\n      \"id\": {{client_id}}\n    },\n    {\n      \"shared_secret\": \"123456\",\n      \"description\": \"\",\n      \"l3_address_profile_id\": 1000\n    }\n  ],\n  \"realms\": [\n    {\n      \"id\": 1\n    },\n    {\n      \"id\": 2\n    },\n    {\n      \"name\": \"test-realm\",\n      \"enable_strip_realm_name\": false,\n      \"radius_client_object_id\": 3000\n    }\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -15762,6 +15740,1540 @@
 								{
 									"key": "certType",
 									"value": "CERT",
+									"description": "The certificate type\n\nAvailable values : CERT, KEY",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Copilot - Connectivity Experience",
+			"item": [
+				{
+					"name": "Copilot Wired Events",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter the number of Top clients to return",
+									"var count = 5; //The count number to be added to URL",
+									"//enter start and end times",
+									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"count\", count);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"data\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wired/events?viewType=LOCATION&startTime={{myStartTime}}&endTime={{myEndTime}}&page=1&limit=10&forensicBucket=TWENTY_FOUR_HOURS&scoreType=PORT_ERRORS&locationId={{loc_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"connectivity",
+								"wired",
+								"events"
+							],
+							"query": [
+								{
+									"key": "viewType",
+									"value": "LOCATION",
+									"description": "The type of View\nAvailable values : LOCATION"
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
+								},
+								{
+									"key": "sortBy",
+									"value": "INTERFACE_ERRORS",
+									"description": "The sort field\nAvailable values : INTERFACE_ERRORS",
+									"disabled": true
+								},
+								{
+									"key": "sortOrder",
+									"value": "ASC",
+									"description": "The sort order (ascending by default)\nAvailable values : ASC, DESC",
+									"disabled": true
+								},
+								{
+									"key": "viewId",
+									"value": "",
+									"description": "The view id based on view type",
+									"disabled": true
+								},
+								{
+									"key": "forensicBucket",
+									"value": "TWENTY_FOUR_HOURS",
+									"description": "The selected time bucket\nAvailable values : TWENTY_FOUR_HOURS, ONE_HOUR, TODAY, ONE_WEEK, SEVEN_DAYS, THIRTY_DAYS, NINETY_DAYS"
+								},
+								{
+									"key": "scoreType",
+									"value": "PORT_ERRORS",
+									"description": "The selected score type\nAvailable values : PORT_ERRORS"
+								},
+								{
+									"key": "searchKey",
+									"value": "",
+									"description": "The selected search key",
+									"disabled": true
+								},
+								{
+									"key": "locationType",
+									"value": "BUILDING",
+									"description": "The selected location type",
+									"disabled": true
+								},
+								{
+									"key": "locationId",
+									"value": "{{loc_id}}",
+									"description": "The selected location id"
+								},
+								{
+									"key": "timestamp",
+									"value": "",
+									"description": "The timestamp to query, epoch time in milliseconds since 1/1/1970",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Wired Experience",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter the number of Top clients to return",
+									"var count = 5; //The count number to be added to URL",
+									"//enter start and end times",
+									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"count\", count);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"data\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wired/experience?viewType=LOCATION&startTime={{myStartTime}}&endTime={{myEndTime}}&page=1&limit=10",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"connectivity",
+								"wired",
+								"experience"
+							],
+							"query": [
+								{
+									"key": "viewType",
+									"value": "LOCATION",
+									"description": "The type of View\nAvailable values : LOCATION"
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
+								},
+								{
+									"key": "sortField",
+									"value": "NAME",
+									"description": "The sort field\nAvailable values : NAME, QUALITY_INDEX",
+									"disabled": true
+								},
+								{
+									"key": "sortOrder",
+									"value": "ASC",
+									"description": "The sort order (ascending by default)\nAvailable values : ASC, DESC",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Wired Hardware",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter the number of Top clients to return",
+									"var count = 5; //The count number to be added to URL",
+									"//enter start and end times",
+									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"count\", count);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"quality_index_graph\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wired/hardware?viewType=LOCATION&startTime={{myStartTime}}&endTime={{myEndTime}}&forensicBucket=TWENTY_FOUR_HOURS",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"connectivity",
+								"wired",
+								"hardware"
+							],
+							"query": [
+								{
+									"key": "viewType",
+									"value": "LOCATION",
+									"description": "The type of View\nAvailable values : LOCATION"
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "viewId",
+									"value": null,
+									"description": "The view id based on view type",
+									"disabled": true
+								},
+								{
+									"key": "forensicBucket",
+									"value": "TWENTY_FOUR_HOURS",
+									"description": "The selected time bucket\nAvailable values : TWENTY_FOUR_HOURS, ONE_HOUR, TODAY, ONE_WEEK, SEVEN_DAYS, THIRTY_DAYS, NINETY_DAYS"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Wired Quality-Index",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter the number of Top clients to return",
+									"var count = 5; //The count number to be added to URL",
+									"//enter start and end times",
+									"var startTime = new Date(\"Feb 15, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"count\", count);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"quality_index\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wired/quality-index?viewType=LOCATION&startTime={{myStartTime}}&endTime={{myEndTime}}&forensicBucket=TWENTY_FOUR_HOURS",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"connectivity",
+								"wired",
+								"quality-index"
+							],
+							"query": [
+								{
+									"key": "viewType",
+									"value": "LOCATION",
+									"description": "The type of View\nAvailable values : LOCATION"
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "viewId",
+									"value": null,
+									"description": "The view id based on view type",
+									"disabled": true
+								},
+								{
+									"key": "forensicBucket",
+									"value": "TWENTY_FOUR_HOURS",
+									"description": "The selected time bucket\nAvailable values : TWENTY_FOUR_HOURS, ONE_HOUR, TODAY, ONE_WEEK, SEVEN_DAYS, THIRTY_DAYS, NINETY_DAYS"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Wireless Apps",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter the number of Top clients to return",
+									"var count = 5; //The count number to be added to URL",
+									"//enter start and end times",
+									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"count\", count);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"total_apps\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/apps?viewType=LOCATION&startTime={{myStartTime}}&endTime={{myEndTime}}&viewId=0",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"connectivity",
+								"wireless",
+								"apps"
+							],
+							"query": [
+								{
+									"key": "viewType",
+									"value": "LOCATION",
+									"description": "The type of View\nAvailable values : LOCATION, SSID, OS"
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "viewId",
+									"value": "0",
+									"description": "The view id based on view type"
+								},
+								{
+									"key": "forensicBucket",
+									"value": "TWENTY_FOUR_HOURS",
+									"description": "The selected time bucket\nAvailable values : TWENTY_FOUR_HOURS, ONE_HOUR, TODAY, ONE_WEEK, SEVEN_DAYS, THIRTY_DAYS, NINETY_DAYS",
+									"disabled": true
+								},
+								{
+									"key": "locationId",
+									"value": "{{loc_id}}",
+									"description": "The location identifier\n\nDefault value : 0",
+									"disabled": true
+								},
+								{
+									"key": "locationType",
+									"value": "BUILDING",
+									"description": "The location type\n\nDefault value :",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Wireless Events",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter the number of Top clients to return",
+									"var count = 5; //The count number to be added to URL",
+									"//enter start and end times",
+									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"count\", count);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"data\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/events?viewType=LOCATION&startTime={{myStartTime}}&endTime={{myEndTime}}&page=1&limit=10&scoreType=TIME_TO_AUTHENTICATE",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"connectivity",
+								"wireless",
+								"events"
+							],
+							"query": [
+								{
+									"key": "viewType",
+									"value": "LOCATION",
+									"description": "The type of View\nAvailable values : LOCATION, SSID, OS"
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
+								},
+								{
+									"key": "sortBy",
+									"value": "INTERFACE_ERRORS",
+									"description": "The sort field\nAvailable values : INTERFACE_ERRORS",
+									"disabled": true
+								},
+								{
+									"key": "sortOrder",
+									"value": "ASC",
+									"description": "The sort order (ascending by default)\nAvailable values : ASC, DESC",
+									"disabled": true
+								},
+								{
+									"key": "viewId",
+									"value": "",
+									"description": "The view id based on view type",
+									"disabled": true
+								},
+								{
+									"key": "scoreType",
+									"value": "TIME_TO_AUTHENTICATE",
+									"description": "The wireless score type\nAvailable values : TIME_TO_AUTHENTICATE, TIME_TO_ASSOCIATE, TIME_TO_DHCP, DNS, RETRIES"
+								},
+								{
+									"key": "forensicBucket",
+									"value": "TWENTY_FOUR_HOURS",
+									"description": "The selected time bucket\nAvailable values : TWENTY_FOUR_HOURS, ONE_HOUR, TODAY, ONE_WEEK, SEVEN_DAYS, THIRTY_DAYS, NINETY_DAYS",
+									"disabled": true
+								},
+								{
+									"key": "searchKey",
+									"value": "",
+									"description": "The selected search key",
+									"disabled": true
+								},
+								{
+									"key": "locationType",
+									"value": "BUILDING",
+									"description": "The selected location type",
+									"disabled": true
+								},
+								{
+									"key": "locationId",
+									"value": "{{loc_id}}",
+									"description": "The selected location id",
+									"disabled": true
+								},
+								{
+									"key": "timestamp",
+									"value": "",
+									"description": "The timestamp to query, epoch time in milliseconds since 1/1/1970",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Wireless Experience",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter the number of Top clients to return",
+									"var count = 5; //The count number to be added to URL",
+									"//enter start and end times",
+									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"count\", count);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"data\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/experience?viewType=LOCATION&page=1&limit=10&startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"connectivity",
+								"wireless",
+								"experience"
+							],
+							"query": [
+								{
+									"key": "viewType",
+									"value": "LOCATION",
+									"description": "The type of View\nAvailable values : LOCATION, SSID, OS"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "sortField",
+									"value": "NAME",
+									"description": "The sort field\nAvailable values : NAME, QUALITY_INDEX",
+									"disabled": true
+								},
+								{
+									"key": "sortOrder",
+									"value": "ASC",
+									"description": "The sort order (ascending by default)\nAvailable values : ASC, DESC",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Wireless Performance",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter the number of Top clients to return",
+									"var count = 5; //The count number to be added to URL",
+									"//enter start and end times",
+									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"count\", count);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"quality_index_graph\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/performance?viewType=LOCATION&startTime={{myStartTime}}&endTime={{myEndTime}}&viewId=0",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"connectivity",
+								"wireless",
+								"performance"
+							],
+							"query": [
+								{
+									"key": "viewType",
+									"value": "LOCATION",
+									"description": "The type of View\nAvailable values : LOCATION, SSID, OS"
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "viewId",
+									"value": "0",
+									"description": "The view id based on view type"
+								},
+								{
+									"key": "forensicBucket",
+									"value": "TWENTY_FOUR_HOURS",
+									"description": "The selected time bucket\nAvailable values : TWENTY_FOUR_HOURS, ONE_HOUR, TODAY, ONE_WEEK, SEVEN_DAYS, THIRTY_DAYS, NINETY_DAYS",
+									"disabled": true
+								},
+								{
+									"key": "locationId",
+									"value": "{{loc_id}}",
+									"description": "The location identifier\nDefault value : 0",
+									"disabled": true
+								},
+								{
+									"key": "locationType",
+									"value": "BUILDING",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Wireless Quality-index",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter the number of Top clients to return",
+									"var count = 5; //The count number to be added to URL",
+									"//enter start and end times",
+									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"count\", count);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"quality_index\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/quality-index?viewType=LOCATION&startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"connectivity",
+								"wireless",
+								"quality-index"
+							],
+							"query": [
+								{
+									"key": "viewType",
+									"value": "LOCATION",
+									"description": "The type of View\nAvailable values : LOCATION, SSID, OS"
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "viewId",
+									"value": "1",
+									"description": "The view id based on view type",
+									"disabled": true
+								},
+								{
+									"key": "forensicBucket",
+									"value": "TWENTY_FOUR_HOURS",
+									"description": "The selected time bucket\nAvailable values : TWENTY_FOUR_HOURS, ONE_HOUR, TODAY, ONE_WEEK, SEVEN_DAYS, THIRTY_DAYS, NINETY_DAYS",
+									"disabled": true
+								},
+								{
+									"key": "locationId",
+									"value": "{{loc_id}}",
+									"description": "The location identifier\nDefault value : 0",
+									"disabled": true
+								},
+								{
+									"key": "locationType",
+									"value": "BUILDING",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Wireless Time To Connect",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter the number of Top clients to return",
+									"var count = 5; //The count number to be added to URL",
+									"//enter start and end times",
+									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"count\", count);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"quality_index_graph\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/time-to-connect?viewType=LOCATION&startTime={{myStartTime}}&endTime={{myEndTime}}&viewId=0&forensicBucket=TWENTY_FOUR_HOURS",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"connectivity",
+								"wireless",
+								"time-to-connect"
+							],
+							"query": [
+								{
+									"key": "viewType",
+									"value": "LOCATION",
+									"description": "The type of View\nAvailable values : LOCATION, SSID, OS"
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "viewId",
+									"value": "0",
+									"description": "The view id based on view type"
+								},
+								{
+									"key": "forensicBucket",
+									"value": "TWENTY_FOUR_HOURS",
+									"description": "The selected time bucket\nAvailable values : TWENTY_FOUR_HOURS, ONE_HOUR, TODAY, ONE_WEEK, SEVEN_DAYS, THIRTY_DAYS, NINETY_DAYS"
+								},
+								{
+									"key": "locationId",
+									"value": "{{loc_id}}",
+									"description": "The location identifier\nDefault value : 0",
+									"disabled": true
+								},
+								{
+									"key": "locationType",
+									"value": "BUILDING",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Wireless Views",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter the number of Top clients to return",
+									"var count = 5; //The count number to be added to URL",
+									"//enter start and end times",
+									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"count\", count);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"views_list_entities\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/views?viewType=SSID",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"connectivity",
+								"wireless",
+								"views"
+							],
+							"query": [
+								{
+									"key": "viewType",
+									"value": "SSID",
+									"description": "The type of View\nAvailable values : SSID, OS"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Copilot - Anomalies",
+			"item": [
+				{
+					"name": "Copilot Anomalies Devices by Location",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter the number of Top clients to return",
+									"var count = 5; //The count number to be added to URL",
+									"//enter start and end times",
+									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"count\", count);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"location_entity\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/devices-by-location?anomalyType=POE_FLAPPING",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"devices-by-location"
+							],
+							"query": [
+								{
+									"key": "anomalyType",
+									"value": "POE_FLAPPING",
+									"description": "Anomaly type\n\nAvailable values : POE_FLAPPING, DFS_RECURRENCE, MULTI_BROADCAST, UPLINK_EFFICIENCY, WIFI_CAPACITY, WIFI_EFFICIENCY"
+								},
+								{
+									"key": "locationId",
+									"value": "0",
+									"description": "The location id\n\nDefault value : 0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Anomalies Locations",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter the number of Top clients to return",
+									"var count = 5; //The count number to be added to URL",
+									"//enter start and end times",
+									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"count\", count);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"data\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/locations?anomalyType=POE_FLAPPING&page=1&limit=10",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"locations"
+							],
+							"query": [
+								{
+									"key": "anomalyType",
+									"value": "POE_FLAPPING",
+									"description": "Anomaly type\n\nAvailable values : POE_FLAPPING, DFS_RECURRENCE, MULTI_BROADCAST, UPLINK_EFFICIENCY, WIFI_CAPACITY, WIFI_EFFICIENCY"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1\n\nDefault value : 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Number of Records, min = 1, max = 100\n\nDefault value : 10"
+								},
+								{
+									"key": "sortField",
+									"value": "LOCATION",
+									"description": "sort by field\n\nAvailable values : LOCATION, SEVERITY, TIME",
+									"disabled": true
+								},
+								{
+									"key": "sortOrder",
+									"value": "ASC",
+									"description": "The sorting order\n\nAvailable values : ASC, DESC",
+									"disabled": true
+								},
+								{
+									"key": "excludeMuted",
+									"value": "false",
+									"description": "exclude muted\n\nDefault value : false",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Anomalies POE Flapping Stats",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter the number of Top clients to return",
+									"var count = 5; //The count number to be added to URL",
+									"//enter start and end times",
+									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"count\", count);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"flap_count_entities\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/poeflapping/stats?anomalyId=string",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"poeflapping",
+								"stats"
+							],
+							"query": [
+								{
+									"key": "anomalyId",
+									"value": "string",
+									"description": "The anomaly id"
+								},
+								{
+									"key": "locationId",
+									"value": "0",
+									"description": "The location id\n\nDefault value : 0",
 									"disabled": true
 								}
 							]
