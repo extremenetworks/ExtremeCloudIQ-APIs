@@ -1,13 +1,14 @@
 import requests
 import json
 
-np_id = 0
+np_id = 0 # Network Policy ID
 access_token = '***'
 
 url = f"https://api.extremecloudiq.com/network-policies/{np_id}/ssids/:remove"
 
-ssid_id = 0
-payload = f"[\n  {ssid_id}\n]"
+payload = json.dumps([
+  0 #ssid_id 
+  ])
 headers = {
   'Authorization': 'Bearer ' + access_token,
   'Content-Type': 'application/json'

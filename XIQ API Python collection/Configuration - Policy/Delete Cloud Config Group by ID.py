@@ -1,6 +1,6 @@
 import requests
 
-ccg_id = 0
+ccg_id = 0 # Cloud Config Group ID
 access_token = '***'
 
 url = f"https://api.extremecloudiq.com/ccgs/{ccg_id}"

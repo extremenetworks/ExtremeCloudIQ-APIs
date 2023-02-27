@@ -1,7 +1,7 @@
 import requests
 import json
 
-ex_radius_id = 0
+ex_radius_id = 0 # The ID for external RADIUS server
 access_token = '***'
 
 url =f"https://api.extremecloudiq.com/radius-servers/external/{ex_radius_id}"

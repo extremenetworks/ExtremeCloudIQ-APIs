@@ -2,7 +2,7 @@ import requests
 
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/clients/active"
+url = "https://api.extremecloudiq.com/clients/active?page=1&limit=10&views=FULL"
 
 payload={}
 headers = {

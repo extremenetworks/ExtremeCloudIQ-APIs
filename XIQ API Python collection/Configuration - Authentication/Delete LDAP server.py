@@ -1,6 +1,6 @@
 import requests
 
-ldap_id = 0
+ldap_id = 0 # The LDAP server ID
 access_token = '***'
 
 url =f"https://api.extremecloudiq.com/ldap-servers/{ldap_id}"

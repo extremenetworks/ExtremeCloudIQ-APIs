@@ -4,9 +4,9 @@ import json
 floor_id = 0
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/locations/floor/{floor_id}"
+url = f"https://api.extremecloudiq.com/locations/floor/{floor_id}?force_delete=false"
 
-payload = ""
+payload = {}
 headers = {
   'accept': 'application/json',
   'Content-Type': 'application/json',

@@ -5,7 +5,6 @@ access_token = '***'
 
 url = "https://api.extremecloudiq.com/devices/os/:change"
 
-device_id = 0
 payload = json.dumps({
   "device_ids": [
     0

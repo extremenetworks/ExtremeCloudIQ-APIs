@@ -7602,7 +7602,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/alerts/count-by -{{alert_group}}?startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"raw": "https://api.extremecloudiq.com/alerts/count-by-{{alert_group}}?startTime={{myStartTime}}&endTime={{myEndTime}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -7611,7 +7611,7 @@
 							],
 							"path": [
 								"alerts",
-								"count-by -{{alert_group}}"
+								"count-by-{{alert_group}}"
 							],
 							"query": [
 								{
@@ -11597,7 +11597,7 @@
 					"response": []
 				},
 				{
-					"name": "Update channel selection settingss",
+					"name": "Update channel selection settings",
 					"event": [
 						{
 							"listen": "test",
@@ -15347,7 +15347,7 @@
 					"response": []
 				},
 				{
-					"name": "[LRO] Delete internal RADIUS server configuration",
+					"name": "[LRO] Delete Multiple internal RADIUS server configuration",
 					"event": [
 						{
 							"listen": "test",
@@ -15397,7 +15397,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/radius-servers/internal?ids={{radius_id}}",
+							"raw": "https://api.extremecloudiq.com/radius-servers/internal?ids={{radius_id}}&async=false",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -15417,8 +15417,7 @@
 								{
 									"key": "async",
 									"value": "false",
-									"description": "Whether to enable async mode",
-									"disabled": true
+									"description": "Whether to enable async mode"
 								}
 							]
 						}

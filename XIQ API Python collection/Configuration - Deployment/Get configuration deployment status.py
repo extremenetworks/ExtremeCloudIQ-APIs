@@ -1,8 +1,9 @@
 import requests
 
+device_id = 0
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/devices/config/deploy/status?deviceIds=***"
+url = f"https://api.extremecloudiq.com/devices/config/deploy/status?deviceIds={device_id}"
 
 payload={}
 headers = {

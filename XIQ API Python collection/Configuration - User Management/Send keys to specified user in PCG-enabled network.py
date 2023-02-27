@@ -1,7 +1,7 @@
 import requests
 import json
 
-np_id = 0
+np_id = 0  # Network Policy ID
 user_id = 0
 access_token = '***'
 

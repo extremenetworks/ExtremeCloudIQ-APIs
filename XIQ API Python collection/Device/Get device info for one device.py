@@ -3,7 +3,7 @@ import requests
 device_id = 0
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/devices/{device_id}"
+url = f"https://api.extremecloudiq.com/devices/{device_id}?views=FULL"
 
 payload={}
 headers = {

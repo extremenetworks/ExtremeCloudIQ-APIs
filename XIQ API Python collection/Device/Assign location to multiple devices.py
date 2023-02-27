@@ -3,7 +3,7 @@ import json
 
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/devices/location/"
+url = "https://api.extremecloudiq.com/devices/location/:assign"
 
 payload = json.dumps({
   "devices": {

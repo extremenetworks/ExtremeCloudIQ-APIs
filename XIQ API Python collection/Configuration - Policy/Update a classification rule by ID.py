@@ -1,7 +1,7 @@
 import requests
 import json
 
-class_id = 0
+class_id = 0 # Classification Rule ID
 access_token = '***'
 
 url = f"https://api.extremecloudiq.com/classification-rules/{class_id}"

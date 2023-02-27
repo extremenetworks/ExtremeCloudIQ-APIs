@@ -3,11 +3,11 @@ import json
 
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/devices/location/"
+url = "https://api.extremecloudiq.com/devices/location/:revoke"
 
 payload = json.dumps({
   "ids": [
-    0
+    0 # List of Device IDs to revoke location
   ]
 })
 headers = {

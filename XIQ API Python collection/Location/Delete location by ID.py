@@ -3,9 +3,9 @@ import requests
 loc_id = 0
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/locations/{loc_id}"
+url = f"https://api.extremecloudiq.com/locations/{loc_id}?force_delete=falses"
 
-payload = ""
+payload = {}
 headers = {
   'accept': 'application/json',
   'Authorization': 'Bearer ' + access_token

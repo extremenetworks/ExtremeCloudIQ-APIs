@@ -16,7 +16,7 @@ payload = json.dumps({
   "key_value2": "string",
   "key_value3": "string",
   "key_value4": "string",
-  "radius_server_group_id": 0
+  "radius_server_group_id": 0 # The RADIUS server group ID if using WEP_8021x as the key management
 })
 headers = {
   'accept': 'application/json',
