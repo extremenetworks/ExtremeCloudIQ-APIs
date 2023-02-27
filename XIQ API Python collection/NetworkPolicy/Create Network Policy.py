@@ -3,17 +3,12 @@ import json
 
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/devices/:cli"
+url = "https://api.extremecloudiq.com/network-policies"
 
 payload = json.dumps({
-  "devices": {
-    "ids": [
-      0
-    ]
-  },
-  "clis": [
-    "string"
-  ]
+  "name": "string",
+  "description": "string",
+  "type": "NETWORK_ACCESS_AND_SWITCHING"
 })
 headers = {
   'Authorization': 'Bearer ' + access_token,

@@ -2,12 +2,13 @@ import requests
 import json
 
 user_id = 0
+user_group_id = 0
 access_token = '***'
 
 url = f"https://api.extremecloudiq.com/endusers/{user_id}"
 
 payload = json.dumps({
-  "user_group_id": "987654321",
+  "user_group_id": user_group_id,
   "name": "MyName1",
   "user_name": "EnterNewOrUseSameAsEmailPhoneOrName",
   "description": "AShortDescription",

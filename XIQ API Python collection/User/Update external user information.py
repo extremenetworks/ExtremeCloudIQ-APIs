@@ -7,8 +7,7 @@ access_token = '***'
 url = f"https://api.extremecloudiq.com/users/external/{ex_user_id}"
 
 payload = json.dumps({
-  "user_role": "OPERATOR",
-  "enable_api_access": True
+  "user_role": "OPERATOR"
 })
 headers = {
   'Authorization': 'Bearer ' + access_token,
@@ -17,4 +16,4 @@ headers = {
 
 response = requests.request("PATCH", url, headers=headers, data=payload)
 
-print(response.text)
+print(response)

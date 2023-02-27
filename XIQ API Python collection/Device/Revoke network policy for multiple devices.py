@@ -3,11 +3,11 @@ import json
 
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/devices/network-policy/"
+url = "https://api.extremecloudiq.com/devices/network-policy/:revoke"
 
 payload = json.dumps({
   "ids": [
-    0
+    0 # List of Device IDs to revoke Network Policy
   ]
 })
 headers = {

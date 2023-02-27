@@ -1,10 +1,10 @@
 import requests
 import json
 
-group_id = 0
+user_group_id = 0
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/usergroups/{group_id}"
+url = f"https://api.extremecloudiq.com/usergroups/{user_group_id}"
 
 payload = json.dumps({
   "name": "string",

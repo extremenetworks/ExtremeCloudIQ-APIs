@@ -1,6 +1,6 @@
 import requests
 
-radius_id = 0
+radius_id = 0 # The ID of RADIUS client object
 access_token = '***'
 
 url =f"https://api.extremecloudiq.com/radius-client-objects/{radius_id}"

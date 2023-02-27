@@ -2,10 +2,10 @@ import requests
 import json
 
 access_token = '***'
+parent_id = 0
 
 url = "https://api.extremecloudiq.com/locations/building"
 
-parent_id = 0
 payload = json.dumps({
   "parent_id": str(parent_id),
   "name": "TheBuildingName",

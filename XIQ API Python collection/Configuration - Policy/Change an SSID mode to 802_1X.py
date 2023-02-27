@@ -11,9 +11,9 @@ payload = json.dumps({
   "encryption_method": "CCMP",
   "enable_idm": True,
   "transition_mode": True,
-  "radius_server_group_id": 0,
+  "radius_server_group_id": 0, # The RADIUS server group ID if not using ExtremeCloud IQ Authentication Service
   "user_group_ids": [
-    0
+    0 # The user group IDs if using ExtremeCloud IQ Authentication Service
   ]
 })
 headers = {

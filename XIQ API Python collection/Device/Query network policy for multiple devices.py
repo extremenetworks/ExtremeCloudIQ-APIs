@@ -3,11 +3,11 @@ import json
 
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/devices/network-policy/"
+url = "https://api.extremecloudiq.com/devices/network-policy/:query"
 
 payload = json.dumps({
   "ids": [
-    0
+    0 # List of Device IDs to collect Network Policies
   ]
 })
 headers = {

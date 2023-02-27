@@ -1,8 +1,9 @@
 import requests
 
+parent_id = 0
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/locations/tree?parentId=***&expandChildren=true"
+url = f"https://api.extremecloudiq.com/locations/tree?parentId={parent_id}&expandChildren=true"
  
 payload={}
 headers = {

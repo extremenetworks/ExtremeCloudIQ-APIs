@@ -7,7 +7,7 @@ url = "https://api.extremecloudiq.com/devices/:unmanage"
 
 payload = json.dumps({
   "ids": [
-    0
+    0 # List of Device IDs to change status
   ]
 })
 headers = {

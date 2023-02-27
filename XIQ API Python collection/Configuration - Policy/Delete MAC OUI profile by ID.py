@@ -1,9 +1,9 @@
 import requests
 
-int_radius_id = 0
+mac_oui_id = 0
 access_token = '***'
 
-url =f"https://api.extremecloudiq.com/radius-servers/external/{int_radius_id}"
+url = f"https://api.extremecloudiq.com/radio-profiles/mac-ouis/{mac_oui_id}"
 
 payload={}
 headers = {

@@ -9,7 +9,7 @@ url = f"https://api.extremecloudiq.com/devices/{device_id}/ssid/status/:change"
 
 payload = json.dumps({
   "ssid_ids": [
-    0
+    0 # IDs of SSIDs
   ],
   "if_names": [
     "WIFI0"

@@ -14,25 +14,25 @@ payload = json.dumps({
   "dead_time": 300,
   "enable_inject_operator_name_attribute": False,
   "device_ids": [
-    1
+    0 # List of Device IDs to assign RADIUS proxy
   ],
   "clients": [
     {
       "shared_secret": "123456",
       "description": "",
-      "l3_address_profile_id": 1000
+      "l3_address_profile_id": 1000 # The associate L3 address profile ID
     }
   ],
   "realms": [
     {
       "name": "NULL",
       "enable_strip_realm_name": False,
-      "radius_client_object_id": 2000
+      "radius_client_object_id": 2000 # The associate RADIUS client object ID
     },
     {
       "name": "DEFAULT",
       "enable_strip_realm_name": False,
-      "radius_client_object_id": 3000
+      "radius_client_object_id": 3000 # The associate RADIUS client object ID
     }
   ]
 })

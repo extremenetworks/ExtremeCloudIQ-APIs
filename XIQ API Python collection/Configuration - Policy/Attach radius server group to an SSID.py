@@ -6,7 +6,9 @@ access_token = '***'
 
 url = f"https://api.extremecloudiq.com/ssids/{ssid_id}/radius-server-group/:attach"
 
-payload = "***"
+payload = json.dumps(
+    0 # The radius server group ID to be attached to the SSID
+    )
 headers = {
   'accept': 'application/json',
   'Authorization': 'Bearer ' + access_token,

@@ -7,7 +7,7 @@ access_token = '***'
 url = f"https://api.extremecloudiq.com/devices/{device_id}/:cli"
 
 payload = json.dumps([
-  "string"
+  "CLI commands as string"
 ])
 headers = {
   'accept': 'Bearer ' + access_token

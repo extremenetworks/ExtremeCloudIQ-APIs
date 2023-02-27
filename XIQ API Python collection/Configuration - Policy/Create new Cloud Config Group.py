@@ -9,8 +9,7 @@ payload = json.dumps({
   "name": "NameOfCGG",
   "description": "Add New CCG",
   "device_ids": [
-    44238164,
-    45054207
+    0 # List of Device IDs to add to new CCG
   ]
 })
 headers = {

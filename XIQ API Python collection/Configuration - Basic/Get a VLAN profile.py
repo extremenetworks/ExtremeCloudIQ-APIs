@@ -1,6 +1,6 @@
 import requests
 
-vp_id = 0
+vp_id = 0 # VLAN Profile ID
 access_token = '***'
 
 url = f"https://api.extremecloudiq.com/vlan-profiles/{vp_id}"

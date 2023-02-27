@@ -17,7 +17,7 @@ payload = json.dumps({
     {
       "server_role": "PRIMARY",
       "server_type": "EXTERNAL_RADIUS_SERVER",
-      "radius_server_id": 0
+      "radius_server_id": 0 # The ID of the RADIUS server object, for EXTERNAL_RADIUS_SERVER please use the ID of external RADIUS server object. For INTERNAL_RADIUS_SERVER, please use the RADIUS device ID
     }
   ]
 })

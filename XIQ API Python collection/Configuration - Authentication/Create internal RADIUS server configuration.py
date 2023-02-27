@@ -3,7 +3,7 @@ import json
 
 access_token = '***'
 
-url ="https://api.extremecloudiq.com/radius-servers/external"
+url ="https://api.extremecloudiq.com/radius-servers/internal"
 
 payload = json.dumps({
   "name": "string",
@@ -31,23 +31,23 @@ payload = json.dumps({
     "external_user_directory_type": "OPEN_LDAP",
     "entries": [
       {
-        "default_server_id": 0,
+        "default_server_id": 0, # The default external user directory server id, could be active directory server id(get the id list from endpoint: '/ad-servers') or LDAP server id(get the id list from endpoint: '/ldap-servers') depends on the 'external_user_directory_type'
         "server_role": "PRIMARY"
       }
     ]
   },
-  "ca_certificate_id": 0,
-  "server_certificate_id": 0,
-  "server_key_id": 0,
+  "ca_certificate_id": 0, # The CA certificate ID, which could be fetched from endpoint: '/certificates' and pick up with type 'CA'
+  "server_certificate_id": 0, # The Server certificate ID, which could be fetched from endpoint: '/certificates' and pick up with type 'CERT'
+  "server_key_id": 0, # The Server key ID, which could be fetched from endpoint: '/certificates' and pick up with type 'KEY'
   "device_ids": [
-    0
+    0 # The list of device ID associated with the internal RADIUS server
   ],
   "clients": [
     {
-      "id": 0,
+      "id": 0, # The RADIUS client ID
       "shared_secret": "string",
       "description": "string",
-      "l3_address_profile_id": 0
+      "l3_address_profile_id": 0 # The associate L3 address profile ID
     }
   ]
 })

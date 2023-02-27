@@ -6,13 +6,13 @@ access_token = '***'
 url = "https://api.extremecloudiq.com/pcgs/key-based"
 
 payload = json.dumps({
-  "policy_name": "0",
-  "ssid_name": "0",
+  "policy_name": "string",
+  "ssid_name": "string",
   "users": [
     {
-      "name": "0",
-      "email": "0",
-      "user_group_name": "0"
+      "name": "string",
+      "email": "string",
+      "user_group_name": "string"
     }
   ]
 })

@@ -3,9 +3,9 @@ import requests
 building_id = 0
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/locations/building/{building_id}"
+url = f"https://api.extremecloudiq.com/locations/building/{building_id}?force_delete=false"
 
-payload = ""
+payload = {}
 headers = {
   'accept': 'application/json',
   'Authorization': 'Bearer ' + access_token

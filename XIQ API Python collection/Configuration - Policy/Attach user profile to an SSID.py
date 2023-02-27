@@ -6,7 +6,9 @@ access_token = '***'
 
 url = f"https://api.extremecloudiq.com/ssids/{ssid_id}/user-profile/:attach"
 
-payload = "***"
+payload = json.dumps(
+    0 # The user profile ID to be attached to the SSID
+    )
 headers = {
   'accept': 'application/json',
   'Authorization': 'Bearer ' + access_token,

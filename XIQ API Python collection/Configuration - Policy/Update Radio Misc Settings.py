@@ -1,12 +1,15 @@
 import requests
 import json
 
-ssid_id = 0
+radio_misc_id = 0 # The radio miscellaneous settings ID
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/ssids/{ssid_id}/psk/password"
+url = f"https://api.extremecloudiq.com/radio-profiles/miscellaneous/{radio_misc_id}"
 
-payload = "string"
+payload = json.dumps({
+  "sla_throughput_level": "string",
+  "radio_range": 10000
+})
 headers = {
   'accept': 'application/json',
   'Authorization': 'Bearer ' + access_token,

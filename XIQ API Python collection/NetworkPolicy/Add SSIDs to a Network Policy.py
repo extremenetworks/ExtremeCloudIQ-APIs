@@ -1,7 +1,7 @@
 import requests
 import json
 
-np_id = 0 
+np_id = 0 # Network Policy ID
 access_token = '***'
 
 url = f"https://api.extremecloudiq.com/network-policies/{np_id}/ssids/:add"
