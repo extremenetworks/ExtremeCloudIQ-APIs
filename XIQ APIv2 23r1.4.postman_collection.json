@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "b9b8e0ef-cdea-4b54-886e-b027df953a51",
-		"name": "XIQ APIv2 23r1",
+		"name": "XIQ APIv2 23r1.4",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4056946"
 	},
@@ -3456,7 +3456,7 @@
 								{
 									"key": "fields",
 									"value": "ID",
-									"description": "The device fields to return\n\nAvailable values : ID, CREATE_TIME, UPDATE_TIME, ORG_ID, SERIAL_NUMBER, SERVICE_TAG, MAC_ADDRESS, DEVICE_FUNCTION, PRODUCT_TYPE, HOSTNAME, IP_ADDRESS, SOFTWARE_VERSION, DEVICE_ADMIN_STATE, CONNECTED, LAST_CONNECT_TIME, NETWORK_POLICY_NAME, NETWORK_POLICY_ID, NTP_SERVER_ADDRESS, DNS_SERVER_ADDRESS, SUBNET_MASK, DEFAULT_GATEWAY, IPV6_ADDRESS, IPV6_NETMASK, SIMULATED, DISPLAY_VERSION, ACTIVE_CLIENTS, LOCATION_ID, LOCATIONS, DESCRIPTION, COUNTRY_CODE",
+									"description": "The device fields to return.\n[All available fields]: id, create_time, update_time, org_id, org_name, location_id, serial_number, mac_address, device_function, product_type, hostname, ip_address, software_version, device_admin_state, connected, last_connect_time, network_policy_name, network_policy_id, ntp_server_address, dns_server_address, subnet_mask, default_gateway, ipv6_address, ipv6_netmask, simulated, display_version, active_clients, locations, description, country_code, lldp_cdp_info",
 									"disabled": true
 								},
 								{
@@ -4719,6 +4719,149 @@
 								"devices",
 								"{{id}}",
 								"ibeacon"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get the device installation report",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes onboarded \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"onboarded\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/installation-report",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"installation-report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get the device WiFi interfaces stats",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes frequency \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"frequency\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"March 9, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"March 9, 2023 04:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/interfaces/wifi?startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"interfaces",
+								"wifi"
+							],
+							"query": [
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time for collecting the wifi interface stats, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time for collecting the wifi interface stats, epoch time in milliseconds since 1/1/1970"
+								}
 							]
 						}
 					},
@@ -6952,6 +7095,174 @@
 									"description": "The client fields to return\n\nAvailable values : ID, CREATE_TIME, UPDATE_TIME, ORG_ID, ORG_NAME, LOCATION_ID, LOCATIONS, HOSTNAME, MAC_ADDRESS, IP_ADDRESS, IPV6_ADDRESS, OS_TYPE, DEVICE_ID, DEVICE_FUNCTION, DEVICE_NAME, USERNAME, USER_PROFILE_NAME, CONNECTED, ONLINE_TIME, OFFLINE_TIME, VLAN, CONNECTION_TYPE, SSID, PORT, BSSID, PORT_TYPE_NAME, INTERFACE_NAME, AUTH, ENCRYPTION_METHOD, CHANNEL, CLIENT_HEALTH, APPLICATION_HEALTH, NETWORK_HEALTH, RADIO_HEALTH, HEALTH_UPDATE_TIME, RSSI, RSSI_UPDATE_TIME, SNR, SNR_UPDATE_TIME, RADIO_TYPE, WING_AP, VENDOR, MOBILITY, CATEGORY, DESCRIPTION, DEVICE_MAC_ADDRESS",
 									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Active Clients count",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/clients/active/count",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"clients",
+								"active",
+								"count"
+							],
+							"query": [
+								{
+									"key": "locationIds",
+									"value": "{{floor_id}}",
+									"description": "The Location IDs",
+									"disabled": true
+								},
+								{
+									"key": "deviceIds",
+									"value": "{{id}}",
+									"description": "the Device IDs",
+									"disabled": true
+								},
+								{
+									"key": "vlans",
+									"value": "200",
+									"description": "The associate vlan IDs",
+									"disabled": true
+								},
+								{
+									"key": "userProfileNames",
+									"value": "Profile Name",
+									"description": "The user profile names",
+									"disabled": true
+								},
+								{
+									"key": "ssids",
+									"value": "SSID Name",
+									"description": "The SSIDs",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disconnect the client by MAC",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/clients/byMac/{{client_mac}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"clients",
+								"byMac",
+								"{{client_mac}}"
 							]
 						}
 					},
