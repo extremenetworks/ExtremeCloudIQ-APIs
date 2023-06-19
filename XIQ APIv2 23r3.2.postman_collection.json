@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "b9b8e0ef-cdea-4b54-886e-b027df953a51",
-		"name": "XIQ APIv2 23r1.4",
+		"_postman_id": "6359cf98-16bb-4f6f-864b-f45bab4016d5",
+		"name": "XIQ APIv2 23r3.2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "4056946"
+		"_exporter_id": "4056946",
+		"_collection_link": "https://gold-escape-604608.postman.co/workspace/XIQ-Workflows---Github~7c6c76b6-b57f-4ebb-8d87-9786462c68e3/collection/4056946-6359cf98-16bb-4f6f-864b-f45bab4016d5?action=share&creator=4056946&source=collection_link"
 	},
 	"item": [
 		{
@@ -1241,7 +1242,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"login_name\": \"example1@company.com\",\n  \"display_name\": \"example1\",\n  \"idle_timeout\": \"30\",\n  \"user_role\": \"ADMINISTRATOR\"\n}",
+							"raw": "{\n  \"login_name\": \"example1@company.com\",\n  \"display_name\": \"example1\",\n  \"idle_timeout\": 30,\n  \"user_role\": \"ADMINISTRATOR\",\n  \"location_ids\": [\n    0\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1428,7 +1429,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"login_name\": \"newlogin1@company.com\",\n  \"display_name\": \"New Name1\",\n  \"idle_timeout\": \"30\",\n  \"user_role\": \"OBSERVER\"\n}",
+							"raw": "{\n  \"login_name\": \"newlogin1@company.com\",\n  \"display_name\": \"New Name1\",\n  \"idle_timeout\": \"30\",\n  \"user_role\": \"OBSERVER\",\n  \"location_ids\": [\n    0\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1571,7 +1572,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"login_name\": \"example1@company.com\",\n  \"user_role\": \"ADMINISTRATOR\",\n  \"org_id\":0\n}",
+							"raw": "{\n  \"login_name\": \"example1@company.com\",\n  \"user_role\": \"ADMINISTRATOR\",\n  \"org_id\":0,\n  \"location_ids\": [\n    0\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1757,7 +1758,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"user_role\": \"OPERATOR\"\n}",
+							"raw": "{\n  \"user_role\": \"OPERATOR\",\n  \"org_id\": 0,\n  \"location_ids\": [\n    0\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3456,7 +3457,7 @@
 								{
 									"key": "fields",
 									"value": "ID",
-									"description": "The device fields to return.\n[All available fields]: id, create_time, update_time, org_id, org_name, location_id, serial_number, mac_address, device_function, product_type, hostname, ip_address, software_version, device_admin_state, connected, last_connect_time, network_policy_name, network_policy_id, ntp_server_address, dns_server_address, subnet_mask, default_gateway, ipv6_address, ipv6_netmask, simulated, display_version, active_clients, locations, description, country_code, lldp_cdp_info",
+									"description": "The device fields to return.\n[All available fields]: ID, CREATE_TIME, UPDATE_TIME, ORG_ID, SERIAL_NUMBER, SERVICE_TAG, MAC_ADDRESS, DEVICE_FUNCTION, PRODUCT_TYPE, HOSTNAME, IP_ADDRESS, SOFTWARE_VERSION, DEVICE_ADMIN_STATE, CONNECTED, LAST_CONNECT_TIME, NETWORK_POLICY_NAME, NETWORK_POLICY_ID, NTP_SERVER_ADDRESS, DNS_SERVER_ADDRESS, SUBNET_MASK, DEFAULT_GATEWAY, IPV6_ADDRESS, IPV6_NETMASK, SIMULATED, DISPLAY_VERSION, ACTIVE_CLIENTS, LOCATION_ID, LOCATIONS, DESCRIPTION, COUNTRY_CODE, LLDP_CDP_INFO",
 									"disabled": true
 								},
 								{
@@ -3469,6 +3470,12 @@
 									"key": "async",
 									"value": "true",
 									"description": "Whether to enable async mode\n\nDefault value : false",
+									"disabled": true
+								},
+								{
+									"key": "nullField",
+									"value": "LOCATION_ID",
+									"description": "The device empty field, only returns the selected field that is null\n\nAvailable values : LOCATION_ID, NETWORK_POLICY_ID",
 									"disabled": true
 								}
 							]
@@ -4445,6 +4452,82 @@
 									"value": "{{myEndTime}}",
 									"description": "The end time for query alarm"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bounce port of a device (EXOS, VOSS, and SR Switches)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"data\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"device_id\": {{id}},\n  \"port_number\": \"6\",\n  \"bounce_port_reason\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/bounce-port",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"bounce-port"
 							]
 						}
 					},
@@ -5480,6 +5563,90 @@
 					"response": []
 				},
 				{
+					"name": "List Digital Twin Product information",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful DEL request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"page\");",
+									"    console.log(pm.test)",
+									"    ",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/digital-twin",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"digital-twin"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1\n\nDefault value : 1",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100\n\nDefault value : 10",
+									"disabled": true
+								},
+								{
+									"key": "makes",
+									"value": null,
+									"description": "List by makes or any with null/empty makes.\n\nAvailable values : SWITCH_ENGINE, FABRIC_ENGINE",
+									"disabled": true
+								},
+								{
+									"key": "models",
+									"value": null,
+									"description": "List by makes or any with null/empty models.\n\nAvailable values : DT_5320_16P_4XE, DT_5320_16P_4XE_DC, DT_5320_24P_8XE, DT_5320_24T_8XE, DT_5320_48P_8XE, DT_5320_48T_8XE, DT_5420F_16MW_32P_4XE, DT_5420F_16W_32P_4XE, DT_5420F_24P_4XE, DT_5420F_24S_4XE, DT_5420F_24T_4XE, DT_5420F_48P_4XE, DT_5420F_48P_4XL, DT_5420F_48T_4XE, DT_5420F_8W_16P_4XE, DT_5420M_16MW_32P_4YE, DT_5420M_24T_4YE, DT_5420M_24W_4YE, DT_5420M_48T_4YE, DT_5420M_48W_4YE, DT_5520_12MW_36W, DT_5520_24T, DT_5520_24W, DT_5520_24X, DT_5520_48SE, DT_5520_48T, DT_5520_48W, DT_5720_24MW, DT_5720_24MXW, DT_5720_48MW, DT_5720_48MXW",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Change iBeacon settings for devices",
 					"event": [
 						{
@@ -6137,7 +6304,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/devices/radius=proxy/:assign?ids={{id}}&radiusProxyId={{radius_proxy_id}}",
+							"raw": "https://api.extremecloudiq.com/devices/radius-proxy/:assign?ids={{id}}&radiusProxyId={{radius_proxy_id}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -6146,7 +6313,7 @@
 							],
 							"path": [
 								"devices",
-								"radius=proxy",
+								"radius-proxy",
 								":assign"
 							],
 							"query": [
@@ -6213,7 +6380,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/devices/radius=proxy/:revoke?ids={{id}}",
+							"raw": "https://api.extremecloudiq.com/devices/radius-proxy/:revoke?ids={{id}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -6222,7 +6389,7 @@
 							],
 							"path": [
 								"devices",
-								"radius=proxy",
+								"radius-proxy",
 								":revoke"
 							],
 							"query": [
@@ -11392,7 +11559,7 @@
 								}
 							]
 						},
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "accept",
@@ -14953,7 +15120,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/radius-client-objects",
+							"raw": "https://api.extremecloudiq.com/radius-proxies",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -14961,7 +15128,7 @@
 								"com"
 							],
 							"path": [
-								"radius-client-objects"
+								"radius-proxies"
 							]
 						}
 					},
@@ -15009,7 +15176,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/radius-client-objects/{{radius_proxy_id}}",
+							"raw": "https://api.extremecloudiq.com/radius-proxies/{{radius_proxy_id}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -15017,7 +15184,7 @@
 								"com"
 							],
 							"path": [
-								"radius-client-objects",
+								"radius-proxies",
 								"{{radius_proxy_id}}"
 							]
 						}
@@ -15075,7 +15242,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/radius-client-objects/{{radius_proxy_id}}",
+							"raw": "https://api.extremecloudiq.com/radius-proxies/{{radius_proxy_id}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -15083,7 +15250,7 @@
 								"com"
 							],
 							"path": [
-								"radius-client-objects",
+								"radius-proxies",
 								"{{radius_proxy_id}}"
 							]
 						}
@@ -15128,7 +15295,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/radius-client-objects/{{radius_proxy_id}}",
+							"raw": "https://api.extremecloudiq.com/radius-proxies/{{radius_proxy_id}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -15136,7 +15303,7 @@
 								"com"
 							],
 							"path": [
-								"radius-client-objects",
+								"radius-proxies",
 								"{{radius_proxy_id}}"
 							]
 						}
@@ -15844,7 +16011,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/radius-servers/external/{{int_radius_id}}",
+							"raw": "https://api.extremecloudiq.com/radius-servers/internal/{{int_radius_id}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -15853,7 +16020,7 @@
 							],
 							"path": [
 								"radius-servers",
-								"external",
+								"internal",
 								"{{int_radius_id}}"
 							]
 						}
@@ -15898,7 +16065,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/radius-servers/external/{{int_radius_id}}",
+							"raw": "https://api.extremecloudiq.com/radius-servers/internal/{{int_radius_id}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -15907,7 +16074,7 @@
 							],
 							"path": [
 								"radius-servers",
-								"external",
+								"internal",
 								"{{int_radius_id}}"
 							]
 						}
@@ -17317,22 +17484,171 @@
 			"name": "Copilot - Anomalies",
 			"item": [
 				{
+					"name": "Copilot Anomalies Adverse-traffic device stats",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"summary\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/adverse-traffic/device-stats?anomalyId={{anomaly_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"adverse-traffic",
+								"device-stats"
+							],
+							"query": [
+								{
+									"key": "anomalyId",
+									"value": "{{anomaly_id}}",
+									"description": "string"
+								},
+								{
+									"key": "locationId",
+									"value": "0",
+									"description": "The location id\n\nDefault value : 0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Anomalies Adverse-traffic packet counts",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"summary\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/adverse-traffic/packet-counts?anomalyId={{anomaly_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"adverse-traffic",
+								"packet-counts"
+							],
+							"query": [
+								{
+									"key": "anomalyId",
+									"value": "{{anomaly_id}}",
+									"description": "string"
+								},
+								{
+									"key": "locationId",
+									"value": "0",
+									"description": "The location id\n\nDefault value : 0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Copilot Anomalies Devices by Location",
 					"event": [
 						{
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"//enter the number of Top clients to return",
-									"var count = 5; //The count number to be added to URL",
 									"//enter start and end times",
 									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"count\", count);"
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
 								"type": "text/javascript"
 							}
@@ -17401,22 +17717,171 @@
 					"response": []
 				},
 				{
+					"name": "Copilot Anomalies DFS recurrence channel stats",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"summary\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/dfs-recurrence/channel-stats?anomalyId={{anomaly_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"dfs-recurrence",
+								"channel-stats"
+							],
+							"query": [
+								{
+									"key": "anomalyId",
+									"value": "{{anomaly_id}}",
+									"description": "string"
+								},
+								{
+									"key": "locationId",
+									"value": "0",
+									"description": "The location id\n\nDefault value : 0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Anomalies DFS recurrence count stats",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"summary\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/dfs-recurrence/count-stats?anomalyId={{anomaly_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"dfs-recurrence",
+								"count-stats"
+							],
+							"query": [
+								{
+									"key": "anomalyId",
+									"value": "{{anomaly_id}}",
+									"description": "string"
+								},
+								{
+									"key": "locationId",
+									"value": "0",
+									"description": "The location id\n\nDefault value : 0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Copilot Anomalies Locations",
 					"event": [
 						{
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"//enter the number of Top clients to return",
-									"var count = 5; //The count number to be added to URL",
 									"//enter start and end times",
 									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"count\", count);"
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
 								"type": "text/javascript"
 							}
@@ -17513,16 +17978,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"//enter the number of Top clients to return",
-									"var count = 5; //The count number to be added to URL",
-									"//enter start and end times",
-									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
-									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
-									"",
-									"//Set in Environment",
-									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"count\", count);"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -17561,7 +18017,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/copilot/anomalies/poeflapping/stats?anomalyId=string",
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/poeflapping/stats?anomalyId={{anomaly_id}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -17577,7 +18033,7 @@
 							"query": [
 								{
 									"key": "anomalyId",
-									"value": "string",
+									"value": "{{anomaly_id}}",
 									"description": "The anomaly id"
 								},
 								{
@@ -17586,6 +18042,530 @@
 									"description": "The location id\n\nDefault value : 0",
 									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Anomalies port efficiency speed duplex stats",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"speed_duplex_entities\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/port-efficiency/speed-duplex-stats?anomalyId={{anomaly_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"port-efficiency",
+								"speed-duplex-stats"
+							],
+							"query": [
+								{
+									"key": "anomalyId",
+									"value": "{{anomaly_id}}",
+									"description": "The anomaly id"
+								},
+								{
+									"key": "locationId",
+									"value": "0",
+									"description": "The location id\n\nDefault value : 0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Anomalies port efficiency stats",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"duplex_data_rate_entities\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/port-efficiency/stats?anomalyId={{anomaly_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"port-efficiency",
+								"stats"
+							],
+							"query": [
+								{
+									"key": "anomalyId",
+									"value": "{{anomaly_id}}",
+									"description": "The anomaly id"
+								},
+								{
+									"key": "locationId",
+									"value": "0",
+									"description": "The location id\n\nDefault value : 0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Anomalies WiFi Capacity client list",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter start and end times",
+									"var Epoch = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myEpoch\", Epoch.getTime()); // myEpoch is used in Params of call - This is EPOCH time in milliseconds",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"client_wifi_stats\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/wifi-capacity/client-list?deviceId={{id}}&channel=1&timestamp={{myEpoch}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"wifi-capacity",
+								"client-list"
+							],
+							"query": [
+								{
+									"key": "deviceId",
+									"value": "{{id}}",
+									"description": "The device id"
+								},
+								{
+									"key": "channel",
+									"value": "1",
+									"description": "The channel"
+								},
+								{
+									"key": "timestamp",
+									"value": "{{myEpoch}}",
+									"description": "The Timestamp"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Anomalies WiFi Capacity stats",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"client_wifi_stats\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/wifi-capacity/stats?anomalyId={{anomaly_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"wifi-capacity",
+								"stats"
+							],
+							"query": [
+								{
+									"key": "anomalyId",
+									"value": "{{anomaly_id}}",
+									"description": "The anomaly id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Anomalies WiFi Efficiency Client List",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter start and end times",
+									"var Epoch = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myEpoch\", Epoch.getTime()); // myEpoch is used in Params of call - This is EPOCH time in milliseconds",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"client_stats_entities\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/wifi-efficiency/client-list?deviceId={{id}}&channel=1&timestamp={{myEpoch}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"wifi-efficiency",
+								"client-list"
+							],
+							"query": [
+								{
+									"key": "deviceId",
+									"value": "{{id}}",
+									"description": "The device id"
+								},
+								{
+									"key": "channel",
+									"value": "1",
+									"description": "The channel"
+								},
+								{
+									"key": "timestamp",
+									"value": "{{myEpoch}}",
+									"description": "The Timestamp"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Anomalies WiFi Efficiency stats",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"sessions_data\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/wifi-efficiency/stats?anomalyId={{anomaly_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"wifi-efficiency",
+								"stats"
+							],
+							"query": [
+								{
+									"key": "anomalyId",
+									"value": "{{anomaly_id}}",
+									"description": "The anomaly id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Assurance Scans Overview",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"anomalies_count_vos\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/assurance-scans/overview",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"assurance-scans",
+								"overview"
 							]
 						}
 					},
