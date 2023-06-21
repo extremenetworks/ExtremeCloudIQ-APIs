@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "6359cf98-16bb-4f6f-864b-f45bab4016d5",
-		"name": "XIQ APIv2 23r3.2",
+		"_postman_id": "df221e58-b8c4-486c-8fb6-903bf49bb7a4",
+		"name": "XIQ APIv2 23r3.3",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4056946",
-		"_collection_link": "https://gold-escape-604608.postman.co/workspace/XIQ-Workflows---Github~7c6c76b6-b57f-4ebb-8d87-9786462c68e3/collection/4056946-6359cf98-16bb-4f6f-864b-f45bab4016d5?action=share&creator=4056946&source=collection_link"
+		"_collection_link": "https://gold-escape-604608.postman.co/workspace/XIQ-Workflows---Github~7c6c76b6-b57f-4ebb-8d87-9786462c68e3/collection/4056946-df221e58-b8c4-486c-8fb6-903bf49bb7a4?action=share&creator=4056946&source=collection_link"
 	},
 	"item": [
 		{
@@ -3467,9 +3467,9 @@
 									"disabled": true
 								},
 								{
-									"key": "async",
-									"value": "true",
-									"description": "Whether to enable async mode\n\nDefault value : false",
+									"key": "locationIds",
+									"value": "[{{floor_id}}]",
+									"description": "array[integer]\nThe location IDs",
 									"disabled": true
 								},
 								{
@@ -3477,6 +3477,95 @@
 									"value": "LOCATION_ID",
 									"description": "The device empty field, only returns the selected field that is null\n\nAvailable values : LOCATION_ID, NETWORK_POLICY_ID",
 									"disabled": true
+								},
+								{
+									"key": "async",
+									"value": "false",
+									"description": "Whether to enable async mode\n\nDefault value : false",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Advanced Onboard Devices [LRO]",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"success_devices\"|\"failure_devices\");",
+									"    console.log(pm.test)",
+									"});",
+									"pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(5000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"extreme\": [\n    {\n      \"serial_number\": \"string\",\n      \"location\": {\n        \"location_id\": 0,\n        \"x\": 0,\n        \"y\": 0,\n        \"latitude\": 0,\n        \"longitude\": 0\n      },\n      \"network_policy_id\": 0,\n      \"hostname\": \"string\"\n    }\n  ],\n  \"exos\": [\n    {\n      \"serial_number\": \"string\",\n      \"location\": {\n        \"location_id\": 0,\n        \"x\": 0,\n        \"y\": 0,\n        \"latitude\": 0,\n        \"longitude\": 0\n      },\n      \"network_policy_id\": 0,\n      \"hostname\": \"string\"\n    }\n  ],\n  \"voss\": [\n    {\n      \"serial_number\": \"string\",\n      \"location\": {\n        \"location_id\": 0,\n        \"x\": 0,\n        \"y\": 0,\n        \"latitude\": 0,\n        \"longitude\": 0\n      },\n      \"network_policy_id\": 0,\n      \"hostname\": \"string\"\n    }\n  ],\n  \"wing\": [\n    {\n      \"serial_number\": \"string\",\n      \"mac_address\": \"string\",\n      \"location\": {\n        \"location_id\": 0,\n        \"x\": 0,\n        \"y\": 0,\n        \"latitude\": 0,\n        \"longitude\": 0\n      },\n      \"network_policy_id\": 0,\n      \"hostname\": \"string\"\n    }\n  ],\n  \"dell\": [\n    {\n      \"serial_number\": \"string\",\n      \"service_tag\": \"string\",\n      \"location\": {\n        \"location_id\": 0,\n        \"x\": 0,\n        \"y\": 0,\n        \"latitude\": 0,\n        \"longitude\": 0\n      },\n      \"network_policy_id\": 0,\n      \"hostname\": \"string\"\n    }\n  ],\n  \"dt\": [\n    {\n      \"digital_twin_device\": {\n        \"make\": \"SWITCH_ENGINE\",\n        \"model\": \"DT_5320_16P_4XE\",\n        \"os_type\": \"string\",\n        \"os_version\": \"string\",\n        \"vim_modules\": [\n          \"DT_5520_VIM_4X\"\n        ],\n        \"feat_licenses\": [\n          \"PRD_5000_PRMR\"\n        ]\n      },\n      \"location\": {\n        \"location_id\": 0,\n        \"x\": 0,\n        \"y\": 0,\n        \"latitude\": 0,\n        \"longitude\": 0\n      },\n      \"network_policy_id\": 0,\n      \"hostname\": \"string\"\n    }\n  ],\n  \"unmanaged\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/:advanced-onboard",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								":advanced-onboard"
+							],
+							"query": [
+								{
+									"key": "async",
+									"value": "false",
+									"description": "Whether to enable async mode\n\nDefault value : false",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "advanced-onboard",
+									"value": null
 								}
 							]
 						}
@@ -5605,7 +5694,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/devices/digital-twin",
+							"raw": "https://api.extremecloudiq.com/devices/digital-twin?page=1&limit=10",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -5620,24 +5709,22 @@
 								{
 									"key": "page",
 									"value": "1",
-									"description": "Page number, min = 1\n\nDefault value : 1",
-									"disabled": true
+									"description": "Page number, min = 1\n\nDefault value : 1"
 								},
 								{
 									"key": "limit",
 									"value": "10",
-									"description": "Page Size, min = 1, max = 100\n\nDefault value : 10",
-									"disabled": true
+									"description": "Page Size, min = 1, max = 100\n\nDefault value : 10"
 								},
 								{
 									"key": "makes",
-									"value": null,
+									"value": "",
 									"description": "List by makes or any with null/empty makes.\n\nAvailable values : SWITCH_ENGINE, FABRIC_ENGINE",
 									"disabled": true
 								},
 								{
 									"key": "models",
-									"value": null,
+									"value": "",
 									"description": "List by makes or any with null/empty models.\n\nAvailable values : DT_5320_16P_4XE, DT_5320_16P_4XE_DC, DT_5320_24P_8XE, DT_5320_24T_8XE, DT_5320_48P_8XE, DT_5320_48T_8XE, DT_5420F_16MW_32P_4XE, DT_5420F_16W_32P_4XE, DT_5420F_24P_4XE, DT_5420F_24S_4XE, DT_5420F_24T_4XE, DT_5420F_48P_4XE, DT_5420F_48P_4XL, DT_5420F_48T_4XE, DT_5420F_8W_16P_4XE, DT_5420M_16MW_32P_4YE, DT_5420M_24T_4YE, DT_5420M_24W_4YE, DT_5420M_48T_4YE, DT_5420M_48W_4YE, DT_5520_12MW_36W, DT_5520_24T, DT_5520_24W, DT_5520_24X, DT_5520_48SE, DT_5520_48T, DT_5520_48W, DT_5720_24MW, DT_5720_24MXW, DT_5720_48MW, DT_5720_48MXW",
 									"disabled": true
 								}
@@ -7242,6 +7329,36 @@
 									"disabled": true
 								},
 								{
+									"key": "clientOsNames",
+									"value": null,
+									"description": "The client os names",
+									"disabled": true
+								},
+								{
+									"key": "clientConnectionTypes",
+									"value": "WIRELESS",
+									"description": "The client connection types: 1 - WIRELESS, 2 - WIRED, -1 - UNDETERMINED",
+									"disabled": true
+								},
+								{
+									"key": "clientHealthStatus",
+									"value": "POOR",
+									"description": "The client health status: 1 - HEALTHY, 2 - POOR",
+									"disabled": true
+								},
+								{
+									"key": "excludeLocallyManaged",
+									"value": "false",
+									"description": "Default value : false\nReturn Cloud managed Devices' clients",
+									"disabled": true
+								},
+								{
+									"key": "searchString",
+									"value": null,
+									"description": "The search string",
+									"disabled": true
+								},
+								{
 									"key": "page",
 									"value": "1",
 									"description": "Page number, min = 1 \nDefault value : 1"
@@ -7250,6 +7367,18 @@
 									"key": "limit",
 									"value": "10",
 									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
+								},
+								{
+									"key": "sortField",
+									"value": null,
+									"description": "Available values : AUTH_METHOD, CHANNEL, CONNECTED_VIA, CONNECTION_TYPE, DEVICE_NAME, HOST_NAME, IPV4, IPV6, MAC, NAC_DETAILS, NAC_PROFILE, OS_TYPE, REPORTED_BY, START_TIME, USER_NAME, USER_PROFILE, VLAN",
+									"disabled": true
+								},
+								{
+									"key": "sortOrder",
+									"value": "ASC",
+									"description": "Sort order (ascending by default)\n\nAvailable values : ASC, DESC",
+									"disabled": true
 								},
 								{
 									"key": "views",
@@ -7360,6 +7489,36 @@
 									"key": "ssids",
 									"value": "SSID Name",
 									"description": "The SSIDs",
+									"disabled": true
+								},
+								{
+									"key": "clientOsNames",
+									"value": null,
+									"description": "The client os names",
+									"disabled": true
+								},
+								{
+									"key": "clientConnectionTypes",
+									"value": "WIRELESS",
+									"description": "The client connection types: 1 - WIRELESS, 2 - WIRED, -1 - UNDETERMINED",
+									"disabled": true
+								},
+								{
+									"key": "clientHealthStatus",
+									"value": "POOR",
+									"description": "The client health status: 1 - HEALTHY, 2 - POOR",
+									"disabled": true
+								},
+								{
+									"key": "excludeLocallyManaged",
+									"value": "false",
+									"description": "Default value : false\nReturn Cloud managed Devices' clients count",
+									"disabled": true
+								},
+								{
+									"key": "searchString",
+									"value": null,
+									"description": "The search string",
 									"disabled": true
 								}
 							]
@@ -7531,6 +7690,30 @@
 									"key": "ssids",
 									"value": "SSID Name",
 									"description": "The SSIDs",
+									"disabled": true
+								},
+								{
+									"key": "clientOsNames",
+									"value": null,
+									"description": "The client os names",
+									"disabled": true
+								},
+								{
+									"key": "clientHealthStatus",
+									"value": "POOR",
+									"description": "The client health status: 1 - HEALTHY, 2 - POOR",
+									"disabled": true
+								},
+								{
+									"key": "excludeLocallyManaged",
+									"value": "false",
+									"description": "Default value : false\nReturn Cloud managed Devices' clients count",
+									"disabled": true
+								},
+								{
+									"key": "searchString",
+									"value": null,
+									"description": "The search string",
 									"disabled": true
 								}
 							]
@@ -8273,7 +8456,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/logs/audit?page=1&limit=10",
+							"raw": "https://api.extremecloudiq.com/logs/audit?page=1&limit=10&startTime={{myStartTime}}&endTime={{myEndTime}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -8296,6 +8479,18 @@
 									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								},
 								{
+									"key": "sortField",
+									"value": "TIMESTAMP",
+									"description": "The field for sorting\n\nAvailable values : TIMESTAMP",
+									"disabled": true
+								},
+								{
+									"key": "sortOrder",
+									"value": "ASC",
+									"description": "The sorting order\n\nAvailable values : ASC, DESC",
+									"disabled": true
+								},
+								{
 									"key": "category",
 									"value": "ADMIN",
 									"description": "Audit category\n\nAvailable values : ADMIN, SYSTEM, DEPLOYMENT, CONFIG, MONITOR, ALARM",
@@ -8310,13 +8505,17 @@
 								{
 									"key": "startTime",
 									"value": "{{myStartTime}}",
-									"description": "The start time to query, epoch time in milliseconds since 1/1/1970, default is 0 if not specified or is negative",
-									"disabled": true
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
 								},
 								{
 									"key": "endTime",
 									"value": "{{myEndTime}}",
-									"description": "The end time to query, epoch time in milliseconds since 1/1/1970, default is now if not specified or is negative",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970. Note: endTime - startTime must be no greater than 2592000000 (30 days)"
+								},
+								{
+									"key": "keyword",
+									"value": null,
+									"description": "The case-insensitive keyword to search in description",
 									"disabled": true
 								}
 							]
@@ -16237,16 +16436,13 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"//enter the number of Top clients to return",
-									"var count = 5; //The count number to be added to URL",
 									"//enter start and end times",
 									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"count\", count);"
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
 								"type": "text/javascript"
 							}
@@ -16355,13 +16551,13 @@
 								{
 									"key": "searchKey",
 									"value": "",
-									"description": "The selected search key",
+									"description": "The selected search key\n\nDefault value :",
 									"disabled": true
 								},
 								{
 									"key": "locationType",
 									"value": "BUILDING",
-									"description": "The selected location type",
+									"description": "The selected location type\n\nDefault value :",
 									"disabled": true
 								},
 								{
@@ -16387,16 +16583,13 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"//enter the number of Top clients to return",
-									"var count = 5; //The count number to be added to URL",
 									"//enter start and end times",
 									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"count\", count);"
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
 								"type": "text/javascript"
 							}
@@ -16498,16 +16691,13 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"//enter the number of Top clients to return",
-									"var count = 5; //The count number to be added to URL",
 									"//enter start and end times",
 									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"count\", count);"
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
 								"type": "text/javascript"
 							}
@@ -16598,16 +16788,13 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"//enter the number of Top clients to return",
-									"var count = 5; //The count number to be added to URL",
 									"//enter start and end times",
 									"var startTime = new Date(\"Feb 15, 2023 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"count\", count);"
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
 								"type": "text/javascript"
 							}
@@ -16698,16 +16885,13 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"//enter the number of Top clients to return",
-									"var count = 5; //The count number to be added to URL",
 									"//enter start and end times",
 									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"count\", count);"
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
 								"type": "text/javascript"
 							}
@@ -16810,16 +16994,13 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"//enter the number of Top clients to return",
-									"var count = 5; //The count number to be added to URL",
 									"//enter start and end times",
 									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"count\", count);"
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
 								"type": "text/javascript"
 							}
@@ -16858,7 +17039,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/events?viewType=LOCATION&startTime={{myStartTime}}&endTime={{myEndTime}}&page=1&limit=10&scoreType=TIME_TO_AUTHENTICATE",
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/events?viewType=LOCATION&page=1&limit=10&startTime={{myStartTime}}&endTime={{myEndTime}}&scoreType=TIME_TO_AUTHENTICATE",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -16878,16 +17059,6 @@
 									"description": "The type of View\nAvailable values : LOCATION, SSID, OS"
 								},
 								{
-									"key": "startTime",
-									"value": "{{myStartTime}}",
-									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
-								},
-								{
-									"key": "endTime",
-									"value": "{{myEndTime}}",
-									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
-								},
-								{
 									"key": "page",
 									"value": "1",
 									"description": "Page number, min = 1 \nDefault value : 1"
@@ -16898,9 +17069,19 @@
 									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
 								},
 								{
-									"key": "sortBy",
-									"value": "INTERFACE_ERRORS",
-									"description": "The sort field\nAvailable values : INTERFACE_ERRORS",
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "sortField",
+									"value": "AVERAGE_VALUE",
+									"description": "the sort field\n\nAvailable values : AVERAGE_VALUE, AVG_RX_RETRY, AVG_TX_RETRY",
 									"disabled": true
 								},
 								{
@@ -16933,15 +17114,15 @@
 									"disabled": true
 								},
 								{
-									"key": "locationType",
-									"value": "BUILDING",
-									"description": "The selected location type",
-									"disabled": true
-								},
-								{
 									"key": "locationId",
 									"value": "{{loc_id}}",
 									"description": "The selected location id",
+									"disabled": true
+								},
+								{
+									"key": "locationType",
+									"value": "BUILDING",
+									"description": "The selected location type",
 									"disabled": true
 								},
 								{
@@ -16962,16 +17143,13 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"//enter the number of Top clients to return",
-									"var count = 5; //The count number to be added to URL",
 									"//enter start and end times",
 									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"count\", count);"
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
 								"type": "text/javascript"
 							}
@@ -17073,16 +17251,13 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"//enter the number of Top clients to return",
-									"var count = 5; //The count number to be added to URL",
 									"//enter start and end times",
 									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"count\", count);"
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
 								"type": "text/javascript"
 							}
@@ -17184,16 +17359,13 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"//enter the number of Top clients to return",
-									"var count = 5; //The count number to be added to URL",
 									"//enter start and end times",
 									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"count\", count);"
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
 								"type": "text/javascript"
 							}
@@ -17296,16 +17468,13 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"//enter the number of Top clients to return",
-									"var count = 5; //The count number to be added to URL",
 									"//enter start and end times",
 									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"count\", count);"
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
 								"type": "text/javascript"
 							}
@@ -17344,7 +17513,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/time-to-connect?viewType=LOCATION&startTime={{myStartTime}}&endTime={{myEndTime}}&viewId=0&forensicBucket=TWENTY_FOUR_HOURS",
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/time-to-connect?viewType=LOCATION&startTime={{myStartTime}}&endTime={{myEndTime}}&viewId=0",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -17381,7 +17550,8 @@
 								{
 									"key": "forensicBucket",
 									"value": "TWENTY_FOUR_HOURS",
-									"description": "The selected time bucket\nAvailable values : TWENTY_FOUR_HOURS, ONE_HOUR, TODAY, ONE_WEEK, SEVEN_DAYS, THIRTY_DAYS, NINETY_DAYS"
+									"description": "The selected time bucket\nAvailable values : TWENTY_FOUR_HOURS, ONE_HOUR, TODAY, ONE_WEEK, SEVEN_DAYS, THIRTY_DAYS, NINETY_DAYS",
+									"disabled": true
 								},
 								{
 									"key": "locationId",
@@ -17406,16 +17576,13 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"//enter the number of Top clients to return",
-									"var count = 5; //The count number to be added to URL",
 									"//enter start and end times",
 									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"count\", count);"
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
 								"type": "text/javascript"
 							}
@@ -17550,7 +17717,7 @@
 								},
 								{
 									"key": "locationId",
-									"value": "0",
+									"value": "{{loc_id}}",
 									"description": "The location id\n\nDefault value : 0",
 									"disabled": true
 								}
@@ -17626,7 +17793,7 @@
 								},
 								{
 									"key": "locationId",
-									"value": "0",
+									"value": "{{loc_id}}",
 									"description": "The location id\n\nDefault value : 0",
 									"disabled": true
 								}
@@ -17703,11 +17870,11 @@
 								{
 									"key": "anomalyType",
 									"value": "POE_FLAPPING",
-									"description": "Anomaly type\n\nAvailable values : POE_FLAPPING, DFS_RECURRENCE, MULTI_BROADCAST, UPLINK_EFFICIENCY, WIFI_CAPACITY, WIFI_EFFICIENCY"
+									"description": "Anomaly type\n\nAvailable values : POE_FLAPPING, DFS_RECURRENCE, ADVERSE_TRAFFIC, PORT_EFFICIENCY, WIFI_CAPACITY, WIFI_EFFICIENCY"
 								},
 								{
 									"key": "locationId",
-									"value": "0",
+									"value": "{{loc_id}}",
 									"description": "The location id\n\nDefault value : 0",
 									"disabled": true
 								}
@@ -17783,7 +17950,7 @@
 								},
 								{
 									"key": "locationId",
-									"value": "0",
+									"value": "{{loc_id}}",
 									"description": "The location id\n\nDefault value : 0",
 									"disabled": true
 								}
@@ -17859,7 +18026,7 @@
 								},
 								{
 									"key": "locationId",
-									"value": "0",
+									"value": "{{loc_id}}",
 									"description": "The location id\n\nDefault value : 0",
 									"disabled": true
 								}
@@ -17875,13 +18042,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"//enter start and end times",
-									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
-									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
-									"",
-									"//Set in Environment",
-									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -17920,7 +18081,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/copilot/anomalies/locations?anomalyType=POE_FLAPPING&page=1&limit=10",
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/locations?anomalyType=WIFI_CAPACITY&page=1&limit=10",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -17935,8 +18096,8 @@
 							"query": [
 								{
 									"key": "anomalyType",
-									"value": "POE_FLAPPING",
-									"description": "Anomaly type\n\nAvailable values : POE_FLAPPING, DFS_RECURRENCE, MULTI_BROADCAST, UPLINK_EFFICIENCY, WIFI_CAPACITY, WIFI_EFFICIENCY"
+									"value": "WIFI_CAPACITY",
+									"description": "Anomaly type\n\nAvailable values : POE_FLAPPING, DFS_RECURRENCE, ADVERSE_TRAFFIC, PORT_EFFICIENCY, WIFI_CAPACITY, WIFI_EFFICIENCY"
 								},
 								{
 									"key": "page",
@@ -18038,7 +18199,7 @@
 								},
 								{
 									"key": "locationId",
-									"value": "0",
+									"value": "{{loc_id}}",
 									"description": "The location id\n\nDefault value : 0",
 									"disabled": true
 								}
@@ -18114,7 +18275,7 @@
 								},
 								{
 									"key": "locationId",
-									"value": "0",
+									"value": "{{loc_id}}",
 									"description": "The location id\n\nDefault value : 0",
 									"disabled": true
 								}
@@ -18190,7 +18351,7 @@
 								},
 								{
 									"key": "locationId",
-									"value": "0",
+									"value": "{{loc_id}}",
 									"description": "The location id\n\nDefault value : 0",
 									"disabled": true
 								}
