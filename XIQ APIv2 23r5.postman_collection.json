@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "df221e58-b8c4-486c-8fb6-903bf49bb7a4",
-		"name": "XIQ APIv2 23r3.3",
+		"_postman_id": "2d660f62-ba0b-4336-b63b-9c9c7b40e356",
+		"name": "XIQ APIv2 23r5",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4056946",
-		"_collection_link": "https://gold-escape-604608.postman.co/workspace/XIQ-Workflows---Github~7c6c76b6-b57f-4ebb-8d87-9786462c68e3/collection/4056946-df221e58-b8c4-486c-8fb6-903bf49bb7a4?action=share&creator=4056946&source=collection_link"
+		"_collection_link": "https://gold-escape-604608.postman.co/workspace/XIQ-Workflows---Github~7c6c76b6-b57f-4ebb-8d87-9786462c68e3/collection/4056946-2d660f62-ba0b-4336-b63b-9c9c7b40e356?action=share&source=collection_link&creator=4056946"
 	},
 	"item": [
 		{
@@ -3328,6 +3328,166 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get devices on the location hierachy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/locations/tree/devices?page=1&limit=10&locationId={{loc_id}}&expandChildren=true",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"locations",
+								"tree",
+								"devices"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1\n\nDefault value : 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100"
+								},
+								{
+									"key": "locationId",
+									"value": "{{loc_id}}",
+									"description": "The location ID, or null for all locations."
+								},
+								{
+									"key": "expandChildren",
+									"value": "true",
+									"description": "Whether to return the child locations recursively, default is true. Set it to false to improve performance when there are a lot of child locations"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get maps on the location hierachy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/locations/tree/maps?page=1&limit=10&locationId={{loc_id}}&expandChildren=true",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"locations",
+								"tree",
+								"maps"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1\n\nDefault value : 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100"
+								},
+								{
+									"key": "locationId",
+									"value": "{{loc_id}}",
+									"description": "The location ID, or null for all locations."
+								},
+								{
+									"key": "expandChildren",
+									"value": "true",
+									"description": "Whether to return the child locations recursively, default is true. Set it to false to improve performance when there are a lot of child locations"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -5725,7 +5885,7 @@
 								{
 									"key": "models",
 									"value": "",
-									"description": "List by makes or any with null/empty models.\n\nAvailable values : DT_5320_16P_4XE, DT_5320_16P_4XE_DC, DT_5320_24P_8XE, DT_5320_24T_8XE, DT_5320_48P_8XE, DT_5320_48T_8XE, DT_5420F_16MW_32P_4XE, DT_5420F_16W_32P_4XE, DT_5420F_24P_4XE, DT_5420F_24S_4XE, DT_5420F_24T_4XE, DT_5420F_48P_4XE, DT_5420F_48P_4XL, DT_5420F_48T_4XE, DT_5420F_8W_16P_4XE, DT_5420M_16MW_32P_4YE, DT_5420M_24T_4YE, DT_5420M_24W_4YE, DT_5420M_48T_4YE, DT_5420M_48W_4YE, DT_5520_12MW_36W, DT_5520_24T, DT_5520_24W, DT_5520_24X, DT_5520_48SE, DT_5520_48T, DT_5520_48W, DT_5720_24MW, DT_5720_24MXW, DT_5720_48MW, DT_5720_48MXW",
+									"description": "List by makes or any with null/empty models.\n\nAvailable values : DT_5320_16P_4XE, DT_5320_16P_4XE_DC, DT_5320_24P_8XE, DT_5320_24T_8XE, DT_5320_48P_8XE, DT_5320_48T_8XE, DT_5420F_16MW_32P_4XE, DT_5420F_16W_32P_4XE, DT_5420F_24P_4XE, DT_5420F_24S_4XE, DT_5420F_24T_4XE, DT_5420F_48P_4XE, DT_5420F_48P_4XL, DT_5420F_48T_4XE, DT_5420F_8W_16P_4XE, DT_5420M_16MW_32P_4YE, DT_5420M_24T_4YE, DT_5420M_24W_4YE, DT_5420M_48T_4YE, DT_5420M_48W_4YE, DT_5520_12MW_36W, DT_5520_24T, DT_5520_24W, DT_5520_24X, DT_5520_48SE, DT_5520_48T, DT_5520_48W, DT_5720_24MW, DT_5720_24MXW, DT_5720_48MW, DT_5720_48MXW, DT_7520_48XT_6C, DT_7520_48Y_8C, DT_7720_32C",
 									"disabled": true
 								}
 							]
@@ -7222,7 +7382,7 @@
 								{
 									"key": "fields",
 									"value": "ID",
-									"description": "The client fields to return\n\nAvailable values : ID, CREATE_TIME, UPDATE_TIME, ORG_ID, ORG_NAME, LOCATION_ID, LOCATIONS, HOSTNAME, MAC_ADDRESS, IP_ADDRESS, IPV6_ADDRESS, OS_TYPE, DEVICE_ID, DEVICE_FUNCTION, DEVICE_NAME, USERNAME, USER_PROFILE_NAME, CONNECTED, ONLINE_TIME, OFFLINE_TIME, VLAN, CONNECTION_TYPE, SSID, PORT, BSSID, PORT_TYPE_NAME, INTERFACE_NAME, AUTH, ENCRYPTION_METHOD, CHANNEL, CLIENT_HEALTH, APPLICATION_HEALTH, NETWORK_HEALTH, RADIO_HEALTH, HEALTH_UPDATE_TIME, RSSI, RSSI_UPDATE_TIME, SNR, SNR_UPDATE_TIME, RADIO_TYPE, WING_AP, VENDOR, MOBILITY, CATEGORY, DESCRIPTION, DEVICE_MAC_ADDRESS",
+									"description": "The client fields to return\n\nAvailable values : ID, CREATE_TIME, UPDATE_TIME, ORG_ID, ORG_NAME, LOCATION_ID, LOCATIONS, HOSTNAME, MAC_ADDRESS, IP_ADDRESS, IPV6_ADDRESS, OS_TYPE, DEVICE_ID, DEVICE_FUNCTION, DEVICE_NAME, USERNAME, USER_PROFILE_NAME, CONNECTED, ONLINE_TIME, OFFLINE_TIME, VLAN, CONNECTION_TYPE, SSID, PORT, BSSID, PORT_TYPE_NAME, INTERFACE_NAME, AUTH, ENCRYPTION_METHOD, CHANNEL, CLIENT_HEALTH, APPLICATION_HEALTH, NETWORK_HEALTH, RADIO_HEALTH, HEALTH_UPDATE_TIME, RSSI, RSSI_UPDATE_TIME, SNR, SNR_UPDATE_TIME, RADIO_TYPE, WING_AP, VENDOR, MOBILITY, CATEGORY, DESCRIPTION, DEVICE_MAC_ADDRESS, ALIAS",
 									"disabled": true
 								}
 							]
@@ -7330,7 +7490,7 @@
 								},
 								{
 									"key": "clientOsNames",
-									"value": null,
+									"value": "",
 									"description": "The client os names",
 									"disabled": true
 								},
@@ -7354,7 +7514,7 @@
 								},
 								{
 									"key": "searchString",
-									"value": null,
+									"value": "",
 									"description": "The search string",
 									"disabled": true
 								},
@@ -7370,7 +7530,7 @@
 								},
 								{
 									"key": "sortField",
-									"value": null,
+									"value": "",
 									"description": "Available values : AUTH_METHOD, CHANNEL, CONNECTED_VIA, CONNECTION_TYPE, DEVICE_NAME, HOST_NAME, IPV4, IPV6, MAC, NAC_DETAILS, NAC_PROFILE, OS_TYPE, REPORTED_BY, START_TIME, USER_NAME, USER_PROFILE, VLAN",
 									"disabled": true
 								},
@@ -7388,7 +7548,7 @@
 								{
 									"key": "fields",
 									"value": "id",
-									"description": "The client fields to return\n\nAvailable values : ID, CREATE_TIME, UPDATE_TIME, ORG_ID, ORG_NAME, LOCATION_ID, LOCATIONS, HOSTNAME, MAC_ADDRESS, IP_ADDRESS, IPV6_ADDRESS, OS_TYPE, DEVICE_ID, DEVICE_FUNCTION, DEVICE_NAME, USERNAME, USER_PROFILE_NAME, CONNECTED, ONLINE_TIME, OFFLINE_TIME, VLAN, CONNECTION_TYPE, SSID, PORT, BSSID, PORT_TYPE_NAME, INTERFACE_NAME, AUTH, ENCRYPTION_METHOD, CHANNEL, CLIENT_HEALTH, APPLICATION_HEALTH, NETWORK_HEALTH, RADIO_HEALTH, HEALTH_UPDATE_TIME, RSSI, RSSI_UPDATE_TIME, SNR, SNR_UPDATE_TIME, RADIO_TYPE, WING_AP, VENDOR, MOBILITY, CATEGORY, DESCRIPTION, DEVICE_MAC_ADDRESS",
+									"description": "The client fields to return\n\nAvailable values : ID, CREATE_TIME, UPDATE_TIME, ORG_ID, ORG_NAME, LOCATION_ID, LOCATIONS, HOSTNAME, MAC_ADDRESS, IP_ADDRESS, IPV6_ADDRESS, OS_TYPE, DEVICE_ID, DEVICE_FUNCTION, DEVICE_NAME, USERNAME, USER_PROFILE_NAME, CONNECTED, ONLINE_TIME, OFFLINE_TIME, VLAN, CONNECTION_TYPE, SSID, PORT, BSSID, PORT_TYPE_NAME, INTERFACE_NAME, AUTH, ENCRYPTION_METHOD, CHANNEL, CLIENT_HEALTH, APPLICATION_HEALTH, NETWORK_HEALTH, RADIO_HEALTH, HEALTH_UPDATE_TIME, RSSI, RSSI_UPDATE_TIME, SNR, SNR_UPDATE_TIME, RADIO_TYPE, WING_AP, VENDOR, MOBILITY, CATEGORY, DESCRIPTION, DEVICE_MAC_ADDRESS, ALIAS",
 									"disabled": true
 								}
 							]
@@ -7521,6 +7681,77 @@
 									"description": "The search string",
 									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set the aliases for multiple clients",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"mac_address\": \"stringstring\",\n    \"alias\": \"string\"\n  }\n]"
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/clients/alias",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"clients",
+								"alias"
 							]
 						}
 					},
@@ -17714,12 +17945,6 @@
 									"key": "anomalyId",
 									"value": "{{anomaly_id}}",
 									"description": "string"
-								},
-								{
-									"key": "locationId",
-									"value": "{{loc_id}}",
-									"description": "The location id\n\nDefault value : 0",
-									"disabled": true
 								}
 							]
 						}
@@ -17790,12 +18015,6 @@
 									"key": "anomalyId",
 									"value": "{{anomaly_id}}",
 									"description": "string"
-								},
-								{
-									"key": "locationId",
-									"value": "{{loc_id}}",
-									"description": "The location id\n\nDefault value : 0",
-									"disabled": true
 								}
 							]
 						}
@@ -17854,7 +18073,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/copilot/anomalies/devices-by-location?anomalyType=POE_FLAPPING",
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/devices-by-location?anomalyType=POE_FLAPPING&locationIds={{loc_id}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -17873,11 +18092,154 @@
 									"description": "Anomaly type\n\nAvailable values : POE_FLAPPING, DFS_RECURRENCE, ADVERSE_TRAFFIC, PORT_EFFICIENCY, WIFI_CAPACITY, WIFI_EFFICIENCY"
 								},
 								{
-									"key": "locationId",
+									"key": "locationIds",
 									"value": "{{loc_id}}",
-									"description": "The location id\n\nDefault value : 0",
-									"disabled": true
+									"description": "The location IDs\n\narray[integer]\n(query)"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Anomalies Devices feedback",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"seccess\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"anomaly_type\": \"POE_FLAPPING\",\n  \"anomaly_id\": \"string\",\n  \"feedback_type\": \"LIKE\",\n  \"feedback\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/devices/feedback",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"devices",
+								"feedback"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Anomalies Devices Update Action",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"success\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"anomaly_type\": \"POE_FLAPPING\",\n  \"action_type\": \"MUTE\",\n  \"location_id\": 0,\n  \"anomaly_id\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/devices/update-action",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"devices",
+								"update-action"
 							]
 						}
 					},
@@ -17947,12 +18309,6 @@
 									"key": "anomalyId",
 									"value": "{{anomaly_id}}",
 									"description": "string"
-								},
-								{
-									"key": "locationId",
-									"value": "{{loc_id}}",
-									"description": "The location id\n\nDefault value : 0",
-									"disabled": true
 								}
 							]
 						}
@@ -18023,12 +18379,6 @@
 									"key": "anomalyId",
 									"value": "{{anomaly_id}}",
 									"description": "string"
-								},
-								{
-									"key": "locationId",
-									"value": "{{loc_id}}",
-									"description": "The location id\n\nDefault value : 0",
-									"disabled": true
 								}
 							]
 						}
@@ -18133,6 +18483,68 @@
 					"response": []
 				},
 				{
+					"name": "Copilot Anomalies Notifications",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"total_anomaly_count\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/notifications",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"notifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Copilot Anomalies POE Flapping Stats",
 					"event": [
 						{
@@ -18196,12 +18608,6 @@
 									"key": "anomalyId",
 									"value": "{{anomaly_id}}",
 									"description": "The anomaly id"
-								},
-								{
-									"key": "locationId",
-									"value": "{{loc_id}}",
-									"description": "The location id\n\nDefault value : 0",
-									"disabled": true
 								}
 							]
 						}
@@ -18272,12 +18678,6 @@
 									"key": "anomalyId",
 									"value": "{{anomaly_id}}",
 									"description": "The anomaly id"
-								},
-								{
-									"key": "locationId",
-									"value": "{{loc_id}}",
-									"description": "The location id\n\nDefault value : 0",
-									"disabled": true
 								}
 							]
 						}
@@ -18348,13 +18748,78 @@
 									"key": "anomalyId",
 									"value": "{{anomaly_id}}",
 									"description": "The anomaly id"
-								},
-								{
-									"key": "locationId",
-									"value": "{{loc_id}}",
-									"description": "The location id\n\nDefault value : 0",
-									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Anomalies Update Action",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"success\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"anomaly_type\": \"POE_FLAPPING\",\n  \"action_type\": \"MUTE\",\n  \"building_id\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/update-action",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"update-action"
 							]
 						}
 					},
