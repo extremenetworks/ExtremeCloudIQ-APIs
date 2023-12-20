@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "d8e7150a-b9d6-4066-9a61-596a611e3bca",
-		"name": "XIQ APIv2 23r6",
+		"_postman_id": "85c7c843-57fd-4b59-99dd-160b019a64f2",
+		"name": "XIQ APIv2 23r7",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4056946",
-		"_collection_link": "https://gold-escape-604608.postman.co/workspace/XIQ-Workflows---Github~7c6c76b6-b57f-4ebb-8d87-9786462c68e3/collection/4056946-d8e7150a-b9d6-4066-9a61-596a611e3bca?action=share&source=collection_link&creator=4056946"
+		"_collection_link": "https://gold-escape-604608.postman.co/workspace/XIQ-Workflows---Github~7c6c76b6-b57f-4ebb-8d87-9786462c68e3/collection/4056946-85c7c843-57fd-4b59-99dd-160b019a64f2?action=share&source=collection_link&creator=4056946"
 	},
 	"item": [
 		{
@@ -2883,8 +2883,14 @@
 								},
 								{
 									"key": "name",
-									"value": null,
+									"value": "",
 									"description": "Name to search the buildings. It's case insensitive.",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": null,
+									"description": "The sort order (ascending by default)\n\nAvailable values : ASC, DESC",
 									"disabled": true
 								}
 							]
@@ -2939,7 +2945,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"parent_id\": \"{{loc_id}}\",\n  \"name\": \"TheBuildingName\",\n  \"address\": \"The building street address\"\n}",
+							"raw": "{\n  \"parent_id\": \"{{loc_id}}\",\n  \"name\": \"TheBuildingName\",\n  \"address\": {\n    \"address\": \"string\",\n    \"address2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\"\n  }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3005,7 +3011,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"parent_id\": \"{{loc_id}}\",\n  \"name\": \"NewBuildingName\",\n  \"address\": \"New building street address\"\n}\n",
+							"raw": "{\n  \"parent_id\": \"{{loc_id}}\",\n  \"name\": \"NewBuildingName\",\n  \"address\": {\n    \"address\": \"string\",\n    \"address2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\"\n  }\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3157,8 +3163,14 @@
 								},
 								{
 									"key": "name",
-									"value": null,
+									"value": "",
 									"description": "Name to search the buildings. It's case insensitive.",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": null,
+									"description": "The sort order (ascending by default)\n\nAvailable values : ASC, DESC",
 									"disabled": true
 								}
 							]
@@ -3398,6 +3410,7 @@
 							"formdata": [
 								{
 									"key": "file",
+									"description": "The floorplan image file to upload. For better performance, Extreme Networks recommends that the image file (.png .jpeg) be less than 10 MB",
 									"type": "file",
 									"src": "/Users/timsmith/Documents/FloorPlans/TestMainFloor.png"
 								}
@@ -3485,8 +3498,14 @@
 								},
 								{
 									"key": "name",
-									"value": null,
+									"value": "",
 									"description": "Name to search the buildings. It's case insensitive.",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": null,
+									"description": "The sort order (ascending by default)\n\nAvailable values : ASC, DESC",
 									"disabled": true
 								}
 							]
@@ -3541,7 +3560,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"parent_id\": {{loc_id}},\n  \"name\": \"Site Name\"\n}",
+							"raw": "{\n  \"parent_id\": {{loc_id}},\n  \"name\": \"Site Name\",\n  \"address\": {\n    \"address\": \"string\",\n    \"address2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\"\n  },\n  \"country_code\": 0\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3559,6 +3578,64 @@
 							"path": [
 								"locations",
 								"site"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a site by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"data\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/locations/site/{{site_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"locations",
+								"site",
+								"{{site_id}}"
 							]
 						}
 					},
@@ -3607,7 +3684,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"parent_id\": \"{{loc_id}}\",\n  \"name\": \"NewLocationName\"\n}",
+							"raw": "{\n  \"parent_id\": \"{{loc_id}}\",\n  \"name\": \"NewSiteName\",\n  \"address\": {\n    \"address\": \"string\",\n    \"address2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\"\n  },\n  \"country_code\": 0\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -5284,6 +5361,76 @@
 								"devices",
 								"{{id}}",
 								"description"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download device gallery image",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/gallery-image?imageName",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"gallery-image"
+							],
+							"query": [
+								{
+									"key": "imageName",
+									"value": null,
+									"description": "The image name"
+								}
 							]
 						}
 					},
@@ -7092,6 +7239,86 @@
 					"response": []
 				},
 				{
+					"name": "Get Devices Radio Information",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"org_id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/radio-information?page=1&limit=10&deviceIds={{id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"radio-information"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 50 \nDefault value : 10"
+								},
+								{
+									"key": "deviceIds",
+									"value": "{{id}}",
+									"description": "the list of devices"
+								},
+								{
+									"key": "includeDisabledRadio",
+									"value": "false",
+									"description": "Include Disabled Radios",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Assign RADIUS proxy to devices",
 					"event": [
 						{
@@ -8095,6 +8322,12 @@
 									"disabled": true
 								},
 								{
+									"key": "usernames",
+									"value": "",
+									"description": "The user names - Array",
+									"disabled": true
+								},
+								{
 									"key": "searchString",
 									"value": "",
 									"description": "The search string",
@@ -8992,14 +9225,1559 @@
 			"name": "Alert",
 			"item": [
 				{
+					"name": "List all alert policies",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"event_rules_overview\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-policies",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-policies"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "",
+									"description": "The keyword to filter, such as summary, severity, source, etc.",
+									"disabled": true
+								},
+								{
+									"key": "policyType",
+									"value": null,
+									"description": "The policy type to filter, such as site or global\n\nAvailable values : GLOBAL, SITE",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a site based alert policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"event_rules_overview\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"string\",\n  \"site_ids\": [\n    {{site_id}}\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-policies",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-policies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get details of an alert policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"event_rules_overview\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-policies/{{alert_policy_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-policies",
+								"{{alert_policy_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a site-based alert policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"event_rules_overview\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"string\",\n  \"site_ids\": [\n    {{site_id}}\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-policies/{{alert_policy_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-policies",
+								"{{alert_policy_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a site-based alert policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-policies/{{alert_policy_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-policies",
+								"{{alert_policy_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get details of an alert rule",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-policies/{{alert_policy_id}}/rules/{{alert_rule_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-policies",
+								"{{alert_policy_id}}",
+								"rules",
+								"{{alert_rule_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an alert rule",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\": \"string\",\n  \"severity_id\": 0,\n  \"trigger_type\": \"string\",\n  \"duration\": 0,\n  \"time_window\": 0,\n  \"count\": 0,\n  \"threshold\": 0,\n  \"operator\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-policies/{{alert_policy_id}}/rules/{{alert_rule_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-policies",
+								"{{alert_policy_id}}",
+								"rules",
+								"{{alert_rule_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disable a rule from an alert policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-policies/{{alert_policy_id}}/rules/{{alert_rule_id}}/:disable",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-policies",
+								"{{alert_policy_id}}",
+								"rules",
+								"{{alert_rule_id}}",
+								":disable"
+							],
+							"variable": [
+								{
+									"key": "disable",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enable a rule from an alert policy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-policies/{{alert_policy_id}}/rules/{{alert_rule_id}}/:enable",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-policies",
+								"{{alert_policy_id}}",
+								"rules",
+								"{{alert_rule_id}}",
+								":enable"
+							],
+							"variable": [
+								{
+									"key": "enable",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "The list of current owner's available sitess",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"site_id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-policies/available-sites",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-policies",
+								"available-sites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List alert email subscriptions",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"email\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-subscriptions/emails",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-subscriptions",
+								"emails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create alert email subscription",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"email\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"string\",\n  \"is_enabled\": true,\n  \"is_subscribe_all\": true,\n  \"alert_policy_ids\": [\n    {{alert_policy_id}}\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-subscriptions/emails",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-subscriptions",
+								"emails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete alert email subscription in bulk",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"result\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ids\": [\n    0\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-subscriptions/emails/:delete",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-subscriptions",
+								"emails",
+								":delete"
+							],
+							"query": [
+								{
+									"key": "async",
+									"value": "",
+									"description": "Whether to enable async mode\n\nDefault value : false",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "delete",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get alert email subscription",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"email\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-subscriptions/emails/{{email_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-subscriptions",
+								"emails",
+								"{{email_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update alert email subscription",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"email\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"string\",\n  \"is_enabled\": true,\n  \"is_subscribe_all\": true,\n  \"alert_policy_ids\": [\n    {{alert_policy_id}}\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-subscriptions/emails/{{email_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-subscriptions",
+								"emails",
+								"{{email_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete alert email subscription",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-subscriptions/emails/{{email_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-subscriptions",
+								"emails",
+								"{{email_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Email Varification",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"string\",\n  \"is_enabled\": true,\n  \"is_subscribe_all\": true,\n  \"alert_policy_ids\": [\n    {{alert_policy_id}}\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-subscriptions/emails/{{email_id}}/:verify",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-subscriptions",
+								"emails",
+								"{{email_id}}",
+								":verify"
+							],
+							"variable": [
+								{
+									"key": "verify",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List alert webhook subscriptions",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"url\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-subscriptions/webhooks",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-subscriptions",
+								"webhooks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create alert webhook subscription",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"url\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"url\": \"string\",\n  \"secret\": \"string\",\n  \"is_enabled\": true,\n  \"is_subscribe_all\": true,\n  \"alert_policy_ids\": [\n    {{alert_policy_id}}\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-subscriptions/webhooks",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-subscriptions",
+								"webhooks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete alert webhook subscription in bulk",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"result\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ids\": [\n    0\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-subscriptions/webhooks/:delete",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-subscriptions",
+								"webhooks",
+								":delete"
+							],
+							"variable": [
+								{
+									"key": "delete",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get alert webhook subscription",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"url\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-subscriptions/webhooks/{{webhook_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-subscriptions",
+								"webhooks",
+								"{{webhook_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update alert webhook subscription",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"url\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"url\": \"string\",\n  \"secret\": \"string\",\n  \"is_enabled\": true,\n  \"is_subscribe_all\": true,\n  \"alert_policy_ids\": [\n    {{alert_policy_id}}\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-subscriptions/webhooks/{{webhook_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-subscriptions",
+								"webhooks",
+								"{{webhook_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete alert webhook subscription",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alert-subscriptions/webhooks/{{webhook_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alert-subscriptions",
+								"webhooks",
+								"{{webhook_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "List the alerts",
 					"event": [
 						{
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"//enter the number of Top clients to return",
-									"var count = 5; //The count number to be added to URL",
 									"//enter start and end times",
 									"var startTime = new Date(\"May 19, 2022 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
@@ -9007,7 +10785,7 @@
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
 									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"count\", count);"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -9078,28 +10856,124 @@
 									"description": "The end time for querying top application usage of application"
 								},
 								{
-									"key": "severity",
+									"key": "severityIds",
 									"value": "",
-									"description": "The alert severity to filter\n\nAvailable values : CRITICAL, WARNING, INFO",
+									"description": "The alert severity identifiers to filter. The currently supported severity IDs are 1 for critical, 2 for warning, and 3 for info.",
 									"disabled": true
 								},
 								{
-									"key": "category",
+									"key": "categoryIds",
 									"value": "",
-									"description": "The alert category to filter\n\nAvailable values : DEVICE, XIQ, SECURITY, PERFORMANCE, CLIENT, ANOMALY",
+									"description": "The alert category ID to filter",
 									"disabled": true
 								},
 								{
-									"key": "alertType",
+									"key": "mesaegMetadataIds",
 									"value": null,
-									"description": "The alert type to filter",
+									"description": "The message metadata ID list to filter",
+									"disabled": true
+								},
+								{
+									"key": "acknowledged",
+									"value": null,
+									"description": "The acknowledged to filter, return global data if not specified\nTrue, False",
+									"disabled": true
+								},
+								{
+									"key": "siteId",
+									"value": null,
+									"description": "The site id to filter",
 									"disabled": true
 								},
 								{
 									"key": "keyword",
 									"value": null,
-									"description": "The keyword to filter, such as device SN or MAC address",
+									"description": "The keyword to filter, such as summary, severity, source, etc.",
 									"disabled": true
+								},
+								{
+									"key": "sortField",
+									"value": null,
+									"description": "The sort field\n\nAvailable values : TIMESTAMP, SOURCE",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": null,
+									"description": "The sort order (descending by default)\n\nAvailable values : ASC, DESC",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Acknowledge the alert",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"alert_ids\": [\n    \"string\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alerts/:acknowledge",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alerts",
+								":acknowledge"
+							],
+							"variable": [
+								{
+									"key": "acknowledge",
+									"value": ""
 								}
 							]
 						}
@@ -9113,16 +10987,13 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"//enter the Group to collect the count from",
-									"var alert_group = \"SEVERITY\"; //Available values : SEVERITY, CATEGORY, ALERT_TYPE",
 									"//enter start and end times",
 									"var startTime = new Date(\"May 19, 2022 02:30:00\"); // Your timezone!",
 									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
 									"",
 									"//Set in Environment",
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds",
-									"pm.environment.set(\"alert_group\", alert_group);"
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
 								"type": "text/javascript"
 							}
@@ -9157,7 +11028,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/alerts/count-by-{{alert_group}}?startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"raw": "https://api.extremecloudiq.com/alerts/count-by-{{alert_group}}?acknowledged&siteId&startTime={{myStartTime}}&endTime={{myEndTime}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -9170,6 +11041,16 @@
 							],
 							"query": [
 								{
+									"key": "acknowledged",
+									"value": null,
+									"description": "The acknowledged to filter, return global data if not specified"
+								},
+								{
+									"key": "siteId",
+									"value": null,
+									"description": "The site id for counting the alerts, default to global"
+								},
+								{
 									"key": "startTime",
 									"value": "{{myStartTime}}"
 								},
@@ -9177,6 +11058,199 @@
 									"key": "endTime",
 									"value": "{{myEndTime}}"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[LRO] Create the alerts report",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter start and end times",
+									"var startTime = new Date(\"May 19, 2022 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alerts/report?startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alerts",
+								"report"
+							],
+							"query": [
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time for querying alerts in milliseconds"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time for querying alerts in milliseconds"
+								},
+								{
+									"key": "serverityIds",
+									"value": null,
+									"description": "The severity identifier. The currently supported severity IDs are 1 for critical, 2 for warning, and 3 for info.",
+									"disabled": true
+								},
+								{
+									"key": "categoryIds",
+									"value": null,
+									"description": "The alert category Id to filter",
+									"disabled": true
+								},
+								{
+									"key": "messageMetadataIds",
+									"value": null,
+									"description": "The alert type to filter",
+									"disabled": true
+								},
+								{
+									"key": "acknowledged",
+									"value": null,
+									"description": "Boolean\nThe site to filter, return global data if not specified",
+									"disabled": true
+								},
+								{
+									"key": "siteId",
+									"value": null,
+									"description": "The site id to filter",
+									"disabled": true
+								},
+								{
+									"key": "timeZoneOffset",
+									"value": null,
+									"description": "The time zone to setup the timestamp",
+									"disabled": true
+								},
+								{
+									"key": "keyword",
+									"value": null,
+									"description": "The keyword to filter, such as source name or description",
+									"disabled": true
+								},
+								{
+									"key": "sortField",
+									"value": null,
+									"description": "The sort field\n\nAvailable values : TIMESTAMP, SOURCE",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": null,
+									"description": "The sort order (ascending by default)\n\nAvailable values : ASC, DESC",
+									"disabled": true
+								},
+								{
+									"key": "async",
+									"value": null,
+									"description": "Whether to enable async mode\n\nDefault value : false",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download the alerts report",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/alerts/reports/{{alert_report_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"alerts",
+								"reports",
+								"{{alert_report_id}}"
 							]
 						}
 					},
@@ -17826,6 +19900,126 @@
 			"name": "Copilot - Connectivity Experience",
 			"item": [
 				{
+					"name": "Copilot Connectivity Locations",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter start and end times",
+									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"data\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/locations?startTime={{myStartTime}}&endTime={{myEndTime}}&page=1&limit=10",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"connectivity",
+								"locations"
+							],
+							"query": [
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
+								},
+								{
+									"key": "sortField",
+									"value": "NAME",
+									"description": "sort by name or quality index\n\nAvailable values : NAME, QUALITY_INDEX",
+									"disabled": true
+								},
+								{
+									"key": "sortOrder",
+									"value": "ASC",
+									"description": "The sort order (ascending by default)\nAvailable values : ASC, DESC",
+									"disabled": true
+								},
+								{
+									"key": "locationId",
+									"value": "",
+									"description": "The location Id\n\nDefault value : 0",
+									"disabled": true
+								},
+								{
+									"key": "searchKey",
+									"value": "",
+									"description": "The search value",
+									"disabled": true
+								},
+								{
+									"key": "clientType",
+									"value": null,
+									"description": "The client type\n\nAvailable values : WIRELESS, WIRED",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Copilot Wired Events",
 					"event": [
 						{
@@ -18164,6 +20358,105 @@
 								{
 									"key": "viewId",
 									"value": null,
+									"description": "The view id based on view type",
+									"disabled": true
+								},
+								{
+									"key": "forensicBucket",
+									"value": "TWENTY_FOUR_HOURS",
+									"description": "The selected time bucket\nAvailable values : TWENTY_FOUR_HOURS, ONE_HOUR, TODAY, ONE_WEEK, SEVEN_DAYS, THIRTY_DAYS, NINETY_DAYS"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Wired Locations Hardware",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter start and end times",
+									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"quality_index_graph\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wired/locations/hardware?startTime={{myStartTime}}&endTime={{myEndTime}}&forensicBucket=TWENTY_FOUR_HOURS",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"connectivity",
+								"wired",
+								"locations",
+								"hardware"
+							],
+							"query": [
+								{
+									"key": "viewType",
+									"value": "LOCATION",
+									"description": "The type of View\nAvailable values : LOCATION",
+									"disabled": true
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "viewId",
+									"value": "",
 									"description": "The view id based on view type",
 									"disabled": true
 								},
@@ -18641,6 +20934,465 @@
 					"response": []
 				},
 				{
+					"name": "Copilot Wireless Location Events",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter start and end times",
+									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"data\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/locations/events?page=1&limit=10&startTime={{myStartTime}}&endTime={{myEndTime}}&scoreType=TIME_TO_AUTHENTICATE&locationId={{loc_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"connectivity",
+								"wireless",
+								"locations",
+								"events"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "sortField",
+									"value": "AVERAGE_VALUE",
+									"description": "the sort field\n\nAvailable values : AVERAGE_VALUE, AVG_RX_RETRY, AVG_TX_RETRY",
+									"disabled": true
+								},
+								{
+									"key": "sortOrder",
+									"value": "ASC",
+									"description": "The sort order (ascending by default)\nAvailable values : ASC, DESC",
+									"disabled": true
+								},
+								{
+									"key": "scoreType",
+									"value": "TIME_TO_AUTHENTICATE",
+									"description": "The wireless score type\nAvailable values : TIME_TO_AUTHENTICATE, TIME_TO_ASSOCIATE, TIME_TO_DHCP, DNS, RETRIES"
+								},
+								{
+									"key": "forensicBucket",
+									"value": "TWENTY_FOUR_HOURS",
+									"description": "The selected time bucket\nAvailable values : TWENTY_FOUR_HOURS, ONE_HOUR, TODAY, ONE_WEEK, SEVEN_DAYS, THIRTY_DAYS, NINETY_DAYS",
+									"disabled": true
+								},
+								{
+									"key": "searchKey",
+									"value": "",
+									"description": "The selected search key",
+									"disabled": true
+								},
+								{
+									"key": "locationId",
+									"value": "{{loc_id}}",
+									"description": "The selected location id"
+								},
+								{
+									"key": "timestamp",
+									"value": "",
+									"description": "The timestamp to query, epoch time in milliseconds since 1/1/1970",
+									"disabled": true
+								},
+								{
+									"key": "ssid",
+									"value": null,
+									"description": "The ssid",
+									"disabled": true
+								},
+								{
+									"key": "osType",
+									"value": null,
+									"description": "The os type",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Wireless Locations Performance",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter start and end times",
+									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"quality_index_graph\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/locations/performance?locationId={{loc_id}}&startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"connectivity",
+								"wireless",
+								"locations",
+								"performance"
+							],
+							"query": [
+								{
+									"key": "locationId",
+									"value": "{{loc_id}}",
+									"description": "The location identifier\nDefault value : 0"
+								},
+								{
+									"key": "ssid",
+									"value": null,
+									"description": "The ssid",
+									"disabled": true
+								},
+								{
+									"key": "osType",
+									"value": null,
+									"description": "The client type",
+									"disabled": true
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "forensicBucket",
+									"value": "TWENTY_FOUR_HOURS",
+									"description": "The selected time bucket\nAvailable values : TWENTY_FOUR_HOURS, ONE_HOUR, TODAY, ONE_WEEK, SEVEN_DAYS, THIRTY_DAYS, NINETY_DAYS",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Wireless Locations Quality-index",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter start and end times",
+									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"quality_index\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/locations/quality-index?locationId={{loc_id}}&startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"connectivity",
+								"wireless",
+								"locations",
+								"quality-index"
+							],
+							"query": [
+								{
+									"key": "locationId",
+									"value": "{{loc_id}}",
+									"description": "The location identifier\nDefault value : 0"
+								},
+								{
+									"key": "ssid",
+									"value": null,
+									"description": "The ssid",
+									"disabled": true
+								},
+								{
+									"key": "osType",
+									"value": null,
+									"description": "The client type",
+									"disabled": true
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "forensicBucket",
+									"value": "TWENTY_FOUR_HOURS",
+									"description": "The selected time bucket\nAvailable values : TWENTY_FOUR_HOURS, ONE_HOUR, TODAY, ONE_WEEK, SEVEN_DAYS, THIRTY_DAYS, NINETY_DAYS",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Wireless Locations Time to Connect",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter start and end times",
+									"var startTime = new Date(\"Jan 1, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"Feb 22, 2023 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"performance_score\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/locations/time-to-connect?locationId={{loc_id}}&startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"connectivity",
+								"wireless",
+								"locations",
+								"time-to-connect"
+							],
+							"query": [
+								{
+									"key": "locationId",
+									"value": "{{loc_id}}",
+									"description": "The location identifier\nDefault value : 0"
+								},
+								{
+									"key": "ssid",
+									"value": null,
+									"description": "The ssid",
+									"disabled": true
+								},
+								{
+									"key": "osType",
+									"value": null,
+									"description": "The client type",
+									"disabled": true
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
+								},
+								{
+									"key": "forensicBucket",
+									"value": "TWENTY_FOUR_HOURS",
+									"description": "The selected time bucket\nAvailable values : TWENTY_FOUR_HOURS, ONE_HOUR, TODAY, ONE_WEEK, SEVEN_DAYS, THIRTY_DAYS, NINETY_DAYS",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Copilot Wireless Performance",
 					"event": [
 						{
@@ -18884,7 +21636,7 @@
 									"});",
 									"",
 									"pm.test(\"include login info\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"quality_index_graph\");",
+									"    pm.expect(pm.response.text()).to.include(\"performance_score\");",
 									"    console.log(pm.test)",
 									"});",
 									" pm.test(\"Response time is less than 1500ms\", function () {",
@@ -21452,6 +24204,163 @@
 									"key": "parentId",
 									"value": "{{building_id}}",
 									"description": "Location ID of the floor's parent (Required)"
+								}
+							]
+						},
+						"description": "Upload the capture files from a packet capture session, if files previously failed to be uploaded to XIQ cloud."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Misc - Metadata - Country",
+			"item": [
+				{
+					"name": "Get country list",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"timestamp\");",
+									"    console.log(pm.test)",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/countries",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"countries"
+							]
+						},
+						"description": "Upload the capture files from a packet capture session, if files previously failed to be uploaded to XIQ cloud."
+					},
+					"response": []
+				},
+				{
+					"name": "Validate country code",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"timestamp\");",
+									"    console.log(pm.test)",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/countries/{{countryCode}}/:validate",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"countries",
+								"{{countryCode}}",
+								":validate"
+							],
+							"variable": [
+								{
+									"key": "validate",
+									"value": ""
 								}
 							]
 						},
