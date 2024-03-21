@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "f8d2b658-0b5d-4feb-8acb-b817bae89bd0",
-		"name": "XIQ APIv2 24r1",
+		"_postman_id": "9555c624-7bd5-451f-b0f1-3b372019e5cf",
+		"name": "XIQ APIv2 24r2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4056946",
-		"_collection_link": "https://gold-escape-604608.postman.co/workspace/XIQ-Workflows---Github~7c6c76b6-b57f-4ebb-8d87-9786462c68e3/collection/4056946-f8d2b658-0b5d-4feb-8acb-b817bae89bd0?action=share&source=collection_link&creator=4056946"
+		"_collection_link": "https://gold-escape-604608.postman.co/workspace/XIQ-Workflows---Github~7c6c76b6-b57f-4ebb-8d87-9786462c68e3/collection/4056946-9555c624-7bd5-451f-b0f1-3b372019e5cf?action=share&source=collection_link&creator=4056946"
 	},
 	"item": [
 		{
@@ -5657,7 +5657,7 @@
 					"response": []
 				},
 				{
-					"name": "Delete VLAN attribute Copy",
+					"name": "Change VLAN attributes",
 					"event": [
 						{
 							"listen": "test",
@@ -5729,6 +5729,634 @@
 								"config",
 								"vlan-attributes",
 								"{{vlan_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get IPv4 Interfaces for a device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"data\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/config/vlan-ipv4-intf?page=1&limit=10",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"config",
+								"vlan-ipv4-intf"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create an IPv4 Interfaces for a device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"ip_address\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ip_address\": \"string\",\n  \"routing_instance\": \"string\",\n  \"enable_forwarding\": true,\n  \"enable_vlan_loopback\": true,\n  \"use_ip_addr_as_ospf_router_id\": true,\n  \"override_dhcp_relay\": true,\n  \"enable_dhcp\": true,\n  \"primary_dhcp_server\": \"string\",\n  \"secondary_dhcp_server\": \"string\",\n  \"predefined\": true,\n  \"vlan_id\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/config/vlan-ipv4-intf",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"config",
+								"vlan-ipv4-intf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete one or more IPv4 Interfaces for a device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/config/vlan-ipv4-intf?interfaceIds={{ipv4IntId}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"config",
+								"vlan-ipv4-intf"
+							],
+							"query": [
+								{
+									"key": "interfaceIds",
+									"value": "{{ipv4IntId}}",
+									"description": "IPv4 Interfaces IDs"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an IPv4 Interfaces for a device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"ip_address\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ip_address\": \"string\",\n  \"routing_instance\": \"string\",\n  \"enable_forwarding\": true,\n  \"enable_vlan_loopback\": true,\n  \"use_ip_addr_as_ospf_router_id\": true,\n  \"override_dhcp_relay\": true,\n  \"enable_dhcp\": true,\n  \"primary_dhcp_server\": \"string\",\n  \"secondary_dhcp_server\": \"string\",\n  \"predefined\": true,\n  \"subnetwork_id\": 0,\n  \"vlan_id\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/config/vlan-ipv4-intf/{{ipv4IntId}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"config",
+								"vlan-ipv4-intf",
+								"{{ipv4IntId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get IPv4 Static Route for a device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"data\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/config/vlan-ipv4-static?page=1&limit=10",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"config",
+								"vlan-ipv4-static"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1 \nDefault value : 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create an IPv4 Static Route for a device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"string\",\n  \"dest_subnetwork\": \"string\",\n  \"next_hop_ip\": \"string\",\n  \"next_hop_ip_ping_protection\": true,\n  \"metric\": 0,\n  \"routing_instance\": \"string\",\n  \"predefined\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/config/vlan-ipv4-static",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"config",
+								"vlan-ipv4-static"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete one or more IPv4 Static Routes for a device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/config/vlan-ipv4-static?staticRouteIds={{ipv4StaticRouteId}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"config",
+								"vlan-ipv4-static"
+							],
+							"query": [
+								{
+									"key": "staticRouteIds",
+									"value": "{{ipv4StaticRouteId}}",
+									"description": "IPv4 Static Routes IDs"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an IPv4 Static Route for a device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"string\",\n  \"dest_subnetwork\": \"string\",\n  \"next_hop_ip\": \"string\",\n  \"next_hop_ip_ping_protection\": true,\n  \"metric\": 0,\n  \"routing_instance\": \"string\",\n  \"predefined\": true,\n  \"ipv4_static_route_id\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/config/vlan-ipv4-static/{{ipv4StaticRouteId}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"config",
+								"vlan-ipv4-static",
+								"{{ipv4StaticRouteId}}"
 							]
 						}
 					},
@@ -6607,6 +7235,162 @@
 					"response": []
 				},
 				{
+					"name": "Get IPv4 Routing information for a device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"data\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/monitor/ipv4-routing?page=1&limit=10",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"monitor",
+								"ipv4-routing"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1\n\nDefault value : 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 4095\n\nDefault value : 10"
+								},
+								{
+									"key": "sortBy",
+									"value": "VLAN_ID",
+									"description": "Sort field (DESTINATION by default)\n\nAvailable values : DESTINATION, NEXTHOP, VLAN_NAME, VLAN_ID, ROUTE_ORIGIN, STATUS, METRIC, AGE, ROUTE_TYPE_PRIORITY, ROUTING_INSTANCE",
+									"disabled": true
+								},
+								{
+									"key": "sortOrder",
+									"value": "ASC",
+									"description": "Sort order (Ascending by default)\n\nAvailable values : ASC, DESC",
+									"disabled": true
+								},
+								{
+									"key": "routeOrigin",
+									"value": "ALL",
+									"description": "Route Origin (ALL by default)\n\nAvailable values : ALL, DIRECT, STATIC, OSPF",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "ALL",
+									"description": "Status (ALL by default)\n\nAvailable values : ALL, UP, DOWN",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get IPv4 Routing Timeline information per Routing Instance for a device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"ipv4_routing_timelines\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/monitor/ipv4-routing-timeline",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"monitor",
+								"ipv4-routing-timeline"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get VLAN attributes per VLAN for a device",
 					"event": [
 						{
@@ -6660,6 +7444,90 @@
 								"{{id}}",
 								"monitor",
 								"vlan-attr"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1\n\nDefault value : 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 4095\n\nDefault value : 10"
+								},
+								{
+									"key": "sortBy",
+									"value": "VLAN_ID",
+									"description": "Sort field (VLAN_ID by default)\n\nAvailable values : VLAN_ID, ACTIVE_PORTS, IGMP_SNOOPING_ENABLED, DHCP_SNOOPING_ENABLED, STP_INSTANCE",
+									"disabled": true
+								},
+								{
+									"key": "sortOrder",
+									"value": "ASC",
+									"description": "Sort order (Ascending by default)\n\nAvailable values : ASC, DESC",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get VLAN IPv4 Interfaces per VLAN for a device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"data\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/monitor/vlan-ipv4-intf?page=1&limit=10",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"monitor",
+								"vlan-ipv4-intf"
 							],
 							"query": [
 								{
