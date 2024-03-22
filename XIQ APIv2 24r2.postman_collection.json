@@ -2571,7 +2571,8 @@
 									"var jsonData = JSON.parse(responseBody);   ",
 									"pm.environment.set(\"loc_id\", jsonData[\"id\"]);"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -2603,7 +2604,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/locations/",
+							"raw": "https://api.extremecloudiq.com/locations",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -2611,8 +2612,7 @@
 								"com"
 							],
 							"path": [
-								"locations",
-								""
+								"locations"
 							]
 						}
 					},
@@ -7936,7 +7936,8 @@
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -7968,7 +7969,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/devices/{{id}}/thread/comissioner/:start",
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/thread/commissioner/:start",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -7979,7 +7980,7 @@
 								"devices",
 								"{{id}}",
 								"thread",
-								"comissioner",
+								"commissioner",
 								":start"
 							],
 							"variable": [
@@ -8007,7 +8008,8 @@
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -8039,7 +8041,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/devices/{{id}}/thread/comissioner/:stop",
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/thread/commissioner/:stop",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -8050,7 +8052,7 @@
 								"devices",
 								"{{id}}",
 								"thread",
-								"comissioner",
+								"commissioner",
 								":stop"
 							],
 							"variable": [
@@ -19720,7 +19722,8 @@
 									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -19752,7 +19755,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/ccgs",
+							"raw": "https://api.extremecloudiq.com/tunnel-concentrators",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -19760,7 +19763,7 @@
 								"com"
 							],
 							"path": [
-								"ccgs"
+								"tunnel-concentrators"
 							]
 						}
 					},
@@ -21945,7 +21948,8 @@
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
 									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -21964,7 +21968,8 @@
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -21982,7 +21987,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/copilot/connectivity/locations?startTime={{myStartTime}}&endTime={{myEndTime}}&page=1&limit=10",
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/client-type?startTime={{myStartTime}}&endTime={{myEndTime}}&page=1&limit=10",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -21992,28 +21997,24 @@
 							"path": [
 								"copilot",
 								"connectivity",
-								"locations"
+								"client-type"
 							],
 							"query": [
 								{
 									"key": "startTime",
-									"value": "{{myStartTime}}",
-									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
+									"value": "{{myStartTime}}"
 								},
 								{
 									"key": "endTime",
-									"value": "{{myEndTime}}",
-									"description": "The end time to query, epoch time in milliseconds since 1/1/1970"
+									"value": "{{myEndTime}}"
 								},
 								{
 									"key": "page",
-									"value": "1",
-									"description": "Page number, min = 1 \nDefault value : 1"
+									"value": "1"
 								},
 								{
 									"key": "limit",
-									"value": "10",
-									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
+									"value": "10"
 								},
 								{
 									"key": "locationId",
