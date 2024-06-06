@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "4a3fe52e-7df6-4466-b15d-5623401dc96d",
-		"name": "XIQ APIv2 24r3",
+		"_postman_id": "90828103-57cd-4422-a073-37de72f61bd7",
+		"name": "XIQ APIv2 24r4",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4056946",
-		"_collection_link": "https://gold-escape-604608.postman.co/workspace/XIQ-Workflows---Github~7c6c76b6-b57f-4ebb-8d87-9786462c68e3/collection/4056946-4a3fe52e-7df6-4466-b15d-5623401dc96d?action=share&source=collection_link&creator=4056946"
+		"_collection_link": "https://gold-escape-604608.postman.co/workspace/XIQ-Workflows---Github~7c6c76b6-b57f-4ebb-8d87-9786462c68e3/collection/4056946-90828103-57cd-4422-a073-37de72f61bd7?action=share&source=collection_link&creator=4056946"
 	},
 	"item": [
 		{
@@ -27,7 +27,10 @@
 									"});",
 									" pm.test(\"Response time is less than 1000ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
-									"    });"
+									"    });",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"jwttoken\", jsonData['access_token']);"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -108,9 +111,7 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text",
-								"uuid": "78c158cc-74d2-4fa9-8598-7b10bd40803d"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -145,7 +146,8 @@
 									"//Set in Environment",
 									"pm.environment.set(\"myEpoch\", myDate.getTime()/1000.0); //myEpoch is used in the body of this call. This is Epoch time in seconds."
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -162,9 +164,13 @@
 									"});",
 									" pm.test(\"Response time is less than 1000ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
-									"    });"
+									"    });",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"pm.environment.set(\"jwttoken\", jsonData['access_token']);"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -242,9 +248,7 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "text/plain",
-								"type": "text",
-								"uuid": "55b3edb7-1fc8-4c5b-a10e-4ca194f63917"
+								"value": "text/plain"
 							}
 						],
 						"body": {
@@ -272,8 +276,7 @@
 							"variable": [
 								{
 									"key": "validate",
-									"value": null,
-									"uuid": "1161846a-5653-44a7-9bd8-d6e6133129ca"
+									"value": null
 								}
 							]
 						}
@@ -473,8 +476,7 @@
 							"variable": [
 								{
 									"key": "check",
-									"value": null,
-									"uuid": "ae229b66-7fc9-4038-9a6b-256386a5be18"
+									"value": null
 								}
 							]
 						}
@@ -661,8 +663,7 @@
 							"variable": [
 								{
 									"key": "cancel",
-									"value": "cancel",
-									"uuid": "1851c459-b9d0-4990-b024-5f84f8c0e0bb"
+									"value": "cancel"
 								}
 							]
 						}
@@ -741,8 +742,7 @@
 							"variable": [
 								{
 									"key": "switch",
-									"value": null,
-									"uuid": "115d62e4-7572-40f5-beae-5dbab7cd8f62"
+									"value": null
 								}
 							]
 						}
@@ -989,8 +989,7 @@
 							"variable": [
 								{
 									"key": "backup",
-									"value": null,
-									"uuid": "8ef87157-a6c9-48dc-8738-c531174f13f5"
+									"value": null
 								}
 							]
 						}
@@ -2793,8 +2792,7 @@
 							"variable": [
 								{
 									"key": "rename",
-									"value": ":rename",
-									"uuid": "5408517d-1269-4105-8d73-87c53a8b64df"
+									"value": ":rename"
 								}
 							]
 						}
@@ -2909,8 +2907,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "889cf2f7-876e-461d-ba23-5cfe25fd9e08"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -2975,8 +2972,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "d096553a-20b7-4083-bfea-33da3da2c235"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -3003,8 +2999,7 @@
 							"variable": [
 								{
 									"key": "init",
-									"value": null,
-									"uuid": "d89188df-638c-424d-90b0-55db68ef3a99"
+									"value": null
 								}
 							]
 						}
@@ -3049,8 +3044,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "e76f220d-d86e-4286-94dd-b9eba5f0eaae"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -3172,8 +3166,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "2e8953e0-cc3f-4e29-8553-839a381ae826"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -3264,8 +3257,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "be5928cc-6ca0-40dc-bbc6-8c71fd856934"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -3331,8 +3323,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "81f5a26d-e9ac-48ad-8c2b-44b9089701dd"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -3390,8 +3381,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "4749ce18-79d8-40cb-a649-9ba35857e2d6"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -3515,8 +3505,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "aa8e1631-8a90-416b-89f0-394938fd58e3"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -3606,8 +3595,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "79618261-76c0-4fba-a859-ce19375745a3"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -3673,8 +3661,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "c00e1d73-ad20-46b0-8285-399cabeb8f07"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -3732,8 +3719,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "c2fdde2b-a43c-4a07-8ff4-4e5b9ad5f059"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -3796,8 +3782,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "0dd4f973-3804-490a-895b-f73db960a38f"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -3851,8 +3836,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "44d32e71-6bd0-484e-8073-f7d910a83b47"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -3877,6 +3861,103 @@
 							"path": [
 								"locations",
 								"floorplan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[LRO] Import one or more floors from an Ekahau archive",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 2500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(2500);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"description": "The Ekahau archive to import floors from.",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/locations/import/ekahau?additionalProp1=0",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"locations",
+								"import",
+								"ekahau"
+							],
+							"query": [
+								{
+									"key": "async",
+									"value": "false",
+									"description": "Whether to enable async mode.\n\nDefault value : false",
+									"disabled": true
+								},
+								{
+									"key": "additionalProp1",
+									"value": "0",
+									"description": "Required: Describes how imported floors are associated with buildings."
+								},
+								{
+									"key": "additionalProp2",
+									"value": "0",
+									"description": "Describes how imported floors are associated with buildings.",
+									"disabled": true
+								},
+								{
+									"key": "additionalProp3",
+									"value": "0",
+									"description": "Describes how imported floors are associated with buildings.",
+									"disabled": true
+								},
+								{
+									"key": "importCustomApConfigurations",
+									"value": "true",
+									"description": "Whether to also import or not the custom AP configurations such as: Hostname, TX Power & Channel.",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -3921,8 +4002,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "2c450f40-a760-4919-87d7-bc6f8ed99e13"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -4013,8 +4093,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "fddc44df-c5a3-42e9-9833-0698e04f8910"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -4080,8 +4159,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "6c22ff08-ce79-47e7-b515-763b0dbb9fdd"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -4139,8 +4217,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "06f8954c-2b16-4259-93b6-3eefb369a291"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -4203,8 +4280,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "c64892e3-bb7e-4aa1-abb9-af31564fcd7f"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -4270,8 +4346,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "769a738e-e791-4bcb-8b16-c156a2085172"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -4341,8 +4416,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "78d73eb9-b7e2-4bc0-af80-e42ec153da6a"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -4422,8 +4496,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "fc03341a-4648-4822-98a9-458e1bf74abb"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -4707,8 +4780,7 @@
 							"variable": [
 								{
 									"key": "advanced-onboard",
-									"value": null,
-									"uuid": "6793c824-f2e9-41d3-bf30-c4221148f1e2"
+									"value": null
 								}
 							]
 						}
@@ -4792,8 +4864,7 @@
 							"variable": [
 								{
 									"key": "cli",
-									"value": ":cli",
-									"uuid": "ce213eb3-7066-4f2c-ad2c-af8bc57f5fbf"
+									"value": ":cli"
 								}
 							]
 						}
@@ -4873,8 +4944,7 @@
 							"variable": [
 								{
 									"key": "delete",
-									"value": ":delete",
-									"uuid": "77ccf878-f3c0-4986-bdd4-1b931a24e006"
+									"value": ":delete"
 								}
 							]
 						}
@@ -4946,8 +5016,7 @@
 							"variable": [
 								{
 									"key": "manage",
-									"value": ":manage",
-									"uuid": "3d9f9be1-cc03-4af9-af8c-ef2b5cb93cd1"
+									"value": ":manage"
 								}
 							]
 						}
@@ -5019,8 +5088,7 @@
 							"variable": [
 								{
 									"key": "onboard",
-									"value": ":onboard",
-									"uuid": "f57a3b08-9cb3-4e4a-9f5b-ce95b7504100"
+									"value": ":onboard"
 								}
 							]
 						}
@@ -5092,8 +5160,7 @@
 							"variable": [
 								{
 									"key": "reboot",
-									"value": ":reboot",
-									"uuid": "92cc25b0-6486-4c34-b0b4-a5274f899728"
+									"value": ":reboot"
 								}
 							]
 						}
@@ -5134,13 +5201,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "518700d1-f6c8-4ef8-830e-2ed50580d825"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "e93ebd7c-7139-4cd9-990b-abf801dc814f"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -5162,8 +5227,7 @@
 							"variable": [
 								{
 									"key": "unmanage",
-									"value": ":unmanage",
-									"uuid": "eaaf0b4c-2c61-4fe6-9388-4fa4b9cb6c51"
+									"value": ":unmanage"
 								}
 							]
 						}
@@ -5208,8 +5272,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "859ee65d-bca4-4f5f-a255-9a76e79f82fd"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -5275,8 +5338,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "da78b20a-107c-4c52-9912-c7f73c606f7b"
+								"value": "*/*"
 							}
 						],
 						"url": {
@@ -5341,13 +5403,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "193b8e2c-1d66-45ec-88d5-f24ef1f6d454"
+								"value": "application/json"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "52b82513-0c35-4419-894f-abcb3f7bb010"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -5370,8 +5430,7 @@
 							"variable": [
 								{
 									"key": "cli",
-									"value": ":cli",
-									"uuid": "ca693e66-ea85-4167-9076-6a54948c8631"
+									"value": ":cli"
 								}
 							]
 						}
@@ -5412,8 +5471,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "d812ecd8-e8c4-4645-bc7e-cce0596d7279"
+								"value": "*/*"
 							}
 						],
 						"url": {
@@ -5432,8 +5490,7 @@
 							"variable": [
 								{
 									"key": "manage",
-									"value": ":manage",
-									"uuid": "d9e52044-a023-429a-a9db-9d03d83f288d"
+									"value": ":manage"
 								}
 							]
 						}
@@ -5474,8 +5531,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "8082a034-4dce-4b16-b2dd-e1448815bcf7"
+								"value": "*/*"
 							}
 						],
 						"url": {
@@ -5494,8 +5550,7 @@
 							"variable": [
 								{
 									"key": "reboot",
-									"value": ":reboot",
-									"uuid": "fecc1dbf-4e00-4004-85b9-f344e35c7c58"
+									"value": ":reboot"
 								}
 							]
 						}
@@ -5536,8 +5591,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "6f22cdef-aafc-4749-9c31-6ff84da08c12"
+								"value": "*/*"
 							}
 						],
 						"url": {
@@ -5564,8 +5618,7 @@
 							"variable": [
 								{
 									"key": "reset",
-									"value": null,
-									"uuid": "4f7fa3f9-6a90-4167-97da-ec6996aa477a"
+									"value": null
 								}
 							]
 						}
@@ -5606,8 +5659,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "cf0c800d-97af-46be-85ce-c1fa1cd51bbd"
+								"value": "*/*"
 							}
 						],
 						"url": {
@@ -5626,8 +5678,7 @@
 							"variable": [
 								{
 									"key": "unmanage",
-									"value": ":unmanage",
-									"uuid": "0347a5eb-7798-4426-aeeb-7eaf69ad68d1"
+									"value": ":unmanage"
 								}
 							]
 						}
@@ -5684,8 +5735,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "c662b843-63e6-4fab-aa84-717febecdb79"
+								"value": "*/*"
 							}
 						],
 						"url": {
@@ -5774,8 +5824,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "7c248afd-ddc5-45dc-8cb5-fc0975079592"
+								"value": "*/*"
 							}
 						],
 						"body": {
@@ -5853,8 +5902,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "a208efa9-c613-485e-8050-0eddbd41ec71"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -5875,7 +5923,7 @@
 					"response": []
 				},
 				{
-					"name": "Assign client monitor setting to device",
+					"name": "Assign client monitor settings to a device",
 					"event": [
 						{
 							"listen": "test",
@@ -5919,8 +5967,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "56d3df10-4698-497a-9986-4a43a19619b6"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -5994,8 +6041,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "94571a28-689b-4230-930a-da75af33d318"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -6062,8 +6108,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "5b6cf8e4-7469-4aea-bca2-dcf57c7856d8"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -6139,8 +6184,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "a8efa00a-4493-4079-a627-8bb2932cc235"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -6213,8 +6257,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "d71e9738-c4fb-424a-a323-a335c1be985a"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -6282,8 +6325,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "465d2532-1b16-40ba-9238-1c29b6b281f3"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -6363,8 +6405,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "d8653a65-6a5f-462c-b2c9-858cd90da4aa"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -6446,8 +6487,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "809da42a-1806-4ab0-b3e2-cf2b4a661dbb"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -6522,8 +6562,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "6d9d6f57-17a9-4317-961a-c3ebd0e94df0"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -6600,8 +6639,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "85f09281-b8f2-4a48-a47f-4476d2114483"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -6681,8 +6719,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "10725f87-a78d-4cab-9733-d79daee1c9f7"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -6764,8 +6801,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "87f8d084-2296-4486-86df-0d57a48b7da9"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -6840,8 +6876,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "a730f419-f1b9-4a20-a6b7-bb6631cc849e"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -6918,8 +6953,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "22b4fedc-a559-41c4-b850-64cf3555d6dd"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -6993,8 +7027,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "39f45b23-f124-466d-842e-c21bcf0da329"
+								"value": "*/*"
 							}
 						],
 						"body": {
@@ -7065,8 +7098,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "803fb285-3967-4408-b501-1a6bdfe8f971"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -7133,8 +7165,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "5b770aaf-b0dd-4cbe-8b62-68a18150aa44"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -7206,8 +7237,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "319849c2-55f1-484b-be3f-c59e2d453c9a"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -7270,8 +7300,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "a3361c4e-8d75-414a-ad8a-ba23afc377c5"
+								"value": "*/*"
 							}
 						],
 						"url": {
@@ -7348,8 +7377,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "31103682-1ded-4a47-bb5d-27d9f94fd6bf"
+								"value": "*/*"
 							}
 						],
 						"url": {
@@ -7421,8 +7449,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "2a264351-a233-4898-ac50-e2f00239c540"
+								"value": "*/*"
 							}
 						],
 						"url": {
@@ -7487,8 +7514,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "e83e7c54-a300-46ae-8575-e143906e5b60"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -7546,8 +7572,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "b02d5dac-1f47-4430-9bd7-dd689a3cfb91"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -7619,8 +7644,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "f7b61dd4-0d29-4f94-abd0-00838e13a55f"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -7647,6 +7671,251 @@
 									"key": "endTime",
 									"value": "{{myEndTime}}",
 									"description": "The end time for collecting the wifi interface stats, epoch time in milliseconds since 1/1/1970"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get the device IOT Wireless Interface settings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes frequency \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"frequency\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"March 9, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"March 9, 2023 04:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/iot",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"iot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disable IoT Wireless Interface settings on device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes frequency \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"frequency\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"March 9, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"March 9, 2023 04:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/iot/:disable",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"iot",
+								":disable"
+							],
+							"variable": [
+								{
+									"key": "disable",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enable IoT Wireless Interface settings on device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes frequency \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"frequency\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"March 9, 2023 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"March 9, 2023 04:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "0",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/iot/:enable",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								"{{id}}",
+								"iot",
+								":enable"
+							],
+							"variable": [
+								{
+									"key": "enable",
+									"value": ""
 								}
 							]
 						}
@@ -7691,8 +7960,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "87be210c-6c4e-4f8b-888a-8931b6715114"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -7746,13 +8014,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "6b68adf5-af2c-4049-8da8-7be15cac5f29"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "963ccfa5-38b5-45d0-82ce-9f429ed2e447"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -7815,8 +8081,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "7c505a1e-4e42-4af6-abf3-4dc0e473547b"
+								"value": "*/*"
 							}
 						],
 						"url": {
@@ -7875,8 +8140,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "87db8489-d8e3-45e6-ae9b-5305b3e6fb43"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -7904,8 +8168,7 @@
 							"variable": [
 								{
 									"key": "refresh",
-									"value": "",
-									"uuid": "397f6fdd-9a32-413f-906f-851a4f5915d9"
+									"value": ""
 								}
 							]
 						}
@@ -7951,8 +8214,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "c382aef6-d6e3-4ff7-8077-b78b7325d284"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -8063,8 +8325,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "25d784d5-db34-45a4-a1cf-8caa21748959"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -8141,8 +8402,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "770d5ada-fc8f-4ba3-8310-23e15116b005"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -8209,8 +8469,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "562907d2-3bdb-4aab-b6dd-af1a632a0ec8"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -8294,8 +8553,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "e86c1db5-5652-4d23-a1e4-441f3fb02daf"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -8378,8 +8636,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "6604ee2a-a9cd-43fc-b16a-2e4bc3a35ea6"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -8433,8 +8690,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "2a4ead77-bc8b-4bc4-b586-c08dd52029ed"
+								"value": "*/*"
 							}
 						],
 						"url": {
@@ -8495,8 +8751,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "bca01934-ddcc-402f-ad91-0be411ea75ad"
+								"value": "*/*"
 							}
 						],
 						"url": {
@@ -8550,8 +8805,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "e98da57e-7d67-4088-aeab-b35bfe748036"
+								"value": "*/*"
 							}
 						],
 						"body": {
@@ -8575,8 +8829,7 @@
 							"variable": [
 								{
 									"key": "override",
-									"value": null,
-									"uuid": "c646d9db-47c6-44c7-96c2-b372d30ed9dc"
+									"value": null
 								}
 							]
 						}
@@ -8617,8 +8870,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "f3da6893-9ac0-4434-abd3-05d299706dbd"
+								"value": "*/*"
 							}
 						],
 						"url": {
@@ -8673,8 +8925,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "a13f6bd7-787e-4290-a9e8-8a5a5ae224fb"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -8704,8 +8955,7 @@
 							"variable": [
 								{
 									"key": "change",
-									"value": null,
-									"uuid": "e9f1e490-8940-4f0e-b9dd-a009857eed2d"
+									"value": null
 								}
 							]
 						}
@@ -8747,8 +8997,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "38e1c1fe-9ccf-4734-94ba-b810c472ce2c"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -8778,8 +9027,7 @@
 							"variable": [
 								{
 									"key": "start",
-									"value": "",
-									"uuid": "2018d20d-f330-459f-ab13-1b377be20e61"
+									"value": ""
 								}
 							]
 						}
@@ -8821,8 +9069,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "5c6a3024-3f12-4f79-b547-78389b486927"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -8852,8 +9099,7 @@
 							"variable": [
 								{
 									"key": "stop",
-									"value": "",
-									"uuid": "484a4e7a-cf3c-4e57-ba56-b0e50f996992"
+									"value": ""
 								}
 							]
 						}
@@ -8895,8 +9141,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "522c277b-919d-4d8e-997d-19606664002e"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -8924,8 +9169,7 @@
 							"variable": [
 								{
 									"key": "assign",
-									"value": "",
-									"uuid": "a4c62671-4bca-42e5-955f-16640306d9ce"
+									"value": ""
 								}
 							]
 						}
@@ -8967,8 +9211,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "429b0f3e-ca4e-4219-b9f1-cf718ede8496"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -8996,8 +9239,7 @@
 							"variable": [
 								{
 									"key": "revoke",
-									"value": "",
-									"uuid": "bd9c059c-11ae-43d2-9540-db78c05cfa2e"
+									"value": ""
 								}
 							]
 						}
@@ -9039,8 +9281,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "9ae31cad-adf5-4837-9948-09a851bde40b"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -9068,8 +9309,7 @@
 							"variable": [
 								{
 									"key": "query",
-									"value": "",
-									"uuid": "018e1f0a-7ef9-4d47-9403-dc511db7e1e5"
+									"value": ""
 								}
 							]
 						}
@@ -9110,8 +9350,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "135f16dd-7353-481e-9267-8f83f1f1f6a6"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -9139,8 +9378,7 @@
 							"variable": [
 								{
 									"key": "assign",
-									"value": null,
-									"uuid": "6d5f3460-9237-432f-a3c6-13caf12263eb"
+									"value": null
 								}
 							]
 						}
@@ -9186,8 +9424,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "73725e28-7735-4972-97a5-9049a90d82bf"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -9264,8 +9501,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "721abf54-85fc-4968-9c21-cc8ca3c4e2ef"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -9327,13 +9563,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "ef932baa-7694-4769-bcf9-d5709ec00b45"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "f1af4f6e-8bc6-4023-8e9c-42da08910ed2"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -9356,8 +9590,7 @@
 							"variable": [
 								{
 									"key": "assign",
-									"value": ":assign",
-									"uuid": "b9a90eea-1498-4ecb-bec5-d09d7982e940"
+									"value": ":assign"
 								}
 							]
 						}
@@ -9402,13 +9635,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "ac09f818-eef1-48a2-a65a-6357fb749a18"
+								"value": "application/json"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "c8910f51-1339-463a-aa13-fd83c616a025"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -9431,8 +9662,7 @@
 							"variable": [
 								{
 									"key": "query",
-									"value": ":query",
-									"uuid": "9c309225-c8d9-48fb-800c-66557aa3bde1"
+									"value": ":query"
 								}
 							]
 						}
@@ -9473,13 +9703,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "67d84151-221d-47fd-b6d4-ac7ec38aafc6"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "ef95ee9f-5409-4599-be21-6a17547bfa6a"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -9502,8 +9730,7 @@
 							"variable": [
 								{
 									"key": "revoke",
-									"value": ":revoke",
-									"uuid": "94cbe746-8c46-457e-b866-3309256547fa"
+									"value": ":revoke"
 								}
 							]
 						}
@@ -9544,13 +9771,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "7ea09d32-b112-493e-a69d-53cdad8c308a"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "c0296745-8a5b-4bf0-a583-385233b3905e"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -9573,8 +9798,7 @@
 							"variable": [
 								{
 									"key": "assign",
-									"value": ":assign",
-									"uuid": "d56dfd11-ea39-4456-be31-11ce08615376"
+									"value": ":assign"
 								}
 							]
 						}
@@ -9619,13 +9843,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "d49be83d-54ee-4ad5-8b8b-4a8b2ff9d7cf"
+								"value": "application/json"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "c5ce9149-8fe5-4c65-b9c1-2e438f068477"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -9648,8 +9870,7 @@
 							"variable": [
 								{
 									"key": "query",
-									"value": ":query",
-									"uuid": "e292f243-6e77-4182-9398-36fb89e38677"
+									"value": ":query"
 								}
 							]
 						}
@@ -9690,13 +9911,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "95be3f5d-1770-4702-9615-46d068513056"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "1c89844e-bba2-449d-9d9d-21290e0da9b4"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -9719,8 +9938,7 @@
 							"variable": [
 								{
 									"key": "revoke",
-									"value": ":revoke",
-									"uuid": "8e38381c-7f65-4836-b53f-d3d03e8d6ab5"
+									"value": ":revoke"
 								}
 							]
 						}
@@ -9765,8 +9983,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "dfe27f33-5849-4a0f-9986-933b130ce7be"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -9832,13 +10049,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "8b1dea40-94bf-462a-8a8a-b9ced047f4f0"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "6c522bfa-f7e9-459c-8f85-06e5892440ba"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -9861,8 +10076,7 @@
 							"variable": [
 								{
 									"key": "change",
-									"value": null,
-									"uuid": "048d8ff2-29b8-42c8-b65c-5bc8d5523f25"
+									"value": null
 								}
 							]
 						}
@@ -9907,8 +10121,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "0430bd05-11c1-4659-b6f5-e779224687c7"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -9984,13 +10197,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "89f02a50-9ad7-479e-98c3-ca6fd90d562b"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "6eeb4e57-e24d-4d65-863d-37833c80fee4"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -10021,8 +10232,7 @@
 							"variable": [
 								{
 									"key": "assign",
-									"value": null,
-									"uuid": "45b5bf0c-cf48-41b5-8efc-c0281efe1a6e"
+									"value": null
 								}
 							]
 						}
@@ -10063,13 +10273,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "0b1a7541-9647-406f-87ee-50a3e68a8174"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "bdf5c552-9435-485f-b247-f57763eab6d8"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -10095,8 +10303,7 @@
 							"variable": [
 								{
 									"key": "revoke",
-									"value": null,
-									"uuid": "6fc4cccf-477b-4437-8482-9065624010bc"
+									"value": null
 								}
 							]
 						}
@@ -10141,8 +10348,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "cd1a562b-abe0-4638-8804-c7860a63c3a5"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -10668,8 +10874,7 @@
 							"variable": [
 								{
 									"key": "add",
-									"value": null,
-									"uuid": "ccc8f4a8-19f8-4985-af84-8984fc7517db"
+									"value": null
 								}
 							]
 						}
@@ -10743,8 +10948,7 @@
 							"variable": [
 								{
 									"key": "remove",
-									"value": null,
-									"uuid": "7a91c02e-0877-495b-9f23-219c2ecac7af"
+									"value": null
 								}
 							]
 						}
@@ -10807,8 +11011,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "d10b746f-dafd-4844-9232-e22df9791d4f",
 								"disabled": true
 							}
 						],
@@ -10892,8 +11094,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "7c2d0c75-0f50-468b-a3b8-a5007a2b9c92",
 								"disabled": true
 							}
 						],
@@ -11061,8 +11261,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "d8964608-ebe6-478e-acfa-ac3d0bd8bf2d",
 								"disabled": true
 							}
 						],
@@ -11192,8 +11390,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "e33d1357-c943-485b-96d3-2bacd6d51941",
 								"disabled": true
 							}
 						],
@@ -11264,8 +11460,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "403a291b-4205-49c3-9894-d112e6e5202c",
 								"disabled": true
 							}
 						],
@@ -11346,8 +11540,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "7874a137-2516-4402-adf7-46a734fe56eb",
 								"disabled": true
 							}
 						],
@@ -11419,8 +11611,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "16f1b281-a356-4a66-af0d-594482f243ee",
 								"disabled": true
 							}
 						],
@@ -11552,8 +11742,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "f30050e0-b0f3-46a6-823f-ea331b3de94d",
 								"disabled": true
 							}
 						],
@@ -12402,8 +12590,7 @@
 							"variable": [
 								{
 									"key": "disable",
-									"value": "",
-									"uuid": "ec2131e1-49f0-4cdd-a5ce-d496fc3d2a82"
+									"value": ""
 								}
 							]
 						}
@@ -12473,8 +12660,7 @@
 							"variable": [
 								{
 									"key": "enable",
-									"value": "",
-									"uuid": "3955516d-2bd3-4606-9ec8-b3cbe1c85935"
+									"value": ""
 								}
 							]
 						}
@@ -12751,8 +12937,7 @@
 							"variable": [
 								{
 									"key": "delete",
-									"value": "",
-									"uuid": "d0650d53-be7e-4df0-8b1d-9c7436cc5e1d"
+									"value": ""
 								}
 							]
 						}
@@ -13017,8 +13202,7 @@
 							"variable": [
 								{
 									"key": "verify",
-									"value": "",
-									"uuid": "31ed0216-aa14-4c98-9b11-2c447895487a"
+									"value": ""
 								}
 							]
 						}
@@ -13226,8 +13410,7 @@
 							"variable": [
 								{
 									"key": "delete",
-									"value": "",
-									"uuid": "86f23078-867a-4eec-b369-f563384246c4"
+									"value": ""
 								}
 							]
 						}
@@ -13627,8 +13810,7 @@
 							"variable": [
 								{
 									"key": "acknowledge",
-									"value": "",
-									"uuid": "b028dcfb-992e-4f8a-babf-df1caebef8fe"
+									"value": ""
 								}
 							]
 						}
@@ -13968,8 +14150,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "ff302fab-22e2-4b26-9dbc-97426f4d5850"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -14076,8 +14257,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "72e366cb-81b6-42a5-9cfb-bff647d5c351"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -14149,6 +14329,81 @@
 					"response": []
 				},
 				{
+					"name": "Get audit log full descriptions",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"May 19, 2022 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"May 20, 2022 12:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/logs/audit/full-descriptions/{{audit_log_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"logs",
+								"audit",
+								"full-descriptions",
+								"{{audit_log_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "[LRO] Create audit logs report",
 					"event": [
 						{
@@ -14203,8 +14458,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "212439a2-8156-4d67-bdae-07d62658fb01"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -14321,8 +14575,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "1c86cd9a-8492-405f-af90-81914deefb75"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -14395,8 +14648,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "fa205f9e-c90f-4d21-8b76-a863af69f3d7"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -14501,8 +14753,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "2f164861-38b8-4002-8b00-862e48073f74"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -14603,8 +14854,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "deea1a2b-25f9-4b47-acc7-d1bd9afd8efb"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -14705,8 +14955,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "f6519c88-5929-496f-9102-98e53d5a58d4"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -14798,8 +15047,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "dc98f8df-b963-41e9-abec-c5872f734b78"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -14852,8 +15100,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "55e85949-7240-4366-8ed2-281bcccf77e8"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -14915,8 +15162,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "e4cf8e01-b3c6-46b6-b953-30f254d8b9fa"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -14980,8 +15226,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "467fc79f-b5d4-4709-8892-0ecdfb87522a"
+								"value": "*/*"
 							}
 						],
 						"body": {
@@ -15046,8 +15291,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "1afea4a1-2400-4425-af6a-fad075147489"
+								"value": "*/*"
 							}
 						],
 						"url": {
@@ -15104,8 +15348,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "2bef36e0-a1c3-459c-9b63-a374282c4816"
+								"value": "*/*"
 							}
 						],
 						"url": {
@@ -15354,8 +15597,7 @@
 							"variable": [
 								{
 									"key": "delete",
-									"value": null,
-									"uuid": "14d9c4e9-10f9-4cf2-a7a3-367f983ddcf5"
+									"value": null
 								}
 							]
 						}
@@ -15928,8 +16170,7 @@
 							"variable": [
 								{
 									"key": "regenerate-password",
-									"value": null,
-									"uuid": "35efff0a-a527-46dc-85d0-064b95cf9b4f"
+									"value": null
 								}
 							]
 						}
@@ -15974,8 +16215,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "7b006893-f8a3-4faf-a8cd-5f92e4ce0ba3"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -16028,13 +16268,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "d01857f0-8e1c-4130-bcf1-ceaf34dfb98d"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "593a8fc4-1643-4b55-85ae-b403cca42a48"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -16091,13 +16329,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "fcd97b9a-7bf1-4966-a864-0b85ed341fee"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "f7ebd0bf-6925-4588-b72e-5871d4c74a72"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -16157,13 +16393,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "590df064-1d76-4824-b9d4-6860bbe4fb42"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "a390bb60-033c-4698-a44b-e79e2e4987e7"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -16187,8 +16421,7 @@
 							"variable": [
 								{
 									"key": "onboard",
-									"value": null,
-									"uuid": "21988268-85c7-4a40-b6d1-7713c3a92ad8"
+									"value": null
 								}
 							]
 						}
@@ -16229,13 +16462,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "566d5c26-9212-41b2-a4f7-a2ab2822c334"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "186219e5-4433-488e-a14a-22415be0c686"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -16263,8 +16494,7 @@
 							"variable": [
 								{
 									"key": "email",
-									"value": null,
-									"uuid": "7e4e875e-c47b-416c-8721-410e49cd5bd0"
+									"value": null
 								}
 							]
 						}
@@ -16305,13 +16535,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "4e5186f8-166d-4521-892c-11c45ac81862"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "4fedbde2-f1eb-491b-901f-55fa9b169e57"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -16339,8 +16567,7 @@
 							"variable": [
 								{
 									"key": "generate",
-									"value": null,
-									"uuid": "8c9de937-2fb1-4470-a2cc-2e826ff11cf5"
+									"value": null
 								}
 							]
 						}
@@ -16385,13 +16612,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "99867775-30c6-4963-87ff-dc3131988ea8"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "222b4835-2edb-464a-a190-9dbca731cc53"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -16450,13 +16675,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "059b9a6d-b6c3-4623-b436-e2eee6024a90"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "75cfbd52-5c56-4dbf-b7b7-b6aaa0340ed7"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -16519,13 +16742,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "77106476-38b7-456b-9113-d44fc0a34c10"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "26047c7b-2c9c-47af-a9aa-0c48e8f31c63"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -16580,13 +16801,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "87303bb3-b8d3-4f47-9854-123e2d7d8c84"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "232c577b-501f-4146-9f59-6875a5191168"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -16645,13 +16864,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "cb3ada50-767b-45ce-9590-db825883d4c0"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "e4979693-6375-41c7-b83b-310887fa513d"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -16710,13 +16927,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "2fded816-c85d-4f71-b520-a54faef899ad"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "77333cb9-d7bf-4658-a224-6ca9d174ce27"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -16779,13 +16994,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "c9302b87-d35e-4d5e-ad8c-f9017cd9dfb1"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "44486e1a-e174-4f33-ad63-447b5226a308"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -16849,13 +17062,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "5d8428f9-ea47-47f5-a5d0-98ee13b70838"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "477d5cb0-68f9-42b3-a151-775fd1a92db2"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -16935,13 +17146,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "93c74b95-c9aa-4142-a7dc-c15b121da575"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "4a79ead1-d9b3-4093-a418-9ff0c228c074"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -17001,13 +17210,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "3c5b7d68-8c36-4a81-842e-8b3729b0dcf0"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "5ee3a461-63e7-4cfc-a888-03c6d8ec85b6"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -17064,13 +17271,11 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "*/*",
-								"uuid": "496834c5-f236-4b5e-94a9-03171df4083c"
+								"value": "*/*"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"uuid": "48a84b76-c5ae-4f13-a62c-e5197a99bdfe"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -17132,8 +17337,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "2bb9438c-5dd2-47f0-854b-c05fba3167fd"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -17201,8 +17405,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "972f44ed-580b-454d-b98e-6e3c01beb8ba"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -17267,8 +17470,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "e7ca401d-8bf3-4b40-af29-1650d9eec5f2"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -17325,8 +17527,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "353af336-2ae8-4a51-9b84-b9ec6adbff68"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -17388,8 +17589,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "6f56374e-5aac-4a31-a355-cc8601c6f547"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -17446,8 +17646,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "c7561dfb-b8cd-4768-abdc-d5e235edbbe4"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -17515,8 +17714,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "821d9a21-6b41-4b3b-83e7-4dfe028dc67e"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -17581,8 +17779,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "b43fde98-8707-4054-b0ca-b91b68b9004a"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -17639,8 +17836,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "eb8a6704-b0ff-4fcb-b6d4-c3e1ad05b668"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -17702,8 +17898,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "6d3350bf-5b6c-4e27-b3ac-00020a5a4092"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -17761,8 +17956,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "86a7041c-b9da-4533-a512-e19218901b0d"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -17831,8 +18025,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "876032d6-ca98-4fcd-b9f6-aa2abff01f45"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -17898,8 +18091,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "d6fa6fbf-9b26-4a59-8405-51887f3ec375"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -17957,8 +18149,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "65e9f681-66bc-48cf-89e8-0e67a6095d64"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -18021,8 +18212,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "e00cab47-8033-476e-b5f4-c9ffbd0ab12f"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -18060,7 +18250,8 @@
 									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -18079,8 +18270,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "968f9375-0bdc-49a9-93f5-92e62a100dfa"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -18104,6 +18294,18 @@
 									"key": "limit",
 									"value": "10",
 									"description": "Page Size, min = 1, max = 100\n\nDefault value : 10"
+								},
+								{
+									"key": "appId",
+									"value": "THREAD_GATEWAY",
+									"description": "Application ID, e.g. THREAD_GATEWAY\n\nAvailable values : THREAD_GATEWAY",
+									"disabled": true
+								},
+								{
+									"key": "appSupported",
+									"value": "SINGLE",
+									"description": "Application Supported, e.g. SINGLE or MULTI\n\nAvailable values : SINGLE, MULTI",
+									"disabled": true
 								}
 							]
 						}
@@ -18148,8 +18350,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "01c27d02-e4e2-4076-9dbd-93f1bc2c8ed5"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -18214,8 +18415,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "38b48f99-be76-4681-8506-c2d7137792c2"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -18272,8 +18472,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "eb969139-c30d-4662-aa57-6d700749debb"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -18335,8 +18534,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "ac29f411-a3d1-4762-9bf3-97250ff5b188"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -18394,8 +18592,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "871048d0-40b8-4d81-81ee-7814065826bc"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -18464,8 +18661,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "7e8c5ad3-6a34-4505-858a-3365b2a5620c"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -18531,8 +18727,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "cd67233d-5014-4358-b4e6-dc83cd45dfac"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -18590,8 +18785,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "a6079f21-b874-4720-8de4-4bd509bec8a4"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -18654,8 +18848,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "dde8466e-48be-4d80-a51c-aa34927e0fa6"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -18709,8 +18902,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "314c4c83-ec36-426b-912c-72d0ce2275a6"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -18738,8 +18930,7 @@
 							"variable": [
 								{
 									"key": "attach",
-									"value": "",
-									"uuid": "b778e6f1-d4e0-479f-b70b-c3f4f6122fbf"
+									"value": ""
 								}
 							]
 						}
@@ -18781,8 +18972,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "539f64b9-a95c-4a82-a19a-f8e709339d4b"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -18810,8 +19000,7 @@
 							"variable": [
 								{
 									"key": "detach",
-									"value": "",
-									"uuid": "655e5564-52e4-4363-a673-551647849565"
+									"value": ""
 								}
 							]
 						}
@@ -18857,8 +19046,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "8814de13-cbd1-44d0-998c-a6ae4f6c855f"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -18922,8 +19110,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "aded2ad2-caa6-4f52-8eee-8967be3e8481"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -18989,8 +19176,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "af5794f5-6622-4e73-81b5-0309ffddbbcf"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -19048,8 +19234,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "b413b9c4-c7f5-411b-a484-824d9e6730e4"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -19112,8 +19297,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "2d00dacd-b43d-485f-b9f7-da3a242e101a"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -19171,8 +19355,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "e10a4c1b-ba4c-40b0-9852-3a8caab930a5"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -19241,8 +19424,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "e54b8d16-757f-4a8d-bcf9-fd07bbd920b4"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -19308,8 +19490,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "031e2b6c-b40c-442a-8d8a-7319779b5c89"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -19367,8 +19548,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "4ed8f231-d694-45e8-9fd0-d1533a5d7941"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -19431,8 +19611,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "1c6c5e7a-b1e1-4aeb-9908-39df2cdc717d"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -19486,8 +19665,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "3ab10404-b79f-4b37-9489-6774bdde38de"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -19515,8 +19693,7 @@
 							"variable": [
 								{
 									"key": "attach",
-									"value": "",
-									"uuid": "e734d07b-3571-4150-826a-024626fb96bb"
+									"value": ""
 								}
 							]
 						}
@@ -19558,8 +19735,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "b15b50f6-1a94-4f06-afcf-6e5eadfe6b8a"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -19587,8 +19763,7 @@
 							"variable": [
 								{
 									"key": "detach",
-									"value": "",
-									"uuid": "a703d790-3434-41d7-8f5c-841506728100"
+									"value": ""
 								}
 							]
 						}
@@ -19634,8 +19809,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "4fd20fda-ea98-4119-a316-cf23bb9a9a99"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -19704,8 +19878,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "d231f381-3f11-473c-b478-4f0ca797480c"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -19771,8 +19944,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "c6aaded9-9ef5-4b3d-9ec2-fdd00e15d564"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -19830,8 +20002,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "6fdfb76d-a5b3-43a3-96ae-7770d9fc0794"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -19894,8 +20065,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "c23b96ff-4e0a-4fed-839c-1b22e176a5b6"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -19909,6 +20079,70 @@
 							"path": [
 								"mac-object-profiles",
 								"{{mac_object_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Radio Operating Modes by product type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"wireless_interface_list\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/radio-profiles?productType=",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"radio-profiles"
+							],
+							"query": [
+								{
+									"key": "productType",
+									"value": "",
+									"description": "radio op mode"
+								}
 							]
 						}
 					},
@@ -19952,8 +20186,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "1371688f-c2d9-454b-89cf-bce31e172592"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -20021,8 +20254,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "adab8842-921d-4ad5-a1f9-153d97884e2b"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -20087,8 +20319,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "f808bc70-b796-469b-bd19-35250736de42"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -20145,8 +20376,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "3bbe1340-b2a3-4761-ac2b-7473df5db807"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -20208,8 +20438,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "d046bb51-0b8c-429b-a167-90b9c1f087b2"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -20266,8 +20495,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "34940b9b-6689-4155-9da8-6b2a06c1802b"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -20325,8 +20553,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "2a3a04b2-cd34-4780-95c0-139cf8f29f57"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -20393,8 +20620,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "74209b45-eabb-4bcf-ad3b-7ab92f297d34"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -20463,8 +20689,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "7be35552-7990-41d8-bf5e-883b81816edb"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -20530,8 +20755,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "fb01913e-68af-4104-81a0-0726cfcb356d"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -20589,8 +20813,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "8021f1cd-8fe1-4a6e-93ee-3d8de2ef0755"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -20653,8 +20876,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "d2adf51d-a616-4b99-8d2e-9fd58e0f6f53"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -20712,8 +20934,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "38a06f8e-a6ea-49c6-84c4-083753e9bde7"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -20771,8 +20992,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "652ec8fc-16b4-4f41-8394-0482f53f38f6"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -20839,8 +21059,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "1973e731-2d6a-4874-92e7-28c038a38760"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -20898,8 +21117,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "4ad1b058-f877-4cc7-9cb8-4b2bf1e1c1fb"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -20966,8 +21184,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "8346c4ce-e253-40a3-b06b-3a031b25ff30"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -21025,8 +21242,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "5f9363a2-5213-4a0b-91ff-658a23ad1e37"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -21093,8 +21309,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "ce3ad924-09dc-47d2-bf02-4020cd2c0f60"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -21152,8 +21367,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "c4e66db7-b39e-44e2-9a3b-f1b43c4f48b7"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -21220,8 +21434,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "8e4842fd-d6cf-4a49-875a-e79356ba20b3"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -21279,8 +21492,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "5d265713-fab7-4002-ab18-25ce00d19806"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -21347,8 +21559,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "a615c9b0-f21f-4ee9-9aff-4202ca18bcc4"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -21412,8 +21623,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "0e053093-c8fe-4784-a8d0-879e436d931a"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -21441,8 +21651,7 @@
 							"variable": [
 								{
 									"key": "rename",
-									"value": null,
-									"uuid": "a2c36ff7-2637-4830-97e9-cf60765ba054"
+									"value": null
 								}
 							]
 						}
@@ -21484,8 +21693,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "4ef9a465-27d6-475a-b3db-8718e5ab11cb"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -21514,8 +21722,7 @@
 							"variable": [
 								{
 									"key": "attach",
-									"value": null,
-									"uuid": "db0839b6-fd5a-469b-ad6f-a5ae173a1abe"
+									"value": null
 								}
 							]
 						}
@@ -21556,8 +21763,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "61523112-c05e-4c0e-bbd2-76c42d942e5f"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -21586,8 +21792,7 @@
 							"variable": [
 								{
 									"key": "attach",
-									"value": null,
-									"uuid": "c0ecabc6-55b1-4407-85f8-c12ac4682839"
+									"value": null
 								}
 							]
 						}
@@ -21628,8 +21833,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "35a9734a-2b53-4ad3-a09b-c1a827251cc4"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -21649,8 +21853,7 @@
 							"variable": [
 								{
 									"key": "disable",
-									"value": null,
-									"uuid": "a34cc589-ecc6-4816-b18d-aa2f679f728b"
+									"value": null
 								}
 							]
 						}
@@ -21691,8 +21894,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "8adc0870-0250-484c-8b1c-2d568a96471e"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -21721,8 +21923,7 @@
 							"variable": [
 								{
 									"key": "enable",
-									"value": null,
-									"uuid": "991ab41b-3619-4d92-9104-69a102748205"
+									"value": null
 								}
 							]
 						}
@@ -21763,8 +21964,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "280f03d3-2a50-443a-b7bb-4ea6767fa19e"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -21828,8 +22028,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "c486fe8b-be3b-4ae7-a9d7-beb36afedb4a"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -21884,8 +22083,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "1d32a54d-99db-4394-be63-ef39e7c5d29b"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -21949,8 +22147,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "52903dd7-b653-48ee-9903-afa92281f759"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -22014,8 +22211,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "8996a7bd-86a9-45aa-8754-449e644f8a4a"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -22079,8 +22275,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "dae6fd5d-242d-4836-a1aa-6df0901d848c"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -22145,8 +22340,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "53da9185-9bd2-42a1-9e30-de778bf42248"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -22175,8 +22369,7 @@
 							"variable": [
 								{
 									"key": "attach",
-									"value": null,
-									"uuid": "c5382a5e-479b-44f4-b854-10aff9fc8e07"
+									"value": null
 								}
 							]
 						}
@@ -22217,8 +22410,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "de923177-61ba-46e2-95d3-c5f406f638b4"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -22247,8 +22439,7 @@
 							"variable": [
 								{
 									"key": "attach",
-									"value": null,
-									"uuid": "7f2105ab-e812-4fbc-8aa3-e3efb1555be2"
+									"value": null
 								}
 							]
 						}
@@ -22290,8 +22481,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "b71010c6-734b-48dd-b69e-2bbd385341e5"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -22320,8 +22510,7 @@
 							"variable": [
 								{
 									"key": "attach",
-									"value": null,
-									"uuid": "893730c9-4c7e-4127-8dbe-93b6689f82b1"
+									"value": null
 								}
 							]
 						}
@@ -22362,8 +22551,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "58c27657-6ebb-4fbd-b44a-edbd561c76f0"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -22392,8 +22580,7 @@
 							"variable": [
 								{
 									"key": "attach",
-									"value": null,
-									"uuid": "25739470-288e-485c-9e00-6423ce80a259"
+									"value": null
 								}
 							]
 						}
@@ -22438,8 +22625,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "7ccdd98a-e8ff-496c-8b35-ea905b594db4"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -22497,8 +22683,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "00e36e1f-9239-4f71-83fe-703972da6bfe"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -22566,8 +22751,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "4ca7d0dd-6a52-4784-9556-ce7c1be95ae6"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -22636,8 +22820,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "cf656964-d344-49f2-8c0f-5f3f4a4d458a"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -22703,8 +22886,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "55f23c15-1c8c-495c-8fc8-a52a5d8f7994"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -22758,8 +22940,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "3dcc346a-0dfe-4655-873c-1f1e8fcc42af"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -22816,8 +22997,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "63a2c24c-6e42-47b1-bae6-810ba0c98908"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -22885,8 +23065,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "8f00a703-5ee7-4633-ade9-2082ce21dfca"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -22951,8 +23130,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "6294e159-4a34-4ffe-b527-22a9ab2a64c1"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -23009,8 +23187,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "b0f0472f-08b1-42d3-ad96-0f4aafc2ce6a"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -23072,8 +23249,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "7ead8ffa-fb11-4506-bbcb-dd2231afd64f"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -23127,8 +23303,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "66cb517b-8ec1-4edd-be7c-eed730490810"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -23157,8 +23332,7 @@
 							"variable": [
 								{
 									"key": "attach",
-									"value": "",
-									"uuid": "7f4b0f83-9619-4fa4-a18e-93ba970833dd"
+									"value": ""
 								}
 							]
 						}
@@ -23200,8 +23374,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "ec852a92-7a1b-464b-954a-116059fe7c38"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -23230,8 +23403,7 @@
 							"variable": [
 								{
 									"key": "detach",
-									"value": "",
-									"uuid": "7d7d77bc-6d3a-4f59-95e4-ad72c40426d7"
+									"value": ""
 								}
 							]
 						}
@@ -23273,8 +23445,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "2d2e39dc-0199-400f-b975-59cad357b9c0"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -23303,8 +23474,7 @@
 							"variable": [
 								{
 									"key": "attach",
-									"value": "",
-									"uuid": "e55b0238-694d-4fe6-92dc-96da4c62f595"
+									"value": ""
 								}
 							]
 						}
@@ -23346,8 +23516,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "5601a91c-d8a3-4aa1-aba7-a23c0e36677d"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -23376,8 +23545,7 @@
 							"variable": [
 								{
 									"key": "detach",
-									"value": "",
-									"uuid": "55cccdd9-6268-4b2d-82f6-94ca91e13f20"
+									"value": ""
 								}
 							]
 						}
@@ -23428,8 +23596,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "dafd280d-bb01-4848-b8af-cadc40c45728"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -23516,8 +23683,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "6def2aac-75d9-472a-8485-756fbb9926d8"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -23579,8 +23745,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "73dea500-efad-4e58-a2ad-747693a151a1"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -23637,8 +23802,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "968d5912-9c6d-4ace-aa50-3411f124fc53"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -23707,8 +23871,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "eb6aa390-c053-4437-be48-12d67fae4aca"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -23773,8 +23936,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "8a253376-12a1-4119-a828-9529bea51971"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -23831,8 +23993,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "3a4af401-b83f-48b1-991b-1095d4ebd89e"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -23894,8 +24055,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "59852cf4-f4c0-4493-8b47-fcba6016f377"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -23957,8 +24117,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "5a1ce055-ad1f-4a7d-b40d-8040ee5de2d7"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -24026,8 +24185,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "13745daf-5ca4-4c4d-ab28-3c1d6a0ba8fa"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -24095,8 +24253,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "a09e4b44-4517-411e-87c5-580a6cb553ef"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -24164,8 +24321,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "0fd6d70f-ae3e-452e-88ac-5789f23cc229"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -24230,8 +24386,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "c1cd18a9-471b-41a0-bfb1-bd2d26dc35b1"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -24288,8 +24443,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "bbbb862a-38fb-4b3f-9b57-9b345bcc6823"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -24351,8 +24505,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "3460f9e7-1328-4cf3-86b7-2201e1184e56"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -24409,8 +24562,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "ddb24de6-d4ed-41a8-987a-71b29d345daa"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -24478,8 +24630,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "257917c0-74f4-430b-b0b2-8f0558a4da4a"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -24544,8 +24695,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "7cfc7cd2-1e3f-4b7a-8e9d-8e99d4168270"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -24602,8 +24752,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "784f9653-7e42-41e2-976e-d5cafdfa5267"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -24665,8 +24814,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "5b87484a-adcc-44c6-9001-373a84625896"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -24723,8 +24871,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "94a9471b-7265-434d-b1c3-b9237256635f"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -24792,8 +24939,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "1af41276-9a01-4f81-87b6-9b83f55de717"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -24858,8 +25004,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "96d66247-eedf-4873-a2ad-c988c0f073d3"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -24916,8 +25061,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "456ab183-b86f-46ea-8e87-4984d522a985"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -24979,8 +25123,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "1d1bd3de-2a15-416d-bfda-65d6e0e5044a"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -25037,8 +25180,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "ce921c85-6c9a-4a4c-a6b9-166ec6a48eb8"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -25107,8 +25249,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "6429d1d5-fe46-468e-a96e-d327f360d8b3"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -25177,8 +25318,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "9aedbbc5-4b40-46ca-ae76-18356155957c"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -25244,8 +25384,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "a71b4fa9-4505-4759-8676-8a7f22aa49c1"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -25299,8 +25438,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "d7e366ee-bef5-4768-9e9d-f01a9436dd6f"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -25363,8 +25501,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "0ffc5cfc-7b64-4963-ac70-d54a4d530d40"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -25422,8 +25559,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "2adc7979-919f-45f9-8e41-6a82b7b60e80"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -25492,8 +25628,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "97e3632d-1847-489d-a5dd-90aefa069be6"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -25559,8 +25694,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "c896d375-3c14-4870-a80c-625dc2161045"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -25638,8 +25772,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "33e6dd49-bdbd-4b24-88fa-f569c21888b6"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -25697,8 +25830,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "87560d9d-99a3-49d9-ae54-29848debcfcc"
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -25761,8 +25893,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "78be8df9-54cd-4bf7-a34a-d6fe15f1b330"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -25820,8 +25951,7 @@
 						"header": [
 							{
 								"key": "accept",
-								"value": "application/json",
-								"uuid": "079fe749-4ee2-4570-bb00-238eb7cd90ba"
+								"value": "application/json"
 							}
 						],
 						"url": {
@@ -28845,6 +28975,88 @@
 					"response": []
 				},
 				{
+					"name": "Copilot Anomalies POE Flapping LLDP-CDP-Info",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"flap_count_entities\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/poeflapping/lldp-cdp-info?anomalyId={{anomaly_id}}&deviceId={{id}}&lastDetectedTime=lastDetectedTime",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"poeflapping",
+								"lldp-cdp-info"
+							],
+							"query": [
+								{
+									"key": "anomalyId",
+									"value": "{{anomaly_id}}",
+									"description": "The anomaly id"
+								},
+								{
+									"key": "deviceId",
+									"value": "{{id}}",
+									"description": "The device ID"
+								},
+								{
+									"key": "lastDetectedTime",
+									"value": "lastDetectedTime",
+									"description": "The last detected timestamp of anomaly"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Copilot Anomalies POE Flapping Stats",
 					"event": [
 						{
@@ -28902,6 +29114,78 @@
 								"anomalies",
 								"poeflapping",
 								"stats"
+							],
+							"query": [
+								{
+									"key": "anomalyId",
+									"value": "{{anomaly_id}}",
+									"description": "The anomaly id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Anomalies POE Flapping Trends",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"flap_count_entities\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/poeflapping/trends?anomalyId={{anomaly_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"poeflapping",
+								"trends"
 							],
 							"query": [
 								{
@@ -28993,7 +29277,8 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -29012,7 +29297,8 @@
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -29048,6 +29334,12 @@
 									"key": "anomalyId",
 									"value": "{{anomaly_id}}",
 									"description": "The anomaly id"
+								},
+								{
+									"key": "offsetTime",
+									"value": null,
+									"description": "The offset value",
+									"disabled": true
 								}
 							]
 						}
@@ -29759,8 +30051,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "278a39d0-5996-4323-8427-857f4c22542e",
 								"disabled": true
 							}
 						],
@@ -29869,8 +30159,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "90bf682d-5352-4e98-9d5b-8fcae56212e8",
 								"disabled": true
 							}
 						],
@@ -29949,8 +30237,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "0bc55e9a-10ea-44b5-903b-354c36aa0812",
 								"disabled": true
 							}
 						],
@@ -30026,8 +30312,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "faf4090e-99d5-4e12-baac-5ba60450c1fb",
 								"disabled": true
 							}
 						],
@@ -30095,8 +30379,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "10e983f3-c69a-4832-9431-ee5b50158dbe",
 								"disabled": true
 							}
 						],
@@ -30125,8 +30407,7 @@
 							"variable": [
 								{
 									"key": "stop",
-									"value": "",
-									"uuid": "7c181c45-3bdd-4bf7-a853-326cd63e1f15"
+									"value": ""
 								}
 							]
 						}
@@ -30181,8 +30462,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "f155e2e6-cf47-4b85-aeb5-77366656a17f",
 								"disabled": true
 							}
 						],
@@ -30202,8 +30481,7 @@
 							"variable": [
 								{
 									"key": "upload",
-									"value": "",
-									"uuid": "7d1eaf61-d31c-486d-af6c-e1729018f575"
+									"value": ""
 								}
 							]
 						},
@@ -30259,8 +30537,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "8eacb5b4-e3bd-4fc5-a209-178cc96c0a80",
 								"disabled": true
 							}
 						],
@@ -30344,8 +30620,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "38357ba1-e1f2-4817-bb5b-4cfac56b1d11",
 								"disabled": true
 							}
 						],
@@ -30436,8 +30710,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "1a13e5e8-caf9-4180-8397-5152bcbf473c",
 								"disabled": true
 							}
 						],
@@ -30528,8 +30800,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "cda0092d-342b-494b-b501-a6d7422a1bb9",
 								"disabled": true
 							}
 						],
@@ -30620,8 +30890,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "38c27d67-28de-4e4a-a5a1-9bce7ef3b75c",
 								"disabled": true
 							}
 						],
@@ -30712,8 +30980,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "50371fa2-ddd9-480f-b33e-d3f2ea2a5310",
 								"disabled": true
 							}
 						],
@@ -30803,8 +31069,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "be0cdb8e-da6b-4bfe-99cf-4111ec50153b",
 								"disabled": true
 							}
 						],
@@ -30897,8 +31161,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "a13433dc-40ad-47a2-957a-1f3d69b9afcc",
 								"disabled": true
 							}
 						],
@@ -30912,6 +31174,81 @@
 							],
 							"path": [
 								"countries"
+							]
+						},
+						"description": "Upload the capture files from a packet capture session, if files previously failed to be uploaded to XIQ cloud."
+					},
+					"response": []
+				},
+				{
+					"name": "Get state list in a country",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"timestamp\");",
+									"    console.log(pm.test)",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/countries/{{countryAlpha2Code}}/states",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"countries",
+								"{{countryAlpha2Code}}",
+								"states"
 							]
 						},
 						"description": "Upload the capture files from a packet capture session, if files previously failed to be uploaded to XIQ cloud."
@@ -30970,8 +31307,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "f109f9a5-a259-4387-b51e-b648841e725b",
 								"disabled": true
 							}
 						],
@@ -30991,8 +31326,7 @@
 							"variable": [
 								{
 									"key": "validate",
-									"value": "",
-									"uuid": "06a48bc6-bce0-4a69-8ac5-eee9c9758ab4"
+									"value": ""
 								}
 							]
 						},
@@ -31059,8 +31393,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "01255889-6498-42bd-a47a-392f4b399676",
 								"disabled": true
 							}
 						],
@@ -31164,8 +31496,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "ad874362-8ddc-42c7-9bdd-c60cbda5b82b",
 								"disabled": true
 							}
 						],
@@ -31281,8 +31611,6 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"uuid": "cb1b7554-81df-4e68-84b6-868226fb6292",
 								"disabled": true
 							}
 						],
