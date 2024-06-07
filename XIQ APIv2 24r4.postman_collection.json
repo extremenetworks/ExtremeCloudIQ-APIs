@@ -3900,8 +3900,8 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "accept",
-								"value": "application/json"
+								"key": "Content-Type",
+								"value": "multipart/form-data'"
 							}
 						],
 						"body": {
@@ -3912,11 +3912,17 @@
 									"description": "The Ekahau archive to import floors from.",
 									"type": "file",
 									"src": []
+								},
+								{
+									"key": "associations",
+									"value": "{\"1st floor\":1}",
+									"description": "Required: Describes how imported floors are associated with buildings.\nkey = name of floor, value = building ID",
+									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/locations/import/ekahau?additionalProp1=0",
+							"raw": "https://api.extremecloudiq.com/locations/import/ekahau",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -3933,23 +3939,6 @@
 									"key": "async",
 									"value": "false",
 									"description": "Whether to enable async mode.\n\nDefault value : false",
-									"disabled": true
-								},
-								{
-									"key": "additionalProp1",
-									"value": "0",
-									"description": "Required: Describes how imported floors are associated with buildings."
-								},
-								{
-									"key": "additionalProp2",
-									"value": "0",
-									"description": "Describes how imported floors are associated with buildings.",
-									"disabled": true
-								},
-								{
-									"key": "additionalProp3",
-									"value": "0",
-									"description": "Describes how imported floors are associated with buildings.",
 									"disabled": true
 								},
 								{
