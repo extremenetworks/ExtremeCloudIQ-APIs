@@ -3,16 +3,16 @@ import json
 
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/devices/:delete?force_delete=false"
+url = "https://api.extremecloudiq.com/alert-subscriptions/webhooks/:delete"
 
 payload = json.dumps({
   "ids": [
-    0 # List of Device IDs to delete
+    0
   ]
 })
 headers = {
-  'Authorization': 'Bearer ' + access_token,
-  'Content-Type': 'application/json'
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer ' + access_token
 }
 
 response = requests.request("POST", url, headers=headers, data=payload)
