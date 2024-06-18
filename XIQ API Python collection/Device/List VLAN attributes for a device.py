@@ -1,11 +1,13 @@
 import requests
 
+device_id = 0 
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/copilot/anomalies/poeflapping/stats?anomalyId=string"
+url = f"https://api.extremecloudiq.com/devices/{device_id}/config/vlan-attributes?page=1&limit=10"
 
-payload={}
+payload = {}
 headers = {
+  'accept': 'application/json',
   'Authorization': 'Bearer ' + access_token
 }
 
