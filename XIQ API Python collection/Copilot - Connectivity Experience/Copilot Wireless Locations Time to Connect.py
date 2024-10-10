@@ -11,10 +11,10 @@ def utc_seconds(str_dt, timezone):
 
 myStartTime = utc_seconds("2022-12-2 02:30:00", 'US/Eastern')
 myEndTime = utc_seconds("2023-2-23 02:30:00", 'US/Eastern')
-location_id = 0
+building_id = 0
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/copilot/connectivity/wireless/locations/time-to-connect?locationId={location_id}&startTime={myStartTime}&endTime={myEndTime}"
+url = f"https://api.extremecloudiq.com/copilot/connectivity/wireless/locations/time-to-connect?buildingId={building_id}&startTime={myStartTime}&endTime={myEndTime}"
 
 payload = {}
 headers = {

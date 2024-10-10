@@ -9,12 +9,12 @@ def utc_seconds(str_dt, timezone):
     dt_timezone = timezone.localize(dt)
     return int(dt_timezone.timestamp()*1000) # epoch time in milliseconds
 
-myStartTime = utc_seconds("2022-12-2 02:30:00", 'US/Eastern')
-myEndTime = utc_seconds("2023-2-23 02:30:00", 'US/Eastern')
-building_id = 0
+
+device_id = 0 
+epoch_time = utc_seconds("2022-12-2 02:30:00", 'US/Eastern')
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/copilot/connectivity/wireless/locations/performance?buildingId={building_id}&startTime={myStartTime}&endTime={myEndTime}"
+url = f"https://api.extremecloudiq.com/copilot/anomalies/hardware-health/client-list?deviceId={device_id}&timestamp={epoch_time}"
 
 payload = {}
 headers = {

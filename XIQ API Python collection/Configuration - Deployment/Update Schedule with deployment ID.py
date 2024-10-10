@@ -10,10 +10,12 @@ def utc_seconds(str_dt, timezone):
     dt_timezone = timezone.localize(dt)
     return int(dt_timezone.timestamp()*1000) # epoch time in milliseconds
 
+site_id = 0
+deployment_id = 0
 epoch_time = utc_seconds("2022-12-2 02:30:00", 'US/Eastern')
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/deployments"
+url = f"https://api.extremecloudiq.com/deployments/{deployment_id}"
 
 payload = json.dumps({
   "schedule": {
@@ -21,10 +23,10 @@ payload = json.dumps({
   },
   "devices": {
     "ids": [
-      0   # List of Device IDs to Push Configuration
+      {{id}}
     ],
     "site_ids": [
-      0   # List of Site IDs to Push Configuration
+      {{site_id}}
     ]
   },
   "policy": {
@@ -48,12 +50,12 @@ payload = json.dumps({
   }
 })
 
+
 headers = {
-  'accept': '*/*',
-  'Authorization': 'Bearer ' + access_token,
-  'Content-Type': 'application/json'
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer ' + access_token
 }
 
-response = requests.request("POST", url, headers=headers, data=payload)
+response = requests.request("PUT", url, headers=headers, data=payload)
 
 print(response.text)

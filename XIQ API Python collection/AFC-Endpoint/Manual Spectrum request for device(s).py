@@ -4,13 +4,12 @@ import json
 device_id = 0
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/nos/device/{device_id}/nos-api"
+url = "https://api.extremecloudiq.com/aps/afc/update"
+
 
 payload = json.dumps({
-  "endpoint": "string",
-  "method": "GET",
-  "json_body": [
-    "string"
+  "ids": [
+    device_id
   ]
 })
 headers = {
