@@ -1,8 +1,10 @@
 import requests
 
+page = 1
+limit = 10
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/devices?page=1&limit=50&views=FULL&async=false"
+url = f"https://api.extremecloudiq.com/devices?page={page}&limit={limit}&views=FULL&async=false"
 
 payload={}
 headers = {

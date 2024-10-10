@@ -1,91 +1,12 @@
 {
 	"info": {
-		"_postman_id": "5fee83f3-64d8-4dba-aa7f-5287ecb5e757",
-		"name": "XIQ APIv2 24r5",
+		"_postman_id": "bcaddf9c-4e9b-4aef-bd88-3aab49548668",
+		"name": "XIQ APIv2 24r6",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4056946",
-		"_collection_link": "https://gold-escape-604608.postman.co/workspace/XIQ-Workflows---Github~7c6c76b6-b57f-4ebb-8d87-9786462c68e3/collection/4056946-5fee83f3-64d8-4dba-aa7f-5287ecb5e757?action=share&source=collection_link&creator=4056946"
+		"_collection_link": "https://gold-escape-604608.postman.co/workspace/XIQ-Workflows---Github~7c6c76b6-b57f-4ebb-8d87-9786462c68e3/collection/4056946-bcaddf9c-4e9b-4aef-bd88-3aab49548668?action=share&source=collection_link&creator=4056946"
 	},
 	"item": [
-		{
-			"name": "NOS",
-			"item": [
-				{
-					"name": "Get device info by NOS",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Successful POST request\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
-									"});",
-									"",
-									"pm.test(\"include access token\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"status_code\");",
-									"    console.log(pm.test)",
-									"});",
-									" pm.test(\"Response time is less than 1000ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
-									"    });"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwttoken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"endpoint\": \"string\",\n  \"method\": \"GET\",\n  \"json_body\": [\n    \"string\"\n  ]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://api.extremecloudiq.com/nos/device/{{id}}/nos-api",
-							"protocol": "https",
-							"host": [
-								"api",
-								"extremecloudiq",
-								"com"
-							],
-							"path": [
-								"nos",
-								"device",
-								"{{id}}",
-								"nos-api"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
 		{
 			"name": "Authentication",
 			"item": [
@@ -3991,17 +3912,11 @@
 									"description": "The Ekahau archive to import floors from.",
 									"type": "file",
 									"src": []
-								},
-								{
-									"key": "associations",
-									"value": "{\"1st floor\":1}",
-									"description": "Required: Describes how imported floors are associated with buildings.\nkey = name of floor, value = building ID",
-									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/locations/import/ekahau",
+							"raw": "https://api.extremecloudiq.com/locations/import/ekahau?floorAssociations&outdoorSiteAssociations",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -4019,6 +3934,16 @@
 									"value": "false",
 									"description": "Whether to enable async mode.\n\nDefault value : false",
 									"disabled": true
+								},
+								{
+									"key": "floorAssociations",
+									"value": null,
+									"description": "Describes how Ekahau floors are imported into XIQ as floors in buildings.\narray[object]\n[{\"floorName\":\"1st floor\",\"parentBuildingId\":1}]"
+								},
+								{
+									"key": "outdoorSiteAssociations",
+									"value": null,
+									"description": "Describes how Ekahau floors are Imported into XIQ as outdoor sites in site groups.\narray[object]\n[{\"floorName\":\"2nd floor\",\"parentSiteGroupId\":2,\"countryCode\":124}]"
 								},
 								{
 									"key": "importCustomApConfigurations",
@@ -4781,7 +4706,8 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -4799,7 +4725,8 @@
 									"        pm.expect(pm.response.responseTime).to.be.below(5000);",
 									"    });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -4818,7 +4745,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"extreme\": [\n    {\n      \"serial_number\": \"string\",\n      \"location\": {\n        \"location_id\": 0,\n        \"x\": 0,\n        \"y\": 0,\n        \"latitude\": 0,\n        \"longitude\": 0\n      },\n      \"network_policy_id\": 0,\n      \"hostname\": \"string\"\n    }\n  ],\n  \"exos\": [\n    {\n      \"serial_number\": \"string\",\n      \"location\": {\n        \"location_id\": 0,\n        \"x\": 0,\n        \"y\": 0,\n        \"latitude\": 0,\n        \"longitude\": 0\n      },\n      \"network_policy_id\": 0,\n      \"hostname\": \"string\"\n    }\n  ],\n  \"voss\": [\n    {\n      \"serial_number\": \"string\",\n      \"location\": {\n        \"location_id\": 0,\n        \"x\": 0,\n        \"y\": 0,\n        \"latitude\": 0,\n        \"longitude\": 0\n      },\n      \"network_policy_id\": 0,\n      \"hostname\": \"string\"\n    }\n  ],\n  \"wing\": [\n    {\n      \"serial_number\": \"string\",\n      \"mac_address\": \"string\",\n      \"location\": {\n        \"location_id\": 0,\n        \"x\": 0,\n        \"y\": 0,\n        \"latitude\": 0,\n        \"longitude\": 0\n      },\n      \"network_policy_id\": 0,\n      \"hostname\": \"string\"\n    }\n  ],\n  \"dell\": [\n    {\n      \"serial_number\": \"string\",\n      \"service_tag\": \"string\",\n      \"location\": {\n        \"location_id\": 0,\n        \"x\": 0,\n        \"y\": 0,\n        \"latitude\": 0,\n        \"longitude\": 0\n      },\n      \"network_policy_id\": 0,\n      \"hostname\": \"string\"\n    }\n  ],\n  \"dt\": [\n    {\n      \"digital_twin_device\": {\n        \"make\": \"SWITCH_ENGINE\",\n        \"model\": \"DT_5320_16P_4XE\",\n        \"os_type\": \"string\",\n        \"os_version\": \"string\",\n        \"vim_modules\": [\n          \"DT_5520_VIM_4X\"\n        ],\n        \"feat_licenses\": [\n          \"PRD_5000_PRMR\"\n        ]\n      },\n      \"location\": {\n        \"location_id\": 0,\n        \"x\": 0,\n        \"y\": 0,\n        \"latitude\": 0,\n        \"longitude\": 0\n      },\n      \"network_policy_id\": 0,\n      \"hostname\": \"string\"\n    }\n  ],\n  \"unmanaged\": true\n}",
+							"raw": "{\n  \"extreme\": [\n    {\n      \"serial_number\": \"03052008070096\",\n      \"location\": {\n        \"location_id\": 769490635964843\n      },\n      \"hostname\": \"AP-305C-1\"\n    }\n  ],\n  \"unmanaged\": false\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4849,6 +4776,80 @@
 								{
 									"key": "advanced-onboard",
 									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check caller is allowed to access the device",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(5000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{sn}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/devices/:check-ownership",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"devices",
+								":check-ownership"
+							],
+							"variable": [
+								{
+									"key": "check-ownership",
+									"value": ""
 								}
 							]
 						}
@@ -7479,7 +7480,8 @@
 									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -7491,7 +7493,8 @@
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
 									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -7514,7 +7517,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/devices/{{id}}/history/cpu-mem?startTime={{myStartTime}}&endTime={{myEndTime}}&interval=100000",
+							"raw": "https://api.extremecloudiq.com/devices/{{id}}/history/cpu-mem?startTime={{myStartTime}}&endTime={{myEndTime}}&interval=10",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -7540,8 +7543,8 @@
 								},
 								{
 									"key": "interval",
-									"value": "100000",
-									"description": "The aggregate interval in milliseconds"
+									"value": "10",
+									"description": "The aggregate interval in milliseconds, min = 10\n\nDefault value : 10\n\n"
 								}
 							]
 						}
@@ -15457,8 +15460,81 @@
 			]
 		},
 		{
+			"name": "NOS",
+			"item": []
+		},
+		{
 			"name": "Configuration - Deployment",
 			"item": [
+				{
+					"name": "Get list of deployments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"data\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/deployments?page=1&limit=10",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"deployments"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1\n\nDefault value : 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100\n\nDefault value : 10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Push config and update firmaware [LRO]",
 					"event": [
@@ -15471,12 +15547,26 @@
 									"});",
 									"",
 									"pm.test(\"Body includes data \", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"request_id\");",
+									"    pm.expect(pm.response.text()).to.include(\"deployment_id\");",
 									"    console.log(pm.test)",
 									"});",
 									" pm.test(\"Response time is less than 1000ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter epoch times",
+									"var epochTime = new Date(\"Oct 1, 2024 02:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myEpoch\", epochTime.getTime()); // myEpoch is used in Params of call - This is EPOCH time in milliseconds"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -15503,7 +15593,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"devices\": {\n    \"ids\": [\n      {{id}}\n    ]\n  },\n  \"policy\": {\n    \"enable_complete_configuration_update\": true,\n    \"firmware_upgrade_policy\": {\n      \"enable_enforce_upgrade\": true,\n      \"enable_distributed_upgrade\": true\n    },\n    \"firmware_activate_option\": {\n      \"enable_activate_at_next_reboot\": true,\n      \"activation_delay_seconds\": 0,\n      \"activation_time\": 0\n    }\n  }\n}",
+							"raw": "{\n  \"schedule\": {\n    \"start_time\": {{myEpoch}}\n  },\n  \"devices\": {\n    \"ids\": [\n      {{id}}\n    ],\n    \"site_ids\": [\n      {{site_id}}\n    ]\n  },\n  \"policy\": {\n    \"enable_complete_configuration_update\": true,\n    \"firmware_upgrade_policy\": {\n      \"enable_enforce_upgrade\": true,\n      \"enable_distributed_upgrade\": true\n    },\n    \"firmware_upgrade_versions\": [\n      {\n        \"firmware_id\": 0,\n        \"device_id\": 0,\n        \"product_type\": \"string\"\n      }\n    ],\n    \"firmware_activate_option\": {\n      \"enable_activate_at_next_reboot\": true,\n      \"activation_delay_seconds\": 0,\n      \"activation_time\": 0\n    }\n  }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -15528,6 +15618,279 @@
 									"description": "Whether to enable async mode\n\nDefault value : false",
 									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get deployment details by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"deployment_id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/deployments/{{deployment_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"deployments",
+								"{{deployment_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update schedule with deployment ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"status\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter epoch times",
+									"var epochTime = new Date(\"Sept 1, 2024 02:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myEpoch\", epochTime.getTime()); // myEpoch is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"schedule\": {\n    \"start_time\": {{myEpoch}}\n  },\n  \"devices\": {\n    \"ids\": [\n      {{id}}\n    ],\n    \"site_ids\": [\n      {{site_id}}\n    ]\n  },\n  \"policy\": {\n    \"enable_complete_configuration_update\": true,\n    \"firmware_upgrade_policy\": {\n      \"enable_enforce_upgrade\": true,\n      \"enable_distributed_upgrade\": true\n    },\n    \"firmware_upgrade_versions\": [\n      {\n        \"firmware_id\": 0,\n        \"device_id\": 0,\n        \"product_type\": \"string\"\n      }\n    ],\n    \"firmware_activate_option\": {\n      \"enable_activate_at_next_reboot\": true,\n      \"activation_delay_seconds\": 0,\n      \"activation_time\": 0\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.extremecloudiq.com/deployments/{{deployment_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"deployments",
+								"{{deployment_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete the deployment schedule by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"status\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/deployments/{{deployment_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"deployments",
+								"{{deployment_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get firmware deployment status by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"schedule_status\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"packages": {},
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/deployments/{{deployment_id}}/status",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"deployments",
+								"{{deployment_id}}",
+								"status"
 							]
 						}
 					},
@@ -17707,7 +18070,8 @@
 									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
 									"    });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -17750,6 +18114,18 @@
 									"key": "limit",
 									"value": "10",
 									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
+								},
+								{
+									"key": "sortField",
+									"value": "NAME",
+									"description": "The Sort field (Name by default)\n\nAvailable values : NAME, DESCRIPTION, ZONE_NAME, READ_ONLY",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "ASC",
+									"description": "The Sort order (ascending by default)\n\nAvailable values : ASC, DESC",
+									"disabled": true
 								}
 							]
 						}
@@ -27756,7 +28132,8 @@
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
 									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -27775,7 +28152,8 @@
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -27793,7 +28171,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/locations/performance?locationId={{loc_id}}&startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/locations/performance?buildingId={{building_id}}&startTime={{myStartTime}}&endTime={{myEndTime}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -27809,19 +28187,19 @@
 							],
 							"query": [
 								{
-									"key": "locationId",
-									"value": "{{loc_id}}",
-									"description": "The location identifier\nDefault value : 0"
+									"key": "buildingId",
+									"value": "{{building_id}}",
+									"description": "The location identifier for building"
 								},
 								{
 									"key": "ssid",
-									"value": null,
+									"value": "",
 									"description": "The ssid",
 									"disabled": true
 								},
 								{
 									"key": "osType",
-									"value": null,
+									"value": "",
 									"description": "The client type",
 									"disabled": true
 								},
@@ -27861,7 +28239,8 @@
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
 									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -27880,7 +28259,8 @@
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -27898,7 +28278,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/locations/quality-index?locationId={{loc_id}}&startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/locations/quality-index?buildingId={{building_id}}&startTime={{myStartTime}}&endTime={{myEndTime}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -27914,19 +28294,19 @@
 							],
 							"query": [
 								{
-									"key": "locationId",
-									"value": "{{loc_id}}",
-									"description": "The location identifier\nDefault value : 0"
+									"key": "buildingId",
+									"value": "{{building_id}}",
+									"description": "The location identifier for building"
 								},
 								{
 									"key": "ssid",
-									"value": null,
+									"value": "",
 									"description": "The ssid",
 									"disabled": true
 								},
 								{
 									"key": "osType",
-									"value": null,
+									"value": "",
 									"description": "The client type",
 									"disabled": true
 								},
@@ -27966,7 +28346,8 @@
 									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
 									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -27985,7 +28366,8 @@
 									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
 									"    });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -28003,7 +28385,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/locations/time-to-connect?locationId={{loc_id}}&startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"raw": "https://api.extremecloudiq.com/copilot/connectivity/wireless/locations/time-to-connect?buildingId={{building_id}}&startTime={{myStartTime}}&endTime={{myEndTime}}",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -28019,19 +28401,19 @@
 							],
 							"query": [
 								{
-									"key": "locationId",
-									"value": "{{loc_id}}",
-									"description": "The location identifier\nDefault value : 0"
+									"key": "buildingId",
+									"value": "{{building_id}}",
+									"description": "The location identifier for building"
 								},
 								{
 									"key": "ssid",
-									"value": null,
+									"value": "",
 									"description": "The ssid",
 									"disabled": true
 								},
 								{
 									"key": "osType",
-									"value": null,
+									"value": "",
 									"description": "The client type",
 									"disabled": true
 								},
@@ -29199,6 +29581,159 @@
 					"response": []
 				},
 				{
+					"name": "Copilot Anomalies Hardware Health Client List",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//enter epoch times",
+									"var epochTime = new Date(\"Sept 1, 2024 02:30:00\"); // Your timezone!",
+									"",
+									"//Set in Environment",
+									"pm.environment.set(\"myEpoch\", epochTime.getTime()); // myEpoch is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"hh_client_stats\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/hardware-health/client-list?deviceId={{id}}&timestamp={{myEpoch}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"hardware-health",
+								"client-list"
+							],
+							"query": [
+								{
+									"key": "deviceId",
+									"value": "{{id}}",
+									"description": "The device id"
+								},
+								{
+									"key": "timestamp",
+									"value": "{{myEpoch}}",
+									"description": "The timestamp -epoch milliseconds"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copilot Anomalies Hardware Health Stats",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"hd_device_stats_entities\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1500ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1500);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/hardware-health/stats?anomalyId={{anomaly_id}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"copilot",
+								"anomalies",
+								"hardware-health",
+								"stats"
+							],
+							"query": [
+								{
+									"key": "anomalyId",
+									"value": "{{anomaly_id}}",
+									"description": "The anomalyId"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Copilot Anomalies Locations",
 					"event": [
 						{
@@ -29405,7 +29940,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://api.extremecloudiq.com/copilot/anomalies/poeflapping/lldp-cdp-info?anomalyId={{anomaly_id}}&deviceId={{id}}&lastDetectedTime=lastDetectedTime",
+							"raw": "https://api.extremecloudiq.com/copilot/anomalies/poeflapping/lldp-cdp-info?anomalyType=POE_STABILITY&anomalyId={{anomaly_id}}&deviceId={{id}}&lastDetectedTime=lastDetectedTime",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -29419,6 +29954,11 @@
 								"lldp-cdp-info"
 							],
 							"query": [
+								{
+									"key": "anomalyType",
+									"value": "POE_STABILITY",
+									"description": "The anomaly Type\n\nAvailable values : POE_STABILITY, DFS_RECURRENCE, ADVERSE_TRAFFIC, PORT_EFFICIENCY, WIFI_CAPACITY, WIFI_EFFICIENCY, HARDWARE_HEALTH"
+								},
 								{
 									"key": "anomalyId",
 									"value": "{{anomaly_id}}",
@@ -32205,6 +32745,89 @@
 					"response": []
 				},
 				{
+					"name": "Get AFC diagnostics",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data \", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"afc_spectrum_details\");",
+									"    console.log(pm.test)",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.extremecloudiq.com/ap/afc/diagnostics/{{sn}}?ownerId",
+							"protocol": "https",
+							"host": [
+								"api",
+								"extremecloudiq",
+								"com"
+							],
+							"path": [
+								"ap",
+								"afc",
+								"diagnostics",
+								"{{sn}}"
+							],
+							"query": [
+								{
+									"key": "ownerId",
+									"value": null,
+									"description": "Owner Id"
+								}
+							]
+						},
+						"description": "Upload the capture files from a packet capture session, if files previously failed to be uploaded to XIQ cloud."
+					},
+					"response": []
+				},
+				{
 					"name": "Get AFC summary data",
 					"event": [
 						{
@@ -32447,7 +33070,7 @@
 					"response": []
 				},
 				{
-					"name": "GET AFC APS Geolocation summary",
+					"name": "Manual Spectrum request for device(s)",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -32467,10 +33090,6 @@
 									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 									"});",
 									"",
-									"pm.test(\"Body includes data \", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"afc_status\");",
-									"    console.log(pm.test)",
-									"});",
 									"",
 									" pm.test(\"Response time is less than 1000ms\", function () {",
 									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
@@ -32495,7 +33114,7 @@
 								}
 							]
 						},
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Accept",
@@ -32503,8 +33122,17 @@
 								"disabled": true
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ids\": [\n    {{id}}\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "https://api.extremecloudiq.com/aps/geolocation/summary?ownerId",
+							"raw": "https://api.extremecloudiq.com/aps/afc/update",
 							"protocol": "https",
 							"host": [
 								"api",
@@ -32513,97 +33141,8 @@
 							],
 							"path": [
 								"aps",
-								"geolocation",
-								"summary"
-							],
-							"query": [
-								{
-									"key": "ownerId",
-									"value": null,
-									"description": "Owner Id"
-								}
-							]
-						},
-						"description": "Upload the capture files from a packet capture session, if files previously failed to be uploaded to XIQ cloud."
-					},
-					"response": []
-				},
-				{
-					"name": "GET AFC APS summary",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Successful GET request\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
-									"});",
-									"",
-									"pm.test(\"Body includes data \", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"total_available\");",
-									"    console.log(pm.test)",
-									"});",
-									"",
-									" pm.test(\"Response time is less than 1000ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
-									"    });"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {}
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwttoken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "https://api.extremecloudiq.com/aps/status/summary?ownerId",
-							"protocol": "https",
-							"host": [
-								"api",
-								"extremecloudiq",
-								"com"
-							],
-							"path": [
-								"aps",
-								"status",
-								"summary"
-							],
-							"query": [
-								{
-									"key": "ownerId",
-									"value": null,
-									"description": "Owner Id"
-								}
+								"afc",
+								"update"
 							]
 						},
 						"description": "Upload the capture files from a packet capture session, if files previously failed to be uploaded to XIQ cloud."

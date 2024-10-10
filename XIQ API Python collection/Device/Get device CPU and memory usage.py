@@ -10,11 +10,12 @@ def utc_seconds(str_dt, timezone):
     return int(dt_timezone.timestamp()*1000) # epoch time in milliseconds
 
 device_id = 0
+interval = 10 # The aggregate interval in milliseconds, min = 10
 myStartTime = utc_seconds("2022-12-2 02:30:00", 'US/Eastern')
 myEndTime = utc_seconds("2023-2-23 02:30:00", 'US/Eastern')
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/devices/{device_id}/history/cpu-mem?startTime={myStartTime}&endTime={myEndTime}&interval=1"
+url = f"https://api.extremecloudiq.com/devices/{device_id}/history/cpu-mem?startTime={myStartTime}&endTime={myEndTime}&interval={interval}"
 
 payload={}
 headers = {

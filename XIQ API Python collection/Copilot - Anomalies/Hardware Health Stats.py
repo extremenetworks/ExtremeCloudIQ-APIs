@@ -1,9 +1,10 @@
 import requests
 
-owner_id = 0
+anomaly_id = 0
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/aps/geolocation/summary?ownerId={owner_id}"
+
+url = f"https://api.extremecloudiq.com/copilot/anomalies/hardware-health/stats?anomalyId={anomaly_id}"
 
 payload = {}
 headers = {

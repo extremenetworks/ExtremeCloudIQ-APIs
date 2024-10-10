@@ -2,7 +2,9 @@ import requests
 
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/ccgs?page=1&limit=10"
+page = 1
+limit = 10
+url = f"https://api.extremecloudiq.com/ccgs?page={page}&limit={limit}"
 
 payload={}
 headers = {
