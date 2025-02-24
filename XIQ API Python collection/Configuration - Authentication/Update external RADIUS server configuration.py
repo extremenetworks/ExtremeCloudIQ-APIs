@@ -1,25 +1,31 @@
 import requests
-import json
-
-ex_radius_id = 0 # The ID for external RADIUS server
+         
+ex_radius_id = 'The ID for external RADIUS server'
 access_token = '***'
 
-url =f"https://api.extremecloudiq.com/radius-servers/external/{ex_radius_id}"
-
-payload = json.dumps({
+url = f"https://api.extremecloudiq.com/radius-servers/external/{ex_radius_id}"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
   "name": "string",
   "shared_secret": "string",
-  "authentication_port": 0,
-  "accounting_port": 0,
+  "authentication_port": 1812,
+  "accounting_port": 1813,
   "server_type": "BOTH",
   "ip_addr": "string"
-})
-headers = {
-  'accept': 'application/json',
-  'Authorization': 'Bearer ' + access_token,
-  'Content-Type': 'application/json'
 }
 
-response = requests.request("PUT", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.put(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

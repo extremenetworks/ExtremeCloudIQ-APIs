@@ -1,11 +1,12 @@
 import requests
-import json
+         
 
 access_token = '***'
 
-url ="https://api.extremecloudiq.com/radius-servers/internal"
-
-payload = json.dumps({
+url = f"https://api.extremecloudiq.com/radius-servers/internal"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
   "name": "string",
   "description": "string",
   "authentication_method_group": "TLS_PEAP_TTLS_LEAP_MD5",
@@ -18,45 +19,52 @@ payload = json.dumps({
   "enable_check_user_for_ttls_auth": True,
   "enable_authentication_server": True,
   "enable_radius_accounting_settings": True,
-  "authentication_server_port": 0,
+  "authentication_server_port": 1812,
   "active_session_limit": 0,
-  "active_session_age_timeout": 0,
+  "active_session_age_timeout": 1800,
   "external_user_directory": {
-    "ldap_retry_interval": 0,
-    "local_check_interval": 0,
-    "remote_check_interval": 0,
+    "ldap_retry_interval": 600,
+    "local_check_interval": 300,
+    "remote_check_interval": 30,
     "enable_radius_server_credential_caching": True,
-    "cache_lifetime": 0,
+    "cache_lifetime": 86400,
     "user_group_attribute": "memberOf",
     "external_user_directory_type": "OPEN_LDAP",
     "entries": [
       {
-        "default_server_id": 0, # The default external user directory server id, could be active directory server id(get the id list from endpoint: '/ad-servers') or LDAP server id(get the id list from endpoint: '/ldap-servers') depends on the 'external_user_directory_type'
+        "default_server_id": 0,
         "server_role": "PRIMARY"
       }
     ]
   },
-  "ca_certificate_id": 0, # The CA certificate ID, which could be fetched from endpoint: '/certificates' and pick up with type 'CA'
-  "server_certificate_id": 0, # The Server certificate ID, which could be fetched from endpoint: '/certificates' and pick up with type 'CERT'
-  "server_key_id": 0, # The Server key ID, which could be fetched from endpoint: '/certificates' and pick up with type 'KEY'
+  "ca_certificate_id": 0,
+  "server_certificate_id": 0,
+  "server_key_id": 0,
   "device_ids": [
-    0 # The list of device ID associated with the internal RADIUS server
+    0
   ],
   "clients": [
     {
-      "id": 0, # The RADIUS client ID
+      "id": 0,
       "shared_secret": "string",
       "description": "string",
-      "l3_address_profile_id": 0 # The associate L3 address profile ID
+      "l3_address_profile_id": 0
     }
   ]
-})
-headers = {
-  'accept': 'application/json',
-  'Authorization': 'Bearer ' + access_token,
-  'Content-Type': 'application/json'
 }
 
-response = requests.request("POST", url, headers=headers, data=payload)
 
-print(response.text)
+
+response = requests.post(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

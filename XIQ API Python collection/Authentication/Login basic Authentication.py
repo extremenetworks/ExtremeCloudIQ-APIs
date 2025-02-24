@@ -1,21 +1,28 @@
 import requests
-import json
+         
+username = 'username'
+password = 'password'
+access_token = '***'
 
-username = '***'
-password = '***'
-
-url = "https://api.extremecloudiq.com/login"
-
-
-payload = json.dumps({
-  'username': username,
-  'password': password
-})
-headers = {
-  'Content-Type': 'application/json'
+url = f"https://api.extremecloudiq.com/login"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
+  "username": "username",
+  "password": "password"
 }
 
-response = requests.request("POST", url, headers=headers, data=payload)
 
-print(response.text)
- 
+response = requests.post(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

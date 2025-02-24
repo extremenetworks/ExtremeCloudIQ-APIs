@@ -1,13 +1,13 @@
 import requests
-import json
+         
 
-owner_id = 0
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/site/spectrum"
-
-payload = json.dumps({
-  "owner_id": owner_id,
+url = f"https://api.extremecloudiq.com/site/spectrum"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {'IsEmptyList': 'False'}
+body = {
+  "owner_id": 0,
   "site_name": "string",
   "region": "US",
   "input_info": [
@@ -31,12 +31,19 @@ payload = json.dumps({
       "environment": "INDOOR"
     }
   ]
-})
-headers = {
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer ' + access_token
 }
 
-response = requests.request("POST", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.post(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

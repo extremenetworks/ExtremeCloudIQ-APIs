@@ -1,17 +1,25 @@
 import requests
-import json
+         
 
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/usergroups?page=1&limit=10"
+url = f"https://api.extremecloudiq.com/usergroups"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {'page': '1', 'limit': '10'}
 
-payload={}
-headers = {
-  'accept': '*/*',
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer ' + access_token
-}
+# password_db_location: CLOUD (disabled)
+# passwordType: PPSK (disabled)
 
-response = requests.request("GET", url, headers=headers, data=payload)
+response = requests.get(url, headers=headers, params=params)
 
-print(response.text)
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

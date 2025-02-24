@@ -1,16 +1,24 @@
 import requests
-
-radius_id = 0 # The ID of RADIUS client object
+         
+radius_id = 'The ID of RADIUS client object'
 access_token = '***'
 
-url =f"https://api.extremecloudiq.com/radius-client-objects/{radius_id}"
+url = f"https://api.extremecloudiq.com/radius-client-objects/{radius_id}"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
 
-payload={}
-headers = {
-  'accept': 'application/json',
-  'Authorization': 'Bearer ' + access_token
-}
 
-response = requests.request("DELETE", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.delete(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

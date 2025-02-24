@@ -1,13 +1,13 @@
 import requests
-import json
-
-parent_id = 0
+         
+loc_id = 'Location ID'
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/locations/site"
-
-payload = json.dumps({
-  "parent_id": parent_id,
+url = f"https://api.extremecloudiq.com/locations/site"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
+  "parent_id": loc_id,
   "name": "Site Name",
   "address": {
     "address": "string",
@@ -17,13 +17,19 @@ payload = json.dumps({
     "postal_code": "string"
   },
   "country_code": 0
-})
-headers = {
-  'accept': 'application/json',
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer ' + access_token
 }
 
-response = requests.request("POST", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.post(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

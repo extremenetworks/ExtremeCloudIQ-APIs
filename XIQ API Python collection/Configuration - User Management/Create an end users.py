@@ -1,13 +1,13 @@
 import requests
-import json
-
-user_group_id = 0
+         
+group_id = 'User Group ID'
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/endusers"
-
-payload = json.dumps({
-  "user_group_id": user_group_id,
+url = f"https://api.extremecloudiq.com/endusers"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
+  "user_group_id": group_id,
   "name": "string",
   "user_name": "string",
   "organization": "string",
@@ -18,13 +18,19 @@ payload = json.dumps({
   "password": "string",
   "email_password_delivery": "string",
   "sms_password_delivery": "string"
-})
-
-headers = {
-  'Authorization': 'Bearer ' + access_token,
-  'Content-Type': 'application/json'
 }
 
-response = requests.request("POST", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.post(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

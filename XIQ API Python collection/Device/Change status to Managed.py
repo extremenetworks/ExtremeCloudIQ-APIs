@@ -1,20 +1,28 @@
 import requests
-import json
-
+         
+device_id = 'device ID'
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/devices/"
-
-payload = json.dumps({
+url = f"https://api.extremecloudiq.com/devices/:manage"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
   "ids": [
-    0 # List of Device IDs to change status
+    device_id
   ]
-})
-headers = {
-  'Authorization': 'Bearer ' + access_token,
-  'Content-Type': 'application/json'
 }
 
-response = requests.request("POST", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.post(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

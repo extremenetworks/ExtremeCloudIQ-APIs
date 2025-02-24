@@ -1,16 +1,24 @@
 import requests
-
-l3_address_profile = 0
+         
+l3_address_profile = 'The L3 address profile ID'
 access_token = '***'
 
 url = f"https://api.extremecloudiq.com/l3-address-profiles/{l3_address_profile}"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
 
-payload = {}
-headers = {
-  'accept': 'application/json',
-  'Authorization': 'Bearer ' + access_token
-}
 
-response = requests.request("GET", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.get(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

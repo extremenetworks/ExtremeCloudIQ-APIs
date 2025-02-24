@@ -1,13 +1,13 @@
 import requests
-import json
-
-alert_policy_id = 0
-alert_rule_id = 0
+         
+alert_policy_id = 'Alert Policy ID'
+alert_rule_id = 'Alert Rule ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/alert-policies/{str(alert_policy_id)}/rules/{str(alert_rule_id)}"
-
-payload = json.dumps({
+url = f"https://api.extremecloudiq.com/alert-policies/{alert_policy_id}/rules/{alert_rule_id}"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
   "description": "string",
   "severity_id": 0,
   "trigger_type": "string",
@@ -16,12 +16,19 @@ payload = json.dumps({
   "count": 0,
   "threshold": 0,
   "operator": "string"
-})
-headers = {
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer ' + access_token
 }
 
-response = requests.request("PUT", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.put(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

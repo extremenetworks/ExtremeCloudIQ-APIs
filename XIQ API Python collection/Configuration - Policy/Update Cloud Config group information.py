@@ -1,24 +1,32 @@
 import requests
-import json
-
-ccg_id = 0 # Cloud Config Group ID
+         
+ccg_id = 'Cloud Config Group ID'
+device_id = 'device ID'
 access_token = '***'
 
 url = f"https://api.extremecloudiq.com/ccgs/{ccg_id}"
-
-payload = json.dumps({
-  "name": "string",
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
+  "name": "",
   "description": "Update CCG device list",
   "device_ids": [
-    0 # List of Device IDs to Update Cloud Config Group
+    device_id
+    
   ]
-})
-headers = {
-  'accept': 'application/json',
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer ' + access_token
 }
 
-response = requests.request("PUT", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.put(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

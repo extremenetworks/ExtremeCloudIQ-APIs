@@ -1,12 +1,12 @@
 import requests
-import json
-
-iot_profile_id = 0 
+         
+iot_profile_id = 'IoT Profile ID'
 access_token = '***'
 
 url = f"https://api.extremecloudiq.com/iot-profiles/{iot_profile_id}"
-
-payload = json.dumps({
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
   "name": "string",
   "app_id": "THREAD_GATEWAY",
   "thread_gateway": {
@@ -25,13 +25,19 @@ payload = json.dumps({
       }
     ]
   }
-})
-headers = {
-  'accept': 'application/json',
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer ' + access_token
 }
 
-response = requests.request("PUT", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.put(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

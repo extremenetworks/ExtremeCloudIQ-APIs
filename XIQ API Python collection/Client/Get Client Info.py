@@ -1,15 +1,24 @@
 import requests
-
-client_id = 0
+         
+client_id = 'Client ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/{client_id}?views=FULL"
+url = f"https://api.extremecloudiq.com/clients/{client_id}"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {'views': 'FULL'}
 
-payload={}
-headers = {
-  'Authorization': 'Bearer ' + access_token
-}
+# fields: ID (disabled)
 
-response = requests.request("GET", url, headers=headers, data=payload)
+response = requests.get(url, headers=headers, params=params)
 
-print(response.text)
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

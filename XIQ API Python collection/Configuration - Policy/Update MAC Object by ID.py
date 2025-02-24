@@ -1,23 +1,29 @@
 import requests
-import json
-
-mac_object_id = 0
+         
+mac_object_id = 'The MAC Object ID'
 access_token = '***'
 
 url = f"https://api.extremecloudiq.com/mac-object-profiles/{mac_object_id}"
-
-payload = json.dumps({
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
   "name": "string",
   "description": "string",
   "value": "string",
   "mac_address_end": "string"
-})
-headers = {
-  'accept': 'application/json',
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer ' + access_token
 }
 
-response = requests.request("PUT", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.put(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

@@ -1,12 +1,12 @@
 import requests
-import json
-
-int_radius_id = 0 # The internal RADIUS server ID
+         
+int_radius_id = 'The ID for internal RADIUS server'
 access_token = '***'
 
-url =f"https://api.extremecloudiq.com/radius-servers/external/{int_radius_id}"
-
-payload = json.dumps({
+url = f"https://api.extremecloudiq.com/radius-servers/internal/{int_radius_id}"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
   "name": "string",
   "description": "string",
   "authentication_method_group": "TLS_PEAP_TTLS_LEAP_MD5",
@@ -19,27 +19,33 @@ payload = json.dumps({
   "enable_check_user_for_ttls_auth": True,
   "enable_authentication_server": True,
   "enable_radius_accounting_settings": True,
-  "authentication_server_port": 0,
+  "authentication_server_port": 1812,
   "active_session_limit": 0,
-  "active_session_age_timeout": 0,
-  "ca_certificate_id": 0, # The CA certificate ID, which could be fetched from endpoint: '/certificates' and pick up with type 'CA'
-  "server_certificate_id": 0, # The Server certificate ID, which could be fetched from endpoint: '/certificates' and pick up with type 'CERT'
-  "server_key_id": 0, # The Server key ID, which could be fetched from endpoint: '/certificates' and pick up with type 'KEY'
+  "active_session_age_timeout": 30,
+  "ca_certificate_id": 0,
+  "server_certificate_id": 0,
+  "server_key_id": 0,
   "clients": [
     {
-      "id": 0, # The RADIUS client ID
+      "id": 0,
       "shared_secret": "string",
       "description": "string",
-      "l3_address_profile_id": 0 # The associate L3 address profile ID
+      "l3_address_profile_id": 0
     }
   ]
-})
-headers = {
-  'accept': 'application/json',
-  'Authorization': 'Bearer ' + access_token,
-  'Content-Type': 'application/json'
 }
 
-response = requests.request("PUT", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.put(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

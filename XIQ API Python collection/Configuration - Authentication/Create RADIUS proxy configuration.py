@@ -1,11 +1,12 @@
 import requests
-import json
-
+         
+device_id = 'device ID'
 access_token = '***'
 
-url ="https://api.extremecloudiq.com/radius-client-objects"
-
-payload = json.dumps({
+url = f"https://api.extremecloudiq.com/radius-proxies"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
   "name": "radius-proxy-1",
   "description": "Radius Proxy 1",
   "format_type": "NAI",
@@ -14,34 +15,40 @@ payload = json.dumps({
   "dead_time": 300,
   "enable_inject_operator_name_attribute": False,
   "device_ids": [
-    0 # List of Device IDs to assign RADIUS proxy
+device_id
   ],
   "clients": [
     {
       "shared_secret": "123456",
       "description": "",
-      "l3_address_profile_id": 1000 # The associate L3 address profile ID
+      "l3_address_profile_id": 1000
     }
   ],
   "realms": [
     {
       "name": "NULL",
       "enable_strip_realm_name": False,
-      "radius_client_object_id": 2000 # The associate RADIUS client object ID
+      "radius_client_object_id": 2000
     },
     {
       "name": "DEFAULT",
       "enable_strip_realm_name": False,
-      "radius_client_object_id": 3000 # The associate RADIUS client object ID
+      "radius_client_object_id": 3000
     }
   ]
-})
-headers = {
-  'accept': 'application/json',
-  'Authorization': 'Bearer ' + access_token,
-  'Content-Type': 'application/json'
 }
 
-response = requests.request("POST", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.post(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

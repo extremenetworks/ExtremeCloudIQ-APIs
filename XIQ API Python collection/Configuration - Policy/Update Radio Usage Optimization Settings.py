@@ -1,12 +1,12 @@
 import requests
-import json
-
-radio_usage_opt_id = 0 # The radio usage optimization settings ID
+         
+radio_usage_opt_id = 'Radio Usage Optimization Setting ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/radio-profiles/radio-usage-opt/radio_usage_opt_id"
-
-payload = json.dumps({
+url = f"https://api.extremecloudiq.com/radio-profiles/radio-usage-opt/{radio_usage_opt_id}"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
   "preamble": "string",
   "beacon_period": 3500,
   "enable_frame_burst": True,
@@ -44,13 +44,20 @@ payload = json.dumps({
   "enable_ofdma_up_link": True,
   "bss_coloring": 63,
   "enable_target_weak_time": True
-})
-headers = {
-  'accept': 'application/json',
-  'Authorization': 'Bearer ' + access_token,
-  'Content-Type': 'application/json'
 }
 
-response = requests.request("PUT", url, headers=headers, data=payload)
 
-print(response.text)
+
+response = requests.put(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

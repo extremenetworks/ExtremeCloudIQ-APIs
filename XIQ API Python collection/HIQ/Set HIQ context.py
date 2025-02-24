@@ -1,21 +1,29 @@
 import requests
-import json
+         
 
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/hiq/context"
-
-payload = json.dumps({
+url = f"https://api.extremecloudiq.com/hiq/context"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
   "reading_org_ids": [
-    0
+   1
   ],
-  "creating_org_id": 0
-})
-headers = {
-  'Authorization': 'Bearer ' + access_token,
-  'Content-Type': 'application/json'
+  "creating_org_id": 1
 }
 
-response = requests.request("PUT", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.put(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

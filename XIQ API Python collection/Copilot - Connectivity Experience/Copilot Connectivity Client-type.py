@@ -1,5 +1,4 @@
 import requests
-
 from datetime import datetime
 import pytz
 
@@ -7,20 +6,32 @@ import pytz
 def utc_seconds(str_dt, timezone):
     timezone = pytz.timezone(timezone)
     dt = datetime.strptime(str_dt, '%Y-%m-%d %H:%M:%S')
-    dt_timezone = timezone.localize(dt)
-    return int(dt_timezone.timestamp()*1000) # epoch time in milliseconds
+    dt_timezone = timezone.localize(dt) 
+    return int(dt_timezone.timestamp()*1000) # epoch time in milliseconds)                 
 
-myStartTime = utc_seconds("2022-12-2 02:30:00", 'US/Eastern')
-myEndTime = utc_seconds("2023-2-23 02:30:00", 'US/Eastern')
+         
+myStartTime = utc_seconds('2024-12-07 02:30:00', 'US/Eastern')
+myEndTime = utc_seconds('2024-12-07 02:30:00', 'US/Eastern')
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/copilot/connectivity/client-type?startTime={myStartTime}&endTime={myEndTime}&page=1&limit=10"
+url = f"https://api.extremecloudiq.com/copilot/connectivity/client-type"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {'startTime': f'{myStartTime}', 'endTime': f'{myEndTime}', 'page': '1', 'limit': '10'}
 
-payload = {}
-headers = {
-  'Authorization': 'Bearer ' + access_token
-}
+# locationId:  (disabled)
+# clientType:  (disabled)
+# forensicBucket:  (disabled)
 
-response = requests.request("GET", url, headers=headers, data=payload)
+response = requests.get(url, headers=headers, params=params)
 
-print(response.text)
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)
