@@ -1,32 +1,39 @@
 import requests
-import json
+         
 
 access_token = '***'
 
-url ="https://api.extremecloudiq.com/radius-client-objects"
-
-payload = json.dumps({
+url = f"https://api.extremecloudiq.com/radius-client-objects"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
   "name": "string",
   "description": "string",
   "enable_inject_operator_name_attribute": True,
   "enable_message_authenticator_attribute": True,
   "enable_permit_dynamic_authorization_message_change": True,
-  "retry_interval": 0,
-  "accounting_interim_update_interval": 0,
+  "retry_interval": 100000000,
+  "accounting_interim_update_interval": 100000000,
   "entries": [
     {
       "server_role": "PRIMARY",
       "server_type": "EXTERNAL_RADIUS_SERVER",
-      "radius_server_id": 0 # The ID of the RADIUS server object, for EXTERNAL_RADIUS_SERVER please use the ID of external RADIUS server object. For INTERNAL_RADIUS_SERVER, please use the RADIUS device ID
+      "radius_server_id": 0
     }
   ]
-})
-headers = {
-  'accept': 'application/json',
-  'Authorization': 'Bearer ' + access_token,
-  'Content-Type': 'application/json'
 }
 
-response = requests.request("POST", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.post(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

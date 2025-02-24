@@ -1,12 +1,12 @@
 import requests
-import json
-
-channel_selection_id = 0
+         
+channel_selection_id = 'Channel Selection setting ID'
 access_token = '***'
 
 url = f"https://api.extremecloudiq.com/radio-profiles/channel-selection/{channel_selection_id}"
-
-payload = json.dumps({
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
   "enable_dynamic_channel_switching": True,
   "channel_width": "string",
   "enable_dynamic_frequency_selection": True,
@@ -28,13 +28,19 @@ payload = json.dumps({
   "enable_switch_channel_if_exceed_threshold": True,
   "rf_interference_threshold": 80,
   "crc_error_threshold": 80
-})
-headers = {
-  'accept': 'application/json',
-  'Authorization': 'Bearer ' + access_token,
-  'Content-Type': 'application/json'
 }
 
-response = requests.request("PUT", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.put(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

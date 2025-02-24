@@ -1,21 +1,28 @@
 import requests
-import json
+         
 
-pcap_id = 0
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/packetcaptures/{pcap_id}/:stop"
-
-payload = json.dumps({
+url = f"https://api.extremecloudiq.com/packetcaptures/{{pcap_id}}/:stop"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
   "device_ids": [
     0
   ]
-})
-headers = {
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer ' + access_token
 }
 
-response = requests.request("POST", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.post(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

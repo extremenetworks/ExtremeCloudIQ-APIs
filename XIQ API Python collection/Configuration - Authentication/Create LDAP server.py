@@ -1,33 +1,40 @@
 import requests
-import json
+         
 
 access_token = '***'
 
-url ="https://api.extremecloudiq.com/ldap-servers"
-
-payload = json.dumps({
-  "name": "test-ldap-server",
-  "description": "test ldap server",
+url = f"https://api.extremecloudiq.com/ldap-servers"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
+  "name": "string",
+  "description": "string",
   "enable_tls": True,
-  "bind_dn": "extreme.com",
-  "bind_dn_password": "123456",
-  "base_dn": "extreme.com",
-  "l3_address_profile_id": 10,
+  "bind_dn": "string",
+  "bind_dn_password": "string",
+  "base_dn": "string",
+  "l3_address_profile_id": 0,
   "protocol_type": "LDAP",
   "enable_strip_realm_name": False,
   "destination_port": 10,
   "verification_mode": "TRY",
-  "ca_certificate_id": 1000,
-  "client_certificate_id": 2000,
-  "client_key_id": 30000,
-  "client_key_password": ""
-})
-headers = {
-  'accept': 'application/json',
-  'Authorization': 'Bearer ' + access_token,
-  'Content-Type': 'application/json'
+  "ca_certificate_id": 0,
+  "client_certificate_id": 0,
+  "client_key_id": 0,
+  "client_key_password": "string"
 }
 
-response = requests.request("POST", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.post(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

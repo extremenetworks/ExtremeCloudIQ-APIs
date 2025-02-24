@@ -1,22 +1,28 @@
 import requests
-import json
-
-sensor_scan_id = 0 # The sensor scan settings ID
+         
+sensor_scan_id = 'Sensor Scan Setting ID'
 access_token = '***'
 
 url = f"https://api.extremecloudiq.com/radio-profiles/sensor-scan/{sensor_scan_id}"
-
-payload = json.dumps({
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
   "enable_scan_all_channels": True,
   "dwell_time": "string",
   "scan_channels": "string"
-})
-headers = {
-  'accept': 'application/json',
-  'Authorization': 'Bearer ' + access_token,
-  'Content-Type': 'application/json'
 }
 
-response = requests.request("PUT", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.put(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

@@ -1,24 +1,32 @@
 import requests
-import json
-
-device_id = 0
+         
+device_id = 'device ID'
+floor_id = 'Floor ID '
 access_token = '***'
 
 url = f"https://api.extremecloudiq.com/devices/{device_id}/location"
-
-payload = json.dumps({
-  "location_id": 0,
-  "x": 0,
-  "y": 0,
-  "latitude": 0,
-  "longitude": 0
-})
-headers = {
-  'accept': '*/*',
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer ' + access_token
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
+    "location_id":floor_id,
+    "x":10,
+    "y":10,
+    "latitude":null,
+    "longitude":null
+    
 }
 
-response = requests.request("PUT", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.put(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

@@ -1,15 +1,24 @@
 import requests
-
-afcserver_id = 0
+         
+afcserver_id = 'AFC Server ID'
 access_token = '***'
 
 url = f"https://api.extremecloudiq.com/afcserver/{afcserver_id}"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
 
-payload = {}
-headers = {
-  'Authorization': 'Bearer ' + access_token
-}
 
-response = requests.request("GET", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.get(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

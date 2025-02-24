@@ -1,20 +1,29 @@
 import requests
-import json
-
-site_ids = [0]
+         
+site_id = 'Site ID'
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/alert-policies"
-
-payload = json.dumps({
+url = f"https://api.extremecloudiq.com/alert-policies"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {
   "name": "string",
-  "site_ids": site_ids
-})
-headers = {
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer ' + access_token
+  "site_ids": [
+    site_id
+  ]
 }
 
-response = requests.request("POST", url, headers=headers, data=payload)
 
-print(response.text)
+response = requests.post(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

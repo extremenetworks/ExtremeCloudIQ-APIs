@@ -1,16 +1,24 @@
 import requests
-
-building_id = 0
+         
+building_id = 'Building ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/locations/building/{building_id}?force_delete=false"
+url = f"https://api.extremecloudiq.com/locations/building/{building_id}"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
 
-payload = {}
-headers = {
-  'accept': 'application/json',
-  'Authorization': 'Bearer ' + access_token
-}
+# force_delete: false (disabled)
 
-response = requests.request("DELETE", url, headers=headers, data=payload)
+response = requests.delete(url, headers=headers, params=params)
 
-print(response.text)
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

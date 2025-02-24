@@ -1,22 +1,24 @@
 import requests
-
-filename = 'filename in XIQ'
-filepathname = 'path with filename to upload'
+         
 
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/locations/floorplan"
+url = f"https://api.extremecloudiq.com/locations/floorplan"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
 
-payload={}
-files={
-            'file' : (f'{filename}', open(filepathname, 'rb'), 'image/png'),
-            'type': 'image/png'
-        }
-headers = {
-  'accept': 'application/json',
-  'Authorization': 'Bearer ' + access_token
-}
 
-response = requests.request("POST", url, headers=headers, data=payload, files=files)
 
-print(response.text)
+response = requests.post(url, headers=headers, params=params)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

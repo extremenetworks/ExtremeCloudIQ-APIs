@@ -1,21 +1,24 @@
 import requests
-import json
+         
 
 access_token = '***'
 
-url = "https://api.extremecloudiq.com/devices/network-policy/:revoke"
+url = f"https://api.extremecloudiq.com/devices/network-policy/:revoke"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {}
+body = {"ids":[{{device_id}}]}
 
-payload = json.dumps({
-  "ids": [
-    0 # List of Device IDs to revoke Network Policy
-  ]
-})
-headers = {
-  'accept': '*/*',
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer ' + access_token
-}
 
-response = requests.request("POST", url, headers=headers, data=payload)
+response = requests.post(url, headers=headers, params=params)
 
-print(response.text)
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)
