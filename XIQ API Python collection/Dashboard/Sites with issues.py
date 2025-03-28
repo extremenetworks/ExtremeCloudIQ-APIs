@@ -1,16 +1,21 @@
 import requests
          
-
+site_id = 'Site ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook"
+url = f"https://api.extremecloudiq.com/dashboard/sites-with-issues"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'page': '1', 'limit': '10'}
+body = {
+  "site_ids": [
+    site_id
+  ]
+}
+# sortField: Alerts (disabled)
+# sortOrder: ASC (disabled)
+# keyword:  (disabled)
 
-# order: ASC (disabled)
-# keyword: None (disabled)
-
-response = requests.get(url, headers=headers, params=params)
+response = requests.post(url, headers=headers, params=params)
 
 print("Status Code:", response.status_code)
 

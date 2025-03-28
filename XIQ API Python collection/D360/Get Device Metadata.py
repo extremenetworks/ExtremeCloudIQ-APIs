@@ -1,14 +1,13 @@
 import requests
          
-
+device_id = 'device ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook"
+url = f"https://api.extremecloudiq.com/d360/device/metadata"
 headers = {'Authorization': f'Bearer {access_token}'}
-params = {'page': '1', 'limit': '10'}
+params = {'deviceId': f'{device_id}'}
 
-# order: ASC (disabled)
-# keyword: None (disabled)
+
 
 response = requests.get(url, headers=headers, params=params)
 

@@ -3,7 +3,7 @@ import requests
 
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/copilot/anomalies/exclude-vlans-list"
+url = f"https://api.extremecloudiq.com/copilot/anomalies/excluded-vlans-list"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'page': '1', 'limit': '10'}
 

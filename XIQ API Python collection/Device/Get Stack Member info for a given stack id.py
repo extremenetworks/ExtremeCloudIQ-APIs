@@ -1,14 +1,13 @@
 import requests
          
-
+stack_id = 'Stack ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook"
+url = f"https://api.extremecloudiq.com/devices/rm-devices-stack/{stack_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
-params = {'page': '1', 'limit': '10'}
+params = {}
 
-# order: ASC (disabled)
-# keyword: None (disabled)
+
 
 response = requests.get(url, headers=headers, params=params)
 

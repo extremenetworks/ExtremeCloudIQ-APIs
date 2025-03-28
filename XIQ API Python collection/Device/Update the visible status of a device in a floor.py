@@ -1,16 +1,18 @@
 import requests
          
-
+device_id = 'device ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook"
+url = f"https://api.extremecloudiq.com/devices/{device_id}/visible"
 headers = {'Authorization': f'Bearer {access_token}'}
-params = {'page': '1', 'limit': '10'}
+params = {'visible': 'true'}
+body = {
+  "device_id": 0,
+  "interface_name": "string"
+}
 
-# order: ASC (disabled)
-# keyword: None (disabled)
 
-response = requests.get(url, headers=headers, params=params)
+response = requests.put(url, headers=headers, params=params)
 
 print("Status Code:", response.status_code)
 

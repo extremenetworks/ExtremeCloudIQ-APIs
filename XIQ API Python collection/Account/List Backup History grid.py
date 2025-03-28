@@ -3,12 +3,12 @@ import requests
 
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook"
+url = f"https://api.extremecloudiq.com/backup/history/grid"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'page': '1', 'limit': '10'}
 
-# order: ASC (disabled)
 # keyword: None (disabled)
+# order: ASC (disabled)
 
 response = requests.get(url, headers=headers, params=params)
 

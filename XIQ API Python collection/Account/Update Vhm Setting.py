@@ -1,16 +1,21 @@
 import requests
          
-
+vhm_id = 'Vhm ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook"
+url = f"https://api.extremecloudiq.com/account/vhm/setting/{vhm_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
-params = {'page': '1', 'limit': '10'}
+params = {}
+body = {
+  "enable_copilot": True,
+  "enable_ssh": True,
+  "enable_supplemental_cli": True,
+  "enable_wireless_onboarding": True,
+  "enable_password_for_exos_voss": True
+}
 
-# order: ASC (disabled)
-# keyword: None (disabled)
 
-response = requests.get(url, headers=headers, params=params)
+response = requests.put(url, headers=headers, params=params)
 
 print("Status Code:", response.status_code)
 

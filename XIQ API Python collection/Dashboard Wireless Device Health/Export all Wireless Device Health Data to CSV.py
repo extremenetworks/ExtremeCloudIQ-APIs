@@ -1,21 +1,33 @@
 import requests
          
-
+site_id = 'Site ID'
+device_id = 'device ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook"
+url = f"https://api.extremecloudiq.com/dashboard/wireless/device-health/export"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
-body = [
-  {
-    "application": "example-app",
-    "url": "https://webhook_endpoint-example-123",
-    "secret": "erw3245cq3dasbjtyj",
-    "message_type": "LOCATION_AP_CENTRIC",
-    "status": "ENABLED"
-  }
-]
-
+body = {
+  "site_ids": [
+    site_id
+  ],
+  "device_ids": [
+    device_id
+  ],
+  "has_device_health_issues": True,
+  "number_filter": [
+    {
+      "column_name": "string",
+      "filter_type": "GT",
+      "value": 0,
+      "min": 0,
+      "max": 0
+    }
+  ]
+}
+# keyword:  (disabled)
+# sortField:  (disabled)
+# sortOrder: ASC (disabled)
 
 response = requests.post(url, headers=headers, params=params)
 
