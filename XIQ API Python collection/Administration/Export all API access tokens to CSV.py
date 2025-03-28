@@ -3,12 +3,13 @@ import requests
 
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook"
+url = f"https://api.extremecloudiq.com/acct-api-token/export"
 headers = {'Authorization': f'Bearer {access_token}'}
-params = {'page': '1', 'limit': '10'}
+params = {}
 
 # order: ASC (disabled)
-# keyword: None (disabled)
+# keyword:  (disabled)
+# sortField: GRANTOR (disabled)
 
 response = requests.get(url, headers=headers, params=params)
 

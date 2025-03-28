@@ -3,14 +3,13 @@ import requests
 
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook"
+url = f"https://api.extremecloudiq.com/acct-api-token"
 headers = {'Authorization': f'Bearer {access_token}'}
-params = {'page': '1', 'limit': '10'}
+params = {'clientId': 'clientId', 'tokenExpireInDay': '30'}
 
-# order: ASC (disabled)
-# keyword: None (disabled)
 
-response = requests.get(url, headers=headers, params=params)
+
+response = requests.post(url, headers=headers, params=params)
 
 print("Status Code:", response.status_code)
 

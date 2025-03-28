@@ -10,7 +10,12 @@ params = {}
 # timeoutInSeconds: 1800 (disabled)
 # excludeDeviceFirmware: false (disabled)
 
-response = requests.post(url, headers=headers, params=params)
+from requests_toolbelt.multipart.encoder import MultipartEncoder
+
+files = {"importFile": ('filename', open('Path-to-file/file.ext', 'rb'),'image/jpeg')}
+payload = MultipartEncoder(fields=files)
+headers["Content-Type"] = payload.content_type
+response = requests.post(url, headers=headers, params=params, data=payload)
 
 print("Status Code:", response.status_code)
 

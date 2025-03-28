@@ -1,16 +1,34 @@
 import requests
          
-
+site_id = 'Site ID'
+device_id = 'device ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook"
+url = f"https://api.extremecloudiq.com/dashboard/wireless/device-health/grid"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'page': '1', 'limit': '10'}
+body = {
+  "site_ids": [
+    site_id
+  ],
+  "device_ids": [
+    device_id
+  ],
+  "has_device_health_issues": True,
+  "number_filter": [
+    {
+      "column_name": "string",
+      "filter_type": "GT",
+      "value": 0,
+      "min": 0,
+      "max": 0
+    }
+  ]
+}
+# sortField:  (disabled)
+# sortOrder: ASC (disabled)
 
-# order: ASC (disabled)
-# keyword: None (disabled)
-
-response = requests.get(url, headers=headers, params=params)
+response = requests.post(url, headers=headers, params=params)
 
 print("Status Code:", response.status_code)
 

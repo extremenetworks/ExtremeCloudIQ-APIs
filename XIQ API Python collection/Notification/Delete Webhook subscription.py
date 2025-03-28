@@ -3,9 +3,9 @@ import requests
 web_id = 'Webhook ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook/{web_id}"
+url = f"https://api.extremecloudiq.com/subscriptions/webhook/:delete"
 headers = {'Authorization': f'Bearer {access_token}'}
-params = {}
+params = {'ids': f'{web_id}'}
 
 
 

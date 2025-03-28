@@ -1,16 +1,23 @@
 import requests
          
-
+web_id = 'Webhook ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook"
+url = f"https://api.extremecloudiq.com/subscriptions/webhook/{web_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
-params = {'page': '1', 'limit': '10'}
+params = {}
+body = [
+  {
+    "application": "example-app",
+    "url": "https://webhook_endpoint-example-123",
+    "secret": "erw3245cq3dasbjtyj",
+    "message_type": "LOCATION_AP_CENTRIC",
+    "status": "ENABLED"
+  }
+]
 
-# order: ASC (disabled)
-# keyword: None (disabled)
 
-response = requests.get(url, headers=headers, params=params)
+response = requests.put(url, headers=headers, params=params)
 
 print("Status Code:", response.status_code)
 

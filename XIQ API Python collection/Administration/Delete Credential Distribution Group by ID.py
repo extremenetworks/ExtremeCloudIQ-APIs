@@ -1,16 +1,29 @@
 import requests
          
-
+cdg_id = 'Credential Distribution Group ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook"
+url = f"https://api.extremecloudiq.com/credential-distribution-groups"
 headers = {'Authorization': f'Bearer {access_token}'}
-params = {'page': '1', 'limit': '10'}
+params = {'ids': f'{cdg_id}'}
+body = {
+  "name": "string",
+  "enable_email_approval": True,
+  "enable_user_limitation": True,
+  "employee_group_type": "ADMIN",
+  "employee_groups": [
+    {
+      "name": "string"
+    }
+  ],
+  "restrict_number": 0,
+  "user_group_ids": [
+    0
+  ]
+}
 
-# order: ASC (disabled)
-# keyword: None (disabled)
 
-response = requests.get(url, headers=headers, params=params)
+response = requests.delete(url, headers=headers, params=params)
 
 print("Status Code:", response.status_code)
 

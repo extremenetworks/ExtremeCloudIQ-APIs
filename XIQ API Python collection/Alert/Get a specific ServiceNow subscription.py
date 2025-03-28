@@ -1,14 +1,13 @@
 import requests
          
-
+servicenow_id = 'ServiceNow subscription ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook"
+url = f"https://api.extremecloudiq.com/alert-subscriptions/servicenow/{servicenow_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
-params = {'page': '1', 'limit': '10'}
+params = {}
 
-# order: ASC (disabled)
-# keyword: None (disabled)
+
 
 response = requests.get(url, headers=headers, params=params)
 

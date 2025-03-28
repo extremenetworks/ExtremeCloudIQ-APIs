@@ -1,16 +1,23 @@
 import requests
          
-
+servicenow_id = 'ServiceNow subscription ID'
+alert_policy_id = 'Alert Policy ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook"
+url = f"https://api.extremecloudiq.com/alert-subscriptions/servicenow/{servicenow_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
-params = {'page': '1', 'limit': '10'}
+params = {}
+body = {
+  "servicenow_account_email": "string",
+  "is_enabled": True,
+  "is_subscribe_all": True,
+  "alert_policy_ids": [
+    alert_policy_id
+  ]
+}
 
-# order: ASC (disabled)
-# keyword: None (disabled)
 
-response = requests.get(url, headers=headers, params=params)
+response = requests.put(url, headers=headers, params=params)
 
 print("Status Code:", response.status_code)
 

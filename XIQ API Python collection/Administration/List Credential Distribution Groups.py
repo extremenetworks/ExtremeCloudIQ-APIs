@@ -3,12 +3,13 @@ import requests
 
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook"
+url = f"https://api.extremecloudiq.com/credential-distribution-groups"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'page': '1', 'limit': '10'}
 
 # order: ASC (disabled)
-# keyword: None (disabled)
+# sortField: GROUP_NAME (disabled)
+# keyword:  (disabled)
 
 response = requests.get(url, headers=headers, params=params)
 

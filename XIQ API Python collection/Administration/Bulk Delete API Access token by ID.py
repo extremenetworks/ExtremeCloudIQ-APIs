@@ -1,16 +1,15 @@
 import requests
          
-
+leg_token_id = 'Legacy Token ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook"
+url = f"https://api.extremecloudiq.com/acct-api-token/:delete"
 headers = {'Authorization': f'Bearer {access_token}'}
-params = {'page': '1', 'limit': '10'}
+params = {'ids': f'{leg_token_id}'}
 
-# order: ASC (disabled)
-# keyword: None (disabled)
 
-response = requests.get(url, headers=headers, params=params)
+
+response = requests.delete(url, headers=headers, params=params)
 
 print("Status Code:", response.status_code)
 

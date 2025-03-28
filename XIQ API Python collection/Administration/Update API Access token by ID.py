@@ -1,16 +1,17 @@
 import requests
          
-
+leg_token_id = 'Legacy Token ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook"
+url = f"https://api.extremecloudiq.com/acct-api-token/{leg_token_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
-params = {'page': '1', 'limit': '10'}
+params = {}
+body = {
+  "token_expire_in_day": 0
+}
 
-# order: ASC (disabled)
-# keyword: None (disabled)
 
-response = requests.get(url, headers=headers, params=params)
+response = requests.patch(url, headers=headers, params=params)
 
 print("Status Code:", response.status_code)
 

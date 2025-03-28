@@ -3,14 +3,27 @@ import requests
 
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook"
+url = f"https://api.extremecloudiq.com/credential-distribution-groups"
 headers = {'Authorization': f'Bearer {access_token}'}
-params = {'page': '1', 'limit': '10'}
+params = {}
+body = {
+  "name": "string",
+  "enable_email_approval": True,
+  "enable_user_limitation": True,
+  "employee_group_type": "ADMIN",
+  "employee_groups": [
+    {
+      "name": "string"
+    }
+  ],
+  "restrict_number": 0,
+  "user_group_ids": [
+    0
+  ]
+}
 
-# order: ASC (disabled)
-# keyword: None (disabled)
 
-response = requests.get(url, headers=headers, params=params)
+response = requests.post(url, headers=headers, params=params)
 
 print("Status Code:", response.status_code)
 

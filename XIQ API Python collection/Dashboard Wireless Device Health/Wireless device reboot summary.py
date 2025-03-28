@@ -3,12 +3,11 @@ import requests
 
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/subscriptions/webhook"
+url = f"https://api.extremecloudiq.com/dashboard/wireless/device-health/reboot/summary"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'page': '1', 'limit': '10'}
 
-# order: ASC (disabled)
-# keyword: None (disabled)
+# deviceId: {{device_id}} (disabled)
 
 response = requests.get(url, headers=headers, params=params)
 
