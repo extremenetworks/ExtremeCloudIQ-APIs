@@ -1,10 +1,11 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 device_id = 'device ID'
 floor_id = 'Floor ID '
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/devices/{device_id}/location"
+url = f"https://{baseUrl}/devices/{device_id}/location"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

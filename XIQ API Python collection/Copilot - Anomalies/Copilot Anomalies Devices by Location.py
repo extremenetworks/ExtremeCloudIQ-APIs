@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 loc_id = 'Location ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/copilot/anomalies/devices-by-location"
+url = f"https://{baseUrl}/copilot/anomalies/devices-by-location"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'anomalyType': 'POE_FLAPPING', 'locationIds': f'{loc_id}'}
 

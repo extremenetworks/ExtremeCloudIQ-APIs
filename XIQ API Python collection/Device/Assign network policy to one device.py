@@ -1,10 +1,11 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 device_id = 'device ID'
 np_id = 'Network Policy ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/devices/{device_id}/network-policy"
+url = f"https://{baseUrl}/devices/{device_id}/network-policy"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'networkPolicyId': f'{np_id}'}
 

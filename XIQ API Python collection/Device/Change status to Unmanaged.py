@@ -1,9 +1,9 @@
 import requests
          
-
+baseUrl = 'api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/devices/:unmanage"
+url = f"https://{baseUrl}/devices/:unmanage"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {"ids":[{{device_id}}]}

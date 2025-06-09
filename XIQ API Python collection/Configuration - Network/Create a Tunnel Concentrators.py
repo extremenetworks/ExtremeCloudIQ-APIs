@@ -1,9 +1,9 @@
 import requests
          
-
+baseUrl = 'api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/tunnel-concentrators"
+url = f"https://{baseUrl}/tunnel-concentrators"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

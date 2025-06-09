@@ -10,12 +10,13 @@ def utc_seconds(str_dt, timezone):
     return int(dt_timezone.timestamp()*1000) # epoch time in milliseconds)                 
 
          
+baseUrl = 'api.extremecloudiq.com'
 afcserver_id = 'AFC Server ID'
 myStartTime = utc_seconds('2024-12-07 02:30:00', 'US/Eastern')
 myEndTime = utc_seconds('2024-12-07 02:30:00', 'US/Eastern')
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/afcserver/statistics/{afcserver_id}"
+url = f"https://{baseUrl}/afcserver/statistics/{afcserver_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'server_id': '1234567890', 'startTime': f'{myStartTime}', 'endTime': f'{myEndTime}'}
 

@@ -1,9 +1,9 @@
 import requests
          
-
+baseUrl = 'api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/thread/topology"
+url = f"https://{baseUrl}/thread/topology"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'networkConfigIds': '0'}
 

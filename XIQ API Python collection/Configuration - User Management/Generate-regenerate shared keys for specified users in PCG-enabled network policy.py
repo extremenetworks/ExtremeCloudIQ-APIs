@@ -1,10 +1,11 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 np_id = 'Network Policy ID'
 user_id = 'User ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/pcgs/key-based/network-policy-{np_id}/keys/:generate"
+url = f"https://{baseUrl}/pcgs/key-based/network-policy-{np_id}/keys/:generate"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'userIds': f'{user_id}'}
 

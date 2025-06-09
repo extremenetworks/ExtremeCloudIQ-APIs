@@ -1,10 +1,11 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 alert_policy_id = 'Alert Policy ID'
 alert_rule_id = 'Alert Rule ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/alert-policies/{alert_policy_id}/rules/{alert_rule_id}/:disable"
+url = f"https://{baseUrl}/alert-policies/{alert_policy_id}/rules/{alert_rule_id}/:disable"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

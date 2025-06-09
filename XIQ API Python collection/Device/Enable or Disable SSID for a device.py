@@ -1,10 +1,11 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 device_id = 'device ID'
 ssid_id = 'SSID ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/devices/{device_id}/ssid/status/:change"
+url = f"https://{baseUrl}/devices/{device_id}/ssid/status/:change"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

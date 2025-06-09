@@ -1,9 +1,9 @@
 import requests
          
-
+baseUrl = 'api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/devices/:onboard"
+url = f"https://{baseUrl}/devices/:onboard"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

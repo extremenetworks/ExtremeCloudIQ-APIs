@@ -1,10 +1,11 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 device_id = 'device ID'
 anomaly_id = 'Anomaly ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/copilot/anomalies/poeflapping/lldp-cdp-info"
+url = f"https://{baseUrl}/copilot/anomalies/poeflapping/lldp-cdp-info"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'anomalyType': 'POE_STABILITY', 'anomalyId': f'{anomaly_id}', 'deviceId': f'{device_id}', 'lastDetectedTime': 'lastDetectedTime'}
 

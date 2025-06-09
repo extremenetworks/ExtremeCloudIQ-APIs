@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 channel_selection_id = 'Channel Selection setting ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/radio-profiles/channel-selection/{channel_selection_id}"
+url = f"https://{baseUrl}/radio-profiles/channel-selection/{channel_selection_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

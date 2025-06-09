@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 deployment_id = 'Deployment ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/deployments/{deployment_id}/status"
+url = f"https://{baseUrl}/deployments/{deployment_id}/status"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 radius_id = 'The ID of RADIUS client object'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/radius-servers/internal"
+url = f"https://{baseUrl}/radius-servers/internal"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'ids': f'{radius_id}', 'async': 'false'}
 body = {

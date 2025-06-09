@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 afcserver_id = 'AFC Server ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/afcserver/{afcserver_id}"
+url = f"https://{baseUrl}/afcserver/{afcserver_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

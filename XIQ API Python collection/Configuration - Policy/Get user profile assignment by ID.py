@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 user_profile_assignment_id = 'The user profile assignment ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/user-profile-assignments/{user_profile_assignment_id}"
+url = f"https://{baseUrl}/user-profile-assignments/{user_profile_assignment_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

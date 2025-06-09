@@ -1,9 +1,9 @@
 import requests
          
-
+baseUrl = 'api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/ap/spectrum"
+url = f"https://{baseUrl}/ap/spectrum"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'IsEmptyList': 'false'}
 body = {

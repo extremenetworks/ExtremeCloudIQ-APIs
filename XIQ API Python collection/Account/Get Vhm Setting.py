@@ -1,9 +1,9 @@
 import requests
          
-
+baseUrl = 'api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/account/vhm/setting"
+url = f"https://{baseUrl}/account/vhm/setting"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

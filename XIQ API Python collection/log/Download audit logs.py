@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 audit_report_id = 'Audit Report ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/logs/audit/reports/{audit_report_id}"
+url = f"https://{baseUrl}/logs/audit/reports/{audit_report_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

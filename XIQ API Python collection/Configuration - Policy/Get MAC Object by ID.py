@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 mac_object_id = 'The MAC Object ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/mac-object-profiles/{mac_object_id}"
+url = f"https://{baseUrl}/mac-object-profiles/{mac_object_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

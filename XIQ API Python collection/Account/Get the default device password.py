@@ -1,9 +1,9 @@
 import requests
          
-
+baseUrl = 'api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/account/viq/default-device-password"
+url = f"https://{baseUrl}/account/viq/default-device-password"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

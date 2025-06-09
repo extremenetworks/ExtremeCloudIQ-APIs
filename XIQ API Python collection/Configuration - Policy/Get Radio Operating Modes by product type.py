@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 productType = 'AP Model'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/radio-operating-modes/{productType}"
+url = f"https://{baseUrl}/radio-operating-modes/{productType}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

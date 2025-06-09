@@ -1,10 +1,11 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 user_profile_id = 'User Profile ID'
 mac_firewall_policy_id = 'The MAC Firewall Policy ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/user-profiles/{user_profile_id}/mac-filrewall-policies/:detach"
+url = f"https://{baseUrl}/user-profiles/{user_profile_id}/mac-filrewall-policies/:detach"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

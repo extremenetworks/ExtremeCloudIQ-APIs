@@ -1,10 +1,11 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 site_id = 'Site ID'
 device_id = 'device ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/dashboard/wireless/client-health/grid"
+url = f"https://{baseUrl}/dashboard/wireless/client-health/grid"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'page': '1', 'limit': '10'}
 body = {

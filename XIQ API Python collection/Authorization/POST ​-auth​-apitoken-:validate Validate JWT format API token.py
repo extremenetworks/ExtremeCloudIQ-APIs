@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 jwttoken = ''
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/auth/apitoken/:validate"
+url = f"https://{baseUrl}/auth/apitoken/:validate"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = jwttoken

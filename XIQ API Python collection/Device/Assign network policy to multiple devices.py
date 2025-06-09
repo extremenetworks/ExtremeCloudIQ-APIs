@@ -1,9 +1,9 @@
 import requests
          
-
+baseUrl = 'api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/devices/network-policy/:assign"
+url = f"https://{baseUrl}/devices/network-policy/:assign"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {"devices":{"ids":[{{device_id}}]},"network_policy_id":{{np_id}}}

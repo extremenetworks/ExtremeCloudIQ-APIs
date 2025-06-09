@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 site_id = 'Site ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/dashboard/wireless/usage-capacity/excessive-packet-loss"
+url = f"https://{baseUrl}/dashboard/wireless/usage-capacity/excessive-packet-loss"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

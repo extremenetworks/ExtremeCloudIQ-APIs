@@ -1,9 +1,9 @@
 import requests
          
-
+baseUrl = 'api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/logout"
+url = f"https://{baseUrl}/logout"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

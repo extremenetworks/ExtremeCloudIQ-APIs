@@ -1,10 +1,11 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 servicenow_id = 'ServiceNow subscription ID'
 alert_policy_id = 'Alert Policy ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/alert-subscriptions/servicenow/{servicenow_id}"
+url = f"https://{baseUrl}/alert-subscriptions/servicenow/{servicenow_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

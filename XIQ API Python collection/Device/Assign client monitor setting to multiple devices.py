@@ -1,9 +1,9 @@
 import requests
          
-
+baseUrl = 'api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/devices/client-monitor/:assign"
+url = f"https://{baseUrl}/devices/client-monitor/:assign"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

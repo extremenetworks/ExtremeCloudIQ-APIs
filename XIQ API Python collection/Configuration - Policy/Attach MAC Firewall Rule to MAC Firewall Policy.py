@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 mac_firewall_policy_id = 'The MAC Firewall Policy ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/mac-firewall-policies/{mac_firewall_policy_id}/:attach"
+url = f"https://{baseUrl}/mac-firewall-policies/{mac_firewall_policy_id}/:attach"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

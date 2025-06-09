@@ -1,10 +1,11 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 np_id = 'Network Policy ID'
 ssid_id = 'SSID ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/network-policies/{np_id}/ssids/:add"
+url = f"https://{baseUrl}/network-policies/{np_id}/ssids/:add"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = [

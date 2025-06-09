@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 radio_qos_id = 'Radio QoS Setting ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/radio-profiles/wmm-qos/{radio_qos_id}"
+url = f"https://{baseUrl}/radio-profiles/wmm-qos/{radio_qos_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 
