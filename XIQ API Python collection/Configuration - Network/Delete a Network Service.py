@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 network_service_id = 'The network Service ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/network-services/{network_service_id}"
+url = f"https://{baseUrl}/network-services/{network_service_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

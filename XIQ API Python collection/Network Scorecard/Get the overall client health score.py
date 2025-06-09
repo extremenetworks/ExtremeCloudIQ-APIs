@@ -10,12 +10,13 @@ def utc_seconds(str_dt, timezone):
     return int(dt_timezone.timestamp()*1000) # epoch time in milliseconds)                 
 
          
+baseUrl = 'api.extremecloudiq.com'
 loc_id = 'Location ID'
 myStartTime = utc_seconds('2024-12-07 02:30:00', 'US/Eastern')
 myEndTime = utc_seconds('2024-12-07 02:30:00', 'US/Eastern')
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/network-scorecard/clientHealth/{loc_id}"
+url = f"https://{baseUrl}/network-scorecard/clientHealth/{loc_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'startTime': f'{myStartTime}', 'endTime': f'{myEndTime}'}
 

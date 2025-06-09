@@ -1,9 +1,9 @@
 import requests
          
-
+baseUrl = 'api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/locations/import/ekahau"
+url = f"https://{baseUrl}/locations/import/ekahau"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'floorAssociations': '[{"floorName":"1st floor","parentBuildingId":1}]', 'outdoorSiteAssociations': '[{"floorName":"2nd floor","parentSiteGroupId":2,"countryCode":124}]'}
 

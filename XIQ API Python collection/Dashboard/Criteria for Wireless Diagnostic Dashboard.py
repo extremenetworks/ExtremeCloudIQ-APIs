@@ -1,9 +1,9 @@
 import requests
          
-
+baseUrl = 'api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/dashboard/wireless/dashboard/criteria"
+url = f"https://{baseUrl}/dashboard/wireless/dashboard/criteria"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

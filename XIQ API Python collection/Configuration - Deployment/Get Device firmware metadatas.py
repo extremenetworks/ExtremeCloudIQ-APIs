@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 device_id = 'device ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/deployments/firmware-metadatas"
+url = f"https://{baseUrl}/deployments/firmware-metadatas"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

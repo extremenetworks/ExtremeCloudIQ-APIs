@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 anomaly_id = 'Anomaly ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/copilot/anomalies/adverse-traffic/packet-counts"
+url = f"https://{baseUrl}/copilot/anomalies/adverse-traffic/packet-counts"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'anomalyId': f'{anomaly_id}'}
 

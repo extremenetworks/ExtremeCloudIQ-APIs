@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 ldap_id = 'The LDAP server'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/ldap-servers/{ldap_id}"
+url = f"https://{baseUrl}/ldap-servers/{ldap_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

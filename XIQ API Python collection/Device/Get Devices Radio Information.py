@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 device_id = 'device ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/devices/radio-information"
+url = f"https://{baseUrl}/devices/radio-information"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'page': '1', 'limit': '10', 'deviceIds': f'{device_id}'}
 

@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 client_id = 'Client ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/clients/{client_id}"
+url = f"https://{baseUrl}/clients/{client_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'views': 'FULL'}
 

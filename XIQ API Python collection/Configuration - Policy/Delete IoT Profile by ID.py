@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 iot_profile_id = 'IoT Profile ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/iot-profiles/{iot_profile_id}"
+url = f"https://{baseUrl}/iot-profiles/{iot_profile_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

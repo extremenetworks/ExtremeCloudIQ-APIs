@@ -1,9 +1,9 @@
 import requests
          
-
+baseUrl = 'api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/copilot/anomalies/devices/feedback"
+url = f"https://{baseUrl}/copilot/anomalies/devices/feedback"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

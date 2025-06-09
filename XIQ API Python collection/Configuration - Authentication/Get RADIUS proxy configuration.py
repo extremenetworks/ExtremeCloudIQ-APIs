@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 radius_proxy_id = 'The RADIUS proxy ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/radius-proxies/{radius_proxy_id}"
+url = f"https://{baseUrl}/radius-proxies/{radius_proxy_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

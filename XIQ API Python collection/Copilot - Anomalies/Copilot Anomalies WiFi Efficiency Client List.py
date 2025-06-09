@@ -10,11 +10,12 @@ def utc_seconds(str_dt, timezone):
     return int(dt_timezone.timestamp()*1000) # epoch time in milliseconds)                 
 
          
+baseUrl = 'api.extremecloudiq.com'
 device_id = 'device ID'
 myEpoch = utc_seconds('2024-12-07 02:30:00', 'US/Eastern')
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/copilot/anomalies/wifi-efficiency/client-list"
+url = f"https://{baseUrl}/copilot/anomalies/wifi-efficiency/client-list"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'deviceId': f'{device_id}', 'channel': '1', 'timestamp': f'{myEpoch}'}
 

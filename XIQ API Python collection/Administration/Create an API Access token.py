@@ -1,9 +1,9 @@
 import requests
          
-
+baseUrl = 'api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/acct-api-token"
+url = f"https://{baseUrl}/acct-api-token"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'clientId': 'clientId', 'tokenExpireInDay': '30'}
 

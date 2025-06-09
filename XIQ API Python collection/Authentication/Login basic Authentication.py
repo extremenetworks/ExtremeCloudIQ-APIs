@@ -1,10 +1,11 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 username = 'username'
 password = 'password'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/login"
+url = f"https://{baseUrl}/login"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

@@ -1,11 +1,12 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 site_id = 'Site ID'
 device_id = 'device ID'
 building_id = 'Building ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/dashboard/wireless/usage-capacity/export"
+url = f"https://{baseUrl}/dashboard/wireless/usage-capacity/export"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

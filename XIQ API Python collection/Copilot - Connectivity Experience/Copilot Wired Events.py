@@ -10,12 +10,13 @@ def utc_seconds(str_dt, timezone):
     return int(dt_timezone.timestamp()*1000) # epoch time in milliseconds)                 
 
          
+baseUrl = 'api.extremecloudiq.com'
 loc_id = 'Location ID'
 myStartTime = utc_seconds('2024-12-07 02:30:00', 'US/Eastern')
 myEndTime = utc_seconds('2024-12-07 02:30:00', 'US/Eastern')
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/copilot/connectivity/wired/events"
+url = f"https://{baseUrl}/copilot/connectivity/wired/events"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'viewType': 'LOCATION', 'startTime': f'{myStartTime}', 'endTime': f'{myEndTime}', 'page': '1', 'limit': '10', 'forensicBucket': 'TWENTY_FOUR_HOURS', 'scoreType': 'PORT_ERRORS', 'locationId': f'{loc_id}'}
 

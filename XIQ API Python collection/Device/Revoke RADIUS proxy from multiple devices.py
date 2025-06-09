@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 device_id = 'device ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/devices/radius-proxy/:revoke"
+url = f"https://{baseUrl}/devices/radius-proxy/:revoke"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'ids': f'{device_id}'}
 

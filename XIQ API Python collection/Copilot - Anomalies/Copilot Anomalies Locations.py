@@ -1,9 +1,9 @@
 import requests
          
-
+baseUrl = 'api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/copilot/anomalies/locations"
+url = f"https://{baseUrl}/copilot/anomalies/locations"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'anomalyType': 'WIFI_CAPACITY', 'page': '1', 'limit': '10'}
 

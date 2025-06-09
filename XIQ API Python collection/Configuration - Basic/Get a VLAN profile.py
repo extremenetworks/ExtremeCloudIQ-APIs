@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 vlan_id = 'VLAN Profile ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/vlan-profiles/{vlan_id}"
+url = f"https://{baseUrl}/vlan-profiles/{vlan_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

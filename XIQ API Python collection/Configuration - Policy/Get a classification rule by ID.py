@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 class_id = 'Classification Rule ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/classification-rules/{class_id}"
+url = f"https://{baseUrl}/classification-rules/{class_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

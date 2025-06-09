@@ -1,9 +1,9 @@
 import requests
          
-
+baseUrl = 'api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/thread/networks"
+url = f"https://{baseUrl}/thread/networks"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'page': '1', 'limit': '10', 'folderId': '0'}
 

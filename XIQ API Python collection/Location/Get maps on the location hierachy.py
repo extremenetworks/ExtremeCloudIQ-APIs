@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 loc_id = 'Location ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/locations/tree/maps"
+url = f"https://{baseUrl}/locations/tree/maps"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'page': '1', 'limit': '10', 'locationId': f'{loc_id}', 'expandChildren': 'true'}
 

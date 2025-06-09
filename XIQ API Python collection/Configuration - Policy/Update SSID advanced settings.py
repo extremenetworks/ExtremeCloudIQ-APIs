@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 ssid_id = 'SSID ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/ssids/advanced-settings/{ssid_id}"
+url = f"https://{baseUrl}/ssids/advanced-settings/{ssid_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

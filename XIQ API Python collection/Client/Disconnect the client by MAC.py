@@ -1,9 +1,10 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 client_mac = 'Client MAC address'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/clients/byMac/{client_mac}"
+url = f"https://{baseUrl}/clients/byMac/{client_mac}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

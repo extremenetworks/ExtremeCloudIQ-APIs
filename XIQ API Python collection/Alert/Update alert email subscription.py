@@ -1,10 +1,11 @@
 import requests
          
+baseUrl = 'api.extremecloudiq.com'
 email_id = 'Email Alert Subscription ID'
 alert_policy_id = 'Alert Policy ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/alert-subscriptions/emails/{email_id}"
+url = f"https://{baseUrl}/alert-subscriptions/emails/{email_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

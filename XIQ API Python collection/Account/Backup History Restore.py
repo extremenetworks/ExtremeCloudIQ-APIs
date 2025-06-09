@@ -1,9 +1,9 @@
 import requests
          
-
+baseUrl = 'api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/backup/history/:restore"
+url = f"https://{baseUrl}/backup/history/:restore"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'backupFile': 'filename'}
 
