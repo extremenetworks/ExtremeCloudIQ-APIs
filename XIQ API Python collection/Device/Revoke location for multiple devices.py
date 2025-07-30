@@ -1,9 +1,9 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://{baseUrl}/devices/location/:revoke"
+url = f"{baseUrl}/devices/location/:revoke"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {"ids":[0]}

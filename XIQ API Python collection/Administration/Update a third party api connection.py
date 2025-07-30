@@ -1,9 +1,9 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://{baseUrl}/third-party-api-connection"
+url = f"{baseUrl}/third-party-api-connection"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

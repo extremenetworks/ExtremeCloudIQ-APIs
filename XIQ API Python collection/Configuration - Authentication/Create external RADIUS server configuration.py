@@ -1,9 +1,9 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://{baseUrl}/radius-servers/external"
+url = f"{baseUrl}/radius-servers/external"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

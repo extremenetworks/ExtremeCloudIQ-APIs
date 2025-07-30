@@ -1,12 +1,12 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 site_id = 'Site ID'
 device_id = 'device ID'
 building_id = 'Building ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/dashboard/wireless/usage-capacity/grid"
+url = f"{baseUrl}/dashboard/wireless/usage-capacity/grid"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'page': '1', 'limit': '10'}
 body = {
@@ -38,9 +38,10 @@ body = {
   "has_packet_loss_issues": True,
   "has_retries_issues": True
 }
-# keyword: None (disabled)
-# sortField: None (disabled)
+# keyword:  (disabled)
+# sortField:  (disabled)
 # sortOrder: ASC (disabled)
+# unassigned_devices: false (disabled)
 
 response = requests.post(url, headers=headers, params=params)
 

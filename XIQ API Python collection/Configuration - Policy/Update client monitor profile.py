@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 cient_mon_profile_id = 'The Client Monitor Profile ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/client-monitor-profiles/{cient_mon_profile_id}"
+url = f"{baseUrl}/client-monitor-profiles/{cient_mon_profile_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

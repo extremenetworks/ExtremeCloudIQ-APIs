@@ -1,0 +1,29 @@
+import requests
+         
+baseUrl = 'https://api.extremecloudiq.com'
+access_token = '***'
+
+url = f"{baseUrl}/certificates/import"
+headers = {'Authorization': f'Bearer {access_token}'}
+params = {'name': 'password', 'certType': 'CERT', 'enableConvertPfx': 'true', 'pfxPassword': 'password', 'enableConvertDer': 'true', 'convertOptionType': 'CERTIFICATE', 'derPassword': 'password'}
+
+
+
+from requests_toolbelt.multipart.encoder import MultipartEncoder
+
+files = {"certificate": ('filename', open('Path-to-file/file.ext', 'rb'),'image/jpeg')}
+payload = MultipartEncoder(fields=files)
+headers["Content-Type"] = payload.content_type
+response = requests.post(url, headers=headers, params=params, data=payload)
+
+print("Status Code:", response.status_code)
+
+content_type = response.headers.get('Content-Type')
+if content_type and 'application/json' in content_type:
+    try:
+        print("Response Body:", response.json())
+    except ValueError:
+        print("Response is not valid JSON")
+else:
+    print("Content-Type is not application/json")
+    print(response.text)

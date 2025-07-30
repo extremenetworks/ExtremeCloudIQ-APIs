@@ -1,12 +1,12 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 building_id = 'Building ID'
 floor_id = 'Floor ID '
 client_mac = 'Client MAC address'
 access_token = '***'
 
-url = f"https://{baseUrl}/essentials/eloc/clients/{client_mac}/last-known-location"
+url = f"{baseUrl}/essentials/eloc/clients/{client_mac}/last-known-location"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'floorId': f'{floor_id}', 'parentId': f'{building_id}'}
 

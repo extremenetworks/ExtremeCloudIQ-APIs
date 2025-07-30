@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 radio_profile_id = 'Radio Profile ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/radio-profiles/{radio_profile_id}"
+url = f"{baseUrl}/radio-profiles/{radio_profile_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

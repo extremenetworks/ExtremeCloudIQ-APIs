@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 wall_type_id = 'The Wall Type ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/locations/wall/type/references/{wall_type_id}"
+url = f"{baseUrl}/locations/wall/type/references/{wall_type_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

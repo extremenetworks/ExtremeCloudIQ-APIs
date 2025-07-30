@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 operation_id = 'Operation ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/operations/{operation_id}/:cancel"
+url = f"{baseUrl}/operations/{operation_id}/:cancel"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

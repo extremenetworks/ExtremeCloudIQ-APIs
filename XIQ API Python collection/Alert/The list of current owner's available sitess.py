@@ -1,9 +1,9 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://{baseUrl}/alert-policies/available-sites"
+url = f"{baseUrl}/alert-policies/available-sites"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

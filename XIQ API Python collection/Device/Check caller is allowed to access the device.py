@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 sn = 'Serial Number'
 access_token = '***'
 
-url = f"https://{baseUrl}/devices/:check-ownership"
+url = f"{baseUrl}/devices/:check-ownership"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = sn

@@ -1,11 +1,11 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 site_id = 'Site ID'
 device_id = 'device ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/dashboard/wireless/device-health/grid"
+url = f"{baseUrl}/dashboard/wireless/device-health/grid"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'page': '1', 'limit': '10'}
 body = {
@@ -28,6 +28,7 @@ body = {
 }
 # sortField:  (disabled)
 # sortOrder: ASC (disabled)
+# unassigned_devices: false (disabled)
 
 response = requests.post(url, headers=headers, params=params)
 

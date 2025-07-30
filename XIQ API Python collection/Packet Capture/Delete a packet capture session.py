@@ -1,9 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
+pcap_id = 'Packet Capture ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/packetcaptures/{{pcap_id}}"
+url = f"{baseUrl}/packetcaptures/{pcap_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

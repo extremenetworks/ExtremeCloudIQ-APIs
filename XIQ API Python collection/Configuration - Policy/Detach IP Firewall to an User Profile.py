@@ -1,11 +1,11 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 user_profile_id = 'User Profile ID'
 ip_firewall_policy_id = 'IP Firewall Policy ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/user-profiles/{user_profile_id}/ip-filrewall-policies/:detach"
+url = f"{baseUrl}/user-profiles/{user_profile_id}/ip-filrewall-policies/:detach"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

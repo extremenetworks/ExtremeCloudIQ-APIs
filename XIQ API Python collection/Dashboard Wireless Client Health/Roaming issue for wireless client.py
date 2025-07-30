@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 site_id = 'Site ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/dashboard/wireless/client-health/issue/roaming"
+url = f"{baseUrl}/dashboard/wireless/client-health/issue/roaming"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'page': '1', 'limit': '10'}
 body = {

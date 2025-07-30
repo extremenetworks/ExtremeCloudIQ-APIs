@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 loc_id = 'Location ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/locations/{loc_id}"
+url = f"{baseUrl}/locations/{loc_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

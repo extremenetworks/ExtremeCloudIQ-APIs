@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 ccg_id = 'Cloud Config Group ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/ccgs/{ccg_id}"
+url = f"{baseUrl}/ccgs/{ccg_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

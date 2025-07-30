@@ -1,23 +1,16 @@
 import requests
          
-
+baseUrl = 'https://api.extremecloudiq.com'
+certificate_id = 'Certificate ID'
 access_token = '***'
 
-url = f"https://api.extremecloudiq.com/devices/{{id}}/config/vlan-attributes"
+url = f"{baseUrl}/certificates/{certificate_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
-body = {
-  "name": "string",
-  "dhcp_snooping_enabled": True,
-  "dhcp_snooping_action": "NONE",
-  "igmp_snooping_enabled": True,
-  "immediate_leave": True,
-  "always_create": True,
-  "vlan_id": 0
-}
 
 
-response = requests.post(url, headers=headers, params=params)
+
+response = requests.delete(url, headers=headers, params=params)
 
 print("Status Code:", response.status_code)
 

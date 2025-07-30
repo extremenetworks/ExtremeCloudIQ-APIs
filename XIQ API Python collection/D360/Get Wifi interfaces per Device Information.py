@@ -1,9 +1,9 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://{baseUrl}/d360/device/interfaces"
+url = f"{baseUrl}/d360/device/interfaces"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'deviceModel': 'AP_5010'}
 

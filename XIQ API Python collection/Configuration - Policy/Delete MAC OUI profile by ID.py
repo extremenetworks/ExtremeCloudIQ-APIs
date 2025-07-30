@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 mac_oui_id = 'MAC OUI ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/radio-profiles/mac-ouis/{mac_oui_id}"
+url = f"{baseUrl}/radio-profiles/mac-ouis/{mac_oui_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

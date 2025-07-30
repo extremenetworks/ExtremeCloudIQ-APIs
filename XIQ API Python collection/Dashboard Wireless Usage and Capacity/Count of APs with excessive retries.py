@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 site_id = 'Site ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/dashboard/wireless/usage-capacity/excessive-retries"
+url = f"{baseUrl}/dashboard/wireless/usage-capacity/excessive-retries"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {
@@ -12,7 +12,7 @@ body = {
     site_id
   ]
 }
-
+# unassigned_devices: false (disabled)
 
 response = requests.post(url, headers=headers, params=params)
 

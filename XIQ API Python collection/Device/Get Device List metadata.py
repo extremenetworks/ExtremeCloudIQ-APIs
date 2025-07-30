@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 site_id = 'Site ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/devices/rm-devices-metadata"
+url = f"{baseUrl}/devices/rm-devices-metadata"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {
@@ -15,6 +15,7 @@ body = {
 # deviceCategory: WIRELESS (disabled)
 # adminStates: NEW (disabled)
 # deviceTypes: REAL (disabled)
+# unassigned_devices: false (disabled)
 
 response = requests.post(url, headers=headers, params=params)
 

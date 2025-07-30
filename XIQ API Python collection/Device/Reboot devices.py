@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 device_id = 'device ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/devices/:reboot"
+url = f"{baseUrl}/devices/:reboot"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {
