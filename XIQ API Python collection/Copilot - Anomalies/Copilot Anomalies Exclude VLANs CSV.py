@@ -1,9 +1,9 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://{baseUrl}/copilot/anomalies/exclude-vlans-csv"
+url = f"{baseUrl}/copilot/anomalies/exclude-vlans-csv"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'action_type': 'ADD', 'dismiss': 'true'}
 

@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 device_id = 'device ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/copilot/anomalies/hardware-health/cpu-mem-stats"
+url = f"{baseUrl}/copilot/anomalies/hardware-health/cpu-mem-stats"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'deviceId': f'{device_id}', 'statsField': 'CPU_STATS', 'timestamp': '0'}
 

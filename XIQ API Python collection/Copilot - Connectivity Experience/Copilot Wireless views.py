@@ -1,9 +1,9 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://{baseUrl}/copilot/connectivity/wireless/views"
+url = f"{baseUrl}/copilot/connectivity/wireless/views"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'viewType': 'SSID'}
 

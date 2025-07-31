@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 countryCode = 'Country Code'
 access_token = '***'
 
-url = f"https://{baseUrl}/countries/{countryCode}/:validate"
+url = f"{baseUrl}/countries/{countryCode}/:validate"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

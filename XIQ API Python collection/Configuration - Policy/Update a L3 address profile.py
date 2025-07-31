@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 l3_address_profile = 'The L3 address profile ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/l3-address-profiles/{l3_address_profile}"
+url = f"{baseUrl}/l3-address-profiles/{l3_address_profile}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

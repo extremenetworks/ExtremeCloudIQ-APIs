@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 site_id = 'Site ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/devices/rm-devices-page/export"
+url = f"{baseUrl}/devices/rm-devices-page/export"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {
@@ -51,7 +51,10 @@ response = requests.post(url, headers=headers, params=params)
 print("Status Code:", response.status_code)
 
 content_type = response.headers.get('Content-Type')
-if content_type and 'application/json' in content_type:
+lro_url = response.headers.get('Location')
+if lro_url:
+    print(lro_url)
+elif content_type and 'application/json' in content_type:
     try:
         print("Response Body:", response.json())
     except ValueError:

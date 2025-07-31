@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 ssid_id = 'SSID ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/ssids/{ssid_id}/psk/password"
+url = f"{baseUrl}/ssids/{ssid_id}/psk/password"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = "string"

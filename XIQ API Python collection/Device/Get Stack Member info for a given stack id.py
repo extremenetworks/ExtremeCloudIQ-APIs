@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 stack_id = 'Stack ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/devices/rm-devices-stack/{stack_id}"
+url = f"{baseUrl}/devices/rm-devices-stack/{stack_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

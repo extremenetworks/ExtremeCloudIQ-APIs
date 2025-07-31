@@ -1,9 +1,9 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://{baseUrl}/credential-distribution-groups"
+url = f"{baseUrl}/credential-distribution-groups"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'page': '1', 'limit': '10'}
 

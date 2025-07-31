@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 int_radius_id = 'The ID for internal RADIUS server'
 access_token = '***'
 
-url = f"https://{baseUrl}/radius-servers/internal/{int_radius_id}"
+url = f"{baseUrl}/radius-servers/internal/{int_radius_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

@@ -1,9 +1,9 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://{baseUrl}/dashboard/wired/device-health/cpu-usage-issues"
+url = f"{baseUrl}/dashboard/wired/device-health/cpu-usage-issues"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

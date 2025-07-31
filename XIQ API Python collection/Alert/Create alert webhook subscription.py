@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 alert_policy_id = 'Alert Policy ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/alert-subscriptions/webhooks"
+url = f"{baseUrl}/alert-subscriptions/webhooks"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

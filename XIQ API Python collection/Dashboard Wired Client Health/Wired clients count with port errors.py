@@ -1,9 +1,9 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://{baseUrl}/dashboard/wired/client-health/port-errors"
+url = f"{baseUrl}/dashboard/wired/client-health/port-errors"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

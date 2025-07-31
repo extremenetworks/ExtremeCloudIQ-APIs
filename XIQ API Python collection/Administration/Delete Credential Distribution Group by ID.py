@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 cdg_id = 'Credential Distribution Group ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/credential-distribution-groups"
+url = f"{baseUrl}/credential-distribution-groups"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'ids': f'{cdg_id}'}
 body = {

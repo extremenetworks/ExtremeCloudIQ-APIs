@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 device_id = 'device ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/dashboard/wired/device-health/temperature-status"
+url = f"{baseUrl}/dashboard/wired/device-health/temperature-status"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'deviceId': f'{device_id}'}
 

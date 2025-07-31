@@ -1,9 +1,9 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://{baseUrl}/email-templates"
+url = f"{baseUrl}/email-templates"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'passwordType': 'PPSK'}
 

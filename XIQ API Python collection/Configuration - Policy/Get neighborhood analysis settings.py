@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 neigh_analysis_id = 'Neighborhood Analysis Setting ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/radio-profiles/neighborhood-analysis/{neigh_analysis_id}"
+url = f"{baseUrl}/radio-profiles/neighborhood-analysis/{neigh_analysis_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

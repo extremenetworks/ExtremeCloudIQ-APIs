@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 hotspot_service_provider_id = 'Hotspot Service Provider profile ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/hotspot-service-provider-profiles/{hotspot_service_provider_id}"
+url = f"{baseUrl}/hotspot-service-provider-profiles/{hotspot_service_provider_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

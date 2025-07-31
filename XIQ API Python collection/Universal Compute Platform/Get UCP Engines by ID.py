@@ -1,9 +1,9 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://{baseUrl}/ucp/{{upc_id}}/engines/installed"
+url = f"{baseUrl}/ucp/{{upc_id}}/engines/installed"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 viq_id = 'External VIQ ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/account/:switch"
+url = f"{baseUrl}/account/:switch"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'id': f'{viq_id}'}
 

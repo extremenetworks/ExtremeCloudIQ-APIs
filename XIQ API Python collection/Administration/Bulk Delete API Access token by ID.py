@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 leg_token_id = 'Legacy Token ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/acct-api-token/:delete"
+url = f"{baseUrl}/acct-api-token/:delete"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'ids': f'{leg_token_id}'}
 

@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 sensor_scan_id = 'Sensor Scan Setting ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/radio-profiles/sensor-scan/{sensor_scan_id}"
+url = f"{baseUrl}/radio-profiles/sensor-scan/{sensor_scan_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = {

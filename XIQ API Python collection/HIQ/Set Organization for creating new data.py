@@ -1,9 +1,9 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 access_token = '***'
 
-url = f"https://{baseUrl}/hiq/context/creating"
+url = f"{baseUrl}/hiq/context/creating"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 body = 1

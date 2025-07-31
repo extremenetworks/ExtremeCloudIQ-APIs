@@ -1,10 +1,10 @@
 import requests
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 org_id = 'Organization ID'
 access_token = '***'
 
-url = f"https://{baseUrl}/hiq/organizations/{org_id}"
+url = f"{baseUrl}/hiq/organizations/{org_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {}
 

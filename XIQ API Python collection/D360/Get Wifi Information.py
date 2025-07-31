@@ -10,13 +10,13 @@ def utc_seconds(str_dt, timezone):
     return int(dt_timezone.timestamp()*1000) # epoch time in milliseconds)                 
 
          
-baseUrl = 'api.extremecloudiq.com'
+baseUrl = 'https://api.extremecloudiq.com'
 device_id = 'device ID'
 myStartTime = utc_seconds('2024-12-07 02:30:00', 'US/Eastern')
 myEndTime = utc_seconds('2024-12-07 02:30:00', 'US/Eastern')
 access_token = '***'
 
-url = f"https://{baseUrl}/d360/wireless/interfaces-stats"
+url = f"{baseUrl}/d360/wireless/interfaces-stats"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'deviceId': f'{device_id}', 'startTime': f'{myStartTime}', 'endTime': f'{myEndTime}'}
 
