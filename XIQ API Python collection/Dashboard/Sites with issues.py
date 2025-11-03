@@ -15,7 +15,7 @@ body = {
 # sortField: Alerts (disabled)
 # sortOrder: ASC (disabled)
 # keyword:  (disabled)
-# unassigned_devices: false (disabled)
+# includeUnassigned: false (disabled)
 
 response = requests.post(url, headers=headers, params=params)
 

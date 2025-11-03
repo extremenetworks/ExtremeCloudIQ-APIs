@@ -12,7 +12,7 @@ body = {
     site_id
   ]
 }
-
+# includeUnassigned: false (disabled)
 
 response = requests.post(url, headers=headers, params=params)
 

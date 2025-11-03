@@ -29,7 +29,7 @@ body = {
 # keyword:  (disabled)
 # sortField:  (disabled)
 # sortOrder: ASC (disabled)
-# unassigned_devices: false (disabled)
+# includeUnassigned: false (disabled)
 
 response = requests.post(url, headers=headers, params=params)
 

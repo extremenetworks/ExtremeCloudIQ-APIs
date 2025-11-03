@@ -1,19 +1,19 @@
 import requests
          
 baseUrl = 'https://api.extremecloudiq.com'
+client_mac = 'Client MAC address'
 site_id = 'Site ID'
 access_token = '***'
 
 url = f"{baseUrl}/dashboard/wireless/client-health/issue/authentication"
 headers = {'Authorization': f'Bearer {access_token}'}
-params = {}
+params = {'macAddress': f'{client_mac}'}
 body = {
   "site_ids": [
     site_id
   ]
 }
-# macAddress:  (disabled)
-# unassigned_devices: false (disabled)
+# includeUnassigned: false (disabled)
 
 response = requests.post(url, headers=headers, params=params)
 
