@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "5c3ff719-e743-47e1-9e8b-a2fddb1e3302",
-		"name": "XIQ APIv2 25r4",
+		"_postman_id": "a8f2f2e8-6a00-45c2-b81b-7df3d8626e5e",
+		"name": "XIQ APIv2 25r5",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4056946",
-		"_collection_link": "https://gold-escape-604608.postman.co/workspace/XIQ-Workflows---Github~7c6c76b6-b57f-4ebb-8d87-9786462c68e3/collection/4056946-5c3ff719-e743-47e1-9e8b-a2fddb1e3302?action=share&source=collection_link&creator=4056946"
+		"_collection_link": "https://gold-escape-604608.postman.co/workspace/XIQ-Workflows---Github~7c6c76b6-b57f-4ebb-8d87-9786462c68e3/collection/4056946-a8f2f2e8-6a00-45c2-b81b-7df3d8626e5e?action=share&source=collection_link&creator=4056946"
 	},
 	"item": [
 		{
@@ -2307,6 +2307,101 @@
 					"response": []
 				},
 				{
+					"name": "Get user data usage",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"site_ids\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"August 19, 2025 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"September 18, 2025 12:30:00\"); // Your timezone!",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"site_ids\": [\n    {{site_id}}\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/data_usage?startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"data_usage"
+							],
+							"query": [
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "(Required) "
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Returns data usage in bytes for each user."
+					},
+					"response": []
+				},
+				{
 					"name": "List all external users",
 					"event": [
 						{
@@ -2628,6 +2723,333 @@
 					"response": []
 				},
 				{
+					"name": "List user grid filter metadata",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"site_ids\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"August 19, 2025 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"September 18, 2025 12:30:00\"); // Your timezone!",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"site_ids\": [\n    {{site_id}}\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/filter_metadata?startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"filter_metadata"
+							],
+							"query": [
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "(Required) "
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Lists of values for user grid filters"
+					},
+					"response": []
+				},
+				{
+					"name": "List Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful PATCH request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"include login info\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"login_name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"August 19, 2025 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"September 18, 2025 12:30:00\"); // Your timezone!",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_name\": [\n    \"string\",\n    \"string\"\n  ],\n  \"source\": [\n    \"string\",\n    \"string\"\n  ],\n  \"site_ids\": [\n    {{site_id}}\n  ],\n  \"status\": true,\n  \"duration\": [\n    {\n      \"column_name\": \"string\",\n      \"filter_type\": \"NEQ\",\n      \"value\": 2907,\n      \"min\": 1313,\n      \"max\": 7816\n    },\n    {\n      \"column_name\": \"string\",\n      \"filter_type\": \"NEQ\",\n      \"value\": 5746,\n      \"min\": 1160,\n      \"max\": 3054\n    }\n  ],\n  \"user_ids\": [\n    2214,\n    7804\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/grid?page=1&limit=10&startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"grid"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100"
+								},
+								{
+									"key": "search",
+									"value": "string",
+									"description": "The search string",
+									"disabled": true
+								},
+								{
+									"key": "sortField",
+									"value": "SESSION_DURATION",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "ASC",
+									"disabled": true
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "(Required) "
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Returns a paginated list of users with support for search, filter, and sort."
+					},
+					"response": []
+				},
+				{
+					"name": "Export the Users grid data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"user_name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"August 19, 2025 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"September 18, 2025 12:30:00\"); // Your timezone!",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_name\": [\n    \"string\",\n    \"string\"\n  ],\n  \"source\": [\n    \"string\",\n    \"string\"\n  ],\n  \"site_ids\": [\n    {{site_id}}\n  ],\n  \"status\": true,\n  \"duration\": [\n    {\n      \"column_name\": \"string\",\n      \"filter_type\": \"NEQ\",\n      \"value\": 2907,\n      \"min\": 1313,\n      \"max\": 7816\n    },\n    {\n      \"column_name\": \"string\",\n      \"filter_type\": \"NEQ\",\n      \"value\": 5746,\n      \"min\": 1160,\n      \"max\": 3054\n    }\n  ],\n  \"user_ids\": [\n    2214,\n    7804\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/grid_export?startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"grid_export"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "string",
+									"description": "The search string",
+									"disabled": true
+								},
+								{
+									"key": "sortField",
+									"value": "SESSION_DURATION",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "ASC",
+									"disabled": true
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "(Required) "
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "Export the Users grid data as a CSV file."
+					},
+					"response": []
+				},
+				{
 					"name": "Current User Info",
 					"event": [
 						{
@@ -2682,6 +3104,340 @@
 								"me"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download the  report",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/reports/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"reports",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "string",
+									"description": "(Required) The report ID"
+								}
+							]
+						},
+						"description": "Download report of Users"
+					},
+					"response": []
+				},
+				{
+					"name": "Get user type distribution",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"site_ids\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"August 19, 2025 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"September 18, 2025 12:30:00\"); // Your timezone!",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"site_ids\": [\n    {{site_id}}\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/type_distribution?startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"type_distribution"
+							],
+							"query": [
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "(Required) "
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "(Required) "
+								}
+							]
+						},
+						"description": "User type distribution and total connected users"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Use Folder Preferences",
+			"item": [
+				{
+					"name": "Query user folder preferences",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"additionalProp1\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user-folder-preferences?folderId=1234&type=string",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user-folder-preferences"
+							],
+							"query": [
+								{
+									"key": "folderId",
+									"value": "1234",
+									"description": "(Required) The folder identifier"
+								},
+								{
+									"key": "type",
+									"value": "string",
+									"description": "(Required) The types of preferences to retrieve (e.g. FLOOR_THRESHOLDS)"
+								}
+							]
+						},
+						"description": "Returns matched preferences."
+					},
+					"response": []
+				},
+				{
+					"name": "Save user folder preferences values.",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"type\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"data\": {\n    \"excellent\": -90,\n    \"good\": -72,\n    \"medium\": -67,\n    \"poor\": -30\n  },\n  \"type\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user-folder-preferences/:folderId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user-folder-preferences",
+								":folderId"
+							],
+							"variable": [
+								{
+									"key": "folderId",
+									"value": "1248163264",
+									"description": "(Required) The id of the folder"
+								}
+							]
+						},
+						"description": "Persists given preferences values."
 					},
 					"response": []
 				}
@@ -6038,6 +6794,77 @@
 							]
 						},
 						"description": "Reset multiple devices to factory default settings."
+					},
+					"response": []
+				},
+				{
+					"name": "List SSH active sessions",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"host_name\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/devices/:ssh-active-sessions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"devices",
+								":ssh-active-sessions"
+							],
+							"variable": [
+								{
+									"key": "ssh-active-sessions"
+								}
+							]
+						},
+						"description": "List active SSH sessions for devices."
 					},
 					"response": []
 				},
@@ -10401,7 +11228,7 @@
 									"disabled": true
 								},
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -10491,7 +11318,7 @@
 									"disabled": true
 								},
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -10627,9 +11454,15 @@
 									"disabled": true
 								},
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
-									"description": "Whether to include unassigned devices",
+									"description": "Whether to include unassigned devices\n\nDefault value : false",
+									"disabled": true
+								},
+								{
+									"key": "stacked_view",
+									"value": "true",
+									"description": "Whether to include only virtual stack (stacked_view = true) or also the stack members (stacked_view = false)\n\nDefault value : true",
 									"disabled": true
 								}
 							]
@@ -10744,9 +11577,21 @@
 									"disabled": true
 								},
 								{
+									"key": "timezoneOffset",
+									"value": "",
+									"description": "timezone offset",
+									"disabled": true
+								},
+								{
 									"key": "async",
 									"value": "false",
 									"description": "Whether to enable async mode\n\nDefault value : false",
+									"disabled": true
+								},
+								{
+									"key": "includeUnassigned",
+									"value": "false",
+									"description": "Whether to include unassigned devices\n\nDefault value : false",
 									"disabled": true
 								}
 							]
@@ -10935,7 +11780,7 @@
 								{
 									"key": "limit",
 									"value": "10",
-									"description": "Page Size, min = 1, max = 100 \nDefault value : 10"
+									"description": "Page Size, min = 1, max = 2000 \nDefault value : 10"
 								},
 								{
 									"key": "policyNames",
@@ -12030,6 +12875,78 @@
 					"response": []
 				},
 				{
+					"name": "Disconnect the clients",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"mac_addresses\": [\n    \"{{client_mac}}\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clients/disconnect",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clients",
+								"disconnect"
+							]
+						},
+						"description": "Disconnect multiple clients by macAddress."
+					},
+					"response": []
+				},
+				{
 					"name": "Get client summary metrics",
 					"event": [
 						{
@@ -12627,6 +13544,12 @@
 							],
 							"query": [
 								{
+									"key": "clientMac",
+									"value": "{{client_mac}}",
+									"description": "The client MAC address",
+									"disabled": true
+								},
+								{
 									"key": "startTime",
 									"value": "{{myStartTime}}",
 									"description": "The start time to query, epoch time in milliseconds since 1/1/1970"
@@ -12736,6 +13659,73 @@
 									"description": "The precision in milliseconds since 1/1/1970\n\nDefault value : 600000",
 									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Connection Trail",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"links\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/client-details/topology/client-trail/{{client_mac}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"client-details",
+								"topology",
+								"client-trail",
+								"{{client_mac}}"
 							]
 						}
 					},
@@ -13573,6 +14563,105 @@
 					"response": []
 				},
 				{
+					"name": "Get Client Grid Filter Metadata",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"timestamped_events_list\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"August 19, 2025 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"September 18, 2025 12:30:00\"); // Your timezone!",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/d360/event/graph?deviceId={{device_id}}&startTime={{myStartTime}}&endTime={{myEndTime}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"d360",
+								"event",
+								"graph"
+							],
+							"query": [
+								{
+									"key": "deviceId",
+									"value": "{{device_id}}",
+									"description": "(Required) "
+								},
+								{
+									"key": "startTime",
+									"value": "{{myStartTime}}",
+									"description": "(Required) "
+								},
+								{
+									"key": "endTime",
+									"value": "{{myEndTime}}",
+									"description": "(Required) "
+								},
+								{
+									"key": "filter",
+									"value": "INFO",
+									"description": "The Enum for graph filter type",
+									"disabled": true
+								},
+								{
+									"key": "filter",
+									"value": "ACTIVE",
+									"description": "The Enum for graph filter type",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Retrieve a time-series graph of event metrics. Each timestamp includes\nan array of event types with their respective counts. Only selected filters will be included in the response.\n"
+					},
+					"response": []
+				},
+				{
 					"name": "List summary of device details",
 					"event": [
 						{
@@ -13737,6 +14826,90 @@
 								}
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "Wired QOS queue grid",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"data\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/d360/wired/queue-grid?deviceId={{device_id}}&page=1&limit=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"d360",
+								"wired",
+								"queue-grid"
+							],
+							"query": [
+								{
+									"key": "deviceId",
+									"value": "{{device_id}}",
+									"description": "(Required) "
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100"
+								}
+							]
+						},
+						"description": "Returns all QOS queue statistics for a wired device"
 					},
 					"response": []
 				},
@@ -14130,7 +15303,7 @@
 							],
 							"query": [
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -14215,7 +15388,7 @@
 							],
 							"query": [
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -14300,7 +15473,7 @@
 							],
 							"query": [
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -14450,7 +15623,7 @@
 							],
 							"query": [
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -14550,7 +15723,7 @@
 									"disabled": true
 								},
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -14714,7 +15887,7 @@
 									"disabled": true
 								},
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -14799,7 +15972,7 @@
 							],
 							"query": [
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -16608,7 +17781,7 @@
 							],
 							"query": [
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -16695,7 +17868,7 @@
 							],
 							"query": [
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -16782,7 +17955,7 @@
 							],
 							"query": [
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -16880,6 +18053,12 @@
 									"key": "sortOrder",
 									"value": "ASC",
 									"description": "The sort order (descending by default)\n\nAvailable values : ASC, DESC",
+									"disabled": true
+								},
+								{
+									"key": "includeUnassigned",
+									"value": "false",
+									"description": "Whether to include unassigned devices",
 									"disabled": true
 								}
 							]
@@ -16992,7 +18171,7 @@
 									"disabled": true
 								},
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -17134,6 +18313,14 @@
 								"wireless",
 								"client-health",
 								"connectivity-issues"
+							],
+							"query": [
+								{
+									"key": "includeUnassigned",
+									"value": "false",
+									"description": "Whether to include unassigned devices",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -17236,7 +18423,7 @@
 									"disabled": true
 								},
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -17323,7 +18510,7 @@
 							],
 							"query": [
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -17410,7 +18597,7 @@
 							],
 							"query": [
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -17531,7 +18718,7 @@
 									"disabled": true
 								},
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -17602,7 +18789,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/dashboard/wireless/client-health/issue/association?page=1&limit=10",
+							"raw": "{{baseUrl}}/dashboard/wireless/client-health/issue/association?page=1&limit=10&macAddress={{client_mac}}",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -17626,12 +18813,11 @@
 								},
 								{
 									"key": "macAddress",
-									"value": "",
-									"description": "macAddress",
-									"disabled": true
+									"value": "{{client_mac}}",
+									"description": "macAddress"
 								},
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -17702,7 +18888,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/dashboard/wireless/client-health/issue/authentication",
+							"raw": "{{baseUrl}}/dashboard/wireless/client-health/issue/authentication?macAddress={{client_mac}}",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -17716,12 +18902,11 @@
 							"query": [
 								{
 									"key": "macAddress",
-									"value": "",
-									"description": "macAddress",
-									"disabled": true
+									"value": "{{client_mac}}",
+									"description": "macAddress"
 								},
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -17792,7 +18977,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/dashboard/wireless/client-health/issue/ipaddress?page=1&limit=10",
+							"raw": "{{baseUrl}}/dashboard/wireless/client-health/issue/ipaddress?page=1&limit=10&macAddress={{client_mac}}",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -17816,12 +19001,11 @@
 								},
 								{
 									"key": "macAddress",
-									"value": "",
-									"description": "macAddress",
-									"disabled": true
+									"value": "{{client_mac}}",
+									"description": "macAddress"
 								},
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -17892,7 +19076,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/dashboard/wireless/client-health/issue/roaming?page=1&limit=10",
+							"raw": "{{baseUrl}}/dashboard/wireless/client-health/issue/roaming?page=1&limit=10&macAddress={{client_mac}}",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -17916,8 +19100,13 @@
 								},
 								{
 									"key": "macAddress",
-									"value": "",
-									"description": "macAddress",
+									"value": "{{client_mac}}",
+									"description": "macAddress"
+								},
+								{
+									"key": "includeUnassigned",
+									"value": "false",
+									"description": "Whether to include unassigned devices",
 									"disabled": true
 								}
 							]
@@ -18055,7 +19244,7 @@
 							],
 							"query": [
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -18161,7 +19350,7 @@
 									"disabled": true
 								},
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -18270,7 +19459,7 @@
 									"disabled": true
 								},
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -18358,7 +19547,7 @@
 							],
 							"query": [
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -18446,7 +19635,7 @@
 							],
 							"query": [
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -18534,7 +19723,7 @@
 							],
 							"query": [
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
@@ -18763,72 +19952,11 @@
 							],
 							"query": [
 								{
-									"key": "unassigned_devices",
+									"key": "includeUnassigned",
 									"value": "false",
 									"description": "Whether to include unassigned devices",
 									"disabled": true
 								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Monitoring",
-			"item": [
-				{
-					"name": "get Connection Trail",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Successful GET request\", function () {",
-									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
-									"});",
-									"",
-									"pm.test(\"Body includes data \", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"links\");",
-									"    console.log(pm.test)",
-									"});",
-									" pm.test(\"Response time is less than 1000ms\", function () {",
-									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
-									"    });"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{jwttoken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/monitoring/topology/client-trail/{{client_mac}}",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"monitoring",
-								"topology",
-								"client-trail",
-								"{{client_mac}}"
 							]
 						}
 					},
@@ -19093,6 +20221,69 @@
 					"response": []
 				},
 				{
+					"name": "Download the Export CSV file",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/applications/reports/{{app_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"applications",
+								"reports",
+								"{{app_id}}"
+							]
+						},
+						"description": "Download the Export CSV file for Application Usage Summary"
+					},
+					"response": []
+				},
+				{
 					"name": "List the TopN applications",
 					"event": [
 						{
@@ -19168,6 +20359,299 @@
 								}
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "List the application usage summary",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"site_ids\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"site_ids\": [\n    {{site_id}}\n  ],\n  \"application_name\": [\n    \"string\",\n    \"string\"\n  ],\n  \"category_name\": [\n    \"string\",\n    \"string\"\n  ],\n  \"number_filter\": [\n    {\n      \"column_name\": \"string\",\n      \"filter_type\": \"BTW\",\n      \"value\": 3261.174924261927,\n      \"min\": 3189.9477031991673,\n      \"max\": 6409.589795124802\n    },\n    {\n      \"column_name\": \"string\",\n      \"filter_type\": \"BTW\",\n      \"value\": 4598.12648292365,\n      \"min\": 9008.729727404578,\n      \"max\": 7674.647296524881\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/applications/usage/summary?page=1&limit=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"applications",
+								"usage",
+								"summary"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number, min = 1"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Page Size, min = 1, max = 100"
+								},
+								{
+									"key": "sortField",
+									"value": "USAGE",
+									"description": "The sort field",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "ASC",
+									"description": "The sort order (ascending by default)",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "string",
+									"description": "Application or Category Name",
+									"disabled": true
+								},
+								{
+									"key": "async",
+									"value": "false",
+									"description": "Whether to enable async mode",
+									"disabled": true
+								}
+							]
+						},
+						"description": "List a page of application usage summary by filter."
+					},
+					"response": []
+				},
+				{
+					"name": "Export the application usage summary",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"site_ids\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"site_ids\": [\n    {{site_id}}\n  ],\n  \"application_name\": [\n    \"string\",\n    \"string\"\n  ],\n  \"category_name\": [\n    \"string\",\n    \"string\"\n  ],\n  \"number_filter\": [\n    {\n      \"column_name\": \"string\",\n      \"filter_type\": \"BTW\",\n      \"value\": 3261.174924261927,\n      \"min\": 3189.9477031991673,\n      \"max\": 6409.589795124802\n    },\n    {\n      \"column_name\": \"string\",\n      \"filter_type\": \"BTW\",\n      \"value\": 4598.12648292365,\n      \"min\": 9008.729727404578,\n      \"max\": 7674.647296524881\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/applications/usage/summary/export",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"applications",
+								"usage",
+								"summary",
+								"export"
+							],
+							"query": [
+								{
+									"key": "sortField",
+									"value": "USAGE",
+									"description": "The sort field",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "ASC",
+									"description": "The sort order (ascending by default)",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "string",
+									"description": "Application or Category Name",
+									"disabled": true
+								},
+								{
+									"key": "async",
+									"value": "false",
+									"description": "Whether to enable async mode",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Export of application usage summary by filter."
+					},
+					"response": []
+				},
+				{
+					"name": "Application usage summary meta data",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"application_names\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/applications/usage/summary/meta-data",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"applications",
+								"usage",
+								"summary",
+								"meta-data"
+							]
+						},
+						"description": "List the application usage summary meta data"
 					},
 					"response": []
 				}
@@ -42046,6 +43530,1159 @@
 			]
 		},
 		{
+			"name": "NG-REPORTS",
+			"item": [
+				{
+					"name": "Download the reports",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/ng-reports/download/reports/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ng-reports",
+								"download",
+								"reports",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "string",
+									"description": "(Required) The report ID"
+								}
+							]
+						},
+						"description": "Download reports of Metrics"
+					},
+					"response": []
+				},
+				{
+					"name": "qoe Diagnostics Xlsx Data",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"August 19, 2025 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"September 18, 2025 12:30:00\"); // Your timezone!",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"metrics\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"building_ids\": [\n   {{building_id}}\n  ],\n  \"end_time\": {{myEndTime}},\n  \"floor_ids\": [\n    {{floor_id}}\n  ],\n  \"site_ids\": [\n    {{site_id}}\n  ],\n  \"start_time\": {{myStartTime}},\n  \"metrics\": [\n    \"TRAFFIC_VOLUME_PER_APP\",\n    \"DEVICES_BY_CLIENTS\"\n  ],\n  \"bands\": [\n    \"FIVE_GHZ\",\n    \"SIX_GHZ\"\n  ],\n  \"contypes\": [\n    \"THREAD\",\n    \"THREAD\"\n  ],\n  \"devicetypes\": [\n    \"WIRELESS\",\n    \"WIRELESS\"\n  ],\n  \"vlan_ids\": [\n    1183,\n    1493\n  ],\n  \"device_ids\": [\n    {{device_id}}\n  ],\n  \"ssids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"user_names\": [\n    \"string\",\n    \"string\"\n  ],\n  \"client_macs\": [\n    \"string\",\n    \"string\"\n  ],\n  \"port_nums\": [\n    5842,\n    3046\n  ],\n  \"app_ids\": [\n    {{app_id}}\n  ],\n  \"channel_nums\": [\n    5828,\n    9800\n  ],\n  \"admin_roles\": [\n    9234,\n    9758\n  ],\n  \"export_data\": false,\n  \"search_parameter\": \"string\",\n  \"async\": false,\n  \"mode\": \"SNAPSHOT\",\n  \"download_type\": \"CSV\",\n  \"limit\": 2105,\n  \"page\": 7893,\n  \"time_offset\": 207,\n  \"os_types\": [\n    \"string\",\n    \"string\"\n  ],\n  \"isSSIDSelected\": true,\n  \"isBandSelected\": true\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ng-reports/downloads/reports",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ng-reports",
+								"downloads",
+								"reports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Information about QoE-Diagnostics Metrics",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"metrics\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/ng-reports/information/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ng-reports",
+								"information",
+								""
+							]
+						},
+						"description": " Gives information about metrics, there functionality and applicable filters"
+					},
+					"response": []
+				},
+				{
+					"name": "Information about QoE-Diagnostics Metrics",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful GET request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"metrics\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/ng-reports/information/:metrics",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ng-reports",
+								"information",
+								":metrics"
+							],
+							"variable": [
+								{
+									"key": "metrics",
+									"value": "WIRELESS_CLIENTS_BY_OS",
+									"description": "(Required) metrics\nAvailable values : MAX_CONCURRENT_CLIENTS, UNIQUE_CLIENTS_BY_SSID, UNIQUE_WIFI_CLIENTS, CLIENT_QUALITY_SCORE, CLIENT_SESSIONS, CLIENT_AIRTIME_USAGE, WIRELESS_CLIENTS_BY_OS, UNIQUE_CLIENTS_BY_OS, TRAFFIC_VOLUME_PER_APP, DEVICES_BY_CLIENTS, SWITCH_SUMMARY, UNIQUE_CLIENT_BY_SSID_PIE_CHART, TRAFFIC_VOLUME_PER_APP_PIE_CHART"
+								}
+							]
+						},
+						"description": " Gives information about metrics, there functionality and applicable filters"
+					},
+					"response": []
+				},
+				{
+					"name": "List of Applications for filtering",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"site_ids\": [\n    {{site_id}}\n  ],\n  \"building_ids\": [\n    {{building_id}}\n  ],\n  \"floor_ids\": [\n   {{floor_id}}\n  ],\n  \"usernames\": [\n    \"string\",\n    \"string\"\n  ],\n  \"client_macs\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ng-reports/metadata/application",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ng-reports",
+								"metadata",
+								"application"
+							]
+						},
+						"description": "Gives List of Applciations for filtering"
+					},
+					"response": []
+				},
+				{
+					"name": "List of Band for filtering",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"August 19, 2025 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"September 18, 2025 12:30:00\"); // Your timezone!",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"site_ids\": [\n    {{site_id}}\n  ],\n  \"building_ids\": [\n    {{building_id}}\n  ],\n  \"floor_ids\": [\n    {{floor_id}}\n  ],\n  \"ssids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"start_time\": {{myStartTime}},\n  \"end_time\": {{myEndTime}}\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ng-reports/metadata/bands",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ng-reports",
+								"metadata",
+								"bands"
+							]
+						},
+						"description": "Gives List of Band for filtering"
+					},
+					"response": []
+				},
+				{
+					"name": "List of Channel for filtering",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"site_ids\": [\n    {{site_id}}\n  ],\n  \"building_ids\": [\n    {{building_id}}\n  ],\n  \"floor_ids\": [\n    {{floor_id}}\n  ],\n  \"ssids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"bands\": [\n    \"SIX_GHZ\",\n    \"SIX_GHZ\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ng-reports/metadata/channel",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ng-reports",
+								"metadata",
+								"channel"
+							]
+						},
+						"description": "Gives List of Channel for filtering"
+					},
+					"response": []
+				},
+				{
+					"name": "List of Clients for filtering",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"site_ids\": [\n   {{site_id}}\n  ],\n  \"building_ids\": [\n    {{building_id}}\n  ],\n  \"floor_ids\": [\n    {{floor_id}}\n  ],\n  \"usernames\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ng-reports/metadata/client",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ng-reports",
+								"metadata",
+								"client"
+							]
+						},
+						"description": "Gives List of Clients for filtering"
+					},
+					"response": []
+				},
+				{
+					"name": "List of Connection Type for filtering",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/ng-reports/metadata/connection-type",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ng-reports",
+								"metadata",
+								"connection-type"
+							]
+						},
+						"description": "Gives List of Connection Type for filtering"
+					},
+					"response": []
+				},
+				{
+					"name": "List of Devices for filtering",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"site_ids\": [\n    {{site_id}}\n  ],\n  \"building_ids\": [\n    {{building_id}}\n  ],\n  \"floor_ids\": [\n    {{floor_id}}\n  ],\n  \"ssids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"bands\": [\n    \"FIVE_GHZ\",\n    \"SIX_GHZ\"\n  ],\n  \"channels\": [\n    1326,\n    7927\n  ],\n  \"os_types\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ng-reports/metadata/device",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ng-reports",
+								"metadata",
+								"device"
+							]
+						},
+						"description": "Gives List of Devices for filtering"
+					},
+					"response": []
+				},
+				{
+					"name": "List of OS for filtering",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"site_ids\": [\n    {{site_id}}\n  ],\n  \"building_ids\": [\n    {{building_id}}\n  ],\n  \"floor_ids\": [\n    {{floor_id}}\n  ],\n  \"ssids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"bands\": [\n    \"SIX_GHZ\",\n    \"SIX_GHZ\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ng-reports/metadata/os",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ng-reports",
+								"metadata",
+								"os"
+							]
+						},
+						"description": "Gives List of OS for filtering"
+					},
+					"response": []
+				},
+				{
+					"name": "List of SSIDs for filtering",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"August 19, 2025 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"September 18, 2025 12:30:00\"); // Your timezone!",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"site_ids\": [\n    {{site_id}}\n  ],\n  \"building_ids\": [\n    {{building_id}}\n  ],\n  \"floor_ids\": [\n    {{floor_id}}\n  ],\n  \"start_time\": {{myStartTime}},\n  \"end_time\": {{myEndTime}}\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ng-reports/metadata/ssids",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ng-reports",
+								"metadata",
+								"ssids"
+							]
+						},
+						"description": "Gives List of SSIDs for filtering"
+					},
+					"response": []
+				},
+				{
+					"name": "List of Users for filtering",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"site_ids\": [\n    {{site_id}}\n  ],\n  \"building_ids\": [\n   {{building_id}}\n  ],\n  \"floor_ids\": [\n    {{floor_id}}\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ng-reports/metadata/user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ng-reports",
+								"metadata",
+								"user"
+							]
+						},
+						"description": "Gives List of Users for filtering"
+					},
+					"response": []
+				},
+				{
+					"name": "qoe Diagnostics Table Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"data\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"August 19, 2025 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"September 18, 2025 12:30:00\"); // Your timezone!",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"building_ids\": [\n    {{building_id}}\n  ],\n  \"end_time\": {{myEndTime}},\n  \"floor_ids\": [\n    {{floor_id}}\n  ],\n  \"metrics\": \"CLIENT_AIRTIME_USAGE\",\n  \"site_ids\": [\n    {{site_id}}\n  ],\n  \"sort_field\": \"TIME_STAMP\",\n  \"sort_order\": \"ASC\",\n  \"start_time\": {{myStartTime}},\n  \"bands\": [\n    \"FIVE_GHZ\",\n    \"TWO_GHZ\"\n  ],\n  \"contypes\": [\n    \"UNKNOWN\",\n    \"THREAD\"\n  ],\n  \"devicetypes\": [\n    \"WIRELESS\",\n    \"WIRELESS\"\n  ],\n  \"vlan_ids\": [\n    2355,\n    1486\n  ],\n  \"device_ids\": [\n    6168,\n    8287\n  ],\n  \"ssids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"user_names\": [\n    \"string\",\n    \"string\"\n  ],\n  \"client_macs\": [\n    \"string\",\n    \"string\"\n  ],\n  \"port_nums\": [\n    8002,\n    5813\n  ],\n  \"app_ids\": [\n    118,\n    6920\n  ],\n  \"channel_nums\": [\n    3815,\n    1773\n  ],\n  \"admin_roles\": [\n    3162,\n    4131\n  ],\n  \"page_no\": 1,\n  \"limit\": 1,\n  \"export_data\": false,\n  \"search_parameter\": \"string\",\n  \"async\": false,\n  \"os_types\": [\n    \"string\",\n    \"string\"\n  ],\n  \"isSSIDSelected\": true,\n  \"isBandSelected\": true\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ng-reports/tabledata",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ng-reports",
+								"tabledata"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "qoe Diagnostics Time Series Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									"",
+									"pm.test(\"Body includes data\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"data\");",
+									"    console.log(pm.test)",
+									"});",
+									" pm.test(\"Response time is less than 1000ms\", function () {",
+									"        pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var startTime = new Date(\"August 19, 2025 02:30:00\"); // Your timezone!",
+									"var endTime = new Date(\"September 18, 2025 12:30:00\"); // Your timezone!",
+									"pm.environment.set(\"myStartTime\", startTime.getTime()); // myStartTime is used in Params of call - This is EPOCH time in milliseconds",
+									"pm.environment.set(\"myEndTime\", endTime.getTime()); // myEndTime is used in Params of call - This is EPOCH time in milliseconds"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwttoken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"async\": false,\n  \"building_ids\": [\n    {{building_id}}\n  ],\n  \"end_time\": {{myEndTime}},\n  \"floor_ids\": [\n    {{floor_id}}\n  ],\n  \"metrics\": \"WIRELESS_CLIENTS_BY_OS\",\n  \"site_ids\": [\n    {{site_id}}\n  ],\n  \"start_time\": {{myStartTime}},\n  \"bands\": [\n    \"FIVE_GHZ\",\n    \"TWO_GHZ\"\n  ],\n  \"contypes\": [\n    \"WIRELESS\",\n    \"WIRELESS\"\n  ],\n  \"devicetypes\": [\n    \"WIRED\",\n    \"WIRELESS\"\n  ],\n  \"vlan_ids\": [\n    6758,\n    313\n  ],\n  \"device_ids\": [\n    5598,\n    9945\n  ],\n  \"ssids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"user_names\": [\n    \"string\",\n    \"string\"\n  ],\n  \"client_macs\": [\n    \"string\",\n    \"string\"\n  ],\n  \"port_nums\": [\n    4402,\n    536\n  ],\n  \"app_ids\": [\n    4354,\n    8243\n  ],\n  \"channel_nums\": [\n    2934,\n    8705\n  ],\n  \"admin_roles\": [\n    8970,\n    5618\n  ],\n  \"page\": 4530,\n  \"limit\": 6219,\n  \"os_types\": [\n    \"string\",\n    \"string\"\n  ],\n  \"isSSIDSelected\": true,\n  \"isBandSelected\": true\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/ng-reports/timeseries",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"ng-reports",
+								"timeseries"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Universal Compute Platform",
 			"item": [
 				{
@@ -42548,16 +45185,6 @@
 					"name": "Get AFC diagnostics",
 					"event": [
 						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
 							"listen": "test",
 							"script": {
 								"exec": [
@@ -42602,7 +45229,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/ap/afc/diagnostics/{{sn}}?ownerId=0",
+							"raw": "{{baseUrl}}/ap/afc/diagnostics/{{device_id}}?ownerId=0",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -42610,7 +45237,7 @@
 								"ap",
 								"afc",
 								"diagnostics",
-								"{{sn}}"
+								"{{device_id}}"
 							],
 							"query": [
 								{

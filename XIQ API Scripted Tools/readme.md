@@ -4,6 +4,9 @@ These are fully functional tools that have been developed leveraging XIQ APIs. T
 If you are just getting started with these Scripts check out our Getting Started repo. This include a PDF document that walks through the basics of using these scripts.
 > Link to GitHub Repo: [API_Getting_Started (v3)](https://github.com/ExtremeNetworksSA/API_Getting_Started)
 
+| The software is provided as-is and Extreme Networks has no obligation to provide maintenance, support, updates, enhancements, or modifications. Any support provided by Extreme Networks is at its sole discretion.
+
+Issues and/or bug fixes may be reported on in the Issues in the script's repository. |
 -------------------
 ------------------
 #### Table of contents
@@ -27,7 +30,7 @@ If you are just getting started with these Scripts check out our Getting Started
 
 ### XIQ_Ekahau_Importer
 
-> Link to GitHub Repo: [XIQ_Ekahau_Importer (v1.0.2)](https://github.com/ExtremeNetworksSA/XIQ_Ekahau_Importer)
+> Link to GitHub Repo: [XIQ_Ekahau_Importer (v1.5.0)](https://github.com/ExtremeNetworksSA/XIQ_Ekahau_Importer)
 
 This script can be used to import a Ekahau floorplan and place APs into ExtremeCloud IQ (XIQ). This will save time by creating the building and floor(s) (as well as optional location), uploading the image file, scaling the floorplan, and setting the location of the Access Points all from data within an Ekahau file. 
 
@@ -38,9 +41,21 @@ This script can be used to import a Ekahau floorplan and place APs into ExtremeC
 
 -------------------
 
+### Ekahau_add_tags_XIQ
+
+> Link to GitHub Repo: [Ekahau_add_tags_XIQ](https://github.com/ExtremeNetworksSA/Ekahau_add_tags_XIQ)
+
+This script will add the AP serialNumber tag to the AP in an Ekahau file from a CSV. The script can also update the AP names in tke Ekahau file, allowing for easy map imports in XIQ.
+###### information
+
+- There is a readme.md with instructions in the GitHub repo. There is also a template CSV file included.
+- Tested on MacOS only
+
+-------------------
+
 ### XIQ_WiNG_Location_Migration
 
-> Link to GitHub Repo: [XIQ_Wing_location_migration (v1.1.1)](https://github.com/ExtremeNetworksSA/XIQ_Wing_location_migration)
+> Link to GitHub Repo: [XIQ_Wing_location_migration (v2.5.0)](https://github.com/ExtremeNetworksSA/XIQ_Wing_location_migration)
 
 This script can be used to migrate the location hierarchy, rf-domains, and floors from WiNG to XIQ. This script will also assign APs that are configured in WiNG to the correct locations in XIQ after the locations are created. A tech-dump from the wing controller will be needed for the script. The script will parse the rf-domain data and device data using a couple files from within the tech-dump. Nothing needs to be done with the tech-dump. The script will ask for the file, just put the name of the tar.gz file (with its path).
 
@@ -68,7 +83,7 @@ This script will collect a device's hostname, location info, and network policy,
 
 ### XIQ_AD_PPSK_Sync
 
-> Link to GitHub Repo: [XIQ-AD-PPSK-Sync (v2.0.6.1)](https://github.com/ExtremeNetworksSA/XIQ-AD-User-Sync)
+> Link to GitHub Repo: [XIQ-AD-PPSK-Sync (v2.1.0)](https://github.com/ExtremeNetworksSA/XIQ-AD-User-Sync)
 
 This script can be used to sync your existing local domain Active directory security group with a Private Pre-shared-key (PPSK) user group. This script will leverage your existing Active Directory security groups to automatically create a Private Pre-shared key for every AD user and remove the PPSK user if a user is disabled or removed from the group in the AD server.
 
@@ -81,7 +96,7 @@ This script can be used to sync your existing local domain Active directory secu
 
 ### XIQ_Azure_AD_PPSK_Sync
 
-> Link to GitHub Repo: [XIQ-Azure-AD-PPSK-Sync (v1.0.0)](https://github.com/ExtremeNetworksSA/XIQ_Azure_AD_Sync)
+> Link to GitHub Repo: [XIQ-Azure-AD-PPSK-Sync (v1.3.0)](https://github.com/ExtremeNetworksSA/XIQ_Azure_AD_Sync)
 
 This script can be used to sync your existing Azure (cloud-based) Active directory user group with a Private Pre-shared-key (PPSK) user group. This script will leverage your existing Azure Active Directory groups to automatically create a Private Pre-shared key for every AD user and remove the PPSK user if a user is disabled or removed from the group in Azure AD.
 
@@ -94,7 +109,7 @@ This script can be used to sync your existing Azure (cloud-based) Active directo
 
 ### XIQ_Gsuite_PPSK_Sync
 
-> Link to GitHub Repo: [XIQ-Gsuite-PPSK-Sync (v1.0.0)](https://github.com/ExtremeNetworksSA/XIQ_Gsuite_PPSK_Sync)
+> Link to GitHub Repo: [XIQ-Gsuite-PPSK-Sync (v1.3.0)](https://github.com/ExtremeNetworksSA/XIQ_Gsuite_PPSK_Sync)
 
 This script can be used to sync your existing GSuite user group with a Private Pre-shared-key (PPSK) user group. This script will leverage your existing GSuite user groups to automatically create a Private Pre-shared key for every GSuite user and remove the PPSK user if a user is disabled or removed from the group in GSuite.
 
@@ -123,7 +138,7 @@ This script will collect the PPSK Users from a the main VIQ account and create t
 
 ### XIQ_Staggered_Reboot
 
-> Link to GitHub Repo [XIQ_Staggered_Reboot (v1.0.0)](https://github.com/ExtremeNetworksSA/XIQ_Staggered_Reboot)
+> Link to GitHub Repo [XIQ_Staggered_Reboot (v1.1.0)](https://github.com/ExtremeNetworksSA/XIQ_Staggered_Reboot)
 
 This script will reboot devices 1 at a time, wait up to 15 mins for the device to come back online. Once the device is back online the script will proceed to reboot the next device. You can do all devices within your XIQ instance or filter to a specific building. If the device does not come back online within the 15 mins the script will pause and ask if it should continue or not.
 

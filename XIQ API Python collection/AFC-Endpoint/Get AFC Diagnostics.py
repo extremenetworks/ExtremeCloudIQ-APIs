@@ -1,10 +1,10 @@
 import requests
          
 baseUrl = 'https://api.extremecloudiq.com'
-sn = 'Serial Number'
+device_id = 'device ID'
 access_token = '***'
 
-url = f"{baseUrl}/ap/afc/diagnostics/{sn}"
+url = f"{baseUrl}/ap/afc/diagnostics/{device_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'ownerId': '0'}
 

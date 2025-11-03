@@ -45,7 +45,8 @@ body = {
 # deviceTypes: REAL (disabled)
 # configMismatch: True (disabled)
 # async: false (disabled)
-# unassigned_devices: false (disabled)
+# includeUnassigned: false (disabled)
+# stacked_view: true (disabled)
 
 response = requests.post(url, headers=headers, params=params)
 

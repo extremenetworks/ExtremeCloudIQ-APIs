@@ -44,7 +44,9 @@ body = {
 # sortOrder: ASC (disabled)
 # deviceTypes: REAL (disabled)
 # configMismatch: True (disabled)
+# timezoneOffset:  (disabled)
 # async: false (disabled)
+# includeUnassigned: false (disabled)
 
 response = requests.post(url, headers=headers, params=params)
 

@@ -20,6 +20,7 @@ url = f"{baseUrl}/client-details/overview/chart-data/{client_id}"
 headers = {'Authorization': f'Bearer {access_token}'}
 params = {'startTime': f'{myStartTime}', 'endTime': f'{myEndTime}'}
 
+# clientMac: {{client_mac}} (disabled)
 # precision: 600000 (disabled)
 
 response = requests.get(url, headers=headers, params=params)
